@@ -12,7 +12,10 @@ ifeq ($(PUSH),true)
 OUTPUT := "type=registry,push=true"
 endif
 
-PLATFORMS=linux/amd64,linux/arm64
+PLATFORMS ?= linux/amd64,linux/arm64
+ifeq ($(INCLUDE_S390X),true)
+PLATFORMS := $(PLATFORMS),linux/s390x
+endif
 RUNTIME_IMAGE=quay.io/cilium/cilium-runtime
 RUNTIME_DIRECTORY?=images/runtime
 

@@ -8,11 +8,16 @@ export DOCKER_BUILDKIT=1
 
 # Docker Buildx support. If ARCH is defined, a builder instance 'cross'
 # on the local node is configured for amd64 and arm64 platform targets.
+# Set INCLUDE_S390X=true to also include linux/s390x in multi-arch builds.
 # Otherwise build on the current (typically default) builder for the host
 # platform only.
+DOCKER_PLATFORMS ?= linux/arm64,linux/amd64
+ifeq ($(INCLUDE_S390X),true)
+  DOCKER_PLATFORMS := $(DOCKER_PLATFORMS),linux/s390x
+endif
+
 ifdef ARCH
-  # Default to multi-arch builds, always create the builder for all the platforms we support
-  DOCKER_PLATFORMS := linux/arm64,linux/amd64
+  # Default to multi-arch builds, always create the builder for all enabled platforms.
   DOCKER_BUILDER := $(shell docker buildx ls --format '{{ .Name }}' | head -n1)
   ifneq (,$(filter $(DOCKER_BUILDER),default desktop-linux))
     DOCKER_BUILDKIT_DRIVER :=
