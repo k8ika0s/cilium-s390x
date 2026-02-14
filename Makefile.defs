@@ -205,7 +205,7 @@ CGO_ENABLED ?= 0
 # See https://pkg.go.dev/internal/goexperiment
 GOEXPERIMENT ?=
 
-# Support CGO cross-compiling for amd64 and arm64 targets
+# Support CGO cross-compiling for amd64, arm64, and s390x targets
 GO_BUILD_ENV = CGO_ENABLED=$(CGO_ENABLED)
 CROSS_ARCH =
 ifneq ($(GOARCH),$(NATIVE_ARCH))
