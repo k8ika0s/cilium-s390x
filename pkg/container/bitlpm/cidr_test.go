@@ -332,6 +332,38 @@ func TestBitValueAt(t *testing.T) {
 	}{
 		// note: prefix length does not matter
 		{
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    0,
+			want: 1,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    1,
+			want: 1,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    2,
+			want: 0,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    7,
+			want: 0,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    8,
+			want: 1,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    15,
+			want: 0,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    30,
+			want: 0,
+		}, {
+			v:    netip.MustParsePrefix("192.168.1.1/32"),
+			i:    31,
+			want: 1,
+		}, {
 			v:    netip.MustParsePrefix("00ff:ffff::/128"),
 			i:    0,
 			want: 0,
@@ -396,6 +428,26 @@ func TestCommonPrefix(t *testing.T) {
 		v2   netip.Prefix
 		want uint
 	}{
+		{
+			v1:   netip.MustParsePrefix("10.0.0.0/32"),
+			v2:   netip.MustParsePrefix("10.0.0.0/32"),
+			want: 32,
+		},
+		{
+			v1:   netip.MustParsePrefix("10.0.0.0/32"),
+			v2:   netip.MustParsePrefix("10.0.0.1/32"),
+			want: 31,
+		},
+		{
+			v1:   netip.MustParsePrefix("10.0.0.0/32"),
+			v2:   netip.MustParsePrefix("10.0.128.0/32"),
+			want: 16,
+		},
+		{
+			v1:   netip.MustParsePrefix("10.0.0.0/32"),
+			v2:   netip.MustParsePrefix("11.0.0.0/32"),
+			want: 7,
+		},
 		{
 			v1:   netip.MustParsePrefix("00ff::/128"),
 			v2:   netip.MustParsePrefix("00fe::/128"),
