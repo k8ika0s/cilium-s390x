@@ -37,20 +37,13 @@ jobs:
           # renovate: datasource=golang-version depName=go
           go-version: 1.25.7
 
-      - name: Cross-build core binaries
+      - name: Cross-build all Go packages
         env:
           GOOS: linux
           GOARCH: s390x
         run: |
           set -euo pipefail
-          go build -o /tmp/cilium-agent-cmd-s390x ./daemon/cmd
-          go build -o /tmp/cilium-dbg-s390x ./cilium-dbg
-          go build -o /tmp/operator-s390x ./operator
-          go build -o /tmp/hubble-relay-s390x ./hubble-relay
-          go build -o /tmp/clustermesh-apiserver-s390x ./clustermesh-apiserver
-          go build -o /tmp/cilium-cli-s390x ./cilium-cli/cmd/cilium
-          go build -o /tmp/hubble-cli-s390x ./hubble
-          go build -o /tmp/standalone-dns-proxy-s390x ./standalone-dns-proxy
+          go build ./...
 
       - name: Compile selected s390x tests
         env:
@@ -59,5 +52,6 @@ jobs:
         run: |
           set -euo pipefail
           go test -c ./pkg/byteorder -o /tmp/byteorder_s390x.test
+          go test -c ./pkg/container/bitlpm -o /tmp/bitlpm_s390x.test
           go test -c ./pkg/maglev -o /tmp/maglev_s390x.test
           go test -c ./pkg/murmur3 -o /tmp/murmur3_s390x.test
