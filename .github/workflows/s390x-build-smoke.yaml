@@ -1,0 +1,63 @@
+name: S390x Build Smoke
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'Documentation/**'
+      - 'test/**'
+  push:
+    branches:
+      - main
+      - ft/main/**
+    paths-ignore:
+      - 'Documentation/**'
+      - 'test/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  s390x-cross-build:
+    name: Cross-build linux/s390x
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Go
+        uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.2.0
+        with:
+          cache: false
+          # renovate: datasource=golang-version depName=go
+          go-version: 1.25.7
+
+      - name: Cross-build core binaries
+        env:
+          GOOS: linux
+          GOARCH: s390x
+        run: |
+          set -euo pipefail
+          go build -o /tmp/cilium-agent-cmd-s390x ./daemon/cmd
+          go build -o /tmp/cilium-dbg-s390x ./cilium-dbg
+          go build -o /tmp/operator-s390x ./operator
+          go build -o /tmp/hubble-relay-s390x ./hubble-relay
+          go build -o /tmp/clustermesh-apiserver-s390x ./clustermesh-apiserver
+          go build -o /tmp/cilium-cli-s390x ./cilium-cli/cmd/cilium
+          go build -o /tmp/hubble-cli-s390x ./hubble
+          go build -o /tmp/standalone-dns-proxy-s390x ./standalone-dns-proxy
+
+      - name: Compile selected s390x tests
+        env:
+          GOOS: linux
+          GOARCH: s390x
+        run: |
+          set -euo pipefail
+          go test -c ./pkg/byteorder -o /tmp/byteorder_s390x.test
+          go test -c ./pkg/maglev -o /tmp/maglev_s390x.test
+          go test -c ./pkg/murmur3 -o /tmp/murmur3_s390x.test
