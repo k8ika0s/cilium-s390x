@@ -113,6 +113,13 @@ RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium --mount=
       # HOST_CC and HOST_STRIP are required by `bpf/Makefile`
       HOST_CC=aarch64-linux-gnu-gcc HOST_STRIP=aarch64-linux-gnu-strip
 
+RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium --mount=target=/root/.cache,type=cache --mount=target=/go/pkg/mod,type=cache \
+  ## optionally cross-compile for s390x and install binaries to /out/linux/s390x
+  env GOARCH=s390x CC=s390x-linux-gnu-gcc \
+    make build-container install-container \
+      DESTDIR=/out/linux/s390x \
+      HOST_CC=s390x-linux-gnu-gcc HOST_STRIP=s390x-linux-gnu-strip
+
 ## this section will get to run on each of the platform, and in GitHub Actions
 ## it will run on top of qemu, which is slow, but sufficient for these minor
 ## steps
@@ -129,3 +136,7 @@ RUN groupadd -f cilium \
 
 CMD ["/usr/bin/cilium-dbg"]
 ```
+
+Use `INCLUDE_S390X=true` with `make` targets in `images/Makefile` and `Makefile.docker`
+to append `linux/s390x` to default multi-platform image builds without changing the
+existing default platforms.
