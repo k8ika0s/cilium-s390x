@@ -29,6 +29,9 @@ ifeq ($(CROSS_ARCH),arm64)
 else ifeq ($(CROSS_ARCH),amd64)
   HOST_CC = x86_64-linux-gnu-gcc
   HOST_STRIP = x86_64-linux-gnu-strip
+else ifeq ($(CROSS_ARCH),s390x)
+  HOST_CC = s390x-linux-gnu-gcc
+  HOST_STRIP = s390x-linux-gnu-strip
 endif
 
 # Define all at the top here so that Makefiles which include this one will hit

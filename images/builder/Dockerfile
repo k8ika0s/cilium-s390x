@@ -27,7 +27,7 @@ RUN \
     apt-get update && \
     apt-get upgrade -y --no-install-recommends && \
     apt-get install -y --no-install-recommends \
-    # Install cross tools for both arm64 on amd64
+    # Install cross tools for arm64, amd64, and s390x
     gcc-aarch64-linux-gnu \
     g++-aarch64-linux-gnu \
     libc6-dev-arm64-cross \
@@ -36,6 +36,10 @@ RUN \
     g++-x86-64-linux-gnu \
     libc6-dev-amd64-cross \
     binutils-x86-64-linux-gnu \
+    gcc-s390x-linux-gnu \
+    g++-s390x-linux-gnu \
+    libc6-dev-s390x-cross \
+    binutils-s390x-linux-gnu \
     # Dependencies to unzip protoc
     unzip \
     # Base Cilium-build dependencies

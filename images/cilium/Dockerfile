@@ -65,6 +65,7 @@ RUN set -xe && \
         'OBJCOPY_CMD=objcopy; \
          if [ "${TARGETARCH}" = "amd64" ]; then OBJCOPY_CMD=x86_64-linux-gnu-objcopy; \
          elif [ "${TARGETARCH}" = "arm64" ]; then OBJCOPY_CMD=aarch64-linux-gnu-objcopy; \
+         elif [ "${TARGETARCH}" = "s390x" ]; then OBJCOPY_CMD=s390x-linux-gnu-objcopy; \
          fi; \
          filename=$(basename ${0}) && \
          ${OBJCOPY_CMD} --only-keep-debug ${0} ${0}.debug && \

@@ -215,6 +215,8 @@ ifeq ($(CROSS_ARCH),arm64)
     GO_BUILD_ENV += CC=aarch64-linux-gnu-gcc
 else ifeq ($(CROSS_ARCH),amd64)
     GO_BUILD_ENV += CC=x86_64-linux-gnu-gcc
+else ifeq ($(CROSS_ARCH),s390x)
+    GO_BUILD_ENV += CC=s390x-linux-gnu-gcc
 endif
 
 ifneq ($(GOARCH),)
