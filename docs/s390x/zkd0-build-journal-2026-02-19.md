@@ -533,3 +533,14 @@ Error: creating build container: unable to copy from source docker://quay.io/cil
 choosing an image from manifest list ...:
 no image found in manifest list for architecture "s390x", variant "", OS "linux"
 ```
+
+### Build Attempt #10 (Re-validate with `Makefile.docker` buildx stderr suppression)
+```text
+Command: rsync Makefile.docker zkd0:/root/work/cilium-s390x/Makefile.docker
+Command: ssh zkd0 'cd /root/work/cilium-s390x && export BASHRCSOURCED=1 && make -n build-container'
+Result: Make expansion proceeds without repeated `docker buildx ls --format` podman error noise.
+Remaining noise: repeated Git metadata warnings from partial `.git` state (`branch ... does not have any commits yet`).
+```
+
+### Additional Remediation Candidate
+- `Makefile.docker`: redirect stderr for builder discovery probe (`docker buildx ls --format ... 2>/dev/null`) to avoid non-fatal podman-shim noise while preserving behavior for Docker Buildx environments.
