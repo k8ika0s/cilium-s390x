@@ -544,3 +544,62 @@ Remaining noise: repeated Git metadata warnings from partial `.git` state (`bran
 
 ### Additional Remediation Candidate
 - `Makefile.docker`: redirect stderr for builder discovery probe (`docker buildx ls --format ... 2>/dev/null`) to avoid non-fatal podman-shim noise while preserving behavior for Docker Buildx environments.
+
+## Local Remediation Iteration (2026-02-19): Opt-in Base Image Overrides
+
+### Problem Addressed
+- `linux/s390x` image builds are blocked when default upstream base images referenced in Dockerfiles do not publish s390x manifests.
+- Existing build entrypoints did not provide a clean, explicit mechanism to override those base image refs end-to-end.
+
+### Code Changes
+1. `images/scripts/build-image.sh`
+   - Added opt-in passthrough for the following environment variables as `--build-arg`:
+     - `CILIUM_BUILDER_IMAGE`
+     - `CILIUM_RUNTIME_IMAGE`
+     - `CILIUM_ENVOY_IMAGE`
+     - `CILIUM_LLVM_IMAGE`
+     - `CILIUM_BPFTOOL_IMAGE`
+     - `CILIUM_IPTABLES_IMAGE`
+   - Behavior remains unchanged when these vars are unset.
+2. `Makefile.docker`
+   - Added matching optional build-arg passthrough for top-level `make docker-*` targets.
+   - Behavior remains unchanged when vars are unset.
+3. `images/README.md`
+   - Documented opt-in override flow and example commands for runtime/cilium images.
+
+### Validation (Local)
+#### Validation A: Script path (`images/scripts/build-image.sh`)
+```text
+Method: Replace `docker` with a temporary shim in PATH and run build script with FORCE=true.
+Result: `docker buildx build` invocation includes expected overrides:
+  --build-arg=CILIUM_BUILDER_IMAGE=registry.internal/cilium-builder:s390x
+  --build-arg=CILIUM_RUNTIME_IMAGE=registry.internal/cilium-runtime:s390x
+  --build-arg=CILIUM_ENVOY_IMAGE=registry.internal/cilium-envoy:s390x
+```
+
+#### Validation B: Top-level make path (`Makefile.docker`)
+```text
+Command: make -n docker-cilium-image \
+  CILIUM_BUILDER_IMAGE=registry.internal/cilium-builder:s390x \
+  CILIUM_RUNTIME_IMAGE=registry.internal/cilium-runtime:s390x \
+  CILIUM_ENVOY_IMAGE=registry.internal/cilium-envoy:s390x
+Result: generated build command includes matching --build-arg flags.
+```
+
+### Impact Assessment
+- Positive: enables internal/private s390x base images to be used without patching Dockerfiles per build.
+- Scope: opt-in only; no behavior changes for existing amd64/arm64 workflows unless override vars are set.
+- Remaining blocker: availability and publication pipeline for the actual s390x base images themselves.
+
+### Build Attempt #11 (zkd0: top-level docker target with override args)
+```text
+Command: make -n docker-cilium-image \
+  CILIUM_BUILDER_IMAGE=registry.internal/cilium-builder:s390x \
+  CILIUM_RUNTIME_IMAGE=registry.internal/cilium-runtime:s390x \
+  CILIUM_ENVOY_IMAGE=registry.internal/cilium-envoy:s390x
+Result: generated build command includes expected override args:
+  --build-arg CILIUM_BUILDER_IMAGE=registry.internal/cilium-builder:s390x
+  --build-arg CILIUM_RUNTIME_IMAGE=registry.internal/cilium-runtime:s390x
+  --build-arg CILIUM_ENVOY_IMAGE=registry.internal/cilium-envoy:s390x
+Notes: partial `.git` metadata warning noise persists on zkd0 and is unrelated to this remediation.
+```
