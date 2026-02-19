@@ -94,12 +94,28 @@ fi
 do_test="${TEST:-false}"
 
 run_buildx() {
+  local build_args
+  local build_arg_name
+  local build_arg_value
   build_args=(
     "--platform=${platform}"
     "--builder=${builder}"
     "--target=release"
     "--file=${image_dir}/Dockerfile"
   )
+  for build_arg_name in \
+    CILIUM_BUILDER_IMAGE \
+    CILIUM_RUNTIME_IMAGE \
+    CILIUM_ENVOY_IMAGE \
+    CILIUM_LLVM_IMAGE \
+    CILIUM_BPFTOOL_IMAGE \
+    CILIUM_IPTABLES_IMAGE
+  do
+    build_arg_value="${!build_arg_name:-}"
+    if [ -n "${build_arg_value}" ] ; then
+      build_args+=("--build-arg=${build_arg_name}=${build_arg_value}")
+    fi
+  done
   if [ "${with_root_context}" = "false" ] ; then
     build_args+=("${image_dir}")
   else
