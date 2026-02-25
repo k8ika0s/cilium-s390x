@@ -1,3 +1,38 @@
+s390x Fork Notes
+================
+
+This fork tracks upstream on ``main`` and keeps active IBM Z / LinuxONE
+(``s390x``, big-endian) enablement work in dedicated ``k8ika0s/s390x-*`` branches.
+
+Highlights
+----------
+
+- Fork-local s390x remediation and validation work for this project is maintained under
+  ``k8ika0s/s390x-local-pr-stack``.
+- Changes are intentionally architecture-scoped to avoid regressions on amd64/arm64.
+- Mainline syncs happen in this fork only; no upstream push/PR is performed from this flow.
+
+Requirements
+------------
+
+- Linux host on ``s390x`` (RHEL/Ubuntu recommended) with ``git``.
+- Project toolchain dependencies from this repository's existing build docs.
+- Container runtime (docker or podman) where image build/test targets require it.
+
+Quick Start on s390x
+--------------------
+
+.. code-block:: bash
+
+   git clone https://github.com/k8ika0s/cilium-s390x.git
+   cd cilium-s390x
+   git checkout main
+   git checkout k8ika0s/s390x-local-pr-stack
+   make build-container
+   RUN_POLICY_INTEGRATION=true RUN_BPF_REGRESSION_SUBSET=true test/s390x/run_harness.sh
+
+----
+
 .. raw:: html
 
    <picture>
