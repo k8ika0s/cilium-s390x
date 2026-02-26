@@ -5,27 +5,26 @@
 static __always_inline void add_egressgw_policy_entry(__be32 saddr, __be32 daddr, __u8 cidr,
 						      __be32 gateway_ip, __be32 egress_ip)
 {
-	struct egress_gw_policy_key in_key = {
-		.lpm_key = { EGRESS_PREFIX_LEN_V4(cidr), {} },
-		.saddr   = saddr,
-		.daddr   = daddr,
-	};
+	struct egress_gw_policy_key in_key = {};
+	struct egress_gw_policy_entry in_val = {};
 
-	struct egress_gw_policy_entry in_val = {
-		.egress_ip  = egress_ip,
-		.gateway_ip = gateway_ip,
-	};
+	in_key.lpm_key.prefixlen = EGRESS_PREFIX_LEN_V4(cidr);
+	in_key.saddr = saddr;
+	in_key.daddr = daddr;
+
+	in_val.egress_ip = egress_ip;
+	in_val.gateway_ip = gateway_ip;
 
 	map_update_elem(&cilium_egress_gw_policy_v4, &in_key, &in_val, 0);
 }
 
 static __always_inline void del_egressgw_policy_entry(__be32 saddr, __be32 daddr, __u8 cidr)
 {
-	struct egress_gw_policy_key in_key = {
-		.lpm_key = { EGRESS_PREFIX_LEN_V4(cidr), {} },
-		.saddr   = saddr,
-		.daddr   = daddr,
-	};
+	struct egress_gw_policy_key in_key = {};
+
+	in_key.lpm_key.prefixlen = EGRESS_PREFIX_LEN_V4(cidr);
+	in_key.saddr = saddr;
+	in_key.daddr = daddr;
 
 	map_delete_elem(&cilium_egress_gw_policy_v4, &in_key);
 }
@@ -38,17 +37,16 @@ static __always_inline void add_egressgw_policy_entry_v6(const union v6addr *sad
 							 const union v6addr *egress_ip,
 							 __u32 egress_ifindex)
 {
-	struct egress_gw_policy_key6 in_key = {
-		.lpm_key = { EGRESS_PREFIX_LEN_V6(cidr), {} },
-		.saddr   = *saddr,
-		.daddr   = *daddr,
-	};
+	struct egress_gw_policy_key6 in_key = {};
+	struct egress_gw_policy_entry6 in_val = {};
 
-	struct egress_gw_policy_entry6 in_val = {
-		.egress_ip  = *egress_ip,
-		.gateway_ip = gateway_ip,
-		.egress_ifindex = egress_ifindex,
-	};
+	in_key.lpm_key.prefixlen = EGRESS_PREFIX_LEN_V6(cidr);
+	in_key.saddr = *saddr;
+	in_key.daddr = *daddr;
+
+	in_val.egress_ip = *egress_ip;
+	in_val.gateway_ip = gateway_ip;
+	in_val.egress_ifindex = egress_ifindex;
 
 	map_update_elem(&cilium_egress_gw_policy_v6, &in_key, &in_val, 0);
 }
@@ -57,11 +55,11 @@ static __always_inline void del_egressgw_policy_entry_v6(const union v6addr *sad
 							 const union v6addr *daddr,
 							 __u8 cidr)
 {
-	struct egress_gw_policy_key6 in_key = {
-		.lpm_key = { EGRESS_PREFIX_LEN_V6(cidr), {} },
-		.saddr   = *saddr,
-		.daddr   = *daddr,
-	};
+	struct egress_gw_policy_key6 in_key = {};
+
+	in_key.lpm_key.prefixlen = EGRESS_PREFIX_LEN_V6(cidr);
+	in_key.saddr = *saddr;
+	in_key.daddr = *daddr;
 
 	map_delete_elem(&cilium_egress_gw_policy_v6, &in_key);
 }

@@ -1,0 +1,32 @@
++ export KUBECONFIG=/etc/kubernetes/admin.conf
++ KUBECONFIG=/etc/kubernetes/admin.conf
++ CILIUM_IMAGE_REPO=docker.io/cilium/cilium-dev
++ CILIUM_IMAGE_TAG=s390x-be-policyfix-20260221T162748Z
++ OPERATOR_IMAGE_OVERRIDE=docker.io/cilium/operator-dev:1233512912-nogit-wip
++ ENVOY_IMAGE_REPO=quay.io/cilium/cilium-envoy-dev
++ ENVOY_IMAGE_TAG=k8ika0s-s390x-proxy-remediate-s390x
++ /root/work/cilium-s390x/test/s390x/deploy_cilium_s390x.sh
+Deploying cilium into kube-system from ./install/kubernetes/cilium
+Release "cilium" has been upgraded. Happy Helming!
+NAME: cilium
+LAST DEPLOYED: Sat Feb 21 08:33:52 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 9
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium.
+
+Your release version is 1.20.0-dev.
+
+For any further help, visit https://docs.cilium.io/en/v1.20/gettinghelp
+Waiting for Cilium workloads
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+Waiting for daemon set spec update to be observed...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Deployment completed

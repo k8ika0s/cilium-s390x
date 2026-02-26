@@ -1,0 +1,284 @@
+[INFO] 2026-02-26T13:25:33Z start proxy-docker-tests-wide-forcedexec
+[INFO] cmd=cd /root/work/proxy-s390x && make docker-tests ARCH=s390x CARGO_BAZEL_REPIN=true TEST_TARGETS='//tests/... @envoy//test/integration:tcp_proxy_integration_test' EXTRA_BAZEL_BUILD_OPTS='--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --@envoy//bazel:http3=False' BAZEL_TEST_OPTS='--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=1 --cache_test_results=no --runs_per_test=2 --test_output=errors'
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Skip registering C++ toolchains via BAZEL_BUILD_OPTS. Local C++ toolchain needs to be available!
+Using Docker Buildx builder "" with build flags "--platform=linux/s390x".
+DOCKER_BUILDKIT=1 docker buildx build --progress=plain --platform=linux/s390x --network=host  --build-arg BUILDER_BASE="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg PROXYLIB_BUILDER="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg BAZEL_BUILD_OPTS="--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --@envoy//bazel:http3=False" --build-arg BAZEL_TEST_OPTS="--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=1 --cache_test_results=no --runs_per_test=2 --test_output=errors" --build-arg CARGO_BAZEL_REPIN="true" --build-arg TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test" -f Dockerfile.tests -t quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs .
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-26T05:25:33-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+[1/8] STEP 1/5: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS proxylib
+[1/8] STEP 2/5: WORKDIR /go/src/github.com/cilium/proxy
+--> Using cache 793ac1cc28e1e985e039489f211589da891528cc7a75ff714611a43388465469
+--> 793ac1cc28e1
+[1/8] STEP 3/5: COPY --chown=1337:1337 . ./
+--> Using cache 043f5fcb55eee8f2e6a3e07abbcdfcfa28d76c98d122f229ec78c0e1e09bb2ba
+--> 043f5fcb55ee
+[1/8] STEP 4/5: ARG TARGETARCH
+--> Using cache 305934d27ef5c4e5e102dded7e4528e30f1969f755aff9d9fa2d0128a7bbb93e
+--> 305934d27ef5
+[1/8] STEP 5/5: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/go/pkg,type=cache,id=$TARGETARCH     PATH=$PATH:/usr/local/go/bin GOFLAGS=-buildvcs=false GOARCH=${TARGETARCH} make -C proxylib all && mv proxylib/libcilium.so /tmp/libcilium.so
+--> Using cache d981f4c70bb001515bf6d143eab1f3bcedd7471b74f79d58f6f8d33160d0813b
+--> d981f4c70bb0
+[2/8] STEP 1/16: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS builder-fresh
+[2/8] STEP 2/16: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 0b8cf4bf6122a089473429c1db9159b10bb93b087c0f1bd9375df1478941a24c
+--> 0b8cf4bf6122
+[2/8] STEP 3/16: WORKDIR /cilium/proxy
+--> Using cache 1e58feb3532aaf7beb49a11b0c0b9d88611a77b8c3fecb3ca7bc6bd1b732946d
+--> 1e58feb3532a
+[2/8] STEP 4/16: COPY . ./
+--> Using cache fe7533dda73837a58320e91e96243252b29f1f6fdc6de1ed635f293c0dc4bcbf
+--> fe7533dda738
+[2/8] STEP 5/16: ARG V
+--> Using cache 6c730a33bd6b0b26bb77557225e108b569de54468e5d3cd210f09ef356187849
+--> 6c730a33bd6b
+[2/8] STEP 6/16: ARG BAZEL_BUILD_OPTS
+--> Using cache 813fb67f93f945ec45b328f11561469c68c8a4b5aa8224f95d5ed234c0628bc4
+--> 813fb67f93f9
+[2/8] STEP 7/16: ARG CARGO_BAZEL_REPIN=true
+--> Using cache 951b6ca5369e825bdd5694b0eca8c18e049f2f14b8017cbfa035fadf254e9b27
+--> 951b6ca5369e
+[2/8] STEP 8/16: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> Using cache 13bfe7e63c1aa1635de1d3c6a1c9292a1bc0200f53172151d2d35d848fb76b09
+--> 13bfe7e63c1a
+[2/8] STEP 9/16: ARG DEBUG
+--> Using cache 800c4da303a3126a7f1ff69a85b2ecedf1c7f4005765f4c393fab147aa78ff4e
+--> 800c4da303a3
+[2/8] STEP 10/16: ARG BUILDARCH
+--> Using cache 3b9547162af621c95156795d57d0b5cc9886eee5e20f7f86dd744eecb245d9d7
+--> 3b9547162af6
+[2/8] STEP 11/16: ARG TARGETARCH
+--> Using cache 964740bd16564aa95d5e28351f671d57934a5902b69ff763ca4a9572d8c959ea
+--> 964740bd1656
+[2/8] STEP 12/16: ARG NO_CACHE
+--> Using cache 079eeca19da0389fb2ee599b21a00979d8aeb0a8b1d4655061ea1935f1bace5f
+--> 079eeca19da0
+[2/8] STEP 13/16: ENV TARGETARCH=$TARGETARCH
+--> Using cache e1ee19a468532688c5cb325e86650f175f2ea349783e2234ddab7bf130e0b41d
+--> e1ee19a46853
+[2/8] STEP 14/16: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> Using cache 8c94100c4ff48ef001368c76ed89be92dc971a1b35f759a98713d83e7ea657dd
+--> 8c94100c4ff4
+[2/8] STEP 15/16: RUN mkdir -p /tmp/bazel-cache
+--> Using cache 3c021e3fd68ccd5a7ad6515ba9bf6ca1fdd7616b11081f9aaf1498eb71395590
+--> 3c021e3fd68c
+[2/8] STEP 16/16: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/tmp/bazel-cache,type=cache,id=$TARGETARCH-bazel-cache     if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps
+--> Using cache 0996160034a639a4670d8a0ae254a3935dd9bdac128c325a1e742bd46b00e344
+--> 0996160034a6
+[3/8] STEP 1/1: FROM 0996160034a639a4670d8a0ae254a3935dd9bdac128c325a1e742bd46b00e344 AS archive-cache
+--> 0996160034a6
+[5/8] STEP 1/17: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS runner
+[5/8] STEP 2/17: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 0b8cf4bf6122a089473429c1db9159b10bb93b087c0f1bd9375df1478941a24c
+--> 0b8cf4bf6122
+[5/8] STEP 3/17: WORKDIR /cilium/proxy
+--> Using cache 1e58feb3532aaf7beb49a11b0c0b9d88611a77b8c3fecb3ca7bc6bd1b732946d
+--> 1e58feb3532a
+[5/8] STEP 4/17: COPY . ./
+--> Using cache fe7533dda73837a58320e91e96243252b29f1f6fdc6de1ed635f293c0dc4bcbf
+--> fe7533dda738
+[5/8] STEP 5/17: ARG V
+--> Using cache 6c730a33bd6b0b26bb77557225e108b569de54468e5d3cd210f09ef356187849
+--> 6c730a33bd6b
+[5/8] STEP 6/17: ARG BAZEL_BUILD_OPTS
+--> Using cache 813fb67f93f945ec45b328f11561469c68c8a4b5aa8224f95d5ed234c0628bc4
+--> 813fb67f93f9
+[5/8] STEP 7/17: ARG BAZEL_TEST_OPTS
+--> Using cache 18f4912feb2a30ce020ee904e98e73a755f771dad6a99cfcbf609213b0ea5048
+--> 18f4912feb2a
+[5/8] STEP 8/17: ARG CARGO_BAZEL_REPIN=true
+--> Using cache 564e0183178c3082b887eaaf727ea0a610315fa38db62978c8a4342c56b7ae06
+--> 564e0183178c
+[5/8] STEP 9/17: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> Using cache a83d2692ffda75ebcb50003df39d85119b0f38bbeb83ccfbc718e14cb479a76e
+--> a83d2692ffda
+[5/8] STEP 10/17: ARG DEBUG
+--> Using cache 34352f115aefbeb900cf0a5a38912c162105b22f7e681592ecd30d3196130caf
+--> 34352f115aef
+[5/8] STEP 11/17: ARG BUILDARCH
+--> Using cache 03a59b7d339e5e183c65713b716fb0c784211c37d203183c4fe0d912cd2e360a
+--> 03a59b7d339e
+[5/8] STEP 12/17: ARG TARGETARCH
+--> Using cache e9674745a35d9f4aa05e0584f045f1da0a8f1144a23d6e2f86fab264cc03731b
+--> e9674745a35d
+[5/8] STEP 13/17: ARG NO_CACHE
+--> Using cache b6d5594e1d6c6e8320b7b53701af3e708be92e756f6f6b0a64aefcba8eeb05ae
+--> b6d5594e1d6c
+[5/8] STEP 14/17: ENV TARGETARCH=$TARGETARCH
+--> Using cache 79e3331199a61a1f0c388b9114e459cc66e56079e7cd8d73c506bb7fc0036a56
+--> 79e3331199a6
+[5/8] STEP 15/17: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH if [ -n "$NO_CACHE" ]; then rm -rf /cilium/proxy/.cache/*; fi
+--> 4475327a5d55
+[5/8] STEP 16/17: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> 135646c15f67
+[5/8] STEP 17/17: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=target=/tmp/bazel-cache,source=/tmp/bazel-cache,from=archive-cache,rw     if [ "$TARGETARCH" != "$BUILDARCH" ]; then       if [ "$TARGETARCH" = "amd64" ]; then         ln -s /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.* /lib;         ln -s /lib /lib64;         ln -s /usr/x86_64-linux-gnu/lib /usr/cilium-cross-compat/lib;       elif [ "$TARGETARCH" = "arm64" ]; then         ln -s /usr/aarch64-linux-gnu/lib/ld-linux-aarch64.so.* /lib;         ln -s /usr/aarch64-linux-gnu/lib /usr/cilium-cross-compat/lib;       elif [ "$TARGETARCH" = "s390x" ]; then         ln -s /usr/s390x-linux-gnu/lib/ld64.so.1 /lib;         ln -s /usr/s390x-linux-gnu/lib /usr/cilium-cross-compat/lib;       fi;     fi &&     if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi &&     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" BAZEL_TEST_OPTS="${BAZEL_TEST_OPTS}" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-tests &&     cp -Lr /cilium/proxy/bazel-testlogs testlogs
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Registering C++ toolchains via BAZEL_BUILD_OPTS
+echo "Clang assumed to be installed in the builder image"
+Clang assumed to be installed in the builder image
+bazel/setup_clang.sh /usr/lib/llvm-18
+[0mecho "build --config=clang" >> clang.bazelrc
+# Upstream tcp_proxy_integration_test included to validate that our custom patches
+# didn't break anything
+CARGO_BAZEL_REPIN=true  bazel  test --jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --@envoy//bazel:http3=False --disk_cache=/tmp/bazel-cache --platforms=//bazel:linux_s390x --config=release --extra_toolchains=//bazel/toolchains:all --jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=1 --cache_test_results=no --runs_per_test=2 --test_output=errors --test_output=errors //tests/... @envoy//test/integration:tcp_proxy_integration_test 
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mINFO: [0mInvocation ID: fcf981aa-7e9c-467d-9190-67adfc97ce3e
+[32mComputing main repo mapping:[0m 
+[32mComputing main repo mapping:[0m 
+[32mComputing main repo mapping:[0m 
+[33mDEBUG: [0mRule 'dynamic_modules_rust_sdk_crate_index' indicated that a canonical reproducible form can be obtained by modifying arguments _action_listener = <unknown object com.google.devtools.build.lib.packages.Attribute$LabelListLateBoundDefault>, _config_dependencies = [], _configure = False, _environ = ["CARGO_BAZEL_GENERATOR_URL", "CARGO_BAZEL_GENERATOR_SHA256", "CARGO_BAZEL_REPIN", "REPIN", "CARGO_BAZEL_REPIN_ONLY", "CARGO_BAZEL_ISOLATED", "CARGO_BAZEL_DEBUG"], _original_name = "", generator_sha256s = {"s390x-unknown-linux-gnu": "5e7a4acf62f6dfe0386d11bd6ace9c5fa6651d233cadc0ac63a4e4e17656c949"}
+[33mDEBUG: [0mRepository dynamic_modules_rust_sdk_crate_index instantiated at:
+  /cilium/proxy/WORKSPACE:94:25: in <toplevel>
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:74:24: in envoy_dependency_imports
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:229:22: in crates_repositories
+Repository rule crates_repository defined at:
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/crates_repository.bzl:124:36: in <toplevel>
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mLoading:[0m 
+[32mLoading:[0m 3 packages loaded
+[32mAnalyzing:[0m 27 targets (5 packages loaded, 0 targets configured)
+[32mAnalyzing:[0m 27 targets (5 packages loaded, 0 targets configured)
+
+[33mDEBUG: [0m/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/com_google_protobuf/protobuf.bzl:654:10: The py_proto_library macro is deprecated and will be removed in the 30.x release. switch to the rule defined by rules_python or the one in bazel/py_proto_library.bzl.
+[32mAnalyzing:[0m 27 targets (139 packages loaded, 133 targets configured)
+
+[32mAnalyzing:[0m 27 targets (139 packages loaded, 133 targets configured)
+
+[32mAnalyzing:[0m 27 targets (139 packages loaded, 133 targets configured)
+
+[32mAnalyzing:[0m 27 targets (176 packages loaded, 2450 targets configured)
+
+[35mWARNING: [0mDownload from https://mirror.bazel.build/github.com/ninja-build/ninja/archive/v1.13.0.tar.gz failed: class java.io.FileNotFoundException GET returned 404 Not Found
+[32mAnalyzing:[0m 27 targets (668 packages loaded, 26488 targets configured)
+
+[32mAnalyzing:[0m 27 targets (672 packages loaded, 28501 targets configured)
+
+[32mAnalyzing:[0m 27 targets (678 packages loaded, 57211 targets configured)
+
+[32mAnalyzing:[0m 27 targets (685 packages loaded, 59321 targets configured)
+[32m[227 / 1,718][0m Compiling absl/flags/internal/commandlineflag.cc; 0s disk-cache, processwrapper-sandbox ... (2 actions running)
+[32mAnalyzing:[0m 27 targets (685 packages loaded, 59377 targets configured)
+[32m[520 / 6,307][0m Compiling absl/time/internal/cctz/src/time_zone_impl.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32mAnalyzing:[0m 27 targets (685 packages loaded, 59377 targets configured)
+[32m[534 / 6,307][0m Compiling absl/time/internal/cctz/src/time_zone_fixed.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32mAnalyzing:[0m 27 targets (686 packages loaded, 59500 targets configured)
+[32m[544 / 6,307][0m Compiling absl/time/internal/cctz/src/time_zone_format.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32mINFO: [0mAnalyzed 27 targets (687 packages loaded, 59626 targets configured).
+[32m[550 / 6,321][0m Compiling absl/time/internal/cctz/src/time_zone_libc.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[559 / 6,321][0m Compiling absl/time/internal/cctz/src/time_zone_info.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[567 / 6,321][0m Compiling absl/time/internal/cctz/src/time_zone_info.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[679 / 6,471][0m Compiling absl/time/internal/cctz/src/time_zone_info.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[699 / 6,471][0m Compiling absl/hash/internal/city.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[712 / 6,471][0m Compiling absl/time/internal/cctz/src/time_zone_format.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[725 / 6,471][0m Compiling absl/time/internal/cctz/src/time_zone_fixed.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[737 / 6,471][0m Compiling absl/crc/internal/crc_x86_arm_combined.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[746 / 6,471][0m Compiling absl/numeric/int128.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[755 / 6,471][0m Compiling absl/debugging/internal/demangle.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[762 / 6,471][0m Compiling absl/debugging/internal/demangle.cc [for tool]; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[780 / 6,471][0m Compiling absl/debugging/internal/demangle.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[789 / 6,471][0m Compiling absl/time/format.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[797 / 6,471][0m Compiling absl/time/duration.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[803 / 6,471][0m Compiling absl/debugging/internal/examine_stack.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[808 / 6,471][0m Compiling tools/cpp/runfiles/runfiles.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[816 / 6,471][0m Compiling absl/time/civil_time.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[823 / 6,471][0m Compiling absl/strings/internal/str_format/float_conversion.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[831 / 6,471][0m Compiling absl/time/format.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[837 / 6,471][0m Compiling absl/time/duration.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[841 / 6,471][0m Compiling absl/strings/internal/str_format/arg.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[846 / 6,471][0m Compiling absl/strings/internal/str_format/parser.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[850 / 6,471][0m Compiling absl/log/log_sink.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[856 / 6,471][0m Compiling absl/log/internal/globals.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[861 / 6,471][0m Compiling absl/strings/numbers.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[867 / 6,471][0m Compiling absl/flags/marshalling.cc [for tool]; 1s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[874 / 6,471][0m Compiling absl/synchronization/internal/kernel_timeout.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[881 / 6,471][0m Compiling absl/strings/charconv.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[886 / 6,471][0m Compiling absl/strings/escaping.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[893 / 6,471][0m Compiling absl/synchronization/internal/graphcycles.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[898 / 6,471][0m Compiling absl/synchronization/notification.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[902 / 6,471][0m Compiling absl/flags/marshalling.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[906 / 6,471][0m Compiling absl/strings/internal/charconv_bigint.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[912 / 6,471][0m Compiling absl/crc/crc32c.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[919 / 6,471][0m Compiling absl/log/internal/log_format.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[924 / 6,471][0m Compiling absl/log/internal/log_format.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[931 / 6,471][0m Compiling absl/strings/internal/cord_internal.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[937 / 6,471][0m Compiling absl/crc/internal/crc_cord_state.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[943 / 6,471][0m Compiling absl/crc/internal/crc_cord_state.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[948 / 6,471][0m Compiling absl/strings/internal/cord_rep_btree_navigator.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[953 / 6,471][0m Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[961 / 6,471][0m Compiling absl/strings/internal/cord_rep_btree_reader.cc; 0s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[984 / 6,471][0m Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[987 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 1s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[989 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 2s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[992 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 3s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[996 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 4s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[999 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 5s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[1,002 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 6s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,008 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 7s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,011 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 8s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,013 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 9s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,015 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 11s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,017 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 12s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,018 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 13s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,019 / 6,471][0m BootstrapGNUMake external/rules_foreign_cc/toolchains/private/make [for tool]; 14s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[1,021 / 6,471][0m GoToolchainBinaryBuild external/go_sdk/builder [for tool]; 7s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[1,023 / 6,471][0m GoToolchainBinaryBuild external/go_sdk/builder [for tool]; 8s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[1,026 / 6,471][0m GoToolchainBinaryBuild external/go_sdk/builder [for tool]; 9s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,030 / 6,471][0m GoToolchainBinaryBuild external/go_sdk/builder [for tool]; 11s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[1,033 / 6,471][0m GoToolchainBinaryBuild external/go_sdk/builder [for tool]; 12s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[1,035 / 6,471][0m GoToolchainBinaryBuild external/go_sdk/builder [for tool]; 13s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,041 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 7s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,042 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 8s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,043 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 9s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[1,046 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 10s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,048 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 12s disk-cache, processwrapper-sandbox ... (5 actions, 3 running)
+[32m[1,050 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 13s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,052 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 14s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,052 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 15s disk-cache, processwrapper-sandbox ... (5 actions, 4 running)
+[32m[1,055 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 16s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,059 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 17s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,062 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 18s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,067 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 20s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,077 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 21s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,079 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 22s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,085 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 24s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,088 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 25s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,093 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 26s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,099 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 27s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,104 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 28s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,108 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 29s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,111 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 30s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,115 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 32s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,121 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 34s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,126 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 35s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,128 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 36s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,130 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 37s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,135 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 39s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,141 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 40s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,143 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 41s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,147 / 6,471][0m BootstrapPkgConfig external/rules_foreign_cc/toolchains/private/pkgconfig [for tool]; 42s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,152 / 6,471][0m Compiling src/google/protobuf/inlined_string_field.cc [for tool]; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,160 / 6,471][0m Compiling src/google/protobuf/json/internal/writer.cc [for tool]; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,174 / 6,471][0m Compiling src/google/protobuf/arena.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,177 / 6,471][0m Compiling absl/status/status.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,191 / 6,471][0m Compiling absl/status/internal/status_internal.cc; 1s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,195 / 6,471][0m Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]; 2s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,198 / 6,471][0m Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]; 3s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,200 / 6,471][0m Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]; 4s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,207 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 6s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,213 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 7s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,217 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 9s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,220 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 10s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,223 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 11s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,228 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 12s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,231 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 14s disk-cache, processwrapper-sandbox ... (4 actions, 3 running)
+[32m[1,239 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 15s disk-cache, processwrapper-sandbox ... (4 actions running)
+[32m[1,241 / 6,471][0m Foreign Cc - Configure: Building cmake_tool_default [for tool]; 16s disk-cache, processwrapper-sandbox ... (4 actions running)
+make: *** [Makefile.docker:252: docker-tests] Error 1

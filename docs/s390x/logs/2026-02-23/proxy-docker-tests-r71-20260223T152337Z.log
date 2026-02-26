@@ -1,0 +1,72 @@
+[INFO] 2026-02-23T15:23:37Z start r71 proxy docker-tests (targeted + repin true)
+[INFO] git_rev=9e7e35f1
+[INFO] cmd=CARGO_BAZEL_REPIN=true ARCH=s390x make docker-tests
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Skip registering C++ toolchains via BAZEL_BUILD_OPTS. Local C++ toolchain needs to be available!
+Using Docker Buildx builder "" with build flags "--platform=linux/s390x".
+DOCKER_BUILDKIT=1 docker buildx build --progress=plain --platform=linux/s390x --network=host  --build-arg BUILDER_BASE="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg PROXYLIB_BUILDER="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg BAZEL_BUILD_OPTS="--jobs=1 --local_ram_resources=2048 --local_cpu_resources=1" --build-arg BAZEL_TEST_OPTS="--jobs=1 --local_ram_resources=2048 --local_cpu_resources=1 --test_timeout=300 --local_test_jobs=1 --flaky_test_attempts=3 --test_output=errors" --build-arg CARGO_BAZEL_REPIN="false" --build-arg TEST_TARGETS="//tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test" -f Dockerfile.tests -t quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs .
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-23T07:23:37-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+[1/8] STEP 1/5: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS proxylib
+[1/8] STEP 2/5: WORKDIR /go/src/github.com/cilium/proxy
+--> Using cache a9fe44fed2b4658006871384e1e6dbb2312faf46eeb7378ab1a5c9dec1b50ec5
+--> a9fe44fed2b4
+[1/8] STEP 3/5: COPY --chown=1337:1337 . ./
+--> Using cache c8e6ecbf6675a3988bd4898e2102b3f8e1350d70a3cbd9793e4b933919957c3e
+--> c8e6ecbf6675
+[1/8] STEP 4/5: ARG TARGETARCH
+--> Using cache 08ffcc11282ea3bd7e7cdb28d0a754b29ddbfc597df2ec6ab5e1396ad0de3804
+--> 08ffcc11282e
+[1/8] STEP 5/5: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/go/pkg,type=cache,id=$TARGETARCH     PATH=$PATH:/usr/local/go/bin GOFLAGS=-buildvcs=false GOARCH=${TARGETARCH} make -C proxylib all && mv proxylib/libcilium.so /tmp/libcilium.so
+--> Using cache 79c5de2c5be3710bfe3bb76b4a1a023b4a526d2a647c39961921b7561dd62622
+--> 79c5de2c5be3
+[2/8] STEP 1/15: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS builder-fresh
+[2/8] STEP 2/15: LABEL maintainer="maintainer@cilium.io"
+--> Using cache dbc9cb9ae77091d2b719b9032d800403b7b34e788e83b7dd59652d71893580b4
+--> dbc9cb9ae770
+[2/8] STEP 3/15: WORKDIR /cilium/proxy
+--> Using cache 8d1546cbd57d59600c0bec9d1c9b20714ae08be0855813f9dc1a47f32d37acc3
+--> 8d1546cbd57d
+[2/8] STEP 4/15: COPY . ./
+--> Using cache e12496e1213163411376e66f864885affb4d62c3ddf71909a19e5681c91059e0
+--> e12496e12131
+[2/8] STEP 5/15: ARG V
+--> Using cache 9759efd491a60e7151e1d8d642d5118540f074bb9493081aca6690e8e2f7bb5f
+--> 9759efd491a6
+[2/8] STEP 6/15: ARG BAZEL_BUILD_OPTS
+--> Using cache a4b6290ee0ff7561810799080bc4fd23896f3e36e7e5e5fd129142788a3f7431
+--> a4b6290ee0ff
+[2/8] STEP 7/15: ARG CARGO_BAZEL_REPIN=true
+--> Using cache 379b24a82f03b239a511b06443c8e14d56d87a14b817537ea33cae7aae4a3a50
+--> 379b24a82f03
+[2/8] STEP 8/15: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> Using cache 1dac1fa1adefb1137bd777c4fc9119b554d6fd22768a9b09a22b278cc948ec0d
+--> 1dac1fa1adef
+[2/8] STEP 9/15: ARG DEBUG
+--> Using cache 9af52bbbcf930499cfc27136723753fd54cebff8d12751ff635816549dde08b6
+--> 9af52bbbcf93
+[2/8] STEP 10/15: ARG BUILDARCH
+--> Using cache e93ab08090dcdf3f15fbabe59ec148d3b7f20c523cba7b7e0aa73d3ce41c444b
+--> e93ab08090dc
+[2/8] STEP 11/15: ARG TARGETARCH
+--> Using cache cf87ac680e525ebe6b834d43292a429b0f220e0a657974aa9eb882ee15a1cb18
+--> cf87ac680e52
+[2/8] STEP 12/15: ARG NO_CACHE
+--> Using cache a0d3a6a297f2005af8ade49f210155300fa9fd404d280c059d1ba138bb52babd
+--> a0d3a6a297f2
+[2/8] STEP 13/15: ENV TARGETARCH=$TARGETARCH
+--> Using cache 4908532aa4c0a63670d1c95cde3ed7172de171161ef03513fc2b7f2c1e7e4f60
+--> 4908532aa4c0
+[2/8] STEP 14/15: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> Using cache cf9abbe71d80ba53b97b2a7a3332b201f9d8a4d2aa1520ddb97f8e819123f89a
+--> cf9abbe71d80
+[2/8] STEP 15/15: RUN if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Registering C++ toolchains via BAZEL_BUILD_OPTS
+make: *** [Makefile.docker:252: docker-tests] Error 1

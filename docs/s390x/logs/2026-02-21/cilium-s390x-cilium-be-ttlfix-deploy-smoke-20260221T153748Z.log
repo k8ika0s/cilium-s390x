@@ -1,0 +1,52 @@
+[START] 2026-02-21T15:37:48Z /root/work/logs/cilium-s390x-cilium-be-ttlfix-deploy-smoke-20260221T153748Z.log
+Deploying cilium into kube-system from ./install/kubernetes/cilium
+Release "cilium" has been upgraded. Happy Helming!
+NAME: cilium
+LAST DEPLOYED: Sat Feb 21 07:37:49 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 5
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium.
+
+Your release version is 1.20.0-dev.
+
+For any further help, visit https://docs.cilium.io/en/v1.20/gettinghelp
+Waiting for Cilium workloads
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+Waiting for daemon set spec update to be observed...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Deployment completed
+--- smoke ---
+Cluster nodes
+NAME                 STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+zkd01.fyre.ibm.com   Ready    control-plane   47m   v1.35.1   10.11.59.172   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+Waiting for node readiness
+node/zkd01.fyre.ibm.com condition met
+Waiting for Cilium DaemonSets/Deployments
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Cilium pod status
+NAME           READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-dg2tr   1/1     Running   0          16s   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                 READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-envoy-rz5ch   1/1     Running   0          45m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                               READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-operator-7d796b74f8-bmc6k   1/1     Running   0          45m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+Smoke checks failed: cluster-health kube-dns-endpoints coredns-rollout host-to-pod-health
+----- cluster-health -----
+cluster health has zero reachable endpoints
+----- kube-dns-endpoints -----
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+kube-dns service has no ready endpoints
+----- coredns-rollout -----
+error: deployment "coredns" exceeded its progress deadline
+----- host-to-pod-health -----
+curl: (28) Connection timed out after 3000 milliseconds

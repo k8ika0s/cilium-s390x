@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>body{font-family:Menlo,Consolas,monospace;background:#0b1020;color:#e8ecff;margin:20px} h1{font-size:22px} pre{white-space:pre-wrap;word-break:break-word;font-size:14px;line-height:1.35;background:#111831;padding:16px;border-radius:10px;border:1px solid #223} .ok{color:#8ff0a4}</style>
+<title>01-cluster-state</title></head><body><h1>01-cluster-state</h1><pre>
+[ts] 2026-02-25T20:26:22Z
+[host] zkd01.fyre.ibm.com
+== nodes ==
+NAME                   STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+kdz.dev.fyre.ibm.com   Ready    control-plane   13h   v1.35.1   10.14.125.157   &lt;none&gt;        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+zkd01.fyre.ibm.com     Ready    control-plane   73m   v1.35.1   10.11.59.172    &lt;none&gt;        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+
+== cilium daemonset ==
+NAME     DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE   CONTAINERS     IMAGES                                                             SELECTOR
+cilium   2         2         2       2            2           kubernetes.io/os=linux   13h   cilium-agent   docker.io/cilium/cilium-dev-eps:s390x-be-epsimg-20260225T195619Z   k8s-app=cilium
+
+== cilium pods ==
+NAME           READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-mcvfz   1/1     Running   0          20m   10.14.125.157   kdz.dev.fyre.ibm.com   &lt;none&gt;           &lt;none&gt;
+cilium-s72pd   1/1     Running   0          20m   10.11.59.172    zkd01.fyre.ibm.com     &lt;none&gt;           &lt;none&gt;
+</pre></body></html>

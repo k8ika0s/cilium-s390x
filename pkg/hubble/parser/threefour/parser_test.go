@@ -283,9 +283,11 @@ func TestL34Decode(t *testing.T) {
 	// 192.168.60.11:6443(sun-sr-https)  10.16.236.178:54222   L3/4   TCP Flags: ACK
 	d := []byte{
 		4, 7, 0, 0, 7, 124, 26, 57, 66, 0, 0, 0, 66, 0, 0, 0, // NOTIFY_CAPTURE_HDR
-		1, 0, 0, 0, // source labels
-		0, 0, 0, 0, // destination labels
-		0, 0, // destination ID
+	}
+	d = binary.NativeEndian.AppendUint32(d, 1) // source labels
+	d = binary.NativeEndian.AppendUint32(d, 0) // destination labels
+	d = binary.NativeEndian.AppendUint16(d, 0) // destination ID
+	d = append(d,
 		0x81,       // "established" trace reason with the encrypt bit set
 		0,          // flags
 		0, 0, 0, 0, // ifindex
@@ -293,7 +295,7 @@ func TestL34Decode(t *testing.T) {
 		45, 33, 217, 8, 0, 69, 0, 0, 52, 234, 28, 64, 0, 64, 6, 120, 49, 192,
 		168, 60, 11, 10, 16, 236, 178, 25, 43, 211, 206, 42, 239, 210, 28, 180,
 		152, 129, 103, 128, 16, 1, 152, 216, 156, 0, 0, 1, 1, 8, 10, 0, 90, 176,
-		98, 0, 90, 176, 97, 0, 0}
+		98, 0, 90, 176, 97, 0, 0)
 
 	endpointGetter := &testutils.FakeEndpointGetter{
 		OnGetEndpointInfo: func(ip netip.Addr) (endpoint getters.EndpointInfo, ok bool) {

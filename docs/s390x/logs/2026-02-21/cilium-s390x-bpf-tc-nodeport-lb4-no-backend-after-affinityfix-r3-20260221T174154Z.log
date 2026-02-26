@@ -1,0 +1,39 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+rm -f output/*
+rm -f 
+rm -f 
+rm -f 
+rm -f 
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb4_no_backend.c -o tc_nodeport_lb4_no_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -run tc_nodeport_no_backend -test tc_nodeport_lb4_no_backend \
+| cat;
+testing: warning: no tests to run
+PASS
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.070s [no tests to run]
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'

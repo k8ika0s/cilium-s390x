@@ -1,0 +1,13 @@
+TS=20260221T171301Z
+NS=s390x-validate
+namespace/s390x-validate created
+pod/server created
+pod/client created
+pod/server condition met
+pod/client condition met
+NAME     READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+client   1/1     Running   0          2s    10.244.0.143   zkd01.fyre.ibm.com   <none>           <none>
+server   1/1     Running   0          2s    10.244.0.18    zkd01.fyre.ibm.com   <none>           <none>
+Baseline connectivity (should succeed)
+DNS: lookup server on 10.96.0.10:53: no such host
+command terminated with exit code 1

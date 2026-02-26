@@ -57,8 +57,8 @@ policy_add_entry(bool egress, __u32 sec_label, __u8 protocol, __u16 dport,
 		.dport = dport,
 	};
 	struct policy_entry value = {
-		.deny = deny,
-		.lpm_prefix_length = value_prefix_len,
+		.deny = (__u8)(deny ? POLICY_ENTRY_DENY_MASK : 0) |
+			(__u8)(value_prefix_len << POLICY_ENTRY_LPM_PREFIX_SHIFT),
 	};
 
 	map_update_elem(&cilium_policy_v2, &key, &value, BPF_ANY);

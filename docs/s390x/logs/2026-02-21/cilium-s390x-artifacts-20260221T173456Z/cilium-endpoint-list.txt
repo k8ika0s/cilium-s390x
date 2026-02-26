@@ -1,0 +1,16 @@
+ENDPOINT   POLICY (ingress)   POLICY (egress)   IDENTITY   LABELS (source:key[=value])                                                  IPv6   IPv4           STATUS   
+           ENFORCEMENT        ENFORCEMENT                                                                                                                     
+365        Disabled           Disabled          4          reserved:health                                                                     10.244.0.29    ready   
+766        Disabled           Disabled          1          k8s:node-role.kubernetes.io/control-plane                                                          ready   
+                                                           k8s:node.kubernetes.io/exclude-from-external-load-balancers                                                
+                                                           reserved:host                                                                                              
+1190       Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system          10.244.0.163   ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                       
+3338       Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system          10.244.0.56    ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                       

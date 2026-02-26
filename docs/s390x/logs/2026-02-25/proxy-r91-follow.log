@@ -1,0 +1,5 @@
+[2026-02-25T01:56:00Z] watcher start; waiting for /root/work/cilium-s390x/docs/s390x/logs/2026-02-25/proxy-docker-tests-r91-20260225T014129Z.status
+[2026-02-25T01:57:13Z] watcher start; waiting for /root/work/cilium-s390x/docs/s390x/logs/2026-02-25/proxy-docker-tests-r91-20260225T014129Z.status
+[2026-02-25T03:28:13Z] detected r91 status file
+[2026-02-25T03:28:13Z] r91 rc=0
+[2026-02-25T03:28:13Z] r91 passed; no r92 relaunch needed

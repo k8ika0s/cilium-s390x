@@ -1,0 +1,830 @@
+[INFO] 2026-02-26T13:19:25Z start s390x-integration-wide full-intwide-20260226T131809Z
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] root_dir=/root/work/cilium-s390x
+[INFO] git_rev=unknown
+[INFO] harness_script=test/s390x/integration_wide.sh
+[INFO] command=test/s390x/integration_wide.sh 
+[2026-02-26T13:19:25Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-26T13:19:25Z] Starting kvstore via make start-kvstores (attempt 1/5)
+Starting key-value store container...
+docker rm -f "cilium-etcd-test-container" 2> /dev/null
+if [ "true" = "true" ] && \
+	docker --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	docker network exists "cilium-etcd-net" || \
+		docker network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	docker run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	docker run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+3c9eefa49cd13ea6626385bfa08d3fd36e00c3ee75a495521a52da9240bf3260
+[2026-02-26T13:19:25Z] Running integration-tests with SKIP_KVSTORES=true
+INTEGRATION_TESTS=true CGO_ENABLED=0 go test -mod=vendor -vet=all -tags=osusergo  ./... -timeout 720s -covermode=count -coverprofile=coverage.out | cat
+	github.com/cilium/cilium/api/v1/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/daemon		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/endpoint		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/prefilter		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/service		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/flow		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server/restapi/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/client/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server/restapi/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/observer		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/operator		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/operator		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/peer		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/relay		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/daemon		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/endpoint		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/prefilter		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/service		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/standalone-dns-proxy		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	(cached)	coverage: 5.8% of statements
+	github.com/cilium/cilium/bugtool		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/bugtool/cmd	(cached)	coverage: 17.3% of statements
+ok  	github.com/cilium/cilium/cilium-cli/api	0.060s	coverage: 60.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/bgp	(cached)	coverage: 41.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/cli	0.127s	coverage: 55.2% of statements
+ok  	github.com/cilium/cilium/cilium-cli/clustermesh	(cached)	coverage: 10.1% of statements
+	github.com/cilium/cilium/cilium-cli/cmd/cilium		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/config		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/builder		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/builder/manifests/template	(cached)	coverage: 78.9% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/check	(cached)	coverage: 4.2% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/filters		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/internal/junit	(cached)	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/perf/benchmarks/netperf	(cached)	coverage: 24.7% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/perf/benchmarks/profiler		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/perf/common		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/sniff		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/tests	(cached)	coverage: 2.8% of statements
+?   	github.com/cilium/cilium/cilium-cli/defaults	[no test files]
+ok  	github.com/cilium/cilium/cilium-cli/encrypt	(cached)	coverage: 39.3% of statements
+ok  	github.com/cilium/cilium/cilium-cli/features	(cached)	coverage: 15.4% of statements
+	github.com/cilium/cilium/cilium-cli/hubble		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/install	(cached)	coverage: 9.6% of statements
+ok  	github.com/cilium/cilium/cilium-cli/internal/helm	(cached)	coverage: 51.9% of statements
+ok  	github.com/cilium/cilium/cilium-cli/internal/utils	0.008s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/k8s	(cached)	coverage: 4.0% of statements
+	github.com/cilium/cilium/cilium-cli/k8s/internal		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/logging		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/multicast		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/status	(cached)	coverage: 59.6% of statements
+ok  	github.com/cilium/cilium/cilium-cli/sysdump	(cached)	coverage: 12.3% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/features	(cached)	coverage: 61.6% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/junit	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/lock		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/log		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/runner	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/wait		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-dbg		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-dbg/cmd	(cached)	coverage: 13.9% of statements
+	github.com/cilium/cilium/cilium-dbg/cmd/troubleshoot		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health/responder		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/clustermesh	(cached)	coverage: 76.4% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/clustermesh/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/clustermesh-dbg		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/common		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/etcdinit		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/health		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/kvstoremesh		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/kvstoremesh-dbg		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/mcsapi-coredns-cfg	(cached)	coverage: 62.2% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/syncstate	(cached)	coverage: 46.2% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/contrib/examples/script	(cached)	coverage: 89.5% of statements
+ok  	github.com/cilium/cilium/contrib/examples/statedb	(cached)	coverage: 8.3% of statements
+ok  	github.com/cilium/cilium/contrib/examples/statedb_k8s	(cached)	coverage: 23.3% of statements
+	github.com/cilium/cilium/daemon		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/daemon/cmd	(cached)	coverage: 51.5% of statements
+ok  	github.com/cilium/cilium/daemon/cmd/cni	(cached)	coverage: 51.4% of statements
+	github.com/cilium/cilium/daemon/cmd/cni/fake		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/daemon/cmd/legacy	[no test files]
+ok  	github.com/cilium/cilium/daemon/healthz	(cached)	coverage: 15.5% of statements
+ok  	github.com/cilium/cilium/daemon/infraendpoints	(cached)	coverage: 13.0% of statements
+ok  	github.com/cilium/cilium/daemon/k8s	(cached)	coverage: 81.1% of statements
+ok  	github.com/cilium/cilium/daemon/restapi	(cached)	coverage: 3.0% of statements
+	github.com/cilium/cilium/hubble		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd	(cached)	coverage: 79.4% of statements
+?   	github.com/cilium/cilium/hubble/cmd/common	[no test files]
+	github.com/cilium/cilium/hubble/cmd/common/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/common/conn	(cached)	coverage: 11.4% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/common/template	(cached)	coverage: 91.7% of statements
+	github.com/cilium/cilium/hubble/cmd/common/validate		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/list	(cached)	coverage: 47.1% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/observe	(cached)	coverage: 66.8% of statements
+	github.com/cilium/cilium/hubble/cmd/reflect		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/status		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/watch	(cached)	coverage: 13.8% of statements
+	github.com/cilium/cilium/hubble/pkg		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/pkg/defaults		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/pkg/logger		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/pkg/printer	(cached)	coverage: 71.2% of statements
+ok  	github.com/cilium/cilium/hubble/pkg/time	(cached)	coverage: 36.8% of statements
+	github.com/cilium/cilium/hubble-relay		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/completion		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/serve		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/version		coverage: 0.0% of statements
+	github.com/cilium/cilium/images/builder		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/api	(cached)	coverage: 70.8% of statements
+	github.com/cilium/cilium/operator/auth		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/operator/auth/identity	[no test files]
+ok  	github.com/cilium/cilium/operator/auth/spire	(cached)	coverage: 36.4% of statements
+ok  	github.com/cilium/cilium/operator/cmd	(cached)	coverage: 13.8% of statements
+	github.com/cilium/cilium/operator/doublewrite		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/endpointgc	(cached)	coverage: 83.5% of statements
+ok  	github.com/cilium/cilium/operator/endpointslicegc	(cached)	coverage: 63.2% of statements
+ok  	github.com/cilium/cilium/operator/identitygc	(cached)	coverage: 55.8% of statements
+	github.com/cilium/cilium/operator/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/bgp	(cached)	coverage: 80.3% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumendpointslice	(cached)	coverage: 84.3% of statements
+	github.com/cilium/cilium/operator/pkg/ciliumendpointslice/testutils		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumenvoyconfig	(cached)	coverage: 33.3% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumidentity	(cached)	coverage: 87.8% of statements
+	github.com/cilium/cilium/operator/pkg/ciliumidentity/testutils		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/client		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/controller-runtime	(cached)	coverage: 30.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api	(cached)	coverage: 49.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/helpers	(cached)	coverage: 46.6% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/indexers	(cached)	coverage: 53.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/policychecks	(cached)	coverage: 94.6% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/routechecks	(cached)	coverage: 19.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ingress	(cached)	coverage: 56.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ingress/annotations	(cached)	coverage: 97.1% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ipam	(cached)	coverage: 42.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/kvstore/locksweeper	(cached)	coverage: 40.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/kvstore/nodesgc	(cached)	coverage: 90.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/lbipam	(cached)	coverage: 81.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model	(cached)	coverage: 28.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/ingestion	(cached)	coverage: 82.5% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/translation	(cached)	coverage: 64.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/translation/gateway-api	(cached)	coverage: 90.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/translation/ingress	(cached)	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/multipool	(cached)	coverage: 77.5% of statements
+	github.com/cilium/cilium/operator/pkg/networkpolicy		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/networkpolicy/helpers		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/nodeipam	(cached)	coverage: 63.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/secretsync	(cached)	coverage: 68.3% of statements
+	github.com/cilium/cilium/operator/pkg/workqueuemetrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/ztunnel		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/policyderivative		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/unmanagedpods		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/watchers	(cached)	coverage: 55.0% of statements
+ok  	github.com/cilium/cilium/pkg/act	(cached)	coverage: 46.6% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/api		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/api/mock		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/alibabacloud/eni	(cached)	coverage: 69.7% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/eni/limits		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/eni/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/alibabacloud/utils	(cached)	coverage: 88.9% of statements
+ok  	github.com/cilium/cilium/pkg/alignchecker	(cached)	coverage: 85.5% of statements
+ok  	github.com/cilium/cilium/pkg/allocator	(cached)	coverage: 74.1% of statements
+ok  	github.com/cilium/cilium/pkg/annotation	(cached)	coverage: 94.7% of statements
+ok  	github.com/cilium/cilium/pkg/api	(cached)	coverage: 44.2% of statements
+ok  	github.com/cilium/cilium/pkg/api/helpers	(cached)	coverage: 70.0% of statements
+	github.com/cilium/cilium/pkg/api/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/api/metrics/mock	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/auth	(cached)	coverage: 62.3% of statements
+?   	github.com/cilium/cilium/pkg/auth/certs	[no test files]
+ok  	github.com/cilium/cilium/pkg/auth/spire	(cached)	coverage: 32.3% of statements
+ok  	github.com/cilium/cilium/pkg/aws/ec2	(cached)	coverage: 2.2% of statements
+ok  	github.com/cilium/cilium/pkg/aws/ec2/mock	(cached)	coverage: 38.8% of statements
+ok  	github.com/cilium/cilium/pkg/aws/eni	(cached)	coverage: 76.6% of statements
+ok  	github.com/cilium/cilium/pkg/aws/eni/limits	(cached)	coverage: 84.7% of statements
+	github.com/cilium/cilium/pkg/aws/eni/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/metadata/mock		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/azure/api	(cached)	coverage: 7.9% of statements
+ok  	github.com/cilium/cilium/pkg/azure/api/mock	(cached)	coverage: 51.8% of statements
+ok  	github.com/cilium/cilium/pkg/azure/ipam	(cached)	coverage: 77.5% of statements
+ok  	github.com/cilium/cilium/pkg/azure/types	(cached)	coverage: 18.8% of statements
+ok  	github.com/cilium/cilium/pkg/backoff	(cached)	coverage: 60.5% of statements
+	github.com/cilium/cilium/pkg/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/agent		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/agent/signaler	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/api	(cached)	coverage: 28.9% of statements
+	github.com/cilium/cilium/pkg/bgp/commands		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/gobgp	(cached)	coverage: 66.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/manager	(cached)	coverage: 22.1% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/instance		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/manager/reconciler	(cached)	coverage: 77.1% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/store		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/tables		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/mock		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/test	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/test/commands		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/types	(cached)	coverage: 22.0% of statements
+ok  	github.com/cilium/cilium/pkg/bpf	(cached)	coverage: 14.3% of statements
+ok  	github.com/cilium/cilium/pkg/bpf/analyze	(cached)	coverage: 76.5% of statements
+ok  	github.com/cilium/cilium/pkg/bufuuid	(cached)	coverage: 71.4% of statements
+ok  	github.com/cilium/cilium/pkg/byteorder	(cached)	coverage: 63.6% of statements
+	github.com/cilium/cilium/pkg/cgroups		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/cgroups/manager	(cached)	coverage: 69.8% of statements
+ok  	github.com/cilium/cilium/pkg/cidr	(cached)	coverage: 60.5% of statements
+ok  	github.com/cilium/cilium/pkg/ciliumenvoyconfig	(cached)	coverage: 80.1% of statements
+ok  	github.com/cilium/cilium/pkg/cleanup	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/client	(cached)	coverage: 11.8% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh	0.686s	coverage: 86.2% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/clustercfg	(cached)	coverage: 51.6% of statements
+	github.com/cilium/cilium/pkg/clustermesh/clustercfg/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/common	(cached)	coverage: 90.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/endpointslicesync	(cached)	coverage: 59.6% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/kvstoremesh	(cached)	coverage: 81.4% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/kvstoremesh/reflector	(cached)	coverage: 92.7% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/mcsapi	(cached)	coverage: 64.3% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/mcsapi/types	(cached)	coverage: 49.4% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/namespace	(cached)	coverage: 61.3% of statements
+	github.com/cilium/cilium/pkg/clustermesh/observer		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/operator	(cached)	coverage: 57.6% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/store	(cached)	coverage: 35.2% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/types	(cached)	coverage: 57.2% of statements
+	github.com/cilium/cilium/pkg/clustermesh/wait		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/cmdref		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/command	(cached)	coverage: 54.4% of statements
+ok  	github.com/cilium/cilium/pkg/command/exec	0.508s	coverage: 47.5% of statements
+ok  	github.com/cilium/cilium/pkg/common	(cached)	coverage: 54.3% of statements
+ok  	github.com/cilium/cilium/pkg/common/ipsec	(cached)	coverage: 73.8% of statements
+ok  	github.com/cilium/cilium/pkg/comparator	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/completion	(cached)	coverage: 97.7% of statements
+	github.com/cilium/cilium/pkg/components		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/container	(cached)	coverage: 91.9% of statements
+ok  	github.com/cilium/cilium/pkg/container/bitlpm	(cached)	coverage: 68.0% of statements
+ok  	github.com/cilium/cilium/pkg/container/cache	(cached)	coverage: 97.3% of statements
+ok  	github.com/cilium/cilium/pkg/container/set	(cached)	coverage: 92.5% of statements
+ok  	github.com/cilium/cilium/pkg/controller	(cached)	coverage: 81.6% of statements
+ok  	github.com/cilium/cilium/pkg/counter	(cached)	coverage: 94.4% of statements
+	github.com/cilium/cilium/pkg/crypto/certificatemanager		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/crypto/certloader	(cached)	coverage: 83.6% of statements
+	github.com/cilium/cilium/pkg/datapath		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/agentliveness		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/alignchecker	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/bpf		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/config	(cached)	coverage: 21.1% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/connector	(cached)	coverage: 6.7% of statements
+	github.com/cilium/cilium/pkg/datapath/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/fake/types	(cached)	coverage: 18.4% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/gneigh	(cached)	coverage: 40.3% of statements
+	github.com/cilium/cilium/pkg/datapath/ipcache		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/iptables	(cached)	coverage: 31.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/iptables/ipset	(cached)	coverage: 77.6% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/l2responder	(cached)	coverage: 59.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/link	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux	(cached)	coverage: 17.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/bandwidth	(cached)	coverage: 9.2% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/bigtcp		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/config	(cached)	coverage: 1.9% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/config/defines		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/device		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/device/scripttest	(cached)	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/ethtool	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/ipsec	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/linux_defaults		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/netdevice		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/probes	(cached)	coverage: 18.7% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/route	(cached)	coverage: 4.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/route/reconciler		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/route/reconciler/scripttest	(cached)	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/routing	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/safenetlink	(cached)	coverage: 8.4% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/sysctl	(cached)	coverage: 53.6% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/utime	(cached)	coverage: 63.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/loader	1.143s	coverage: 11.1% of statements
+	github.com/cilium/cilium/pkg/datapath/loader/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/loader/tools		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/maps	(cached)	coverage: 65.9% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/neighbor	(cached)	coverage: 12.5% of statements
+	github.com/cilium/cilium/pkg/datapath/node		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/datapath/option	[no test files]
+	github.com/cilium/cilium/pkg/datapath/orchestrator		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/prefilter		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/sockets	(cached)	coverage: 18.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/tables	(cached)	coverage: 47.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/tunnel	(cached)	coverage: 58.1% of statements
+	github.com/cilium/cilium/pkg/datapath/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/vtep		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/xdp	(cached)	coverage: 66.0% of statements
+ok  	github.com/cilium/cilium/pkg/debug	(cached)	coverage: 84.2% of statements
+ok  	github.com/cilium/cilium/pkg/debug/api	(cached)	coverage: 10.3% of statements
+?   	github.com/cilium/cilium/pkg/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/dial	(cached)	coverage: 90.8% of statements
+ok  	github.com/cilium/cilium/pkg/driftchecker	(cached)	coverage: 78.8% of statements
+ok  	github.com/cilium/cilium/pkg/dynamicconfig	(cached)	coverage: 81.6% of statements
+ok  	github.com/cilium/cilium/pkg/dynamiclifecycle	(cached)	coverage: 70.5% of statements
+	github.com/cilium/cilium/pkg/ebpf		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/egressgateway	(cached)	coverage: 3.4% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint	(cached)	coverage: 30.1% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint/api	(cached)	coverage: 2.6% of statements
+?   	github.com/cilium/cilium/pkg/endpoint/cell	[no test files]
+	github.com/cilium/cilium/pkg/endpoint/creator		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint/id	(cached)	coverage: 46.4% of statements
+	github.com/cilium/cilium/pkg/endpoint/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/endpoint/regeneration		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/endpoint/watchdog		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpointcleanup	(cached)	coverage: 56.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpointmanager	(cached)	coverage: 33.6% of statements
+?   	github.com/cilium/cilium/pkg/endpointstate	[no test files]
+ok  	github.com/cilium/cilium/pkg/envoy	(cached)	coverage: 24.2% of statements
+	github.com/cilium/cilium/pkg/envoy/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/envoy/policy	(cached)	coverage: 65.4% of statements
+?   	github.com/cilium/cilium/pkg/envoy/resource	[no test files]
+	github.com/cilium/cilium/pkg/envoy/test		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/envoy/xds	(cached)	coverage: 79.2% of statements
+ok  	github.com/cilium/cilium/pkg/eventqueue	(cached)	coverage: 94.7% of statements
+	github.com/cilium/cilium/pkg/flowdebug		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn	(cached)	coverage: 76.7% of statements
+	github.com/cilium/cilium/pkg/fqdn/bootstrap		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/fqdn/cell	[no test files]
+ok  	github.com/cilium/cilium/pkg/fqdn/dns	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/dnsproxy	(cached)	coverage: 30.6% of statements
+	github.com/cilium/cilium/pkg/fqdn/lookup		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/matchpattern	(cached)	coverage: 63.3% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/messagehandler	(cached)	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/fqdn/namemanager	(cached)	coverage: 39.6% of statements
+?   	github.com/cilium/cilium/pkg/fqdn/proxy	[no test files]
+	github.com/cilium/cilium/pkg/fqdn/proxy/ipfamily		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/fqdn/re		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/restore	(cached)	coverage: 53.3% of statements
+	github.com/cilium/cilium/pkg/fqdn/rules		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/service	(cached)	coverage: 82.8% of statements
+ok  	github.com/cilium/cilium/pkg/fswatcher	(cached)	coverage: 84.1% of statements
+	github.com/cilium/cilium/pkg/gops		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/health		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/health/client	(cached)	coverage: 72.0% of statements
+?   	github.com/cilium/cilium/pkg/health/defaults	[no test files]
+	github.com/cilium/cilium/pkg/health/probe		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/health/probe/responder	(cached)	coverage: 33.3% of statements
+ok  	github.com/cilium/cilium/pkg/health/server	(cached)	coverage: 24.4% of statements
+ok  	github.com/cilium/cilium/pkg/healthconfig	(cached)	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/pkg/hive	(cached)	coverage: 57.5% of statements
+ok  	github.com/cilium/cilium/pkg/hive/health	(cached)	coverage: 68.8% of statements
+	github.com/cilium/cilium/pkg/hive/health/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/pkg/hubble/api/v1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/build	(cached)	coverage: 92.9% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/cell	(cached)	coverage: 1.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/container	(cached)	coverage: 93.8% of statements
+?   	github.com/cilium/cilium/pkg/hubble/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/dropeventemitter	(cached)	coverage: 50.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/exporter	(cached)	coverage: 86.1% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/exporter/cell	(cached)	coverage: 17.6% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/filters	(cached)	coverage: 92.8% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/k8s	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/math	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics	(cached)	coverage: 59.7% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/api	(cached)	coverage: 90.1% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/cell		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/dns		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/drop	(cached)	coverage: 68.3% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/flow	(cached)	coverage: 66.1% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/flows-to-world	(cached)	coverage: 81.8% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/http	(cached)	coverage: 75.4% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/icmp		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/kafka	(cached)	coverage: 74.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/policy	(cached)	coverage: 71.2% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/port-distribution	(cached)	coverage: 57.4% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/sctp	(cached)	coverage: 66.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/tcp	(cached)	coverage: 71.4% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/monitor	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/observer	(cached)	coverage: 67.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/observer/namespace	(cached)	coverage: 77.8% of statements
+	github.com/cilium/cilium/pkg/hubble/observer/observeroption		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/hubble/observer/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/parser	(cached)	coverage: 62.1% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/agent	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/cell	(cached)	coverage: 16.4% of statements
+	github.com/cilium/cilium/pkg/hubble/parser/common		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/debug	(cached)	coverage: 95.8% of statements
+	github.com/cilium/cilium/pkg/hubble/parser/errors		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/fieldaggregate	(cached)	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/fieldmask	(cached)	coverage: 94.9% of statements
+?   	github.com/cilium/cilium/pkg/hubble/parser/getters	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/options	(cached)	coverage: 43.3% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/seven	(cached)	coverage: 88.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/sock	(cached)	coverage: 90.9% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/threefour	(cached)	coverage: 83.6% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/peer	(cached)	coverage: 94.3% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/peer/cell	(cached)	coverage: 31.8% of statements
+	github.com/cilium/cilium/pkg/hubble/peer/serviceoption		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/peer/types	(cached)	coverage: 57.8% of statements
+?   	github.com/cilium/cilium/pkg/hubble/relay/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/observer	(cached)	coverage: 72.6% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/relay/pool	(cached)	coverage: 90.4% of statements
+?   	github.com/cilium/cilium/pkg/hubble/relay/pool/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/queue	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/relay/server	(cached)	coverage: 14.3% of statements
+	github.com/cilium/cilium/pkg/hubble/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/hubble/server/serveroption		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/testutils	(cached)	coverage: 5.6% of statements
+ok  	github.com/cilium/cilium/pkg/iana	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity	(cached)	coverage: 43.4% of statements
+	github.com/cilium/cilium/pkg/identity/api		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/basicallocator	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/cache	(cached)	coverage: 72.2% of statements
+	github.com/cilium/cilium/pkg/identity/cache/cell		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/identity/cell	[no test files]
+ok  	github.com/cilium/cilium/pkg/identity/identitymanager	(cached)	coverage: 75.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/key	(cached)	coverage: 18.8% of statements
+	github.com/cilium/cilium/pkg/identity/model		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/idpool	(cached)	coverage: 98.1% of statements
+ok  	github.com/cilium/cilium/pkg/ip	(cached)	coverage: 82.6% of statements
+ok  	github.com/cilium/cilium/pkg/ipalloc	(cached)	coverage: 76.8% of statements
+ok  	github.com/cilium/cilium/pkg/ipam	(cached)	coverage: 61.4% of statements
+?   	github.com/cilium/cilium/pkg/ipam/allocator	[no test files]
+	github.com/cilium/cilium/pkg/ipam/allocator/alibabacloud		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/aws		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/azure		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/clusterpool		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/allocator/clusterpool/cidralloc	(cached)	coverage: 71.4% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/allocator/podcidr	(cached)	coverage: 81.4% of statements
+	github.com/cilium/cilium/pkg/ipam/api		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/cidrset	(cached)	coverage: 80.3% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/metadata	(cached)	coverage: 89.4% of statements
+	github.com/cilium/cilium/pkg/ipam/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/metrics/mock	(cached)	coverage: 55.2% of statements
+?   	github.com/cilium/cilium/pkg/ipam/option	[no test files]
+ok  	github.com/cilium/cilium/pkg/ipam/podippool	(cached)	coverage: 85.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/service/allocator	(cached)	coverage: 5.7% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/service/ipallocator	(cached)	coverage: 23.1% of statements
+?   	github.com/cilium/cilium/pkg/ipam/stats	[no test files]
+ok  	github.com/cilium/cilium/pkg/ipam/types	(cached)	coverage: 8.3% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache	(cached)	coverage: 77.3% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/api	(cached)	coverage: 7.7% of statements
+	github.com/cilium/cilium/pkg/ipcache/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/fake	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/pkg/ipcache/restore		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/types	(cached)	coverage: 21.1% of statements
+ok  	github.com/cilium/cilium/pkg/ipmasq	(cached)	coverage: 85.8% of statements
+ok  	github.com/cilium/cilium/pkg/ipmasq/cell	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s	(cached)	coverage: 68.8% of statements
+	github.com/cilium/cilium/pkg/k8s/apis		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/apis/cilium.io	[no test files]
+	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/client		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/utils	(cached)	coverage: 54.9% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2	(cached)	coverage: 1.8% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2/validator	(cached)	coverage: 82.5% of statements
+	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2alpha1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/crdhelpers	(cached)	coverage: 40.8% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/client	(cached)	coverage: 74.1% of statements
+	github.com/cilium/cilium/pkg/k8s/client/applyconfiguration/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/scheme		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2alpha1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2alpha1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io/v2alpha1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/internalinterfaces	[no test files]
+	github.com/cilium/cilium/pkg/k8s/client/listers/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/listers/cilium.io/v2alpha1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/client/testutils	(cached)	coverage: 47.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/constants	[no test files]
+	github.com/cilium/cilium/pkg/k8s/hostfirewallbypass		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/identitybackend	(cached)	coverage: 30.2% of statements
+	github.com/cilium/cilium/pkg/k8s/informer		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/informer/benchmarks	(cached)	coverage: [no statements] [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/metrics	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/pkg/k8s/portforward		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/resource	(cached)	coverage: 80.5% of statements
+	github.com/cilium/cilium/pkg/k8s/resource/example		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/api/meta		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/labels	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1/validation		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1beta1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/selection	[no test files]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/util/intstr		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/scheme		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/core/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/discovery/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/networking/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/core		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/discovery		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/discovery/v1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/internalinterfaces	[no test files]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/networking		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/networking/v1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/synced	(cached)	coverage: 30.6% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/testutils	(cached)	coverage: 56.7% of statements
+	github.com/cilium/cilium/pkg/k8s/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/utils	(cached)	coverage: 76.4% of statements
+	github.com/cilium/cilium/pkg/k8s/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/watchers	(cached)	coverage: 16.3% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/resources		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/subscriber		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/kpr		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/kpr/initializer	(cached)	coverage: 33.5% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore	(cached)	coverage: 47.3% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/allocator	(cached)	coverage: 54.5% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/allocator/doublewrite	(cached)	coverage: 18.4% of statements
+	github.com/cilium/cilium/pkg/kvstore/etcdinit		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/kvstore/heartbeat		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/store	(cached)	coverage: 93.3% of statements
+ok  	github.com/cilium/cilium/pkg/l2announcer	(cached)	coverage: 64.7% of statements
+ok  	github.com/cilium/cilium/pkg/labels	(cached)	coverage: 52.6% of statements
+	github.com/cilium/cilium/pkg/labels/model		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/labelsfilter	(cached)	coverage: 63.3% of statements
+	github.com/cilium/cilium/pkg/lbipamconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer	(cached)	coverage: 26.9% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/benchmark	(cached)	coverage: 67.9% of statements
+	github.com/cilium/cilium/pkg/loadbalancer/benchmark/cmd		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/cell	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/healthserver	(cached)	coverage: 94.3% of statements
+	github.com/cilium/cilium/pkg/loadbalancer/maps		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/reconciler	(cached)	coverage: 56.7% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/redirectpolicy	(cached)	coverage: 73.1% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/reflectors	(cached)	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/repl	(cached)	coverage: 42.9% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/tests	(cached)	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/writer	(cached)	coverage: 54.2% of statements
+	github.com/cilium/cilium/pkg/loadinfo		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/lock	(cached)	coverage: 59.2% of statements
+ok  	github.com/cilium/cilium/pkg/lock/lockfile	(cached)	coverage: 93.5% of statements
+ok  	github.com/cilium/cilium/pkg/logging	(cached)	coverage: 51.6% of statements
+	github.com/cilium/cilium/pkg/logging/hooks		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/logging/logfields	[no test files]
+ok  	github.com/cilium/cilium/pkg/mac	(cached)	coverage: 50.0% of statements
+ok  	github.com/cilium/cilium/pkg/maglev	(cached)	coverage: 90.7% of statements
+ok  	github.com/cilium/cilium/pkg/maps	(cached)	coverage: 59.1% of statements
+	github.com/cilium/cilium/pkg/maps/act		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/authmap	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/authmap/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/bwmap		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/maps/callsmap	[no test files]
+	github.com/cilium/cilium/pkg/maps/cidrmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/configmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ctmap	(cached)	coverage: 5.0% of statements
+	github.com/cilium/cilium/pkg/maps/ctmap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ctmap/gc	(cached)	coverage: 42.6% of statements
+ok  	github.com/cilium/cilium/pkg/maps/egressmap	(cached)	coverage: 0.9% of statements
+	github.com/cilium/cilium/pkg/maps/encrypt		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/encrypt/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/eventsmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/fragmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ipcache	(cached)	coverage: 14.1% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ipmasq	(cached)	coverage: 14.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/iptrace	(cached)	coverage: 58.3% of statements
+	github.com/cilium/cilium/pkg/maps/l2respondermap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/l2v6respondermap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/lxcmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/metricsmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/multicast	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nat	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/nat/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nat/stats	(cached)	coverage: 14.8% of statements
+	github.com/cilium/cilium/pkg/maps/neighborsmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/netdev	(cached)	coverage: 13.7% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nodemap	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/nodemap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/policymap	(cached)	coverage: 17.3% of statements
+	github.com/cilium/cilium/pkg/maps/ratelimitmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/signalmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/signalmap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/srv6map	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/subnet	(cached)	coverage: 24.4% of statements
+ok  	github.com/cilium/cilium/pkg/maps/timestamp	(cached)	coverage: 26.1% of statements
+	github.com/cilium/cilium/pkg/maps/vtep		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/mcastmanager	(cached)	coverage: 87.5% of statements
+ok  	github.com/cilium/cilium/pkg/metrics	(cached)	coverage: 58.5% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/features	(cached)	coverage: 78.8% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/features/operator	(cached)	coverage: 48.1% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/metric	(cached)	coverage: 40.4% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/metric/collections	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/monitor	(cached)	coverage: 37.5% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/agent	(cached)	coverage: 4.8% of statements
+?   	github.com/cilium/cilium/pkg/monitor/agent/consumer	[no test files]
+	github.com/cilium/cilium/pkg/monitor/agent/listener		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/api	(cached)	coverage: 17.9% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/format	(cached)	coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/monitor/notifications	[no test files]
+ok  	github.com/cilium/cilium/pkg/monitor/payload	(cached)	coverage: 88.9% of statements
+ok  	github.com/cilium/cilium/pkg/mountinfo	(cached)	coverage: 73.5% of statements
+ok  	github.com/cilium/cilium/pkg/mtu	(cached)	coverage: 7.9% of statements
+ok  	github.com/cilium/cilium/pkg/multicast	(cached)	coverage: 73.7% of statements
+ok  	github.com/cilium/cilium/pkg/murmur3	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/netns	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node	(cached)	coverage: 23.2% of statements
+	github.com/cilium/cilium/pkg/node/addressing		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node/manager	(cached)	coverage: 76.6% of statements
+	github.com/cilium/cilium/pkg/node/neighbordiscovery		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node/store	(cached)	coverage: 43.2% of statements
+ok  	github.com/cilium/cilium/pkg/node/sync	(cached)	coverage: 55.7% of statements
+ok  	github.com/cilium/cilium/pkg/node/types	(cached)	coverage: 20.4% of statements
+ok  	github.com/cilium/cilium/pkg/nodediscovery	(cached)	coverage: 7.5% of statements
+	github.com/cilium/cilium/pkg/nodeipamconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/option	0.020s	coverage: 38.4% of statements
+ok  	github.com/cilium/cilium/pkg/option/resolver	(cached)	coverage: 77.4% of statements
+ok  	github.com/cilium/cilium/pkg/pidfile	0.006s	coverage: 73.2% of statements
+ok  	github.com/cilium/cilium/pkg/policy	(cached)	coverage: 83.2% of statements
+ok  	github.com/cilium/cilium/pkg/policy/api	(cached)	coverage: 39.3% of statements
+ok  	github.com/cilium/cilium/pkg/policy/cell	(cached)	coverage: 37.6% of statements
+ok  	github.com/cilium/cilium/pkg/policy/cookie	(cached)	coverage: 96.7% of statements
+ok  	github.com/cilium/cilium/pkg/policy/correlation	(cached)	coverage: 58.6% of statements
+ok  	github.com/cilium/cilium/pkg/policy/directory	(cached)	coverage: 31.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/groups	(cached)	coverage: 23.6% of statements
+	github.com/cilium/cilium/pkg/policy/groups/aws		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/k8s	(cached)	coverage: 40.7% of statements
+ok  	github.com/cilium/cilium/pkg/policy/testutils	(cached)	coverage: 90.0% of statements
+	github.com/cilium/cilium/pkg/policy/trafficdirection		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/types	(cached)	coverage: 17.5% of statements
+ok  	github.com/cilium/cilium/pkg/policy/utils	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/pprof	(cached)	coverage: 73.2% of statements
+ok  	github.com/cilium/cilium/pkg/promise	(cached)	coverage: 94.7% of statements
+ok  	github.com/cilium/cilium/pkg/proxy	(cached)	coverage: 18.4% of statements
+ok  	github.com/cilium/cilium/pkg/proxy/accesslog	(cached)	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/proxy/accesslog/endpoint		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/proxy/endpoint	[no test files]
+ok  	github.com/cilium/cilium/pkg/proxy/proxyports	(cached)	coverage: 55.1% of statements
+	github.com/cilium/cilium/pkg/proxy/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/rate	(cached)	coverage: 98.1% of statements
+	github.com/cilium/cilium/pkg/rate/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/resiliency	(cached)	coverage: 91.7% of statements
+ok  	github.com/cilium/cilium/pkg/revert	(cached)	coverage: 83.3% of statements
+ok  	github.com/cilium/cilium/pkg/safeio	(cached)	coverage: 35.3% of statements
+ok  	github.com/cilium/cilium/pkg/safetime	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/shortener	(cached)	coverage: 66.7% of statements
+ok  	github.com/cilium/cilium/pkg/signal	(cached)	coverage: 74.2% of statements
+ok  	github.com/cilium/cilium/pkg/slices	(cached)	coverage: 87.0% of statements
+ok  	github.com/cilium/cilium/pkg/socketlb	(cached)	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/source	(cached)	coverage: 85.7% of statements
+ok  	github.com/cilium/cilium/pkg/spanstat	(cached)	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/status	(cached)	coverage: 11.7% of statements
+ok  	github.com/cilium/cilium/pkg/subnet	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/svcrouteconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/testutils	(cached)	coverage: 6.7% of statements
+ok  	github.com/cilium/cilium/pkg/testutils/identity	(cached)	coverage: 32.9% of statements
+	github.com/cilium/cilium/pkg/testutils/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/ipcache		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/mockmaps		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/netns		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/scriptnet		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/sockets		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/time		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/trigger	(cached)	coverage: 93.4% of statements
+	github.com/cilium/cilium/pkg/tuple		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/types	(cached)	coverage: 76.9% of statements
+	github.com/cilium/cilium/pkg/u8proto		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/util		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/version	(cached)	coverage: 65.5% of statements
+ok  	github.com/cilium/cilium/pkg/versioncheck	(cached)	coverage: 60.9% of statements
+ok  	github.com/cilium/cilium/pkg/wal	(cached)	coverage: 66.7% of statements
+ok  	github.com/cilium/cilium/pkg/wireguard/agent	(cached)	coverage: 44.3% of statements
+?   	github.com/cilium/cilium/pkg/wireguard/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/xds/experimental/client	(cached)	coverage: 89.7% of statements
+	github.com/cilium/cilium/pkg/ztunnel		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ztunnel/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/iptables	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ztunnel/pb		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/reconciler	(cached)	coverage: 73.6% of statements
+	github.com/cilium/cilium/pkg/ztunnel/table		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/xds	(cached)	coverage: 45.8% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/zds	(cached)	coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/chaining/api	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/awscni		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/azure		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/flannel		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/generic-veth		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/cmd		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/lib	(cached)	coverage: 70.7% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/types	(cached)	coverage: 58.3% of statements
+	github.com/cilium/cilium/plugins/cilium-docker		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-docker/driver		coverage: 0.0% of statements
+	github.com/cilium/cilium/standalone-dns-proxy		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/cmd	(cached)	coverage: 60.0% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/client	(cached)	coverage: 72.8% of statements
+?   	github.com/cilium/cilium/standalone-dns-proxy/pkg/defaults	[no test files]
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/lookup	(cached)	coverage: 89.4% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/messagehandler	(cached)	coverage: 75.0% of statements
+	github.com/cilium/cilium/standalone-dns-proxy/pkg/shell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test	(cached)	coverage: [no statements]
+	github.com/cilium/cilium/test/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test/controlplane	(cached)	coverage: 100.0% of statements
+	github.com/cilium/cilium/test/controlplane/node		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/controlplane/node/ciliumnodes		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/controlplane/suite		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/ginkgo-ext		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test/helpers	(cached)	coverage: 0.3% of statements
+?   	github.com/cilium/cilium/test/helpers/constants	[no test files]
+ok  	github.com/cilium/cilium/test/helpers/logutils	(cached)	coverage: 98.0% of statements
+	github.com/cilium/cilium/test/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/logger		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/runtime		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/alignchecker		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/api-flaggen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/complexity-diff		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/crdcheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/crdlistgen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/dev-doctor		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/dpgen		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/tools/feature-helm-generator	(cached)	coverage: 88.4% of statements
+	github.com/cilium/cilium/tools/legacyhguardcheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/licensecheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/licensegen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/metricslint		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/tools/metricslint/pkg/analyzer	0.146s	coverage: 74.0% of statements
+	github.com/cilium/cilium/tools/mount		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/slogloggercheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/spdxconv		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/sysctlfix		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/testowners		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/testowners/codeowners		coverage: 0.0% of statements
+make generate-cov
+make[1]: Entering directory '/root/work/cilium-s390x'
+grep -Ev '(^github.com/cilium/cilium/api/v1)|(generated.deepcopy.go)|(^github.com/cilium/cilium/pkg/k8s/client/)' \
+	coverage.out > coverage.out.tmp
+go tool cover -html=coverage.out.tmp -o=coverage-all.html
+rm coverage.out.tmp
+make[1]: Leaving directory '/root/work/cilium-s390x'
+make stop-kvstores
+make[1]: Entering directory '/root/work/cilium-s390x'
+make[1]: Nothing to be done for 'stop-kvstores'.
+make[1]: Leaving directory '/root/work/cilium-s390x'
+[2026-02-26T13:20:00Z] Integration sweep completed
+[INFO] 2026-02-26T13:20:01Z end rc=0

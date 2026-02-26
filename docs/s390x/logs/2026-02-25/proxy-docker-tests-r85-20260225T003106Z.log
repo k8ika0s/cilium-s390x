@@ -1,0 +1,183 @@
+[INFO] 2026-02-25T00:31:06Z start r85 proxy docker-tests on kdz (drop boringssl=fips; route linux_s390x to aws_lc)
+[INFO] git_rev=9e7e35f1
+awk: cmd. line:1: {print
+awk: cmd. line:1:       ^ unexpected newline or end of string
+[INFO] patch_0012_sha256=
+[INFO] cmd=make docker-tests ARCH=s390x CARGO_BAZEL_REPIN=true TEST_TARGETS=//tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test EXTRA_BAZEL_BUILD_OPTS=--jobs=2 --local_ram_resources=4096 --local_cpu_resources=2 --@envoy//bazel:http3=False BAZEL_TEST_OPTS=--jobs=2 --local_ram_resources=4096 --local_cpu_resources=2 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=3 --test_output=errors
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Skip registering C++ toolchains via BAZEL_BUILD_OPTS. Local C++ toolchain needs to be available!
+Using Docker Buildx builder "" with build flags "--platform=linux/s390x".
+DOCKER_BUILDKIT=1 docker buildx build --progress=plain --platform=linux/s390x --network=host  --build-arg BUILDER_BASE="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg PROXYLIB_BUILDER="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg BAZEL_BUILD_OPTS="--jobs=2 --local_ram_resources=4096 --local_cpu_resources=2 --@envoy//bazel:http3=False" --build-arg BAZEL_TEST_OPTS="--jobs=2 --local_ram_resources=4096 --local_cpu_resources=2 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=3 --test_output=errors" --build-arg CARGO_BAZEL_REPIN="true" --build-arg TEST_TARGETS="//tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test" -f Dockerfile.tests -t quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs .
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-24T16:31:06-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+[1/8] STEP 1/5: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS proxylib
+[1/8] STEP 2/5: WORKDIR /go/src/github.com/cilium/proxy
+--> Using cache 793ac1cc28e1e985e039489f211589da891528cc7a75ff714611a43388465469
+--> 793ac1cc28e1
+[1/8] STEP 3/5: COPY --chown=1337:1337 . ./
+--> dff45bc93ae5
+[1/8] STEP 4/5: ARG TARGETARCH
+--> dbbdf134fb80
+[1/8] STEP 5/5: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/go/pkg,type=cache,id=$TARGETARCH     PATH=$PATH:/usr/local/go/bin GOFLAGS=-buildvcs=false GOARCH=${TARGETARCH} make -C proxylib all && mv proxylib/libcilium.so /tmp/libcilium.so
+make: Entering directory '/go/src/github.com/cilium/proxy/proxylib'
+go: downloading go1.25.7 (linux/s390x)
+CGO_ENABLED=1  go build -ldflags '-extldflags -Wl,-soname,libcilium.so' -o libcilium.so -buildmode=c-shared
+make: Leaving directory '/go/src/github.com/cilium/proxy/proxylib'
+--> fa38d4cd8498
+[2/8] STEP 1/16: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS builder-fresh
+[2/8] STEP 2/16: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 0b8cf4bf6122a089473429c1db9159b10bb93b087c0f1bd9375df1478941a24c
+--> 0b8cf4bf6122
+[2/8] STEP 3/16: WORKDIR /cilium/proxy
+--> Using cache 1e58feb3532aaf7beb49a11b0c0b9d88611a77b8c3fecb3ca7bc6bd1b732946d
+--> 1e58feb3532a
+[2/8] STEP 4/16: COPY . ./
+--> ffeff51a8cf1
+[2/8] STEP 5/16: ARG V
+--> 3f8e2ca7dc4c
+[2/8] STEP 6/16: ARG BAZEL_BUILD_OPTS
+--> f90edda221c0
+[2/8] STEP 7/16: ARG CARGO_BAZEL_REPIN=true
+--> 4e72b158b60d
+[2/8] STEP 8/16: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> 01df7800e1c3
+[2/8] STEP 9/16: ARG DEBUG
+--> c2bc16f4255e
+[2/8] STEP 10/16: ARG BUILDARCH
+--> 8c568723a630
+[2/8] STEP 11/16: ARG TARGETARCH
+--> 54a09e0df66f
+[2/8] STEP 12/16: ARG NO_CACHE
+--> 1bb586dd5648
+[2/8] STEP 13/16: ENV TARGETARCH=$TARGETARCH
+--> 216450adbaa1
+[2/8] STEP 14/16: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> 4f698d0a2468
+[2/8] STEP 15/16: RUN mkdir -p /tmp/bazel-cache
+--> e39f7578df06
+[2/8] STEP 16/16: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/tmp/bazel-cache,type=cache,id=$TARGETARCH-bazel-cache     if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Registering C++ toolchains via BAZEL_BUILD_OPTS
+echo "Clang assumed to be installed in the builder image"
+Clang assumed to be installed in the builder image
+bazel/setup_clang.sh /usr/lib/llvm-18
+[0mecho "build --config=clang" >> clang.bazelrc
+CARGO_BAZEL_REPIN=true  bazel  build --jobs=2 --local_ram_resources=4096 --local_cpu_resources=2 --@envoy//bazel:http3=False --disk_cache=/tmp/bazel-cache --platforms=//bazel:linux_s390x --config=release --extra_toolchains=//bazel/toolchains:all --jobs=HOST_RAM*.0003 --test_timeout=300 --local_test_jobs=1 --flaky_test_attempts=3 --test_output=errors //tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test 
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mINFO: [0mInvocation ID: c44ea844-0636-47cf-819e-33ff6df79fed
+[32mComputing main repo mapping:[0m 
+[32mComputing main repo mapping:[0m 
+[32mComputing main repo mapping:[0m 
+[33mDEBUG: [0mRule 'dynamic_modules_rust_sdk_crate_index' indicated that a canonical reproducible form can be obtained by modifying arguments _action_listener = <unknown object com.google.devtools.build.lib.packages.Attribute$LabelListLateBoundDefault>, _config_dependencies = [], _configure = False, _environ = ["CARGO_BAZEL_GENERATOR_URL", "CARGO_BAZEL_GENERATOR_SHA256", "CARGO_BAZEL_REPIN", "REPIN", "CARGO_BAZEL_REPIN_ONLY", "CARGO_BAZEL_ISOLATED", "CARGO_BAZEL_DEBUG"], _original_name = "", generator_sha256s = {"s390x-unknown-linux-gnu": "5e7a4acf62f6dfe0386d11bd6ace9c5fa6651d233cadc0ac63a4e4e17656c949"}
+[33mDEBUG: [0mRepository dynamic_modules_rust_sdk_crate_index instantiated at:
+  /cilium/proxy/WORKSPACE:93:25: in <toplevel>
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:74:24: in envoy_dependency_imports
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:229:22: in crates_repositories
+Repository rule crates_repository defined at:
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/crates_repository.bzl:124:36: in <toplevel>
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mLoading:[0m 
+[32mLoading:[0m 3 packages loaded
+[32mAnalyzing:[0m 4 targets (5 packages loaded, 0 targets configured)
+[32mAnalyzing:[0m 4 targets (5 packages loaded, 0 targets configured)
+
+[33mDEBUG: [0m/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/com_google_protobuf/protobuf.bzl:654:10: The py_proto_library macro is deprecated and will be removed in the 30.x release. switch to the rule defined by rules_python or the one in bazel/py_proto_library.bzl.
+[32mAnalyzing:[0m 4 targets (547 packages loaded, 21977 targets configured)
+
+[32mAnalyzing:[0m 4 targets (677 packages loaded, 57174 targets configured)
+
+[32mINFO: [0mAnalyzed 4 targets (679 packages loaded, 58261 targets configured).
+[32m[1,072 / 4,497][0m [Prepa] Writing script external/envoy/bazel/foreign_cc/liburing_foreign_cc/wrapper_build_script.sh
+[32m[4,221 / 4,499][0m Compiling source/common/network/base_listener_impl.cc; 0s disk-cache, processwrapper-sandbox ... (19 actions, 2 running)
+[32m[4,221 / 4,499][0m Compiling source/common/network/base_listener_impl.cc; 11s disk-cache, processwrapper-sandbox ... (19 actions, 2 running)
+[32m[4,221 / 4,499][0m Compiling source/common/network/base_listener_impl.cc; 14s disk-cache, processwrapper-sandbox ... (19 actions, 3 running)
+[32m[4,222 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 15s ... (19 actions, 3 running)
+[32m[4,224 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 16s ... (19 actions, 2 running)
+[32m[4,224 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 25s ... (19 actions, 2 running)
+[32m[4,224 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 29s ... (19 actions, 3 running)
+[32m[4,226 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 31s ... (19 actions, 2 running)
+[32m[4,226 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 40s ... (19 actions, 2 running)
+[32m[4,226 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 42s ... (19 actions, 3 running)
+[32m[4,229 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 43s ... (19 actions, 2 running)
+[32m[4,229 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 53s ... (19 actions, 2 running)
+[32m[4,229 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 56s ... (19 actions, 3 running)
+[32m[4,230 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 57s ... (19 actions, 3 running)
+[32m[4,233 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 58s ... (19 actions, 2 running)
+[32m[4,233 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 67s ... (19 actions, 2 running)
+[32m[4,233 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 71s ... (19 actions, 3 running)
+[32m[4,234 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 72s ... (19 actions, 2 running)
+[32m[4,235 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 74s ... (19 actions, 2 running)
+[32m[4,235 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 84s ... (19 actions, 3 running)
+[32m[4,236 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 85s ... (19 actions, 2 running)
+[32m[4,236 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 90s ... (19 actions, 3 running)
+[32m[4,239 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 91s ... (19 actions, 2 running)
+[32m[4,239 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 97s ... (19 actions, 3 running)
+[32m[4,240 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 98s ... (19 actions, 2 running)
+[32m[4,240 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 104s ... (19 actions, 3 running)
+[32m[4,242 / 4,499][0m [Sched] Compiling source/common/stats/thread_local_store.cc; 105s ... (19 actions, 2 running)
+[32m[4,242 / 4,499][0m [Sched] Compiling source/common/http/http2/codec_impl.cc; 111s ... (19 actions, 3 running)
+[32m[4,243 / 4,499][0m [Sched] Compiling source/common/http/http2/codec_impl.cc; 112s ... (19 actions, 2 running)
+[32m[4,243 / 4,499][0m [Sched] Compiling source/common/http/http2/codec_impl.cc; 119s ... (19 actions, 3 running)
+[32m[4,244 / 4,499][0m [Sched] Compiling source/common/http/http2/codec_impl.cc; 121s ... (19 actions, 2 running)
+[32m[4,244 / 4,499][0m [Sched] Compiling source/common/stats/isolated_store_impl.cc; 115s ... (19 actions, 3 running)
+[32m[4,245 / 4,499][0m [Sched] Compiling source/common/stats/isolated_store_impl.cc; 117s ... (19 actions, 2 running)
+[32m[4,245 / 4,499][0m [Sched] Compiling source/server/admin/clusters_handler.cc; 118s ... (19 actions, 3 running)
+[32m[4,246 / 4,499][0m [Sched] Compiling source/server/admin/clusters_handler.cc; 120s ... (19 actions, 2 running)
+[32m[4,246 / 4,499][0m [Sched] Compiling source/server/admin/clusters_handler.cc; 129s ... (19 actions, 2 running)
+[32m[4,246 / 4,499][0m [Sched] Compiling test/common/stats/stat_test_utility.cc; 117s ... (19 actions, 3 running)
+[32m[4,247 / 4,499][0m [Sched] Compiling test/common/stats/stat_test_utility.cc; 119s ... (19 actions, 2 running)
+[32m[4,247 / 4,499][0m [Sched] Compiling source/common/router/router_ratelimit.cc; 122s ... (19 actions, 3 running)
+[32m[4,248 / 4,499][0m [Sched] Compiling source/common/router/router_ratelimit.cc; 124s ... (19 actions, 2 running)
+[32m[4,248 / 4,499][0m [Sched] Compiling source/server/admin/stats_html_render.cc; 120s ... (19 actions, 3 running)
+[32m[4,249 / 4,499][0m [Sched] Compiling source/server/admin/stats_html_render.cc; 122s ... (19 actions, 2 running)
+[32m[4,249 / 4,499][0m [Sched] Compiling source/common/config/subscription_factory_impl.cc; 124s ... (19 actions, 3 running)
+[32m[4,250 / 4,499][0m [Sched] Compiling source/common/config/subscription_factory_impl.cc; 126s ... (19 actions, 2 running)
+[32m[4,250 / 4,499][0m [Sched] Compiling source/common/config/subscription_factory_impl.cc; 136s ... (19 actions, 2 running)
+[32m[4,251 / 4,499][0m [Sched] Compiling source/common/network/connection_impl.cc; 122s ... (19 actions, 3 running)
+[32m[4,254 / 4,499][0m [Sched] Compiling source/common/network/connection_impl.cc; 124s ... (19 actions, 2 running)
+[32m[4,254 / 4,499][0m [Sched] Compiling source/common/upstream/cds_api_impl.cc; 115s ... (19 actions, 3 running)
+[32m[4,255 / 4,499][0m [Sched] Compiling source/common/upstream/cds_api_impl.cc; 117s ... (19 actions, 2 running)
+[32m[4,255 / 4,499][0m [Sched] Compiling source/server/admin/stats_render.cc; 121s ... (19 actions, 3 running)
+[32m[4,256 / 4,499][0m [Sched] Compiling source/server/admin/stats_render.cc; 122s ... (19 actions, 2 running)
+[32m[4,256 / 4,499][0m [Sched] Compiling source/common/router/retry_state_impl.cc; 119s ... (19 actions, 3 running)
+[32m[4,257 / 4,499][0m [Sched] Compiling source/common/router/retry_state_impl.cc; 121s ... (19 actions, 2 running)
+[32m[4,257 / 4,499][0m [Sched] Compiling source/extensions/http/header_validators/envoy_default/header_validator.cc; 117s ... (19 actions, 3 running)
+[32m[4,259 / 4,499][0m [Sched] Compiling source/extensions/http/header_validators/envoy_default/header_validator.cc; 119s ... (19 actions, 2 running)
+[32m[4,259 / 4,499][0m [Sched] Compiling source/server/admin/listeners_handler.cc; 121s ... (19 actions, 3 running)
+[32m[4,260 / 4,499][0m [Sched] Compiling source/server/admin/listeners_handler.cc; 123s ... (19 actions, 2 running)
+[32m[4,261 / 4,499][0m [Sched] Compiling source/common/router/header_parser.cc; 117s ... (19 actions, 2 running)
+[32m[4,261 / 4,499][0m [Sched] Compiling source/common/router/header_parser.cc; 128s ... (19 actions, 2 running)
+[32m[4,261 / 4,499][0m [Sched] Compiling source/common/network/default_client_connection_factory.cc; 122s ... (19 actions, 3 running)
+[32m[4,262 / 4,499][0m [Sched] Compiling source/common/network/default_client_connection_factory.cc; 124s ... (19 actions, 2 running)
+[32m[4,263 / 4,499][0m [Sched] Compiling test/mocks/stats/mocks.cc; 117s ... (19 actions, 2 running)
+[32m[4,263 / 4,499][0m [Sched] Compiling test/mocks/stats/mocks.cc; 128s ... (19 actions, 2 running)
+[32m[4,263 / 4,499][0m [Sched] Compiling source/common/filter/config_discovery_impl.cc; 118s ... (19 actions, 3 running)
+[32m[4,264 / 4,499][0m [Sched] Compiling source/common/tls/context_impl.cc; 116s ... (19 actions, 3 running)
+[32m[4,265 / 4,499][0m [Sched] Compiling source/common/tls/context_impl.cc; 117s ... (19 actions, 2 running)
+[32m[4,265 / 4,499][0m [Sched] Compiling source/common/tls/context_impl.cc; 127s ... (19 actions, 2 running)
+[32m[4,265 / 4,499][0m [Sched] Compiling source/server/options_impl.cc; 118s ... (19 actions, 3 running)
+[32m[4,266 / 4,499][0m [Sched] Compiling source/server/options_impl.cc; 119s ... (19 actions, 2 running)
+[32m[4,266 / 4,499][0m [Sched] Compiling source/common/config/xds_manager_impl.cc; 123s ... (19 actions, 3 running)
+[31m[1mERROR: [0m/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/source/common/tls/BUILD:169:17: Compiling source/common/tls/context_impl.cc failed: (Exit 1): clang-18 failed: error executing CppCompile command (from target @@envoy//source/common/tls:context_lib) /usr/bin/clang-18 '--target=s390x-unknown-linux-gnu' '-fuse-ld=lld-18' -DTOOLCHAIN_MISS_ASM_HWCAP_H -DNVALGRIND -U_FORTIFY_SOURCE -fstack-protector -Wall -Wunused-but-set-parameter ... (remaining 221 arguments skipped)
+
+Use --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging
+external/envoy/source/common/tls/context_impl.cc:375:48: error: use of undeclared identifier 'ssl_compliance_policy_fips_202205'
+  375 |                                                ssl_compliance_policy_fips_202205);
+      |                                                ^
+1 error generated.
+Use --verbose_failures to see the command lines of failed build steps.
+[32mINFO: [0mElapsed time: 288.093s, Critical Path: 156.49s
+[32mINFO: [0m76 processes: 41 internal, 35 processwrapper-sandbox.
+[31m[1mERROR: [0mBuild did NOT complete successfully
+[0mmake: *** [Makefile:176: envoy-test-deps] Error 1
+Error: building at STEP "RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH --mount=mode=0777,uid=1337,gid=1337,target=/tmp/bazel-cache,type=cache,id=$TARGETARCH-bazel-cache if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps": while running runtime: exit status 2
+make: *** [Makefile.docker:252: docker-tests] Error 2
+[INFO] 2026-02-25T00:36:39Z end r85 rc=2

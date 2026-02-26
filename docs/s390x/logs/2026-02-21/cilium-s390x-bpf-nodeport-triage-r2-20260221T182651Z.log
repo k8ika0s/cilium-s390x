@@ -1,0 +1,232 @@
+# 2026-02-21T18:26:55Z nodeport triage r2
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+rm -f output/*
+rm -f 
+rm -f bpf_ct_tests.o bpf_nat_tests.o bpf_skb_255_tests.o bpf_skb_511_tests.o builtins.o classifiers_l2_dev.o classifiers_l3_dev.o conntrack_test.o destroy_sock_socket_lb.o drop_notify_test.o encrypt_host_ipsec.o encrypt_host_ipsec_strict.o encrypt_host_wireguard.o encrypt_host_wireguard_strict.o eni_nlb_symetric_routing_host.o fib_tests.o hairpin_sctp_flow.o host_bpf_masq_native.o host_bpf_masq_overlay.o hostfw_bpf_masq.o hostfw_host_iptables.o host_hostfw_extended_protocols.o host_hostfw_igmp.o host_only_socket_lb_test.o icmp_error_revnat.o inter_cluster_snat_clusterip_backend_lxc.o inter_cluster_snat_clusterip_backend_overlay.o inter_cluster_snat_clusterip_client_lxc.o inter_cluster_snat_clusterip_client_overlay.o ipfrag.o ip_options_trace_id.o ipsec_encryption_on_egress.o ipsec_from_network_native_endpoint.o ipsec_from_network_native.o ipsec_redirect_native.o ipsec_redirect_tunnel.o ipv6_ndp_from_netdev_test.o ipv6_test.o jhash_test.o l4lb_ipip_health_check_host.o lb_tests.o lxc_extended_protocols.o mcast_tests.o mock_skb_metadata.o network_policy.o nodeport_geneve_dsr_lb_xdp.o nodeport_hybrid_dsr_test.o nodeport_overlay_nat_lb.o overlay.o ratelimit.o remote_node_masquerade_skip_test.o remote_node_masquerade_test.o _scapy_selftest.o session_affinity_maglev_test.o session_affinity_test.o skip_lb_xlate_lrp_per_packet_lb.o skip_lb_xlate_socket_lb.o skip_tunnel_from_host.o skip_tunnel_from_lxc.o skip_tunnel_nodeport_masq.o skip_tunnel_nodeport_nat.o skip_tunnel_nodeport_revnat.o tc_egressgw_redirect_from_host.o tc_egressgw_redirect_from_overlay.o tc_egressgw_redirect_from_overlay_with_egress_interface.o tc_egressgw_snat.o tc_geneve_dsr_v4_legacy.o tc_geneve_dsr_v6_legacy.o tc_l2_announcement6.o tc_l2_announcement.o tc_lb_no_backend_nonroutable.o tc_lxc_lb4_dsr_nodeport.o tc_lxc_lb4_hybrid_dsr_nodeport.o tc_lxc_lb4_no_backend.o tc_lxc_lb6_dsr_nodeport.o tc_lxc_lb6_hybrid_dsr_nodeport.o tc_lxc_lb6_no_backend.o tc_lxc_policy_drop.o tc_nodeport_icmp4_snat_hostfw.o tc_nodeport_icmp4_snat.o tc_nodeport_icmp4_snat_tunnel.o tc_nodeport_icmp6_snat_hostfw.o tc_nodeport_icmp6_snat.o tc_nodeport_icmp6_snat_tunnel.o tc_nodeport_l3_dev_lb_dsr_geneve_lb.o tc_nodeport_l3_dev.o tc_nodeport_l3_dev_to_tunnel.o tc_nodeport_l3_wireguard.o tc_nodeport_lb4_dsr_backend.o tc_nodeport_lb4_dsr_ipip.o tc_nodeport_lb4_dsr_lb.o tc_nodeport_lb4_nat_backend.o tc_nodeport_lb4_nat_lb.o tc_nodeport_lb4_no_backend.o tc_nodeport_lb4_wildcard_drop.o tc_nodeport_lb6_dsr_backend.o tc_nodeport_lb6_dsr_ipip.o tc_nodeport_lb6_dsr_lb.o tc_nodeport_lb6_no_backend.o tc_nodeport_lb6_wildcard_drop.o tc_nodeport_lb_terminating_backend.o tc_nodeport_snat_conflict.o tc_nodeport_test.o tc_policy_reject_response_test.o tc_srv6_decap.o tc_srv6_encap.o tc_wireguard_from_overlay.o wildcard_lookup.o wireguard_from_netdev.o wireguard_helpers_tests.o xdp_egressgw_reply.o xdp_nodeport_lb4_dsr_ipip.o xdp_nodeport_lb4_dsr_lb.o xdp_nodeport_lb4_nat_backend.o xdp_nodeport_lb4_nat_lb.o xdp_nodeport_lb4_test.o xdp_nodeport_lb6_dsr_ipip.o xdp_nodeport_lb6_dsr_lb.o
+rm -f 
+rm -f bpf_ct_tests.d bpf_nat_tests.d bpf_skb_255_tests.d bpf_skb_511_tests.d builtins.d classifiers_l2_dev.d classifiers_l3_dev.d conntrack_test.d destroy_sock_socket_lb.d drop_notify_test.d encrypt_host_ipsec.d encrypt_host_ipsec_strict.d encrypt_host_wireguard.d encrypt_host_wireguard_strict.d eni_nlb_symetric_routing_host.d fib_tests.d hairpin_sctp_flow.d host_bpf_masq_native.d host_bpf_masq_overlay.d hostfw_bpf_masq.d hostfw_host_iptables.d host_hostfw_extended_protocols.d host_hostfw_igmp.d host_only_socket_lb_test.d icmp_error_revnat.d inter_cluster_snat_clusterip_backend_lxc.d inter_cluster_snat_clusterip_backend_overlay.d inter_cluster_snat_clusterip_client_lxc.d inter_cluster_snat_clusterip_client_overlay.d ipfrag.d ip_options_trace_id.d ipsec_encryption_on_egress.d ipsec_from_network_native.d ipsec_from_network_native_endpoint.d ipsec_redirect_native.d ipsec_redirect_tunnel.d ipv6_ndp_from_netdev_test.d ipv6_test.d jhash_test.d l4lb_ipip_health_check_host.d lb_tests.d lxc_extended_protocols.d mcast_tests.d mock_skb_metadata.d network_policy.d nodeport_geneve_dsr_lb_xdp.d nodeport_hybrid_dsr_test.d nodeport_overlay_nat_lb.d overlay.d ratelimit.d remote_node_masquerade_skip_test.d remote_node_masquerade_test.d _scapy_selftest.d session_affinity_maglev_test.d session_affinity_test.d skip_lb_xlate_lrp_per_packet_lb.d skip_lb_xlate_socket_lb.d skip_tunnel_from_host.d skip_tunnel_from_lxc.d skip_tunnel_nodeport_masq.d skip_tunnel_nodeport_nat.d skip_tunnel_nodeport_revnat.d tc_egressgw_redirect_from_host.d tc_egressgw_redirect_from_overlay.d tc_egressgw_redirect_from_overlay_with_egress_interface.d tc_egressgw_snat.d tc_geneve_dsr_v4_legacy.d tc_geneve_dsr_v6_legacy.d tc_l2_announcement6.d tc_l2_announcement.d tc_lb_no_backend_nonroutable.d tc_lxc_lb4_dsr_nodeport.d tc_lxc_lb4_hybrid_dsr_nodeport.d tc_lxc_lb4_no_backend.d tc_lxc_lb6_dsr_nodeport.d tc_lxc_lb6_hybrid_dsr_nodeport.d tc_lxc_lb6_no_backend.d tc_lxc_policy_drop.d tc_nodeport_icmp4_snat.d tc_nodeport_icmp4_snat_hostfw.d tc_nodeport_icmp4_snat_tunnel.d tc_nodeport_icmp6_snat.d tc_nodeport_icmp6_snat_hostfw.d tc_nodeport_icmp6_snat_tunnel.d tc_nodeport_l3_dev.d tc_nodeport_l3_dev_lb_dsr_geneve_lb.d tc_nodeport_l3_dev_to_tunnel.d tc_nodeport_l3_wireguard.d tc_nodeport_lb4_dsr_backend.d tc_nodeport_lb4_dsr_ipip.d tc_nodeport_lb4_dsr_lb.d tc_nodeport_lb4_nat_backend.d tc_nodeport_lb4_nat_lb.d tc_nodeport_lb4_no_backend.d tc_nodeport_lb4_wildcard_drop.d tc_nodeport_lb6_dsr_backend.d tc_nodeport_lb6_dsr_ipip.d tc_nodeport_lb6_dsr_lb.d tc_nodeport_lb6_no_backend.d tc_nodeport_lb6_wildcard_drop.d tc_nodeport_lb_terminating_backend.d tc_nodeport_snat_conflict.d tc_nodeport_test.d tc_policy_reject_response_test.d tc_srv6_decap.d tc_srv6_encap.d tc_wireguard_from_overlay.d wildcard_lookup.d wireguard_from_netdev.d wireguard_helpers_tests.d xdp_egressgw_reply.d xdp_nodeport_lb4_dsr_ipip.d xdp_nodeport_lb4_dsr_lb.d xdp_nodeport_lb4_nat_backend.d xdp_nodeport_lb4_nat_lb.d xdp_nodeport_lb4_test.d xdp_nodeport_lb6_dsr_ipip.d xdp_nodeport_lb6_dsr_lb.d
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== RUN tc_nodeport_lb4_nat_backend =====
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb4_nat_backend.c -o tc_nodeport_lb4_nat_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_nodeport_lb4_nat_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_nodeport_lb4_nat_backend.o
+=== RUN   TestBPF/tc_nodeport_lb4_nat_backend.o/tc_nodeport_nat_backend
+=== NAME  TestBPF/tc_nodeport_lb4_nat_backend.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Failed to map addr=10.0.10.1 to identity
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 0
+--- PASS: TestBPF (0.52s)
+    --- PASS: TestBPF/tc_nodeport_lb4_nat_backend.o (0.52s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_backend.o/tc_nodeport_nat_backend (0.00s)
+PASS
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.576s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE tc_nodeport_lb4_nat_backend =====
+===== RUN xdp_nodeport_lb4_nat_backend =====
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c xdp_nodeport_lb4_nat_backend.c -o xdp_nodeport_lb4_nat_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test xdp_nodeport_lb4_nat_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/xdp_nodeport_lb4_nat_backend.o
+=== RUN   TestBPF/xdp_nodeport_lb4_nat_backend.o/xdp_nodeport_nat_backend
+--- PASS: TestBPF (0.42s)
+    --- PASS: TestBPF/xdp_nodeport_lb4_nat_backend.o (0.42s)
+        --- PASS: TestBPF/xdp_nodeport_lb4_nat_backend.o/xdp_nodeport_nat_backend (0.00s)
+PASS
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.476s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE xdp_nodeport_lb4_nat_backend =====
+===== RUN tc_nodeport_lb4_nat_lb =====
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb4_nat_lb.c -o tc_nodeport_lb4_nat_lb.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_nodeport_lb4_nat_lb \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Failed to map addr=120.0.12.2 to identity
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=120.0.12.2:111 dst=172.16.10.1:80
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect_reply
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=120.0.12.2:111
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_reply
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_original_renated
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516350, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=4
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=4 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=4
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=4 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516350, revnat=4
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=4
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply2_egw
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516350, revnat=4
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=4
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_no_fib
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516350, revnat=4
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=4
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_punt
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=110.0.11.1 to identity=112200
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_original_entry
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=3
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=3 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=3
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=3 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516350, revnat=3
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=3
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_reply
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516350, revnat=3
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=3
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_verify_restored_original_entry
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=110.0.11.1 to identity=112200
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=5
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=5 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=5
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=5 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_udp_local_backend
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=110.0.11.1 to identity=112200
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=17 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=2
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=2 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=17 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=2
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=2 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 112200
+--- PASS: TestBPF (1.47s)
+    --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o (1.47s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect_reply (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_reply (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_original_renated (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply2_egw (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_no_fib (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_punt (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_original_entry (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_reply (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_verify_restored_original_entry (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_udp_local_backend (0.00s)
+PASS
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	1.537s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE tc_nodeport_lb4_nat_lb =====

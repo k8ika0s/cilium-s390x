@@ -1,0 +1,3 @@
+NAME                       SECURITY IDENTITY   INGRESS ENFORCEMENT   EGRESS ENFORCEMENT   ENDPOINT STATE   IPV4           IPV6
+coredns-5bf8685f84-nsmbr   11329                                                          ready            10.244.0.56    
+coredns-5bf8685f84-v2t8x   11329                                                          ready            10.244.0.163   

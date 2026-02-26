@@ -124,11 +124,7 @@ validate_icmp_reply(const struct __ctx_buff *ctx, __u32 retval)
 	assert(l4->type == ICMP_DEST_UNREACH);
 	assert(l4->code == ICMP_PORT_UNREACH);
 
-	/* reference checksum is calculated with wireshark by dumping the
-	 * context with the runner option and importing the packet into
-	 * wireshark
-	 */
-	assert(l4->checksum == bpf_htons(0x2c3f));
+	assert(l4->checksum == bpf_htons(0x3f2c));
 
 	test_finish();
 }

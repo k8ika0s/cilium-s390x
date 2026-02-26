@@ -1,0 +1,103 @@
+[START] 2026-02-21T15:30:08Z /root/work/logs/cilium-s390x-cilium-be-ttlfix-build-20260221T153008Z.log
+before_image_id=923db27e2583c91afc09e92eb37be177a993296dac934d620260da1e4cc082c7
+make: Entering directory '/root/work/cilium-s390x/images'
+ROOT_CONTEXT=true scripts/build-image.sh cilium-dev images/cilium linux/s390x "type=image" "$(cat .buildx_builder)" docker.io/cilium
+will build cilium-dev:1053606339-nogit-wip as it has wip suffix
+building cilium-dev:1053606339-nogit-wip
++ run_buildx
++ local build_args
++ release_target_args=()
++ local release_target_args
++ test_target_args=()
++ local test_target_args
++ local dockerfile
++ local has_release_stage=false
++ local has_test_stage=false
++ build_output_args=()
++ local build_output_args
++ local build_arg_name
++ local build_arg_value
++ dockerfile=images/cilium/Dockerfile
++ grep -Eiq '^[[:space:]]*FROM[[:space:]].*[[:space:]]AS[[:space:]]+release([[:space:]]|$)' images/cilium/Dockerfile
++ has_release_stage=true
++ grep -Eiq '^[[:space:]]*FROM[[:space:]].*[[:space:]]AS[[:space:]]+test([[:space:]]|$)' images/cilium/Dockerfile
++ build_args=("--platform=${platform}" "--file=${dockerfile}")
++ '[' true = true ']'
++ release_target_args+=("--target=release")
++ '[' false = true ']'
++ '[' -n '' ']'
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=docker.io/cilium/cilium-builder-dev:3743682944-nogit-wip
++ '[' -n docker.io/cilium/cilium-builder-dev:3743682944-nogit-wip ']'
++ build_args+=("--build-arg=${build_arg_name}=${build_arg_value}")
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=docker.io/cilium/cilium-runtime-dev:1493274796-nogit-wip
++ '[' -n docker.io/cilium/cilium-runtime-dev:1493274796-nogit-wip ']'
++ build_args+=("--build-arg=${build_arg_name}=${build_arg_value}")
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x
++ '[' -n quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x ']'
++ build_args+=("--build-arg=${build_arg_name}=${build_arg_value}")
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ for build_arg_name in GOLANG_IMAGE UBUNTU_IMAGE ALPINE_IMAGE BASE_IMAGE COMPILERS_IMAGE TESTER_IMAGE OPERATOR_VARIANT MODIFIERS CILIUM_BUILDER_IMAGE CILIUM_RUNTIME_IMAGE CILIUM_ENVOY_IMAGE CILIUM_LLVM_IMAGE CILIUM_BPFTOOL_IMAGE CILIUM_IPTABLES_IMAGE
++ build_arg_value=
++ '[' -n '' ']'
++ '[' true = false ']'
++ build_args+=("${root_dir}")
++ '[' false = true ']'
++ docker buildx build --tag docker.io/cilium/cilium-dev:1053606339-nogit-wip --target=release --platform=linux/s390x --file=images/cilium/Dockerfile --build-arg=CILIUM_BUILDER_IMAGE=docker.io/cilium/cilium-builder-dev:3743682944-nogit-wip --build-arg=CILIUM_RUNTIME_IMAGE=docker.io/cilium/cilium-runtime-dev:1493274796-nogit-wip --build-arg=CILIUM_ENVOY_IMAGE=quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x /root/work/cilium-s390x
+time="2026-02-21T07:30:56-08:00" level=warning msg="missing \"MODIFIERS\" build argument. Try adding \"--build-arg MODIFIERS=<VALUE>\" to the command line"
+[1/3] STEP 1/1: FROM quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x AS cilium-envoy
+--> 28637c79beb6
+[2/3] STEP 1/10: FROM --platform=linux/s390x docker.io/cilium/cilium-builder-dev:3743682944-nogit-wip AS builder
+[2/3] STEP 2/10: ARG TARGETOS
+--> Using cache 175cab2fd1656ea30b42ffb821a01294b379faf64b4beb43c3f1e220dd810b5c
+--> 175cab2fd165
+[2/3] STEP 3/10: ARG TARGETARCH
+--> Using cache 75b25aca4b979d188452cbbb0c30dacc706dd682954a9119556396129ca6e8e5
+--> 75b25aca4b97
+[2/3] STEP 4/10: ARG MODIFIERS
+--> Using cache 110748c79c3c8ce9450df27311f8b383b9c86ffee0693eb079f08108f63b3d43
+--> 110748c79c3c
+[2/3] STEP 5/10: WORKDIR /go/src/github.com/cilium/cilium
+--> Using cache 3219583c0ecfbc463a5c5872e97f3831d9d8d836e6d7e528b83edd91130aeea6
+--> 3219583c0ecf
+[2/3] STEP 6/10: RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=${TARGETARCH} DESTDIR=/tmp/install/${TARGETOS}/${TARGETARCH} PKG_BUILD=1 $(echo $MODIFIERS | tr -d '"') NOSTRIP=1     build-container install-container-binary
+time="2026-02-21T07:31:28-08:00" level=warning msg="pkg/bind: error removing \"/var/tmp/buildah1079380773/mnt\": no such file or directory"
+time="2026-02-21T07:31:28-08:00" level=error msg="no such file or directory"
+error running container: did not get container start message from parent: EOF
+Error: building at STEP "RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium --mount=type=cache,target=/root/.cache --mount=type=cache,target=/go/pkg make GOARCH=${TARGETARCH} DESTDIR=/tmp/install/${TARGETOS}/${TARGETARCH} PKG_BUILD=1 $(echo $MODIFIERS | tr -d '"') NOSTRIP=1     build-container install-container-binary": setup network: netavark: create veth pair: Netlink error: Invalid argument (os error 22)
++ '[' -n '' ']'
++ exit 1
+make: *** [Makefile:58: cilium-image] Error 1
+make: Leaving directory '/root/work/cilium-s390x/images'

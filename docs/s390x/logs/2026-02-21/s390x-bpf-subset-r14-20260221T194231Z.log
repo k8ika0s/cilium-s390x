@@ -1,0 +1,43 @@
+Running BPF regression test: tc_lxc_policy_drop
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_lxc_policy_drop \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.399s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+Running BPF regression test: tc_policy_reject_response_test
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_policy_reject_response_test \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.407s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+Running BPF regression test: hairpin_sctp_flow
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test hairpin_sctp_flow \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.497s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+BPF regression subset passed

@@ -1,0 +1,13 @@
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test ip_options_trace_id \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.700s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'

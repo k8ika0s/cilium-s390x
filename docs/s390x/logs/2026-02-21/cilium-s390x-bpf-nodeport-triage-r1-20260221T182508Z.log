@@ -1,0 +1,259 @@
+# 2026-02-21T18:25:10Z nodeport triage
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+===== RUN tc_nodeport_lb4_nat_backend =====
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb4_nat_backend.c -o tc_nodeport_lb4_nat_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_nodeport_lb4_nat_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_nodeport_lb4_nat_backend.o
+=== RUN   TestBPF/tc_nodeport_lb4_nat_backend.o/tc_nodeport_nat_backend
+=== NAME  TestBPF/tc_nodeport_lb4_nat_backend.o
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Failed to map addr=10.0.10.1 to identity
+    bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 0
+=== NAME  TestBPF/tc_nodeport_lb4_nat_backend.o/tc_nodeport_nat_backend
+    bpf_test.go:584: tc_nodeport_lb4_nat_backend.c:163: L4 checksum is invalid: 0000 != 0000
+--- FAIL: TestBPF (0.48s)
+    --- FAIL: TestBPF/tc_nodeport_lb4_nat_backend.o (0.48s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_backend.o/tc_nodeport_nat_backend (0.00s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.541s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE tc_nodeport_lb4_nat_backend =====
+===== RUN xdp_nodeport_lb4_nat_backend =====
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test xdp_nodeport_lb4_nat_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/xdp_nodeport_lb4_nat_backend.o
+=== RUN   TestBPF/xdp_nodeport_lb4_nat_backend.o/xdp_nodeport_nat_backend
+    bpf_test.go:584: xdp_nodeport_lb4_nat_backend.c:143: L4 checksum is invalid: 0000 != 0000
+--- FAIL: TestBPF (0.41s)
+    --- FAIL: TestBPF/xdp_nodeport_lb4_nat_backend.o (0.41s)
+        --- FAIL: TestBPF/xdp_nodeport_lb4_nat_backend.o/xdp_nodeport_nat_backend (0.00s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.464s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE xdp_nodeport_lb4_nat_backend =====
+===== RUN tc_nodeport_lb4_nat_lb =====
+make: *** [Makefile:114: run] Error 1
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb4_nat_lb.c -o tc_nodeport_lb4_nat_lb.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_nodeport_lb4_nat_lb \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:266: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:454: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Failed to map addr=120.0.12.2 to identity
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=120.0.12.2:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=120.0.12.2:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect_reply
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:549: L4 checksum is invalid: 0000 != 0000
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_reply
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516242, revnat=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=1
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_reply
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:359: L4 checksum is invalid: 0000 != 0000
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_original_renated
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=4
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=4 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=4
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=4 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:826: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516242, revnat=4
+    bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=4
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply2_egw
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply2_egw
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:826: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516242, revnat=4
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=4
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_no_fib
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_no_fib
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:826: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516242, revnat=4
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=4
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_punt
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=110.0.11.1 to identity=112200
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=3
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=3 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=3
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=3 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_original_entry
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516242, revnat=3
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=3
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_original_entry
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:826: L4 checksum is invalid: 0000 != 0000
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_reply
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.2 to identity=112233
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_reply
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:826: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=516242, revnat=3
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=3
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_verify_restored_original_entry
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=110.0.11.1 to identity=112200
+=== RUN   TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_udp_local_backend
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=5
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=5 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.2:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=5
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=5 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=110.0.11.1 to identity=112200
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_udp_local_backend
+    bpf_test.go:584: tc_nodeport_lb4_nat_lb.c:651: L4 checksum is invalid: 0000 != 0000
+=== NAME  TestBPF/tc_nodeport_lb4_nat_lb.o
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=17 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=2
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=2 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=17 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=2
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=2 src-identity=2 lb=0.0.0.0
+    bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 127 from seclabel 112200
+--- FAIL: TestBPF (1.53s)
+    --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o (1.52s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_redirect_reply (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_local_backend_reply (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_original_renated (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply2_egw (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_no_fib (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_reply_punt (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_original_entry (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_restore_reply (0.00s)
+        --- PASS: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_nat_fwd_verify_restored_original_entry (0.00s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_nat_lb.o/tc_nodeport_udp_local_backend (0.00s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	1.585s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE tc_nodeport_lb4_nat_lb =====
+make: *** [Makefile:114: run] Error 1

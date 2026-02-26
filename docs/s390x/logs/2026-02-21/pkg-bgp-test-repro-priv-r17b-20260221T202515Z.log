@@ -1,0 +1,19 @@
+=== RUN   TestPrivilegedScript
+=== RUN   TestPrivilegedScript/interface.txtar
+=== PAUSE TestPrivilegedScript/interface.txtar
+=== CONT  TestPrivilegedScript/interface.txtar
+    scripttest.go:253: 2026-02-21T20:25:23Z
+    scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptinterface.txtar392353777/001
+    script_test.go:196: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+        	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+        	Error:      	Received unexpected error:
+        	            	permission denied
+        	Test:       	TestPrivilegedScript/interface.txtar
+    logger.go:256: time=2026-02-21T12:25:23.937-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:25:23.937-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.688µs
+--- FAIL: TestPrivilegedScript (0.06s)
+    --- FAIL: TestPrivilegedScript/interface.txtar (0.01s)
+FAIL
+FAIL	github.com/cilium/cilium/pkg/bgp/test	0.141s
+FAIL

@@ -57,7 +57,11 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY --from=compilers-image /usr/lib/aarch64-linux-gnu /usr/lib/aarch64-linux-gnu
+RUN --mount=from=compilers-image,source=/usr/lib,target=/tmp/compilers-usrlib,readonly \
+    if [ -d /tmp/compilers-usrlib/aarch64-linux-gnu ]; then \
+      mkdir -p /usr/lib/aarch64-linux-gnu && \
+      cp -a /tmp/compilers-usrlib/aarch64-linux-gnu/. /usr/lib/aarch64-linux-gnu/; \
+    fi
 
 COPY --from=golang-dist /usr/local/go /usr/local/go
 RUN mkdir -p /go
@@ -65,7 +69,10 @@ ENV GOROOT=/usr/local/go
 ENV GOPATH=/go
 ENV PATH="${GOROOT}/bin:${GOPATH}/bin:${PATH}"
 
-RUN GOARCH=${TARGETARCH} CGO_ENABLED=0 go install github.com/go-delve/delve/cmd/dlv@latest
+RUN case "${TARGETARCH}" in \
+      amd64|arm64) GOARCH=${TARGETARCH} CGO_ENABLED=0 go install github.com/go-delve/delve/cmd/dlv@latest ;; \
+      *) mkdir -p /go/bin && printf '#!/bin/sh\necho "dlv is unavailable on %s" >&2\nexit 1\n' "${TARGETARCH}" > /go/bin/dlv && chmod +x /go/bin/dlv ;; \
+    esac
 
 WORKDIR /go/src/github.com/cilium/cilium/images/builder
 RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium/images/builder \

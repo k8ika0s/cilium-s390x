@@ -1,0 +1,211 @@
+[START] 2026-02-21T15:43:23Z /root/work/logs/cilium-s390x-cilium-be-ttlfix-build-direct-r2-20260221T154323Z.log
+time="2026-02-21T07:43:23-08:00" level=warning msg="missing \"MODIFIERS\" build argument. Try adding \"--build-arg MODIFIERS=<VALUE>\" to the command line"
+[1/3] STEP 1/1: FROM quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x AS cilium-envoy
+--> 28637c79beb6
+[2/3] STEP 1/10: FROM --platform=linux/s390x docker.io/cilium/cilium-builder-dev:3743682944-nogit-wip AS builder
+[2/3] STEP 2/10: ARG TARGETOS
+--> Using cache 175cab2fd1656ea30b42ffb821a01294b379faf64b4beb43c3f1e220dd810b5c
+--> 175cab2fd165
+[2/3] STEP 3/10: ARG TARGETARCH
+--> Using cache 75b25aca4b979d188452cbbb0c30dacc706dd682954a9119556396129ca6e8e5
+--> 75b25aca4b97
+[2/3] STEP 4/10: ARG MODIFIERS
+--> Using cache 110748c79c3c8ce9450df27311f8b383b9c86ffee0693eb079f08108f63b3d43
+--> 110748c79c3c
+[2/3] STEP 5/10: WORKDIR /go/src/github.com/cilium/cilium
+--> Using cache 3219583c0ecfbc463a5c5872e97f3831d9d8d836e6d7e528b83edd91130aeea6
+--> 3219583c0ecf
+[2/3] STEP 6/10: RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=${TARGETARCH} DESTDIR=/tmp/install/${TARGETOS}/${TARGETARCH} PKG_BUILD=1 $(echo $MODIFIERS | tr -d '"') NOSTRIP=1     build-container install-container-binary
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+for i in cilium-dbg daemon cilium-health bugtool hubble tools/mount tools/sysctlfix plugins/cilium-cni; do make  -C $i all; done
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-dbg
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/daemon'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-agent
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/daemon'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-health'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-health
+make[2]: Entering directory '/go/src/github.com/cilium/cilium/cilium-health/responder'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-health-responder
+make[2]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-health/responder'
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-health'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/bugtool'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-bugtool
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/bugtool'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/hubble'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" -X "github.com/cilium/cilium/hubble/pkg.GitBranch=HEAD" -X "github.com/cilium/cilium/hubble/pkg.GitHash=" -X "github.com/cilium/cilium/hubble/pkg.Version=v1.20.0-dev" ' -tags=osusergo  -o ./hubble .
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/hubble'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/mount'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-mount
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/mount'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-sysctlfix
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-cni
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+install -m 0750 -d /tmp/install/linux/s390x/var/lib/cilium
+rm -rf /tmp/install/linux/s390x/var/lib/cilium/bpf/*
+install -D -m 0644 bpf/COPYING /tmp/install/linux/s390x/var/lib/cilium/bpf/COPYING;  install -D -m 0644 bpf/LICENSE.BSD-2-Clause /tmp/install/linux/s390x/var/lib/cilium/bpf/LICENSE.BSD-2-Clause;  install -D -m 0644 bpf/LICENSE.GPL-2.0 /tmp/install/linux/s390x/var/lib/cilium/bpf/LICENSE.GPL-2.0;  install -D -m 0644 bpf/bpf_alignchecker.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_alignchecker.c;  install -D -m 0644 bpf/bpf_host.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_host.c;  install -D -m 0644 bpf/bpf_lxc.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_lxc.c;  install -D -m 0644 bpf/bpf_network.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_network.c;  install -D -m 0644 bpf/bpf_overlay.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_overlay.c;  install -D -m 0644 bpf/bpf_probes.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_probes.c;  install -D -m 0644 bpf/bpf_sock.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_sock.c;  install -D -m 0644 bpf/bpf_sock_term.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_sock_term.c;  install -D -m 0644 bpf/bpf_wireguard.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_wireguard.c;  install -D -m 0644 bpf/bpf_xdp.c /tmp/install/linux/s390x/var/lib/cilium/bpf/bpf_xdp.c;  install -D -m 0644 bpf/ep_config.h /tmp/install/linux/s390x/var/lib/cilium/bpf/ep_config.h;  install -D -m 0644 bpf/filter_config.h /tmp/install/linux/s390x/var/lib/cilium/bpf/filter_config.h;  install -D -m 0644 bpf/include/bpf/access.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/access.h;  install -D -m 0644 bpf/include/bpf/api.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/api.h;  install -D -m 0644 bpf/include/bpf/builtins.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/builtins.h;  install -D -m 0644 bpf/include/bpf/compiler.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/compiler.h;  install -D -m 0644 bpf/include/bpf/config/endpoint.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/endpoint.h;  install -D -m 0644 bpf/include/bpf/config/global.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/global.h;  install -D -m 0644 bpf/include/bpf/config/host.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/host.h;  install -D -m 0644 bpf/include/bpf/config/lxc.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/lxc.h;  install -D -m 0644 bpf/include/bpf/config/node.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/node.h;  install -D -m 0644 bpf/include/bpf/config/overlay.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/overlay.h;  install -D -m 0644 bpf/include/bpf/config/sock.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/sock.h;  install -D -m 0644 bpf/include/bpf/config/xdp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/config/xdp.h;  install -D -m 0644 bpf/include/bpf/csum.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/csum.h;  install -D -m 0644 bpf/include/bpf/ctx/common.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/ctx/common.h;  install -D -m 0644 bpf/include/bpf/ctx/ctx.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/ctx/ctx.h;  install -D -m 0644 bpf/include/bpf/ctx/skb.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/ctx/skb.h;  install -D -m 0644 bpf/include/bpf/ctx/sock.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/ctx/sock.h;  install -D -m 0644 bpf/include/bpf/ctx/unspec.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/ctx/unspec.h;  install -D -m 0644 bpf/include/bpf/ctx/xdp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/ctx/xdp.h;  install -D -m 0644 bpf/include/bpf/errno.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/errno.h;  install -D -m 0644 bpf/include/bpf/features.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/features.h;  install -D -m 0644 bpf/include/bpf/features_skb.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/features_skb.h;  install -D -m 0644 bpf/include/bpf/features_xdp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/features_xdp.h;  install -D -m 0644 bpf/include/bpf/helpers.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/helpers.h;  install -D -m 0644 bpf/include/bpf/helpers_skb.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/helpers_skb.h;  install -D -m 0644 bpf/include/bpf/helpers_sock.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/helpers_sock.h;  install -D -m 0644 bpf/include/bpf/helpers_xdp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/helpers_xdp.h;  install -D -m 0644 bpf/include/bpf/loader.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/loader.h;  install -D -m 0644 bpf/include/bpf/section.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/section.h;  install -D -m 0644 bpf/include/bpf/stddef.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/stddef.h;  install -D -m 0644 bpf/include/bpf/tailcall.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/tailcall.h;  install -D -m 0644 bpf/include/bpf/types_mapper.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/bpf/types_mapper.h;  install -D -m 0644 bpf/include/linux/bpf.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/bpf.h;  install -D -m 0644 bpf/include/linux/bpf_common.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/bpf_common.h;  install -D -m 0644 bpf/include/linux/byteorder.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/byteorder.h;  install -D -m 0644 bpf/include/linux/byteorder/big_endian.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/byteorder/big_endian.h;  install -D -m 0644 bpf/include/linux/byteorder/little_endian.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/byteorder/little_endian.h;  install -D -m 0644 bpf/include/linux/icmp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/icmp.h;  install -D -m 0644 bpf/include/linux/icmpv6.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/icmpv6.h;  install -D -m 0644 bpf/include/linux/if_arp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/if_arp.h;  install -D -m 0644 bpf/include/linux/if_ether.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/if_ether.h;  install -D -m 0644 bpf/include/linux/if_packet.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/if_packet.h;  install -D -m 0644 bpf/include/linux/igmp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/igmp.h;  install -D -m 0644 bpf/include/linux/in.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/in.h;  install -D -m 0644 bpf/include/linux/in6.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/in6.h;  install -D -m 0644 bpf/include/linux/ip.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/ip.h;  install -D -m 0644 bpf/include/linux/ipv6.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/ipv6.h;  install -D -m 0644 bpf/include/linux/socket.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/socket.h;  install -D -m 0644 bpf/include/linux/swab.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/swab.h;  install -D -m 0644 bpf/include/linux/tcp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/tcp.h;  install -D -m 0644 bpf/include/linux/types.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/types.h;  install -D -m 0644 bpf/include/linux/udp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/include/linux/udp.h;  install -D -m 0644 bpf/lib/act.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/act.h;  install -D -m 0644 bpf/lib/arp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/arp.h;  install -D -m 0644 bpf/lib/auth.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/auth.h;  install -D -m 0644 bpf/lib/classifiers.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/classifiers.h;  install -D -m 0644 bpf/lib/clustermesh.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/clustermesh.h;  install -D -m 0644 bpf/lib/common.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/common.h;  install -D -m 0644 bpf/lib/config.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/config.h;  install -D -m 0644 bpf/lib/config_map.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/config_map.h;  install -D -m 0644 bpf/lib/conntrack.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/conntrack.h;  install -D -m 0644 bpf/lib/conntrack_map.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/conntrack_map.h;  install -D -m 0644 bpf/lib/csum.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/csum.h;  install -D -m 0644 bpf/lib/dbg.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/dbg.h;  install -D -m 0644 bpf/lib/drop.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/drop.h;  install -D -m 0644 bpf/lib/drop_reasons.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/drop_reasons.h;  install -D -m 0644 bpf/lib/edt.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/edt.h;  install -D -m 0644 bpf/lib/egress_gateway.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/egress_gateway.h;  install -D -m 0644 bpf/lib/encap.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/encap.h;  install -D -m 0644 bpf/lib/encrypt.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/encrypt.h;  install -D -m 0644 bpf/lib/endian.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/endian.h;  install -D -m 0644 bpf/lib/eps.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/eps.h;  install -D -m 0644 bpf/lib/eth.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/eth.h;  install -D -m 0644 bpf/lib/events.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/events.h;  install -D -m 0644 bpf/lib/fib.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/fib.h;  install -D -m 0644 bpf/lib/ghash.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ghash.h;  install -D -m 0644 bpf/lib/hash.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/hash.h;  install -D -m 0644 bpf/lib/hexdump.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/hexdump.h;  install -D -m 0644 bpf/lib/host_firewall.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/host_firewall.h;  install -D -m 0644 bpf/lib/icmp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/icmp.h;  install -D -m 0644 bpf/lib/icmp6.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/icmp6.h;  install -D -m 0644 bpf/lib/icmp_wsum.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/icmp_wsum.h;  install -D -m 0644 bpf/lib/identity.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/identity.h;  install -D -m 0644 bpf/lib/ip_options.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ip_options.h;  install -D -m 0644 bpf/lib/ipfrag.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ipfrag.h;  install -D -m 0644 bpf/lib/ipsec.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ipsec.h;  install -D -m 0644 bpf/lib/ipv4.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ipv4.h;  install -D -m 0644 bpf/lib/ipv6.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ipv6.h;  install -D -m 0644 bpf/lib/ipv6_core.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ipv6_core.h;  install -D -m 0644 bpf/lib/jhash.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/jhash.h;  install -D -m 0644 bpf/lib/l2_responder.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/l2_responder.h;  install -D -m 0644 bpf/lib/l3.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/l3.h;  install -D -m 0644 bpf/lib/l4.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/l4.h;  install -D -m 0644 bpf/lib/lb.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/lb.h;  install -D -m 0644 bpf/lib/local_delivery.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/local_delivery.h;  install -D -m 0644 bpf/lib/lrp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/lrp.h;  install -D -m 0644 bpf/lib/lxc.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/lxc.h;  install -D -m 0644 bpf/lib/map_defs.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/map_defs.h;  install -D -m 0644 bpf/lib/mcast.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/mcast.h;  install -D -m 0644 bpf/lib/metrics.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/metrics.h;  install -D -m 0644 bpf/lib/nat.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/nat.h;  install -D -m 0644 bpf/lib/nat_46x64.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/nat_46x64.h;  install -D -m 0644 bpf/lib/neigh.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/neigh.h;  install -D -m 0644 bpf/lib/network_device.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/network_device.h;  install -D -m 0644 bpf/lib/node.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/node.h;  install -D -m 0644 bpf/lib/nodeport.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/nodeport.h;  install -D -m 0644 bpf/lib/nodeport_egress.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/nodeport_egress.h;  install -D -m 0644 bpf/lib/notify.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/notify.h;  install -D -m 0644 bpf/lib/overloadable.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/overloadable.h;  install -D -m 0644 bpf/lib/overloadable_skb.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/overloadable_skb.h;  install -D -m 0644 bpf/lib/overloadable_xdp.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/overloadable_xdp.h;  install -D -m 0644 bpf/lib/policy.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/policy.h;  install -D -m 0644 bpf/lib/policy_log.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/policy_log.h;  install -D -m 0644 bpf/lib/proxy.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/proxy.h;  install -D -m 0644 bpf/lib/proxy_hairpin.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/proxy_hairpin.h;  install -D -m 0644 bpf/lib/ratelimit.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/ratelimit.h;  install -D -m 0644 bpf/lib/signal.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/signal.h;  install -D -m 0644 bpf/lib/sock.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/sock.h;  install -D -m 0644 bpf/lib/sock_term.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/sock_term.h;  install -D -m 0644 bpf/lib/socket.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/socket.h;  install -D -m 0644 bpf/lib/source_info.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/source_info.h;  install -D -m 0644 bpf/lib/srv6.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/srv6.h;  install -D -m 0644 bpf/lib/static_data.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/static_data.h;  install -D -m 0644 bpf/lib/stubs.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/stubs.h;  install -D -m 0644 bpf/lib/subnet.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/subnet.h;  install -D -m 0644 bpf/lib/tailcall.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/tailcall.h;  install -D -m 0644 bpf/lib/time.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/time.h;  install -D -m 0644 bpf/lib/token_bucket.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/token_bucket.h;  install -D -m 0644 bpf/lib/trace.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/trace.h;  install -D -m 0644 bpf/lib/trace_helpers.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/trace_helpers.h;  install -D -m 0644 bpf/lib/trace_sock.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/trace_sock.h;  install -D -m 0644 bpf/lib/tunnel.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/tunnel.h;  install -D -m 0644 bpf/lib/utils.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/utils.h;  install -D -m 0644 bpf/lib/utime.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/utime.h;  install -D -m 0644 bpf/lib/vtep.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/vtep.h;  install -D -m 0644 bpf/lib/wireguard.h /tmp/install/linux/s390x/var/lib/cilium/bpf/lib/wireguard.h;  install -D -m 0644 bpf/netdev_config.h /tmp/install/linux/s390x/var/lib/cilium/bpf/netdev_config.h;  install -D -m 0644 bpf/node_config.h /tmp/install/linux/s390x/var/lib/cilium/bpf/node_config.h;  install -D -m 0644 bpf/tools/log2scapy.py /tmp/install/linux/s390x/var/lib/cilium/bpf/tools/log2scapy.py;
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+for i in cilium-dbg daemon cilium-health bugtool hubble tools/mount tools/sysctlfix plugins/cilium-cni; do make  -C $i install-binary; done
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-dbg /tmp/install/linux/s390x/usr/bin
+ln -frs /tmp/install/linux/s390x/usr/bin/cilium-dbg /tmp/install/linux/s390x/usr/bin/cilium
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/daemon'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-agent /tmp/install/linux/s390x/usr/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/daemon'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-health'
+for i in responder; do make  -C $i install; done
+make[2]: Entering directory '/go/src/github.com/cilium/cilium/cilium-health/responder'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-health-responder /tmp/install/linux/s390x/usr/bin
+make[2]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-health/responder'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-health /tmp/install/linux/s390x/usr/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-health'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/bugtool'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-bugtool /tmp/install/linux/s390x/usr/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/bugtool'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/hubble'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 GOARCH=s390x go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" -X "github.com/cilium/cilium/hubble/pkg.GitBranch=HEAD" -X "github.com/cilium/cilium/hubble/pkg.GitHash=" -X "github.com/cilium/cilium/hubble/pkg.Version=v1.20.0-dev" ' -tags=osusergo  -o ./hubble .
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 hubble /tmp/install/linux/s390x/usr/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/hubble'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/mount'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-mount /tmp/install/linux/s390x/usr/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/mount'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+install -m 0755 cilium-sysctlfix /tmp/install/linux/s390x/usr/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+install -m 0755 -d /tmp/install/linux/s390x/etc/cni/net.d
+install -m 0755 -d /tmp/install/linux/s390x/opt/cni/bin
+install -m 0755 cilium-cni /tmp/install/linux/s390x/opt/cni/bin
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+--> 7021a74dc19c
+[2/3] STEP 7/10: RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium     --mount=type=cache,target=/root/.cache     --mount=type=cache,target=/go/pkg     make GOARCH=${BUILDARCH} DESTDIR=/tmp/install/${TARGETOS}/${TARGETARCH} PKG_BUILD=1 $(echo $MODIFIERS | tr -d '"')     install-bash-completion licenses-all &&     mv LICENSE.all /tmp/install/${TARGETOS}/${TARGETARCH}/LICENSE.all
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+install -m 0755 -d /tmp/install/linux/s390x/usr/bin
+for i in cilium-dbg daemon cilium-health bugtool hubble tools/mount tools/sysctlfix plugins/cilium-cni; do make  -C $i install-bash-completion; done
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -s -w -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" ' -tags=osusergo  -o cilium-dbg
+install -m 0755 -d /tmp/install/linux/s390x/etc/bash_completion.d
+./cilium-dbg completion bash > cilium-dbg_bash_completion
+install -m 0644 -T cilium-dbg_bash_completion /tmp/install/linux/s390x/etc/bash_completion.d/cilium-dbg
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-dbg'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/daemon'
+make[1]: Nothing to be done for 'install-bash-completion'.
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/daemon'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/cilium-health'
+make[1]: Nothing to be done for 'install-bash-completion'.
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/cilium-health'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/bugtool'
+make[1]: Nothing to be done for 'install-bash-completion'.
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/bugtool'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/hubble'
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+CGO_ENABLED=0 go build -mod=vendor -ldflags '-X "github.com/cilium/cilium/pkg/version.ciliumVersion=1.20.0-dev " -s -w -X "github.com/cilium/cilium/pkg/envoy.requiredEnvoyVersionSHA=14da6b9c8a54244f0a67cd90a0deb83e5f110a4a" -X "github.com/cilium/cilium/hubble/pkg.GitBranch=HEAD" -X "github.com/cilium/cilium/hubble/pkg.GitHash=" -X "github.com/cilium/cilium/hubble/pkg.Version=v1.20.0-dev" ' -tags=osusergo  -o ./hubble .
+install -m 0755 -d /tmp/install/linux/s390x/etc/bash_completion.d
+./hubble completion bash > hubble_bash_completion
+install -m 0644 -T hubble_bash_completion /tmp/install/linux/s390x/etc/bash_completion.d/hubble
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/hubble'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/mount'
+make[1]: Nothing to be done for 'install-bash-completion'.
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/mount'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+make[1]: Nothing to be done for 'install-bash-completion'.
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/tools/sysctlfix'
+make[1]: Entering directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+make[1]: Nothing to be done for 'install-bash-completion'.
+make[1]: Leaving directory '/go/src/github.com/cilium/cilium/plugins/cilium-cni'
+--> 3ca38fba5140
+[2/3] STEP 8/10: RUN set -xe &&     export D=/tmp/debug/${TARGETOS}/${TARGETARCH} &&     cd /tmp/install/${TARGETOS}/${TARGETARCH} &&     find . -type f       -executable       -exec sh -c         'OBJCOPY_CMD=objcopy;          if [ "${TARGETARCH}" = "amd64" ]; then OBJCOPY_CMD=x86_64-linux-gnu-objcopy;          elif [ "${TARGETARCH}" = "arm64" ]; then OBJCOPY_CMD=aarch64-linux-gnu-objcopy;          elif [ "${TARGETARCH}" = "s390x" ]; then OBJCOPY_CMD=s390x-linux-gnu-objcopy;          fi;          filename=$(basename ${0}) &&          ${OBJCOPY_CMD} --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then ${OBJCOPY_CMD} --strip-all ${0} && (cd $(dirname ${0}) && ${OBJCOPY_CMD} --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug'       {} \;
++ export D=/tmp/debug/linux/s390x
++ cd /tmp/install/linux/s390x
++ find . -type f -executable -exec sh -c OBJCOPY_CMD=objcopy;          if [ "${TARGETARCH}" = "amd64" ]; then OBJCOPY_CMD=x86_64-linux-gnu-objcopy;          elif [ "${TARGETARCH}" = "arm64" ]; then OBJCOPY_CMD=aarch64-linux-gnu-objcopy;          elif [ "${TARGETARCH}" = "s390x" ]; then OBJCOPY_CMD=s390x-linux-gnu-objcopy;          fi;          filename=$(basename ${0}) &&          ${OBJCOPY_CMD} --only-keep-debug ${0} ${0}.debug &&          if ! echo "$MODIFIERS" | grep "NOSTRIP=1" ; then ${OBJCOPY_CMD} --strip-all ${0} && (cd $(dirname ${0}) && ${OBJCOPY_CMD} --add-gnu-debuglink=${filename}.debug ${filename}) ; fi &&          mkdir -p $(dirname ${D}/${0}) &&          mv -v ${0}.debug ${D}/${0}.debug {} ;
+renamed './opt/cni/bin/cilium-cni.debug' -> '/tmp/debug/linux/s390x/./opt/cni/bin/cilium-cni.debug'
+renamed './usr/bin/cilium-agent.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-agent.debug'
+renamed './usr/bin/cilium-bugtool.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-bugtool.debug'
+renamed './usr/bin/cilium-dbg.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-dbg.debug'
+renamed './usr/bin/cilium-health.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-health.debug'
+renamed './usr/bin/cilium-health-responder.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-health-responder.debug'
+renamed './usr/bin/cilium-mount.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-mount.debug'
+renamed './usr/bin/cilium-sysctlfix.debug' -> '/tmp/debug/linux/s390x/./usr/bin/cilium-sysctlfix.debug'
+renamed './usr/bin/hubble.debug' -> '/tmp/debug/linux/s390x/./usr/bin/hubble.debug'
+--> c20f0f998b8b
+[2/3] STEP 9/10: RUN for f in $(find /tmp/debug -type f -name '*.debug') ; do readelf -S ${f} | grep -q \\.symtab ||     (echo Debug symbols are missing in ${f} - possibly due to incorrect build parameters && false); done
+--> d1be3982fd72
+[2/3] STEP 10/10: COPY images/cilium/init-container.sh      plugins/cilium-cni/install-plugin.sh      plugins/cilium-cni/cni-uninstall.sh        /tmp/install/${TARGETOS}/${TARGETARCH}
+--> 76b5fbcf348c
+[3/3] STEP 1/12: FROM docker.io/cilium/cilium-runtime-dev:1493274796-nogit-wip AS release
+[3/3] STEP 2/12: ARG TARGETOS
+--> Using cache d7d3d7fb2e90410a3bc7dfbc2c0d26076a740129112c7251ea3b290cf23e8ad9
+--> d7d3d7fb2e90
+[3/3] STEP 3/12: ARG TARGETARCH
+--> Using cache a329f9f517efb74939771e66012b3f4955ad019382886538bf73766bcf5cd35f
+--> a329f9f517ef
+[3/3] STEP 4/12: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 7abee487c073b9084479399cc1804456f52166bb9fc773fe40a5ea0e4970a12b
+--> 7abee487c073
+[3/3] STEP 5/12: RUN echo ". /etc/profile.d/bash_completion.sh" >> /etc/bash.bashrc
+--> Using cache f222f88a60170724cca9bd21ed90215e44eb18794a7f367758806e5f8ecc8d79
+--> f222f88a6017
+[3/3] STEP 6/12: COPY --from=cilium-envoy /usr/lib/libcilium.so /usr/lib/libcilium.so
+--> Using cache ce3fecca096e682b1f143aa79744c30259a72e2d42f68e523bdb40bef63b8094
+--> ce3fecca096e
+[3/3] STEP 7/12: COPY --from=cilium-envoy /usr/bin/cilium-envoy /usr/bin/cilium-envoy-starter /usr/bin/
+--> Using cache 521cfc3703546684fb3de1d49c98b31ec1883db0db9ff8164cc373629198da9c
+--> 521cfc370354
+[3/3] STEP 8/12: ENV HUBBLE_SERVER=unix:///var/run/cilium/hubble.sock
+--> Using cache cee3c5b11e433faf41772c5212772b2db1cd06ce0591bf48a44c048a2f32f7f8
+--> cee3c5b11e43
+[3/3] STEP 9/12: COPY --from=builder /tmp/install/${TARGETOS}/${TARGETARCH} /
+--> c89cafce45c2
+[3/3] STEP 10/12: WORKDIR /home/cilium
+--> cbbbf19afda0
+[3/3] STEP 11/12: ENV INITSYSTEM="SYSTEMD"
+--> d60dae1091f9
+[3/3] STEP 12/12: CMD ["/usr/bin/cilium-dbg"]
+[3/3] COMMIT docker.io/cilium/cilium-dev:1053606339-nogit-wip
+--> 57e2ed68bb3c
+Successfully tagged docker.io/cilium/cilium-dev:1053606339-nogit-wip
+57e2ed68bb3ce0c3c234bd57793014ddbbc6a0ea4646a7541fac746a65cf0748
+image_id=57e2ed68bb3ce0c3c234bd57793014ddbbc6a0ea4646a7541fac746a65cf0748
+[END] 2026-02-21T15:47:42Z rc=0

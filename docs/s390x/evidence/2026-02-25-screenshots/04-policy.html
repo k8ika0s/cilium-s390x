@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>body{font-family:Menlo,Consolas,monospace;background:#0b1020;color:#e8ecff;margin:20px} h1{font-size:22px} pre{white-space:pre-wrap;word-break:break-word;font-size:14px;line-height:1.35;background:#111831;padding:16px;border-radius:10px;border:1px solid #223} .ok{color:#8ff0a4}</style>
+<title>04-policy</title></head><body><h1>04-policy</h1><pre>
+[ts] 2026-02-25T20:27:07Z
+[2026-02-25T20:27:07Z] namespace=s390x-proof-policy client_node=zkd01.fyre.ibm.com server_node=kdz.dev.fyre.ibm.com
+[2026-02-25T20:27:11Z] baseline allow expected target=10.244.0.234:8080
+[PASS] baseline-allow
+[2026-02-25T20:27:17Z] deny expected (client has no access label)
+[PASS] policy-deny
+[2026-02-25T20:27:49Z] allow expected after CEP convergence
+[PASS] policy-allow-after-label
+multinode policy enforcement passed
+</pre></body></html>

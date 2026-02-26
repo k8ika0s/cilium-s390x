@@ -1,0 +1,8 @@
+run=r99
+component=s390x-harness
+host=kdz.dev.fyre.ibm.com
+started_at=2026-02-25T07:16:31Z
+ended_at=2026-02-25T07:18:15Z
+rc=1
+log=/root/work/cilium-s390x/docs/s390x/logs/2026-02-25/s390x-harness-r99-20260225T071631Z.log
+harness_script=/root/work/cilium-s390x/test/s390x/run_harness.sh

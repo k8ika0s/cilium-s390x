@@ -1,0 +1,115 @@
+NAMESPACE     LAST SEEN   TYPE      REASON              OBJECT                                           MESSAGE
+kube-system   60m         Warning   BackOff             pod/cilium-j5jwg                                 Back-off restarting failed container cilium-agent in pod cilium-j5jwg_kube-system(ec627550-c62d-48c7-9207-56ddc0184665)
+kube-system   54m         Normal    Pulled              pod/cilium-j5jwg                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix-20260221T162748Z" already present on machine and can be accessed by the pod
+kube-system   50m         Warning   DNSConfigForming    pod/cilium-j5jwg                                 Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   50m         Warning   Unhealthy           pod/coredns-7d764666f9-hsmgg                     Readiness probe failed: HTTP probe failed with statuscode: 503
+kube-system   50m         Warning   Unhealthy           pod/coredns-7d764666f9-gj2fg                     Readiness probe failed: HTTP probe failed with statuscode: 503
+kube-system   50m         Normal    SuccessfulDelete    daemonset/cilium                                 Deleted pod: cilium-j5jwg
+kube-system   50m         Normal    SuccessfulCreate    daemonset/cilium                                 Created pod: cilium-4s2k4
+kube-system   50m         Normal    Scheduled           pod/cilium-4s2k4                                 Successfully assigned kube-system/cilium-4s2k4 to zkd01.fyre.ibm.com
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   50m         Normal    Created             pod/cilium-4s2k4                                 Container created
+kube-system   50m         Normal    Started             pod/cilium-4s2k4                                 Container started
+kube-system   50m         Normal    Pulled              pod/cilium-4s2k4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   49m         Normal    SuccessfulCreate    replicaset/coredns-5bf8685f84                    Created pod: coredns-5bf8685f84-v2t8x
+kube-system   49m         Normal    SuccessfulCreate    replicaset/coredns-5bf8685f84                    Created pod: coredns-5bf8685f84-nsmbr
+kube-system   49m         Normal    Scheduled           pod/coredns-5bf8685f84-nsmbr                     Successfully assigned kube-system/coredns-5bf8685f84-nsmbr to zkd01.fyre.ibm.com
+kube-system   49m         Normal    SuccessfulDelete    replicaset/coredns-7d764666f9                    Deleted pod: coredns-7d764666f9-hsmgg
+kube-system   49m         Normal    Killing             pod/coredns-7d764666f9-hsmgg                     Stopping container coredns
+kube-system   49m         Normal    ScalingReplicaSet   deployment/coredns                               Scaled down replica set coredns-7d764666f9 from 2 to 1
+kube-system   49m         Normal    Scheduled           pod/coredns-5bf8685f84-v2t8x                     Successfully assigned kube-system/coredns-5bf8685f84-v2t8x to zkd01.fyre.ibm.com
+kube-system   49m         Normal    ScalingReplicaSet   deployment/coredns                               Scaled up replica set coredns-5bf8685f84 from 1 to 2
+kube-system   49m         Normal    ScalingReplicaSet   deployment/coredns                               Scaled up replica set coredns-5bf8685f84 from 0 to 1
+kube-system   49m         Normal    ScalingReplicaSet   deployment/coredns                               Scaled down replica set coredns-7d764666f9 from 1 to 0
+kube-system   49m         Normal    Killing             pod/coredns-7d764666f9-gj2fg                     Stopping container coredns
+kube-system   49m         Normal    SuccessfulDelete    replicaset/coredns-7d764666f9                    Deleted pod: coredns-7d764666f9-gj2fg
+kube-system   19m         Warning   DNSConfigForming    pod/cilium-4s2k4                                 Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   17m         Normal    SuccessfulDelete    daemonset/cilium                                 Deleted pod: cilium-4s2k4
+kube-system   17m         Normal    Killing             pod/cilium-4s2k4                                 Stopping container cilium-agent
+kube-system   17m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   17m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   17m         Normal    Scheduled           pod/cilium-sgjp4                                 Successfully assigned kube-system/cilium-sgjp4 to zkd01.fyre.ibm.com
+kube-system   17m         Normal    SuccessfulCreate    daemonset/cilium                                 Created pod: cilium-sgjp4
+kube-system   17m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   17m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   17m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   17m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   17m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   17m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   17m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   17m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   17m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   17m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   17m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   17m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   17m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   17m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   17m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   17m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   16m         Normal    Created             pod/cilium-sgjp4                                 Container created
+kube-system   16m         Normal    Pulled              pod/cilium-sgjp4                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   16m         Normal    Started             pod/cilium-sgjp4                                 Container started
+kube-system   16m         Warning   Unhealthy           pod/coredns-5bf8685f84-v2t8x                     Readiness probe failed: Get "http://10.244.0.163:8181/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   14m         Warning   Unhealthy           pod/coredns-5bf8685f84-nsmbr                     Liveness probe failed: Get "http://10.244.0.56:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   14m         Warning   Unhealthy           pod/coredns-5bf8685f84-v2t8x                     Liveness probe failed: Get "http://10.244.0.163:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   10m         Warning   DNSConfigForming    pod/cilium-sgjp4                                 Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   10m         Normal    Killing             pod/coredns-5bf8685f84-nsmbr                     Container coredns failed liveness probe, will be restarted
+kube-system   10m         Normal    Killing             pod/coredns-5bf8685f84-v2t8x                     Container coredns failed liveness probe, will be restarted
+kube-system   10m         Normal    Created             pod/coredns-5bf8685f84-nsmbr                     Container created
+kube-system   10m         Normal    Pulled              pod/coredns-5bf8685f84-nsmbr                     Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Started             pod/coredns-5bf8685f84-v2t8x                     Container started
+kube-system   10m         Normal    Created             pod/coredns-5bf8685f84-v2t8x                     Container created
+kube-system   10m         Normal    Pulled              pod/coredns-5bf8685f84-v2t8x                     Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Started             pod/coredns-5bf8685f84-nsmbr                     Container started
+kube-system   10m         Normal    Killing             pod/cilium-sgjp4                                 Stopping container cilium-agent
+kube-system   10m         Normal    SuccessfulDelete    daemonset/cilium                                 Deleted pod: cilium-sgjp4
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Scheduled           pod/cilium-qcpq4                                 Successfully assigned kube-system/cilium-qcpq4 to zkd01.fyre.ibm.com
+kube-system   10m         Normal    SuccessfulCreate    daemonset/cilium                                 Created pod: cilium-qcpq4
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created             pod/cilium-qcpq4                                 Container created
+kube-system   10m         Normal    Pulled              pod/cilium-qcpq4                                 Container image "docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Started             pod/cilium-qcpq4                                 Container started
+kube-system   4m41s       Warning   DNSConfigForming    pod/etcd-zkd01.fyre.ibm.com                      Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   4m27s       Warning   DNSConfigForming    pod/kube-controller-manager-zkd01.fyre.ibm.com   Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   4m20s       Warning   DNSConfigForming    pod/kube-proxy-vhb8x                             Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   4m15s       Warning   DNSConfigForming    pod/kube-scheduler-zkd01.fyre.ibm.com            Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   3m50s       Warning   DNSConfigForming    pod/kube-apiserver-zkd01.fyre.ibm.com            Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   3m45s       Warning   DNSConfigForming    pod/coredns-5bf8685f84-nsmbr                     Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   3m10s       Warning   DNSConfigForming    pod/coredns-5bf8685f84-v2t8x                     Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   2m10s       Warning   DNSConfigForming    pod/cilium-envoy-rz5ch                           Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   115s        Warning   DNSConfigForming    pod/cilium-operator-7d796b74f8-bmc6k             Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   8s          Warning   DNSConfigForming    pod/cilium-qcpq4                                 Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21

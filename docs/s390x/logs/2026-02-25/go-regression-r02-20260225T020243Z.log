@@ -1,0 +1,12 @@
+[INFO] 2026-02-25T02:02:43Z start go-regression-r02
+[INFO] host=kdz.dev.fyre.ibm.com
+fatal: Needed a single revision
+[INFO] git_rev=
+[INFO] cmd=GOMAXPROCS=4 go test ./pkg/act ./pkg/bpf ./pkg/datapath/iptables ./pkg/datapath/sockets ./pkg/hubble/parser/debug ./pkg/hubble/parser/threefour ./pkg/hubble/testutils
+ok  	github.com/cilium/cilium/pkg/act	0.024s
+ok  	github.com/cilium/cilium/pkg/bpf	0.026s
+ok  	github.com/cilium/cilium/pkg/datapath/iptables	4.074s
+ok  	github.com/cilium/cilium/pkg/datapath/sockets	0.038s
+ok  	github.com/cilium/cilium/pkg/hubble/parser/debug	0.028s
+ok  	github.com/cilium/cilium/pkg/hubble/parser/threefour	0.045s
+ok  	github.com/cilium/cilium/pkg/hubble/testutils	0.046s

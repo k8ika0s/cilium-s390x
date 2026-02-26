@@ -10,12 +10,14 @@ set -o nounset
 
 # renovate: datasource=github-release-attachments depName=protocolbuffers/protobuf
 protoc_version="v33.5"
-protoc_ersion="${protoc_version//v/}"
+protoc_version_number="${protoc_version#v}"
 arch=$(arch)
 if [[ "${arch}" == "aarch64" ]]; then
   arch="aarch_64"
+elif [[ "${arch}" == "s390x" ]]; then
+  arch="s390_64"
 fi
-protoc_archive="protoc-${protoc_ersion}-linux-${arch}.zip"
+protoc_archive="protoc-${protoc_version_number}-linux-${arch}.zip"
 protoc_url="https://github.com/protocolbuffers/protobuf/releases/download/${protoc_version}/${protoc_archive}"
 
 if curl --fail --show-error --silent --location "${protoc_url}" --output /tmp/protoc.zip; then
@@ -25,9 +27,8 @@ if curl --fail --show-error --silent --location "${protoc_url}" --output /tmp/pr
   chmod o+rx /usr/local/bin/protoc
   chmod o+rX -R /usr/local/include/google/
 else
-  # The protobuf project does not publish linux/s390x archives. Fall back to
-  # distro packages so the builder image can still be created.
-  if [[ "${arch}" == "s390x" ]]; then
+  # Keep a distro fallback for arches without upstream protobuf release assets.
+  if [[ "${arch}" == "s390_64" ]]; then
     apt-get update
     apt-get install -y --no-install-recommends protobuf-compiler
     apt-get clean

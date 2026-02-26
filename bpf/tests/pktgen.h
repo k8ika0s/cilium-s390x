@@ -48,7 +48,7 @@ volatile const __u8 mac_host[] = host_mac_addr;
  *  having to come up with custom ips.
  */
 
-#define IPV4(a, b, c, d) __bpf_htonl(((a) << 24) + ((b) << 16) + ((c) << 8) + (d))
+#define IPV4(a, b, c, d) __bpf_htonl(((__u32)(a) << 24) | ((__u32)(b) << 16) | ((__u32)(c) << 8) | (__u32)(d))
 
 /* IPv4 addresses for hosts, external to the cluster */
 #define v4_ext_one	IPV4(110, 0, 11, 1)
@@ -1135,7 +1135,8 @@ pktgen__ip_csum(const struct pktgen *builder, int i)
 
 		csum = csum_diff(NULL, 0, &ipv4_layer->saddr, sizeof(__be32), 0);
 		csum = csum_diff(NULL, 0, &ipv4_layer->daddr, sizeof(__be32), csum);
-		tmp = (__u16)ipv4_layer->protocol << 8;
+		/* Pseudo-header word: 0x00<proto> 0x0000 in network byte order. */
+		tmp = bpf_htonl((__u32)ipv4_layer->protocol << 16);
 		csum = csum_diff(NULL, 0, &tmp, sizeof(__u32), csum);
 		return csum;
 	case PKT_LAYER_IPV6:
@@ -1150,7 +1151,8 @@ pktgen__ip_csum(const struct pktgen *builder, int i)
 
 		csum = csum_diff(NULL, 0, &ipv6_layer->saddr, sizeof(struct in6_addr), 0);
 		csum = csum_diff(NULL, 0, &ipv6_layer->daddr, sizeof(struct in6_addr), csum);
-		tmp = (__u16)ipv6_layer->nexthdr << 8;
+		/* Pseudo-header word: 0x00<nexthdr> 0x0000 in network byte order. */
+		tmp = bpf_htonl((__u32)ipv6_layer->nexthdr << 16);
 		csum = csum_diff(NULL, 0, &tmp, sizeof(__u32), csum);
 		return csum;
 	default:
@@ -1196,7 +1198,8 @@ pktgen__tcp_csum(const struct pktgen *builder, int i, struct tcphdr *tcp_layer)
 
 		tcp_layer->check = 0;
 		csum = pktgen__ip_csum(builder, i);
-		tmp = bpf_htons((__be16)(builder->cur_off - builder->layer_offsets[i]));
+		/* Pseudo-header word: <l4_len> 0x0000 in network byte order. */
+		tmp = bpf_htonl((__u32)(builder->cur_off - builder->layer_offsets[i]) << 16);
 		csum = csum_diff(NULL, 0, &tmp, sizeof(__u32), csum);
 
 		len = sizeof(struct tcphdr) + sizeof(default_data);

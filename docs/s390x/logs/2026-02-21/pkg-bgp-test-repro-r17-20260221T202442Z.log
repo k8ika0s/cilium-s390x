@@ -1,0 +1,5 @@
+=== RUN   TestPrivilegedScript
+    script_test.go:71: Set PRIVILEGED_TESTS to run this test
+--- SKIP: TestPrivilegedScript (0.00s)
+PASS
+ok  	github.com/cilium/cilium/pkg/bgp/test	0.053s

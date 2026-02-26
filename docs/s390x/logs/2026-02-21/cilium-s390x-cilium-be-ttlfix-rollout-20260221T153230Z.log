@@ -1,0 +1,68 @@
+[START] 2026-02-21T15:32:30Z /root/work/logs/cilium-s390x-cilium-be-ttlfix-rollout-20260221T153230Z.log
+daemonset.apps/cilium restarted
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+cilium_pod=cilium-wn59t
+5544c50d9b76ab1befccdd04f1a8a404926c888006bef3220a3e2cbab155ca76  /var/lib/cilium/bpf/lib/ipv4.h
+probe tests
+-- 10.244.0.29
+*   Trying 10.244.0.29:8080...
+-- 10.244.0.108
+*   Trying 10.244.0.108:8080...
+-- 10.244.0.249
+*   Trying 10.244.0.249:8080...
+tcpdump coredns SYN
+if=lxcb3659d9ea62e
+dropped privs to tcpdump
+tcpdump: listening on lxcb3659d9ea62e, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+07:32:55.670826 00:00:67:7a:6b:85 > 00:00:be:ae:00:4a, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 63, id 62393, offset 0, flags [DF], proto TCP (6), length 60, bad cksum 3058 (->3157)!)
+    10.244.0.88.53346 > 10.244.0.108.8080: Flags [S], cksum 0x8628 (correct), seq 2514525256, win 64240, options [mss 1460,sackOK,TS val 3961561598 ecr 0,nop,wscale 7], length 0
+07:32:56.689924 00:00:67:7a:6b:85 > 00:00:be:ae:00:4a, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 63, id 62394, offset 0, flags [DF], proto TCP (6), length 60, bad cksum 3057 (->3156)!)
+    10.244.0.88.53346 > 10.244.0.108.8080: Flags [S], cksum 0x822c (correct), seq 2514525256, win 64240, options [mss 1460,sackOK,TS val 3961562618 ecr 0,nop,wscale 7], length 0
+
+2 packets captured
+2 packets received by filter
+0 packets dropped by kernel
+  Neighbor table                145529
+  Endpoint policy               16384
+  Policy stats                  65536
+  Session affinity              65536
+  Sock reverse NAT              72764
+Encryption:       Disabled        
+Cluster health:   0/0 reachable   (2026-02-21T15:32:41Z)   (Probe interval: 0s)
+Name              IP              Node                     Endpoints
+Modules Health:                   agent
+                                  ├── controlplane
+                                  │   ├── agent-infra-endpoints
+                                  │   │   └── job-init-host-endpoint                              [STOPPED] Start initialization (24s, x1)
+                                  │   ├── bgp-control-plane
+                                  │   │   ├── observer-job-default-gateway-route-change-tracker      [OK] Primed (24s, x1)
+                                  │   │   └── observer-job-device-change-device-change-tracker      [OK] OK (10.135µs) [16] (0s, x1)
+                                  │   ├── cilium-agent-dynamic-config
+                                  │   │   └── job-k8s-reflector-cilium-configs-cm-cilium-config-kube-system      [OK] 143 upserted, 0 deleted, 143 total objects (24s, x1)
+                                  │   ├── cilium-health
+                                  │   │   └── job-init                                            [STOPPED] Start initialization (24s, x1)
+                                  │   ├── ciliumenvoyconfig
+                                  │   │   ├── job-node-labels                                     [OK] Running (24s, x1)
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (24s, x3)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (24s, x1)
+                                  │   ├── clustermesh
+                                  │   │   └── job-clustermesh-nodemanager-notifier                [STOPPED] Running (24s, x1)
+                                  │   ├── config-drift-checker
+                                  │   │   └── job-drift-checker                                   [OK] Running (24s, x1)
+                                  │   ├── daemonconfig
+                                  │   │   └── timer-job-validate-unchanged-daemon-config          [OK] Primed (24s, x1)
+                                  │   ├── dynamic-lifecycle-manager
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (24s, x2)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (24s, x1)
+                                  │   ├── enabled-features
+                                  │   │   └── job-update-config-metric                            [STOPPED] Waiting for agent config (24s, x1)
+                                  │   ├── endpoint-api
+                                  │   │   ├── job-cni-deletion-queue                              [STOPPED] Running (24s, x1)
+                                  │   │   └── job-unlock-lockfile                                 [STOPPED] Running (24s, x1)
+                                  │   ├── endpoint-manager
+                                  │   │   ├── cilium-endpoint-1024 (/)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (20s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-1024 (20s, x1)
+[END] 2026-02-21T15:33:04Z

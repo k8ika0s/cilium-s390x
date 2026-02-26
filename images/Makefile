@@ -27,7 +27,14 @@ lint:
 .buildx_builder:
 	# see https://github.com/docker/buildx/issues/308
 	mkdir -p ../.buildx
-	docker buildx create --platform $(PLATFORMS) --buildkitd-flags '--debug' > $@
+	@if docker buildx --help 2>/dev/null | grep -qE '(^|[[:space:]])create([[:space:]]|$$)'; then \
+		docker buildx create --platform $(PLATFORMS) --buildkitd-flags '--debug' > $@ 2>/dev/null || \
+		docker buildx create --platform $(PLATFORMS) > $@ 2>/dev/null || \
+		docker buildx create > $@; \
+	else \
+		echo "buildx create is unavailable; using default builder context" >&2; \
+		: > $@; \
+	fi
 
 runtime-image: .buildx_builder
 	TEST=true scripts/build-image.sh cilium-runtime-dev $(RUNTIME_DIRECTORY) $(PLATFORMS) $(OUTPUT) "$$(cat .buildx_builder)" $(REGISTRIES)

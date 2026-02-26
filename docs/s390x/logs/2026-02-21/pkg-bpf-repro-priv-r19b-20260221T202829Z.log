@@ -1,0 +1,8 @@
+=== RUN   TestPrivilegedUpgradeMap
+--- PASS: TestPrivilegedUpgradeMap (0.00s)
+=== RUN   TestPrivilegedUnusedMaps
+--- PASS: TestPrivilegedUnusedMaps (0.00s)
+=== RUN   TestPrivilegedUnusedMapsFalseNegative
+--- PASS: TestPrivilegedUnusedMapsFalseNegative (0.00s)
+PASS
+ok  	github.com/cilium/cilium/pkg/bpf	0.065s

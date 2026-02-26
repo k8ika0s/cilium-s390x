@@ -1,0 +1,12 @@
+[meta] started_at_utc=20260225T200123Z
+[meta] host=zkd0
+[build] base=docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z new=docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z
+docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z                                                application/vnd.docker.distribution.manifest.v2+json      sha256:52d54011f6c1b9f7ad92925031ec4b218c08c51723128d74af2b518c88ce2018 831.6 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 
+Loaded image: docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+STEP 1/2: FROM docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+STEP 2/2: COPY eps.h /var/lib/cilium/bpf/lib/eps.h
+COMMIT docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z
+--> e6e79c2d3dd0
+Successfully tagged docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z
+e6e79c2d3dd0c7798be15cb265499d50e4d27e5ad1e652bccac3eb25991f158e
+e6e79c2d3dd0c7798be15cb265499d50e4d27e5ad1e652bccac3eb25991f158e

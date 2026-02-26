@@ -1,0 +1,6 @@
+run=r88
+host=kdz.dev.fyre.ibm.com
+started_at=2026-02-25T01:33:42Z
+ended_at=2026-02-25T01:34:26Z
+rc=0
+log=/root/work/cilium-s390x/docs/s390x/logs/2026-02-25/proxy-docker-tests-r88-20260225T013342Z.log

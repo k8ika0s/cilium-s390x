@@ -115,8 +115,14 @@ func TestPrivilegedScript(t *testing.T) {
 			e := &script.Engine{
 				Conds: map[string]script.Cond{
 					"kernel-can-manage-arp-ping": script.BoolCondition(
-						"True if a probe detects the current kernel can manage ARP pings",
-						probes.HaveManagedNeighbors() == nil,
+						"True if a probe detects the current kernel can manage ARP pings and supports interval_probe_time_ms sysctl",
+						func() bool {
+							if probes.HaveManagedNeighbors() != nil {
+								return false
+							}
+							_, err := sc.Read([]string{"net", "ipv4", "neigh", "default", "interval_probe_time_ms"})
+							return err == nil
+						}(),
 					),
 				},
 				RetryInterval: 10 * time.Millisecond,

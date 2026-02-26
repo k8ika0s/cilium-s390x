@@ -68,6 +68,42 @@ Architectures
 
 Cilium images are distributed for AMD64 and AArch64 architectures.
 
+s390x Fork Notes
+----------------
+
+This fork (``k8ika0s/cilium-s390x``) carries local zLinux (``linux/s390x``,
+big-endian) remediations validated in a two-node cluster testbed.
+
+Key remediation areas include:
+
+* BE-safe checksum handling in ``bpf/lib/ipv4.h`` (``ipv4_dec_ttl()`` now updates
+  checksum deltas using the full 16-bit ``TTL|Protocol`` field semantics).
+* Endian-stable policy and endpoint map encoding/decoding in
+  ``bpf/lib/policy.h`` and ``bpf/lib/eps.h``.
+* BPF/unit/integration fixture updates for BE correctness in ``bpf/tests`` and
+  ``pkg/*_test.go``.
+* Native ``s390x`` harness automation and evidence capture in ``test/s390x/``
+  and ``docs/s390x/``.
+
+Quick runtime flow on ``s390x``:
+
+.. code-block:: bash
+
+   test/s390x/deploy_cilium_s390x.sh
+   test/s390x/smoke_status.sh
+   test/s390x/multinode_matrix.sh
+   test/s390x/multinode_policy_enforcement.sh
+   test/s390x/nodeport_crossnode.sh
+
+For a logged end-to-end run with UTC-stamped artifacts:
+
+.. code-block:: bash
+
+   RUN_ID=rNN test/s390x/launch_logged_run.sh
+
+See ``test/s390x/README.md`` and ``docs/s390x/README.md`` for full
+prerequisites, run controls, and reporting flow.
+
 Software Bill of Materials
 --------------------------
 

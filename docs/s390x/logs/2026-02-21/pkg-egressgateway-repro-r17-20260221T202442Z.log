@@ -1,0 +1,5 @@
+=== RUN   TestPrivilegedEgressGatewayManager
+    manager_privileged_test.go:146: Set PRIVILEGED_TESTS to run this test
+--- SKIP: TestPrivilegedEgressGatewayManager (0.00s)
+PASS
+ok  	github.com/cilium/cilium/pkg/egressgateway	0.124s

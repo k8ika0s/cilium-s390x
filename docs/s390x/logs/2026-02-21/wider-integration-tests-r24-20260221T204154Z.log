@@ -1,0 +1,1171 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+docker rm -f "cilium-etcd-test-container" 2> /dev/null
+docker run -d \
+	-e ETCD_UNSUPPORTED_ARCH=s390x \
+	--name "cilium-etcd-test-container" \
+	-p 4002:4001 \
+	gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+	etcd -name etcd0 \
+	-advertise-client-urls http://0.0.0.0:4001 \
+	-listen-client-urls http://0.0.0.0:4001 \
+	-listen-peer-urls http://0.0.0.0:2380 \
+	-initial-cluster-token etcd-cluster-1 \
+	-initial-cluster-state new
+Trying to pull gcr.io/etcd-development/etcd@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4...
+Getting image source signatures
+Copying blob sha256:3214acf345c0cc6bbdb56b698a41ccdefc624a09d6beb0d38b5de0b2303ecaf4
+Copying blob sha256:bfb59b82a9b65e47d485e53b3e815bca3b3e21a095bd0cb88ced9ac0b48062bf
+Copying blob sha256:ab55b917517ff6cc41f8e27593413426433a370c8469c53b8a6110a31c47e7ae
+Copying blob sha256:7c12895b777bcaa8ccae0605b4de635b68fc32d60fa08f421dc3818bf55ee212
+Copying blob sha256:efa9d1d5d3a286c60a7261496166fdf31cec2284dafe7eef7cda89eba2f675d6
+Copying blob sha256:b6824ed73363f94b3b2b44084c51c31bc32af77a96861d49e16f91e3ab6bed71
+Copying blob sha256:5664b15f108bf9436ce3312090a767300800edbbfd4511aa1a6d64357024d5dd
+Copying blob sha256:27be814a09ebd97fac6fb7b82d19f117185e90601009df3fbab6f442f85cd6b3
+Copying blob sha256:4aa0ea1413d37a58615488592a0b827ea4b2e48fa5a77cf707d0e35f025e613f
+Copying blob sha256:da7816fa955ea24533c388143c78804c28682eef99b4ee3723b548c70148bba6
+Copying blob sha256:9aee425378d2c16cd44177dc54a274b312897f5860a8e78fdfda555a0d79dd71
+Copying blob sha256:a035a7a44d1a7fd2c4e2b37278e4cd3c7adbf209e8d4374379d7fce46f4b8a83
+Copying blob sha256:9b49b8cd3bbf629bed907549b9f3d9cf917bd603ea8e51532e0eb545ca299f35
+Copying blob sha256:ca267ce565af37499d4d6b6797e5e2b6b26dd45a0851cb2be68253e420ada22e
+Copying blob sha256:e15129ef810b5e682861cc8350b9a046124561fb77c4a1f26eb8394b4aaae925
+Copying blob sha256:ac32e6763fedcd47d69024457d1ab0f9e30820665484bf873e81717ff3101907
+Copying config sha256:b4c163ebbb167b31fd916333999ceb948e7f6e1d7f69473c02ff998c2a310702
+Writing manifest to image destination
+7a74b51436c5dc748c2574af458ccdf014d7095182274949b01b35c823b79514
+INTEGRATION_TESTS=true CGO_ENABLED=0 go test -mod=vendor -vet=all -tags=osusergo  ./... -timeout 720s -covermode=count -coverprofile=coverage.out | cat
+	github.com/cilium/cilium/api/v1/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/daemon		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/endpoint		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/prefilter		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/service		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/flow		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server/restapi/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/client/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server/restapi/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/observer		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/operator		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/operator		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/peer		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/relay		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/daemon		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/endpoint		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/prefilter		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/service		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/standalone-dns-proxy		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.549s	coverage: 5.8% of statements
+	github.com/cilium/cilium/bugtool		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/bugtool/cmd	0.497s	coverage: 17.3% of statements
+ok  	github.com/cilium/cilium/cilium-cli/api	0.488s	coverage: 60.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/bgp	0.394s	coverage: 41.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/cli	0.815s	coverage: 55.2% of statements
+ok  	github.com/cilium/cilium/cilium-cli/clustermesh	0.411s	coverage: 10.1% of statements
+	github.com/cilium/cilium/cilium-cli/cmd/cilium		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/config		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/builder		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/builder/manifests/template	0.096s	coverage: 78.9% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/check	1.145s	coverage: 4.2% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/filters		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/internal/junit	0.063s	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/perf/benchmarks/netperf	0.714s	coverage: 24.7% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/perf/benchmarks/profiler		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/perf/common		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/sniff		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/tests	0.685s	coverage: 2.8% of statements
+?   	github.com/cilium/cilium/cilium-cli/defaults	[no test files]
+ok  	github.com/cilium/cilium/cilium-cli/encrypt	0.445s	coverage: 39.3% of statements
+ok  	github.com/cilium/cilium/cilium-cli/features	0.481s	coverage: 15.4% of statements
+	github.com/cilium/cilium/cilium-cli/hubble		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/install	0.849s	coverage: 9.6% of statements
+ok  	github.com/cilium/cilium/cilium-cli/internal/helm	1.881s	coverage: 51.9% of statements
+ok  	github.com/cilium/cilium/cilium-cli/internal/utils	0.214s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/k8s	0.441s	coverage: 4.0% of statements
+	github.com/cilium/cilium/cilium-cli/k8s/internal		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/logging		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/multicast		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/status	0.337s	coverage: 59.6% of statements
+ok  	github.com/cilium/cilium/cilium-cli/sysdump	1.034s	coverage: 12.3% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/features	0.111s	coverage: 61.6% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/junit	0.177s	coverage: 100.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/lock		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/log		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/runner	0.054s	coverage: 100.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/wait		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-dbg		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-dbg/cmd	0.861s	coverage: 13.9% of statements
+	github.com/cilium/cilium/cilium-dbg/cmd/troubleshoot		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health/responder		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/clustermesh	1.734s	coverage: 76.4% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/clustermesh/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/clustermesh-dbg		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/common		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/etcdinit		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/health		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/kvstoremesh		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/kvstoremesh-dbg		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/mcsapi-coredns-cfg	0.651s	coverage: 62.2% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/syncstate	0.410s	coverage: 46.2% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/contrib/examples/script	0.390s	coverage: 89.5% of statements
+ok  	github.com/cilium/cilium/contrib/examples/statedb	0.347s	coverage: 8.3% of statements
+ok  	github.com/cilium/cilium/contrib/examples/statedb_k8s	0.647s	coverage: 23.3% of statements
+	github.com/cilium/cilium/daemon		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/daemon/cmd	11.838s	coverage: 51.5% of statements
+ok  	github.com/cilium/cilium/daemon/cmd/cni	0.549s	coverage: 51.4% of statements
+	github.com/cilium/cilium/daemon/cmd/cni/fake		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/daemon/cmd/legacy	[no test files]
+ok  	github.com/cilium/cilium/daemon/healthz	0.529s	coverage: 15.5% of statements
+ok  	github.com/cilium/cilium/daemon/infraendpoints	0.699s	coverage: 13.0% of statements
+ok  	github.com/cilium/cilium/daemon/k8s	1.021s	coverage: 81.1% of statements
+ok  	github.com/cilium/cilium/daemon/restapi	0.693s	coverage: 3.0% of statements
+	github.com/cilium/cilium/hubble		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd	0.916s	coverage: 79.4% of statements
+?   	github.com/cilium/cilium/hubble/cmd/common	[no test files]
+	github.com/cilium/cilium/hubble/cmd/common/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/common/conn	0.304s	coverage: 11.4% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/common/template	0.184s	coverage: 91.7% of statements
+	github.com/cilium/cilium/hubble/cmd/common/validate		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/list	0.057s	coverage: 47.1% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/observe	0.592s	coverage: 66.8% of statements
+	github.com/cilium/cilium/hubble/cmd/reflect		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/status		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/watch	0.131s	coverage: 13.8% of statements
+	github.com/cilium/cilium/hubble/pkg		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/pkg/defaults		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/pkg/logger		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/pkg/printer	0.345s	coverage: 71.2% of statements
+ok  	github.com/cilium/cilium/hubble/pkg/time	0.030s	coverage: 36.8% of statements
+	github.com/cilium/cilium/hubble-relay		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/completion		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/serve		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/version		coverage: 0.0% of statements
+	github.com/cilium/cilium/images/builder		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/api	22.600s	coverage: 70.8% of statements
+	github.com/cilium/cilium/operator/auth		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/operator/auth/identity	[no test files]
+ok  	github.com/cilium/cilium/operator/auth/spire	0.489s	coverage: 36.4% of statements
+ok  	github.com/cilium/cilium/operator/cmd	0.947s	coverage: 13.8% of statements
+	github.com/cilium/cilium/operator/doublewrite		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/endpointgc	1.667s	coverage: 83.5% of statements
+ok  	github.com/cilium/cilium/operator/endpointslicegc	0.542s	coverage: 63.2% of statements
+ok  	github.com/cilium/cilium/operator/identitygc	1.076s	coverage: 55.8% of statements
+	github.com/cilium/cilium/operator/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/bgp	12.343s	coverage: 80.3% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumendpointslice	11.923s	coverage: 82.9% of statements
+	github.com/cilium/cilium/operator/pkg/ciliumendpointslice/testutils		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumenvoyconfig	0.865s	coverage: 33.3% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumidentity	15.205s	coverage: 87.4% of statements
+	github.com/cilium/cilium/operator/pkg/ciliumidentity/testutils		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/client		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/controller-runtime	0.437s	coverage: 30.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api	19.957s	coverage: 49.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/helpers	0.410s	coverage: 46.6% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/indexers	0.371s	coverage: 53.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/policychecks	1.605s	coverage: 94.6% of statements
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/routechecks	1.492s	coverage: 19.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ingress	1.931s	coverage: 56.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ingress/annotations	0.058s	coverage: 97.1% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ipam	5.497s	coverage: 42.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/kvstore/locksweeper	0.356s	coverage: 40.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/kvstore/nodesgc	1.355s	coverage: 89.4% of statements
+ok  	github.com/cilium/cilium/operator/pkg/lbipam	13.786s	coverage: 81.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model	0.047s	coverage: 28.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/ingestion	1.038s	coverage: 82.5% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/translation	0.301s	coverage: 64.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/translation/gateway-api	2.245s	coverage: 90.9% of statements
+ok  	github.com/cilium/cilium/operator/pkg/model/translation/ingress	1.191s	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/multipool	0.384s	coverage: 77.5% of statements
+	github.com/cilium/cilium/operator/pkg/networkpolicy		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/networkpolicy/helpers		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/nodeipam	1.100s	coverage: 63.8% of statements
+ok  	github.com/cilium/cilium/operator/pkg/secretsync	1.977s	coverage: 68.3% of statements
+	github.com/cilium/cilium/operator/pkg/workqueuemetrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/ztunnel		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/policyderivative		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/unmanagedpods		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/watchers	6.413s	coverage: 54.6% of statements
+--- FAIL: TestReconcileServices (0.00s)
+    act_test.go:321: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/act/act_test.go:321
+        	Error:      	Not equal: 
+        	            	expected: map[uint8]map[uint16]*act.actMetric{0x7b:map[uint16]*act.actMetric{0x18:(*act.actMetric)(0xc00093b860), 0x1a:(*act.actMetric)(0xc00093b860), 0x1b:(*act.actMetric)(0xc00093b860)}, 0x7c:map[uint16]*act.actMetric{0x1a:(*act.actMetric)(0xc00093b860), 0x1b:(*act.actMetric)(0xc00093b860)}}
+        	            	actual  : map[uint8]map[uint16]*act.actMetric{0x7b:map[uint16]*act.actMetric{}, 0x7c:map[uint16]*act.actMetric{}}
+        	            	
+        	            	Diff:
+        	            	--- Expected
+        	            	+++ Actual
+        	            	@@ -1,65 +1,5 @@
+        	            	 (map[uint8]map[uint16]*act.actMetric) (len=2) {
+        	            	- (uint8) 123: (map[uint16]*act.actMetric) (len=3) {
+        	            	-  (uint16) 24: (*act.actMetric)({
+        	            	-   opened: (uint64) 0,
+        	            	-   closed: (uint64) 0,
+        	            	-   newFailed: (uint64) 0,
+        	            	-   failed: (uint64) 0,
+        	            	-   updated: (time.Time) {
+        	            	-    wall: (uint64) 0,
+        	            	-    ext: (int64) 0,
+        	            	-    loc: (*time.Location)(<nil>)
+        	            	-   },
+        	            	-   labelValues: ([]string) <nil>
+        	            	-  }),
+        	            	-  (uint16) 26: (*act.actMetric)({
+        	            	-   opened: (uint64) 0,
+        	            	-   closed: (uint64) 0,
+        	            	-   newFailed: (uint64) 0,
+        	            	-   failed: (uint64) 0,
+        	            	-   updated: (time.Time) {
+        	            	-    wall: (uint64) 0,
+        	            	-    ext: (int64) 0,
+        	            	-    loc: (*time.Location)(<nil>)
+        	            	-   },
+        	            	-   labelValues: ([]string) <nil>
+        	            	-  }),
+        	            	-  (uint16) 27: (*act.actMetric)({
+        	            	-   opened: (uint64) 0,
+        	            	-   closed: (uint64) 0,
+        	            	-   newFailed: (uint64) 0,
+        	            	-   failed: (uint64) 0,
+        	            	-   updated: (time.Time) {
+        	            	-    wall: (uint64) 0,
+        	            	-    ext: (int64) 0,
+        	            	-    loc: (*time.Location)(<nil>)
+        	            	-   },
+        	            	-   labelValues: ([]string) <nil>
+        	            	-  })
+        	            	+ (uint8) 123: (map[uint16]*act.actMetric) {
+        	            	  },
+        	            	- (uint8) 124: (map[uint16]*act.actMetric) (len=2) {
+        	            	-  (uint16) 26: (*act.actMetric)({
+        	            	-   opened: (uint64) 0,
+        	            	-   closed: (uint64) 0,
+        	            	-   newFailed: (uint64) 0,
+        	            	-   failed: (uint64) 0,
+        	            	-   updated: (time.Time) {
+        	            	-    wall: (uint64) 0,
+        	            	-    ext: (int64) 0,
+        	            	-    loc: (*time.Location)(<nil>)
+        	            	-   },
+        	            	-   labelValues: ([]string) <nil>
+        	            	-  }),
+        	            	-  (uint16) 27: (*act.actMetric)({
+        	            	-   opened: (uint64) 0,
+        	            	-   closed: (uint64) 0,
+        	            	-   newFailed: (uint64) 0,
+        	            	-   failed: (uint64) 0,
+        	            	-   updated: (time.Time) {
+        	            	-    wall: (uint64) 0,
+        	            	-    ext: (int64) 0,
+        	            	-    loc: (*time.Location)(<nil>)
+        	            	-   },
+        	            	-   labelValues: ([]string) <nil>
+        	            	-  })
+        	            	+ (uint8) 124: (map[uint16]*act.actMetric) {
+        	            	  }
+        	Test:       	TestReconcileServices
+FAIL
+coverage: 46.2% of statements
+FAIL	github.com/cilium/cilium/pkg/act	0.746s
+	github.com/cilium/cilium/pkg/alibabacloud/api		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/api/mock		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/alibabacloud/eni	1.425s	coverage: 69.7% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/eni/limits		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/eni/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/alibabacloud/utils	0.120s	coverage: 88.9% of statements
+ok  	github.com/cilium/cilium/pkg/alignchecker	0.117s	coverage: 85.5% of statements
+ok  	github.com/cilium/cilium/pkg/allocator	1.322s	coverage: 74.3% of statements
+ok  	github.com/cilium/cilium/pkg/annotation	0.164s	coverage: 94.7% of statements
+ok  	github.com/cilium/cilium/pkg/api	0.069s	coverage: 44.2% of statements
+ok  	github.com/cilium/cilium/pkg/api/helpers	0.229s	coverage: 70.0% of statements
+	github.com/cilium/cilium/pkg/api/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/api/metrics/mock	0.064s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/auth	0.397s	coverage: 63.1% of statements
+?   	github.com/cilium/cilium/pkg/auth/certs	[no test files]
+ok  	github.com/cilium/cilium/pkg/auth/spire	0.317s	coverage: 32.3% of statements
+ok  	github.com/cilium/cilium/pkg/aws/ec2	0.095s	coverage: 2.2% of statements
+ok  	github.com/cilium/cilium/pkg/aws/ec2/mock	0.097s	coverage: 38.8% of statements
+ok  	github.com/cilium/cilium/pkg/aws/eni	6.897s	coverage: 76.6% of statements
+ok  	github.com/cilium/cilium/pkg/aws/eni/limits	1.064s	coverage: 84.7% of statements
+	github.com/cilium/cilium/pkg/aws/eni/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/metadata/mock		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/azure/api	0.091s	coverage: 7.9% of statements
+ok  	github.com/cilium/cilium/pkg/azure/api/mock	0.049s	coverage: 51.8% of statements
+ok  	github.com/cilium/cilium/pkg/azure/ipam	0.361s	coverage: 77.5% of statements
+ok  	github.com/cilium/cilium/pkg/azure/types	0.069s	coverage: 18.8% of statements
+ok  	github.com/cilium/cilium/pkg/backoff	0.136s	coverage: 60.5% of statements
+	github.com/cilium/cilium/pkg/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/agent		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/agent/signaler	0.075s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/api	0.419s	coverage: 28.9% of statements
+	github.com/cilium/cilium/pkg/bgp/commands		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/gobgp	0.151s	coverage: 66.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/manager	0.479s	coverage: 22.1% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/instance		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/manager/reconciler	2.697s	coverage: 77.1% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/store		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/tables		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/mock		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/test	0.480s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/test/commands		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/types	0.277s	coverage: 22.0% of statements
+ok  	github.com/cilium/cilium/pkg/bpf	0.344s	coverage: 14.3% of statements
+ok  	github.com/cilium/cilium/pkg/bpf/analyze	0.197s	coverage: 76.5% of statements
+ok  	github.com/cilium/cilium/pkg/bufuuid	0.099s	coverage: 71.4% of statements
+ok  	github.com/cilium/cilium/pkg/byteorder	0.094s	coverage: 63.6% of statements
+	github.com/cilium/cilium/pkg/cgroups		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/cgroups/manager	0.448s	coverage: 69.8% of statements
+ok  	github.com/cilium/cilium/pkg/cidr	0.201s	coverage: 60.5% of statements
+ok  	github.com/cilium/cilium/pkg/ciliumenvoyconfig	2.332s	coverage: 80.1% of statements
+ok  	github.com/cilium/cilium/pkg/cleanup	0.106s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/client	0.229s	coverage: 11.8% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh	3.223s	coverage: 86.2% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/clustercfg	0.232s	coverage: 51.6% of statements
+	github.com/cilium/cilium/pkg/clustermesh/clustercfg/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/common	1.482s	coverage: 90.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/endpointslicesync	1.087s	coverage: 59.6% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/kvstoremesh	0.831s	coverage: 81.4% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/kvstoremesh/reflector	0.917s	coverage: 92.7% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/mcsapi	4.136s	coverage: 64.3% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/mcsapi/types	0.136s	coverage: 49.4% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/namespace	3.061s	coverage: 61.3% of statements
+	github.com/cilium/cilium/pkg/clustermesh/observer		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/operator	0.387s	coverage: 57.6% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/store	0.211s	coverage: 35.2% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/types	0.044s	coverage: 57.2% of statements
+	github.com/cilium/cilium/pkg/clustermesh/wait		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/cmdref		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/command	0.075s	coverage: 54.4% of statements
+ok  	github.com/cilium/cilium/pkg/command/exec	0.566s	coverage: 47.5% of statements
+ok  	github.com/cilium/cilium/pkg/common	0.126s	coverage: 54.3% of statements
+ok  	github.com/cilium/cilium/pkg/common/ipsec	0.111s	coverage: 73.8% of statements
+ok  	github.com/cilium/cilium/pkg/comparator	0.120s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/completion	1.101s	coverage: 97.7% of statements
+	github.com/cilium/cilium/pkg/components		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/container	1.902s	coverage: 91.9% of statements
+ok  	github.com/cilium/cilium/pkg/container/bitlpm	0.166s	coverage: 68.3% of statements
+ok  	github.com/cilium/cilium/pkg/container/cache	0.113s	coverage: 97.3% of statements
+ok  	github.com/cilium/cilium/pkg/container/set	0.058s	coverage: 92.5% of statements
+ok  	github.com/cilium/cilium/pkg/controller	1.186s	coverage: 81.6% of statements
+ok  	github.com/cilium/cilium/pkg/counter	0.047s	coverage: 94.4% of statements
+	github.com/cilium/cilium/pkg/crypto/certificatemanager		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/crypto/certloader	7.321s	coverage: 83.6% of statements
+	github.com/cilium/cilium/pkg/datapath		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/agentliveness		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/alignchecker	0.275s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/bpf		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/config	0.303s	coverage: 21.1% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/connector	0.441s	coverage: 6.7% of statements
+	github.com/cilium/cilium/pkg/datapath/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/fake/types	0.688s	coverage: 18.4% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/gneigh	0.686s	coverage: 40.3% of statements
+	github.com/cilium/cilium/pkg/datapath/ipcache		coverage: 0.0% of statements
+--- FAIL: TestAddProxyRulesv4 (0.00s)
+    iptables_test.go:52: 1: Unexpected iptables ("-t mangle -A CILIUM_PRE_mangle -p tcp -m mark --mark 0x92030200 -m comment --comment cilium: TPROXY to host cilium-dns-egress proxy -j TPROXY --tproxy-mark 0x200 --on-ip 127.0.0.1 --on-port 37379" != "-t mangle -A CILIUM_PRE_mangle -p tcp -m mark --mark 0x3920200 -m comment --comment cilium: TPROXY to host cilium-dns-egress proxy -j TPROXY --tproxy-mark 0x200 --on-ip 127.0.0.1 --on-port 37379")
+    iptables_test.go:230: 1 unmet expectations
+--- FAIL: TestAddProxyRulesv6 (0.00s)
+    iptables_test.go:52: 1: Unexpected ip6tables ("-t mangle -A CILIUM_PRE_mangle -p tcp -m mark --mark 0xa9d50200 -m comment --comment cilium: TPROXY to host cilium-dns-egress proxy -j TPROXY --tproxy-mark 0x200 --on-ip ::1 --on-port 43477" != "-t mangle -A CILIUM_PRE_mangle -p tcp -m mark --mark 0xd5a90200 -m comment --comment cilium: TPROXY to host cilium-dns-egress proxy -j TPROXY --tproxy-mark 0x200 --on-ip ::1 --on-port 43477")
+    iptables_test.go:482: 1 unmet expectations
+FAIL
+coverage: 30.3% of statements
+FAIL	github.com/cilium/cilium/pkg/datapath/iptables	4.843s
+ok  	github.com/cilium/cilium/pkg/datapath/iptables/ipset	0.961s	coverage: 77.6% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/l2responder	0.325s	coverage: 59.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/link	0.132s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux	1.834s	coverage: 17.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/bandwidth	0.798s	coverage: 9.2% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/bigtcp		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/config	0.901s	coverage: 1.9% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/config/defines		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/device		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/device/scripttest	0.131s	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/ethtool	0.142s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/ipsec	0.435s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/linux_defaults		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/netdevice		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/probes	0.202s	coverage: 18.7% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/route	0.140s	coverage: 4.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/route/reconciler		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/route/reconciler/scripttest	0.130s	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/routing	0.288s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/safenetlink	0.176s	coverage: 8.4% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/sysctl	0.604s	coverage: 53.6% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/utime	1.657s	coverage: 63.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/loader	4.247s	coverage: 11.1% of statements
+	github.com/cilium/cilium/pkg/datapath/loader/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/loader/tools		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/maps	0.465s	coverage: 65.9% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/neighbor	0.505s	coverage: 12.5% of statements
+	github.com/cilium/cilium/pkg/datapath/node		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/datapath/option	[no test files]
+	github.com/cilium/cilium/pkg/datapath/orchestrator		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/prefilter		coverage: 0.0% of statements
+--- FAIL: TestSocketReqSerialize (0.00s)
+    --- FAIL: TestSocketReqSerialize/nil_addresses (0.00s)
+        sockets_test.go:78: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/datapath/sockets/sockets_test.go:78
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x2, 0x6, 0x0, 0x0, 0xff, 0xf, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}
+            	            	actual  : []byte{0x2, 0x6, 0x0, 0x0, 0x0, 0x0, 0xf, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,3 +1,3 @@
+            	            	 ([]uint8) (len=56) {
+            	            	- 00000000  02 06 00 00 ff 0f 00 00  00 00 00 00 00 00 00 00  |................|
+            	            	+ 00000000  02 06 00 00 00 00 0f ff  00 00 00 00 00 00 00 00  |................|
+            	            	  00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+            	Test:       	TestSocketReqSerialize/nil_addresses
+    --- FAIL: TestSocketReqSerialize/non-nil_addresses (0.00s)
+        sockets_test.go:78: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/datapath/sockets/sockets_test.go:78
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x2, 0x6, 0x0, 0x0, 0xff, 0xf, 0x0, 0x0, 0xe7, 0x4c, 0x75, 0x30, 0x7f, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7f, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x30, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}
+            	            	actual  : []byte{0x2, 0x6, 0x0, 0x0, 0x0, 0x0, 0xf, 0xff, 0xe7, 0x4c, 0x75, 0x30, 0x7f, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7f, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x30, 0x0, 0x0, 0x0, 0x0}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,6 +1,6 @@
+            	            	 ([]uint8) (len=56) {
+            	            	- 00000000  02 06 00 00 ff 0f 00 00  e7 4c 75 30 7f 00 00 01  |.........Lu0....|
+            	            	+ 00000000  02 06 00 00 00 00 0f ff  e7 4c 75 30 7f 00 00 01  |.........Lu0....|
+            	            	  00000010  00 00 00 00 00 00 00 00  00 00 00 00 7f 00 00 01  |................|
+            	            	  00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+            	            	- 00000030  30 10 00 00 00 00 00 00                           |0.......|
+            	            	+ 00000030  00 00 10 30 00 00 00 00                           |...0....|
+            	            	 }
+            	Test:       	TestSocketReqSerialize/non-nil_addresses
+--- FAIL: TestSocketDeserialize (0.00s)
+    --- FAIL: TestSocketDeserialize/default_route_addresses (0.00s)
+        sockets_test.go:141: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/datapath/sockets/sockets_test.go:141
+            	Error:      	Not equal: 
+            	            	expected: sockets.Socket{Family:0x2, State:0x7, Timer:0x0, Retrans:0x0, ID:netlink.SocketID{SourcePort:0xaad5, DestinationPort:0x0, Source:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0}, Destination:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0}, Interface:0x0, Cookie:[2]uint32{0x2009, 0x0}}, Expires:0x0, RQueue:0x0, WQueue:0x0, UID:0x6c, INode:0x6559}
+            	            	actual  : sockets.Socket{Family:0x2, State:0x7, Timer:0x0, Retrans:0x0, ID:netlink.SocketID{SourcePort:0xaad5, DestinationPort:0x0, Source:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0}, Destination:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0}, Interface:0x0, Cookie:[2]uint32{0x9200000, 0x0}}, Expires:0x0, RQueue:0x0, WQueue:0x0, UID:0x6c000000, INode:0x59650000}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -16,3 +16,3 @@
+            	            	   Cookie: ([2]uint32) (len=2) {
+            	            	-   (uint32) 8201,
+            	            	+   (uint32) 153092096,
+            	            	    (uint32) 0
+            	            	@@ -23,4 +23,4 @@
+            	            	  WQueue: (uint32) 0,
+            	            	- UID: (uint32) 108,
+            	            	- INode: (uint32) 25945
+            	            	+ UID: (uint32) 1811939328,
+            	            	+ INode: (uint32) 1499791360
+            	            	 }
+            	Test:       	TestSocketDeserialize/default_route_addresses
+    --- FAIL: TestSocketDeserialize/non_default_route_addresses (0.00s)
+        sockets_test.go:141: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/datapath/sockets/sockets_test.go:141
+            	Error:      	Not equal: 
+            	            	expected: sockets.Socket{Family:0x2, State:0x1, Timer:0x0, Retrans:0x0, ID:netlink.SocketID{SourcePort:0xbd89, DestinationPort:0x1bb, Source:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0xc0, 0xa8, 0x32, 0xc2}, Destination:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x97, 0x63, 0x34, 0xd}, Interface:0x0, Cookie:[2]uint32{0x2013, 0x0}}, Expires:0x0, RQueue:0x0, WQueue:0x0, UID:0x3e8, INode:0xa8a92}
+            	            	actual  : sockets.Socket{Family:0x2, State:0x1, Timer:0x0, Retrans:0x0, ID:netlink.SocketID{SourcePort:0xbd89, DestinationPort:0x1bb, Source:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0xc0, 0xa8, 0x32, 0xc2}, Destination:net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x97, 0x63, 0x34, 0xd}, Interface:0x0, Cookie:[2]uint32{0x13200000, 0x0}}, Expires:0x0, RQueue:0x0, WQueue:0x0, UID:0xe8030000, INode:0x928a0a00}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -16,3 +16,3 @@
+            	            	   Cookie: ([2]uint32) (len=2) {
+            	            	-   (uint32) 8211,
+            	            	+   (uint32) 320864256,
+            	            	    (uint32) 0
+            	            	@@ -23,4 +23,4 @@
+            	            	  WQueue: (uint32) 0,
+            	            	- UID: (uint32) 1000,
+            	            	- INode: (uint32) 690834
+            	            	+ UID: (uint32) 3892510720,
+            	            	+ INode: (uint32) 2458520064
+            	            	 }
+            	Test:       	TestSocketDeserialize/non_default_route_addresses
+FAIL
+coverage: 18.5% of statements
+FAIL	github.com/cilium/cilium/pkg/datapath/sockets	0.685s
+ok  	github.com/cilium/cilium/pkg/datapath/tables	3.200s	coverage: 47.2% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/tunnel	0.608s	coverage: 58.1% of statements
+	github.com/cilium/cilium/pkg/datapath/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/vtep		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/xdp	0.515s	coverage: 66.0% of statements
+ok  	github.com/cilium/cilium/pkg/debug	0.080s	coverage: 84.2% of statements
+ok  	github.com/cilium/cilium/pkg/debug/api	0.440s	coverage: 10.3% of statements
+?   	github.com/cilium/cilium/pkg/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/dial	0.731s	coverage: 90.8% of statements
+ok  	github.com/cilium/cilium/pkg/driftchecker	0.424s	coverage: 78.8% of statements
+ok  	github.com/cilium/cilium/pkg/dynamicconfig	1.215s	coverage: 82.3% of statements
+ok  	github.com/cilium/cilium/pkg/dynamiclifecycle	5.431s	coverage: 70.5% of statements
+	github.com/cilium/cilium/pkg/ebpf		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/egressgateway	0.270s	coverage: 3.4% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint	5.714s	coverage: 30.1% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint/api	0.615s	coverage: 2.6% of statements
+?   	github.com/cilium/cilium/pkg/endpoint/cell	[no test files]
+	github.com/cilium/cilium/pkg/endpoint/creator		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint/id	0.103s	coverage: 46.4% of statements
+	github.com/cilium/cilium/pkg/endpoint/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/endpoint/regeneration		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/endpoint/watchdog		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpointcleanup	1.236s	coverage: 56.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpointmanager	5.188s	coverage: 33.6% of statements
+?   	github.com/cilium/cilium/pkg/endpointstate	[no test files]
+ok  	github.com/cilium/cilium/pkg/envoy	0.522s	coverage: 24.2% of statements
+	github.com/cilium/cilium/pkg/envoy/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/envoy/policy	0.190s	coverage: 65.4% of statements
+?   	github.com/cilium/cilium/pkg/envoy/resource	[no test files]
+	github.com/cilium/cilium/pkg/envoy/test		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/envoy/xds	13.808s	coverage: 79.2% of statements
+ok  	github.com/cilium/cilium/pkg/eventqueue	0.065s	coverage: 94.7% of statements
+	github.com/cilium/cilium/pkg/flowdebug		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn	0.194s	coverage: 76.7% of statements
+	github.com/cilium/cilium/pkg/fqdn/bootstrap		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/fqdn/cell	[no test files]
+ok  	github.com/cilium/cilium/pkg/fqdn/dns	0.062s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/dnsproxy	0.604s	coverage: 30.6% of statements
+	github.com/cilium/cilium/pkg/fqdn/lookup		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/matchpattern	0.100s	coverage: 63.3% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/messagehandler	0.175s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/fqdn/namemanager	1.017s	coverage: 39.6% of statements
+?   	github.com/cilium/cilium/pkg/fqdn/proxy	[no test files]
+	github.com/cilium/cilium/pkg/fqdn/proxy/ipfamily		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/fqdn/re		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/restore	0.216s	coverage: 53.3% of statements
+	github.com/cilium/cilium/pkg/fqdn/rules		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/service	8.534s	coverage: 82.8% of statements
+ok  	github.com/cilium/cilium/pkg/fswatcher	0.156s	coverage: 84.1% of statements
+	github.com/cilium/cilium/pkg/gops		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/health		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/health/client	0.294s	coverage: 72.0% of statements
+?   	github.com/cilium/cilium/pkg/health/defaults	[no test files]
+	github.com/cilium/cilium/pkg/health/probe		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/health/probe/responder	0.140s	coverage: 33.3% of statements
+ok  	github.com/cilium/cilium/pkg/health/server	0.450s	coverage: 24.4% of statements
+ok  	github.com/cilium/cilium/pkg/healthconfig	0.098s	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/pkg/hive	0.206s	coverage: 57.5% of statements
+ok  	github.com/cilium/cilium/pkg/hive/health	0.389s	coverage: 68.8% of statements
+	github.com/cilium/cilium/pkg/hive/health/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble	0.288s	coverage: 100.0% of statements
+	github.com/cilium/cilium/pkg/hubble/api/v1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/build	0.160s	coverage: 92.9% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/cell	0.237s	coverage: 1.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/container	0.641s	coverage: 93.8% of statements
+?   	github.com/cilium/cilium/pkg/hubble/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/dropeventemitter	0.227s	coverage: 50.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/exporter	0.738s	coverage: 86.1% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/exporter/cell	0.343s	coverage: 17.6% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/filters	0.483s	coverage: 92.8% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/k8s	0.125s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/math	0.045s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics	0.570s	coverage: 59.7% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/api	0.773s	coverage: 90.1% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/cell		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/dns		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/drop	0.572s	coverage: 68.3% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/flow	0.526s	coverage: 66.1% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/flows-to-world	0.713s	coverage: 81.8% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/http	0.454s	coverage: 75.4% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/icmp		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/kafka	0.642s	coverage: 74.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/policy	0.371s	coverage: 71.2% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/port-distribution	0.328s	coverage: 57.4% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/sctp	0.333s	coverage: 66.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/tcp	0.425s	coverage: 71.4% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/monitor	0.813s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/observer	0.492s	coverage: 67.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/observer/namespace	0.115s	coverage: 77.8% of statements
+	github.com/cilium/cilium/pkg/hubble/observer/observeroption		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/hubble/observer/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/parser	0.294s	coverage: 62.1% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/agent	0.379s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/cell	0.331s	coverage: 16.4% of statements
+	github.com/cilium/cilium/pkg/hubble/parser/common		coverage: 0.0% of statements
+--- FAIL: TestDecodeDebugEvent (0.00s)
+    --- FAIL: TestDecodeDebugEvent/IPv4_Mapping (0.00s)
+        parser_test.go:233: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/parser/debug/parser_test.go:233
+            	Error:      	Not equal: 
+            	            	expected: &flow.DebugEvent{state:impl.MessageState{NoUnkeyedLiterals:pragma.NoUnkeyedLiterals{}, DoNotCompare:pragma.DoNotCompare{}, DoNotCopy:pragma.DoNotCopy{}, atomicMessageInfo:(*impl.MessageInfo)(nil)}, Type:58, Source:(*flow.Endpoint)(0xc0000d0000), Hash:(*wrapperspb.UInt32Value)(0xc00062e180), Arg1:(*wrapperspb.UInt32Value)(0xc00062e1b0), Arg2:(*wrapperspb.UInt32Value)(0xc00062e1e0), Arg3:(*wrapperspb.UInt32Value)(0xc00062e210), Message:"Successfully mapped addr=10.11.0.233 to identity=2", Cpu:(*wrapperspb.Int32Value)(0xc00062e240), unknownFields:[]uint8(nil), sizeCache:0}
+            	            	actual  : &flow.DebugEvent{state:impl.MessageState{NoUnkeyedLiterals:pragma.NoUnkeyedLiterals{}, DoNotCompare:pragma.DoNotCompare{}, DoNotCopy:pragma.DoNotCopy{}, atomicMessageInfo:(*impl.MessageInfo)(nil)}, Type:58, Source:(*flow.Endpoint)(0xc0000d01b0), Hash:(*wrapperspb.UInt32Value)(0xc00062e840), Arg1:(*wrapperspb.UInt32Value)(0xc00062e870), Arg2:(*wrapperspb.UInt32Value)(0xc00062e8a0), Arg3:(*wrapperspb.UInt32Value)(0xc00062e8d0), Message:"Successfully mapped addr=233.0.11.10 to identity=2", Cpu:(*wrapperspb.Int32Value)(0xc00062e900), unknownFields:[]uint8(nil), sizeCache:0}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -94,3 +94,3 @@
+            	            	  }),
+            	            	- Message: (string) (len=50) "Successfully mapped addr=10.11.0.233 to identity=2",
+            	            	+ Message: (string) (len=50) "Successfully mapped addr=233.0.11.10 to identity=2",
+            	            	  Cpu: (*wrapperspb.Int32Value)({
+            	Test:       	TestDecodeDebugEvent/IPv4_Mapping
+FAIL
+coverage: 95.8% of statements
+FAIL	github.com/cilium/cilium/pkg/hubble/parser/debug	0.482s
+	github.com/cilium/cilium/pkg/hubble/parser/errors		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/fieldaggregate	0.132s	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/fieldmask	0.114s	coverage: 94.9% of statements
+?   	github.com/cilium/cilium/pkg/hubble/parser/getters	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/options	0.662s	coverage: 43.3% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/seven	0.574s	coverage: 88.5% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/sock	0.768s	coverage: 90.9% of statements
+--- FAIL: TestL34Decode (0.00s)
+    parser_test.go:390: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/hubble/parser/threefour/parser_test.go:390
+        	Error:      	Not equal: 
+        	            	expected: 0x1
+        	            	actual  : 0x1000000
+        	Test:       	TestL34Decode
+FAIL
+coverage: 83.6% of statements
+FAIL	github.com/cilium/cilium/pkg/hubble/parser/threefour	0.923s
+ok  	github.com/cilium/cilium/pkg/hubble/peer	0.434s	coverage: 94.3% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/peer/cell	0.322s	coverage: 31.8% of statements
+	github.com/cilium/cilium/pkg/hubble/peer/serviceoption		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/peer/types	0.257s	coverage: 57.8% of statements
+?   	github.com/cilium/cilium/pkg/hubble/relay/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/observer	2.478s	coverage: 73.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/relay/pool	43.734s	coverage: 89.9% of statements
+?   	github.com/cilium/cilium/pkg/hubble/relay/pool/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/queue	0.243s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/relay/server	0.735s	coverage: 13.6% of statements
+	github.com/cilium/cilium/pkg/hubble/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/hubble/server/serveroption		coverage: 0.0% of statements
+--- FAIL: TestCreateL3L4Payload (0.00s)
+    --- FAIL: TestCreateL3L4Payload/ICMPv4_Echo_Reply (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x3, 0xa8, 0xb, 0x8d, 0x45, 0x98, 0xd4, 0x62, 0x0, 0x0, 0x0, 0x62, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0x1, 0x1, 0x1, 0x1, 0xa, 0x10, 0x7e, 0x40, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	actual  : []byte{0x4, 0x3, 0xb, 0xa8, 0xd4, 0x98, 0x45, 0x8d, 0x0, 0x0, 0x0, 0x62, 0x0, 0x62, 0x0, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0x1, 0x1, 0x1, 0x1, 0xa, 0x10, 0x7e, 0x40, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,4 +1,4 @@
+            	            	 ([]uint8) (len=130) {
+            	            	- 00000000  04 03 a8 0b 8d 45 98 d4  62 00 00 00 62 00 00 00  |.....E..b...b...|
+            	            	- 00000010  68 00 00 00 01 00 00 00  00 00 02 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 03 0b a8 d4 98 45 8d  00 00 00 62 00 62 00 00  |......E....b.b..|
+            	            	+ 00000010  00 00 00 68 00 00 00 01  00 00 02 00 00 00 00 00  |...h............|
+            	            	  00000020  06 e9 18 3b b2 75 12 91  06 e2 22 1a 08 00 45 00  |...;.u...."...E.|
+            	Test:       	TestCreateL3L4Payload/ICMPv4_Echo_Reply
+    --- FAIL: TestCreateL3L4Payload/ICMPv6_Neighbor_Solicitation (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x5, 0xa8, 0xb, 0x5f, 0x16, 0xf2, 0xb8, 0x56, 0x0, 0x0, 0x0, 0x56, 0x0, 0x1, 0x0, 0x68, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x33, 0x33, 0xff, 0x0, 0xb3, 0xe5, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x86, 0xdd, 0x60, 0x0, 0x0, 0x0, 0x0, 0x20, 0x3a, 0xff, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0x91, 0x95, 0xff, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xff, 0x0, 0xb3, 0xe5, 0x87, 0x0, 0x50, 0x75, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0xb3, 0xe5, 0x1, 0x1, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a}
+            	            	actual  : []byte{0x4, 0x5, 0xb, 0xa8, 0xb8, 0xf2, 0x16, 0x5f, 0x0, 0x0, 0x0, 0x56, 0x0, 0x56, 0x1, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x33, 0x33, 0xff, 0x0, 0xb3, 0xe5, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x86, 0xdd, 0x60, 0x0, 0x0, 0x0, 0x0, 0x20, 0x3a, 0xff, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0x91, 0x95, 0xff, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xff, 0x0, 0xb3, 0xe5, 0x87, 0x0, 0x50, 0x75, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0xb3, 0xe5, 0x1, 0x1, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,4 +1,4 @@
+            	            	 ([]uint8) (len=134) {
+            	            	- 00000000  04 05 a8 0b 5f 16 f2 b8  56 00 00 00 56 00 01 00  |...._...V...V...|
+            	            	- 00000010  68 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 05 0b a8 b8 f2 16 5f  00 00 00 56 00 56 01 00  |......._...V.V..|
+            	            	+ 00000010  00 00 00 68 00 00 00 00  00 00 00 00 00 00 00 00  |...h............|
+            	            	  00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+            	Test:       	TestCreateL3L4Payload/ICMPv6_Neighbor_Solicitation
+    --- FAIL: TestCreateL3L4Payload/ICMPv4_Echo_Reply_with_IP_Trace (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x3, 0xa8, 0xb, 0x8d, 0x45, 0x98, 0xd4, 0x62, 0x0, 0x0, 0x0, 0x62, 0x0, 0x2, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0x1, 0x1, 0x1, 0x1, 0xa, 0x10, 0x7e, 0x40, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	actual  : []byte{0x4, 0x3, 0xb, 0xa8, 0xd4, 0x98, 0x45, 0x8d, 0x0, 0x0, 0x0, 0x62, 0x0, 0x62, 0x2, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0x1, 0x1, 0x1, 0x1, 0xa, 0x10, 0x7e, 0x40, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,6 +1,6 @@
+            	            	 ([]uint8) (len=154) {
+            	            	- 00000000  04 03 a8 0b 8d 45 98 d4  62 00 00 00 62 00 02 00  |.....E..b...b...|
+            	            	- 00000010  68 00 00 00 01 00 00 00  00 00 02 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 03 0b a8 d4 98 45 8d  00 00 00 62 00 62 02 00  |......E....b.b..|
+            	            	+ 00000010  00 00 00 68 00 00 00 01  00 00 02 00 00 00 00 00  |...h............|
+            	            	  00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+            	            	- 00000030  f0 de bc 9a 78 56 34 12  06 e9 18 3b b2 75 12 91  |....xV4....;.u..|
+            	            	+ 00000030  12 34 56 78 9a bc de f0  06 e9 18 3b b2 75 12 91  |.4Vx.......;.u..|
+            	            	  00000040  06 e2 22 1a 08 00 45 00  00 54 bf e9 00 00 3f 01  |.."...E..T....?.|
+            	Test:       	TestCreateL3L4Payload/ICMPv4_Echo_Reply_with_IP_Trace
+    --- FAIL: TestCreateL3L4Payload/ICMPv4_Echo_Reply_Reversed (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x3, 0xa8, 0xb, 0x8d, 0x45, 0x98, 0xd4, 0x62, 0x0, 0x0, 0x0, 0x62, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0xa, 0x10, 0x7e, 0x40, 0x1, 0x1, 0x1, 0x1, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	actual  : []byte{0x4, 0x3, 0xb, 0xa8, 0xd4, 0x98, 0x45, 0x8d, 0x0, 0x0, 0x0, 0x62, 0x0, 0x62, 0x0, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0xa, 0x10, 0x7e, 0x40, 0x1, 0x1, 0x1, 0x1, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,4 +1,4 @@
+            	            	 ([]uint8) (len=130) {
+            	            	- 00000000  04 03 a8 0b 8d 45 98 d4  62 00 00 00 62 00 00 00  |.....E..b...b...|
+            	            	- 00000010  68 00 00 00 01 00 00 00  00 00 02 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 03 0b a8 d4 98 45 8d  00 00 00 62 00 62 00 00  |......E....b.b..|
+            	            	+ 00000010  00 00 00 68 00 00 00 01  00 00 02 00 00 00 00 00  |...h............|
+            	            	  00000020  06 e9 18 3b b2 75 12 91  06 e2 22 1a 08 00 45 00  |...;.u...."...E.|
+            	Test:       	TestCreateL3L4Payload/ICMPv4_Echo_Reply_Reversed
+    --- FAIL: TestCreateL3L4Payload/ICMPv6_Neighbor_Solicitation_Reversed (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x5, 0xa8, 0xb, 0x5f, 0x16, 0xf2, 0xb8, 0x56, 0x0, 0x0, 0x0, 0x56, 0x0, 0x1, 0x0, 0x68, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x33, 0x33, 0xff, 0x0, 0xb3, 0xe5, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x86, 0xdd, 0x60, 0x0, 0x0, 0x0, 0x0, 0x20, 0x3a, 0xff, 0xff, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xff, 0x0, 0xb3, 0xe5, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0x91, 0x95, 0x87, 0x0, 0x50, 0x75, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0xb3, 0xe5, 0x1, 0x1, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a}
+            	            	actual  : []byte{0x4, 0x5, 0xb, 0xa8, 0xb8, 0xf2, 0x16, 0x5f, 0x0, 0x0, 0x0, 0x56, 0x0, 0x56, 0x1, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x33, 0x33, 0xff, 0x0, 0xb3, 0xe5, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x86, 0xdd, 0x60, 0x0, 0x0, 0x0, 0x0, 0x20, 0x3a, 0xff, 0xff, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xff, 0x0, 0xb3, 0xe5, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0x91, 0x95, 0x87, 0x0, 0x50, 0x75, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0xb3, 0xe5, 0x1, 0x1, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,4 +1,4 @@
+            	            	 ([]uint8) (len=134) {
+            	            	- 00000000  04 05 a8 0b 5f 16 f2 b8  56 00 00 00 56 00 01 00  |...._...V...V...|
+            	            	- 00000010  68 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 05 0b a8 b8 f2 16 5f  00 00 00 56 00 56 01 00  |......._...V.V..|
+            	            	+ 00000010  00 00 00 68 00 00 00 00  00 00 00 00 00 00 00 00  |...h............|
+            	            	  00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+            	Test:       	TestCreateL3L4Payload/ICMPv6_Neighbor_Solicitation_Reversed
+    --- FAIL: TestCreateL3L4Payload/802.11q_ICMPv4_Echo_Reply (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x3, 0xa8, 0xb, 0x8d, 0x45, 0x98, 0xd4, 0x62, 0x0, 0x0, 0x0, 0x62, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x81, 0x0, 0x2, 0x2, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0x1, 0x1, 0x1, 0x1, 0xa, 0x10, 0x7e, 0x40, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	actual  : []byte{0x4, 0x3, 0xb, 0xa8, 0xd4, 0x98, 0x45, 0x8d, 0x0, 0x0, 0x0, 0x62, 0x0, 0x62, 0x0, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x6, 0xe9, 0x18, 0x3b, 0xb2, 0x75, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x81, 0x0, 0x2, 0x2, 0x8, 0x0, 0x45, 0x0, 0x0, 0x54, 0xbf, 0xe9, 0x0, 0x0, 0x3f, 0x1, 0x9a, 0xe2, 0x1, 0x1, 0x1, 0x1, 0xa, 0x10, 0x7e, 0x40, 0x0, 0x0, 0x36, 0x39, 0x22, 0x57, 0x0, 0x5, 0x1b, 0x7b, 0x41, 0x5d, 0x0, 0x0, 0x0, 0x0, 0x86, 0xbf, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,4 +1,4 @@
+            	            	 ([]uint8) (len=134) {
+            	            	- 00000000  04 03 a8 0b 8d 45 98 d4  62 00 00 00 62 00 00 00  |.....E..b...b...|
+            	            	- 00000010  68 00 00 00 01 00 00 00  00 00 02 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 03 0b a8 d4 98 45 8d  00 00 00 62 00 62 00 00  |......E....b.b..|
+            	            	+ 00000010  00 00 00 68 00 00 00 01  00 00 02 00 00 00 00 00  |...h............|
+            	            	  00000020  06 e9 18 3b b2 75 12 91  06 e2 22 1a 81 00 02 02  |...;.u....".....|
+            	Test:       	TestCreateL3L4Payload/802.11q_ICMPv4_Echo_Reply
+    --- FAIL: TestCreateL3L4Payload/802.11q_ICMPv6_Neighbor_Solicitation (0.00s)
+        payload_test.go:243: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/hubble/testutils/payload_test.go:243
+            	Error:      	Not equal: 
+            	            	expected: []byte{0x4, 0x5, 0xa8, 0xb, 0x5f, 0x16, 0xf2, 0xb8, 0x56, 0x0, 0x0, 0x0, 0x56, 0x0, 0x1, 0x0, 0x68, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x33, 0x33, 0xff, 0x0, 0xb3, 0xe5, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x81, 0x0, 0x2, 0x2, 0x86, 0xdd, 0x60, 0x0, 0x0, 0x0, 0x0, 0x20, 0x3a, 0xff, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0x91, 0x95, 0xff, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xff, 0x0, 0xb3, 0xe5, 0x87, 0x0, 0x50, 0x75, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0xb3, 0xe5, 0x1, 0x1, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a}
+            	            	actual  : []byte{0x4, 0x5, 0xb, 0xa8, 0xb8, 0xf2, 0x16, 0x5f, 0x0, 0x0, 0x0, 0x56, 0x0, 0x56, 0x1, 0x0, 0x0, 0x0, 0x0, 0x68, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x33, 0x33, 0xff, 0x0, 0xb3, 0xe5, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a, 0x81, 0x0, 0x2, 0x2, 0x86, 0xdd, 0x60, 0x0, 0x0, 0x0, 0x0, 0x20, 0x3a, 0xff, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0x91, 0x95, 0xff, 0x2, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xff, 0x0, 0xb3, 0xe5, 0x87, 0x0, 0x50, 0x75, 0x0, 0x0, 0x0, 0x0, 0xf0, 0xd, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa, 0x10, 0x0, 0x0, 0x0, 0x0, 0xb3, 0xe5, 0x1, 0x1, 0x12, 0x91, 0x6, 0xe2, 0x22, 0x1a}
+            	            	
+            	            	Diff:
+            	            	--- Expected
+            	            	+++ Actual
+            	            	@@ -1,4 +1,4 @@
+            	            	 ([]uint8) (len=138) {
+            	            	- 00000000  04 05 a8 0b 5f 16 f2 b8  56 00 00 00 56 00 01 00  |...._...V...V...|
+            	            	- 00000010  68 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |h...............|
+            	            	+ 00000000  04 05 0b a8 b8 f2 16 5f  00 00 00 56 00 56 01 00  |......._...V.V..|
+            	            	+ 00000010  00 00 00 68 00 00 00 00  00 00 00 00 00 00 00 00  |...h............|
+            	            	  00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+            	Test:       	TestCreateL3L4Payload/802.11q_ICMPv6_Neighbor_Solicitation
+FAIL
+coverage: 5.6% of statements
+FAIL	github.com/cilium/cilium/pkg/hubble/testutils	0.384s
+ok  	github.com/cilium/cilium/pkg/iana	0.120s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity	0.134s	coverage: 43.4% of statements
+	github.com/cilium/cilium/pkg/identity/api		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/basicallocator	0.165s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/cache	4.061s	coverage: 72.2% of statements
+	github.com/cilium/cilium/pkg/identity/cache/cell		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/identity/cell	[no test files]
+ok  	github.com/cilium/cilium/pkg/identity/identitymanager	0.070s	coverage: 75.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/key	0.141s	coverage: 18.8% of statements
+	github.com/cilium/cilium/pkg/identity/model		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/idpool	1.886s	coverage: 98.1% of statements
+ok  	github.com/cilium/cilium/pkg/ip	0.287s	coverage: 82.6% of statements
+ok  	github.com/cilium/cilium/pkg/ipalloc	0.176s	coverage: 76.8% of statements
+ok  	github.com/cilium/cilium/pkg/ipam	16.414s	coverage: 61.5% of statements
+?   	github.com/cilium/cilium/pkg/ipam/allocator	[no test files]
+	github.com/cilium/cilium/pkg/ipam/allocator/alibabacloud		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/aws		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/azure		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/clusterpool		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/allocator/clusterpool/cidralloc	0.266s	coverage: 71.4% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/allocator/podcidr	4.470s	coverage: 81.4% of statements
+	github.com/cilium/cilium/pkg/ipam/api		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/cidrset	0.102s	coverage: 80.3% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/metadata	0.311s	coverage: 89.4% of statements
+	github.com/cilium/cilium/pkg/ipam/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/metrics/mock	0.052s	coverage: 55.2% of statements
+?   	github.com/cilium/cilium/pkg/ipam/option	[no test files]
+ok  	github.com/cilium/cilium/pkg/ipam/podippool	0.490s	coverage: 85.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/service/allocator	0.063s	coverage: 5.7% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/service/ipallocator	0.115s	coverage: 23.1% of statements
+?   	github.com/cilium/cilium/pkg/ipam/stats	[no test files]
+ok  	github.com/cilium/cilium/pkg/ipam/types	0.113s	coverage: 8.3% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache	0.373s	coverage: 77.2% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/api	0.242s	coverage: 7.7% of statements
+	github.com/cilium/cilium/pkg/ipcache/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/fake	0.122s	coverage: 100.0% of statements
+	github.com/cilium/cilium/pkg/ipcache/restore		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/types	0.049s	coverage: 21.1% of statements
+ok  	github.com/cilium/cilium/pkg/ipmasq	5.778s	coverage: 85.8% of statements
+ok  	github.com/cilium/cilium/pkg/ipmasq/cell	0.271s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s	1.797s	coverage: 68.8% of statements
+	github.com/cilium/cilium/pkg/k8s/apis		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/apis/cilium.io	[no test files]
+	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/client		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/utils	0.069s	coverage: 54.9% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2	0.228s	coverage: 1.8% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2/validator	7.372s	coverage: 82.5% of statements
+	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2alpha1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/crdhelpers	0.212s	coverage: 40.8% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/client	3.377s	coverage: 72.9% of statements
+	github.com/cilium/cilium/pkg/k8s/client/applyconfiguration/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/scheme		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2alpha1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2alpha1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io/v2alpha1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/internalinterfaces	[no test files]
+	github.com/cilium/cilium/pkg/k8s/client/listers/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/listers/cilium.io/v2alpha1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/client/testutils	0.274s	coverage: 47.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/constants	[no test files]
+	github.com/cilium/cilium/pkg/k8s/hostfirewallbypass		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/identitybackend	0.431s	coverage: 30.2% of statements
+	github.com/cilium/cilium/pkg/k8s/informer		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/informer/benchmarks	0.137s	coverage: [no statements] [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/metrics	0.154s	coverage: 100.0% of statements
+	github.com/cilium/cilium/pkg/k8s/portforward		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/resource	2.378s	coverage: 80.5% of statements
+	github.com/cilium/cilium/pkg/k8s/resource/example		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/api/meta		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/labels	0.169s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1/validation		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1beta1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/selection	[no test files]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/util/intstr		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/scheme		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/core/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/discovery/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/networking/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/core		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/discovery		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/discovery/v1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/internalinterfaces	[no test files]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/networking		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/networking/v1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/synced	0.944s	coverage: 30.6% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/testutils	0.354s	coverage: 56.7% of statements
+	github.com/cilium/cilium/pkg/k8s/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/utils	0.211s	coverage: 76.4% of statements
+	github.com/cilium/cilium/pkg/k8s/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/watchers	0.289s	coverage: 16.3% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/resources		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/subscriber		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/kpr		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/kpr/initializer	0.369s	coverage: 33.5% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore	64.079s	coverage: 47.0% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/allocator	19.534s	coverage: 54.5% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/allocator/doublewrite	7.164s	coverage: 18.4% of statements
+	github.com/cilium/cilium/pkg/kvstore/etcdinit		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/kvstore/heartbeat		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/store	10.557s	coverage: 93.3% of statements
+ok  	github.com/cilium/cilium/pkg/l2announcer	3.615s	coverage: 64.7% of statements
+ok  	github.com/cilium/cilium/pkg/labels	0.162s	coverage: 52.6% of statements
+	github.com/cilium/cilium/pkg/labels/model		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/labelsfilter	0.222s	coverage: 63.3% of statements
+	github.com/cilium/cilium/pkg/lbipamconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer	0.138s	coverage: 26.9% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/benchmark	1.701s	coverage: 67.9% of statements
+	github.com/cilium/cilium/pkg/loadbalancer/benchmark/cmd		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/cell	0.848s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/healthserver	1.858s	coverage: 94.3% of statements
+	github.com/cilium/cilium/pkg/loadbalancer/maps		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/reconciler	0.276s	coverage: 56.7% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/redirectpolicy	3.302s	coverage: 73.1% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/reflectors	0.357s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/repl	0.389s	coverage: 42.9% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/tests	4.317s	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/writer	0.413s	coverage: 54.2% of statements
+	github.com/cilium/cilium/pkg/loadinfo		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/lock	2.368s	coverage: 59.2% of statements
+ok  	github.com/cilium/cilium/pkg/lock/lockfile	1.098s	coverage: 90.3% of statements
+ok  	github.com/cilium/cilium/pkg/logging	3.714s	coverage: 51.6% of statements
+	github.com/cilium/cilium/pkg/logging/hooks		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/logging/logfields	[no test files]
+ok  	github.com/cilium/cilium/pkg/mac	0.101s	coverage: 50.0% of statements
+ok  	github.com/cilium/cilium/pkg/maglev	1.855s	coverage: 90.7% of statements
+ok  	github.com/cilium/cilium/pkg/maps	0.477s	coverage: 59.1% of statements
+	github.com/cilium/cilium/pkg/maps/act		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/authmap	0.233s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/authmap/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/bwmap		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/maps/callsmap	[no test files]
+	github.com/cilium/cilium/pkg/maps/cidrmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/configmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ctmap	0.331s	coverage: 5.0% of statements
+	github.com/cilium/cilium/pkg/maps/ctmap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ctmap/gc	6.438s	coverage: 42.6% of statements
+ok  	github.com/cilium/cilium/pkg/maps/egressmap	0.332s	coverage: 0.9% of statements
+	github.com/cilium/cilium/pkg/maps/encrypt		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/encrypt/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/eventsmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/fragmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ipcache	0.227s	coverage: 14.1% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ipmasq	0.283s	coverage: 14.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/iptrace	0.570s	coverage: 58.3% of statements
+	github.com/cilium/cilium/pkg/maps/l2respondermap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/l2v6respondermap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/lxcmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/metricsmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/multicast	0.374s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nat	0.724s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/nat/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nat/stats	0.517s	coverage: 14.8% of statements
+	github.com/cilium/cilium/pkg/maps/neighborsmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/netdev	0.427s	coverage: 13.7% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nodemap	0.671s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/nodemap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/policymap	0.908s	coverage: 17.3% of statements
+	github.com/cilium/cilium/pkg/maps/ratelimitmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/signalmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/signalmap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/srv6map	0.295s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/subnet	0.228s	coverage: 24.4% of statements
+ok  	github.com/cilium/cilium/pkg/maps/timestamp	0.479s	coverage: 26.1% of statements
+	github.com/cilium/cilium/pkg/maps/vtep		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/mcastmanager	0.111s	coverage: 87.5% of statements
+ok  	github.com/cilium/cilium/pkg/metrics	0.785s	coverage: 58.5% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/features	0.866s	coverage: 78.8% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/features/operator	1.437s	coverage: 48.1% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/metric	0.536s	coverage: 40.4% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/metric/collections	0.302s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/monitor	0.635s	coverage: 37.5% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/agent	0.662s	coverage: 4.8% of statements
+?   	github.com/cilium/cilium/pkg/monitor/agent/consumer	[no test files]
+	github.com/cilium/cilium/pkg/monitor/agent/listener		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/api	0.333s	coverage: 17.9% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/format	0.437s	coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/monitor/notifications	[no test files]
+ok  	github.com/cilium/cilium/pkg/monitor/payload	0.128s	coverage: 88.9% of statements
+ok  	github.com/cilium/cilium/pkg/mountinfo	0.358s	coverage: 73.5% of statements
+ok  	github.com/cilium/cilium/pkg/mtu	0.427s	coverage: 7.9% of statements
+ok  	github.com/cilium/cilium/pkg/multicast	0.042s	coverage: 73.7% of statements
+ok  	github.com/cilium/cilium/pkg/murmur3	0.067s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/netns	0.104s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node	0.437s	coverage: 24.1% of statements
+	github.com/cilium/cilium/pkg/node/addressing		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node/manager	2.517s	coverage: 76.6% of statements
+	github.com/cilium/cilium/pkg/node/neighbordiscovery		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node/store	0.192s	coverage: 43.2% of statements
+ok  	github.com/cilium/cilium/pkg/node/sync	0.698s	coverage: 55.7% of statements
+ok  	github.com/cilium/cilium/pkg/node/types	0.383s	coverage: 20.4% of statements
+ok  	github.com/cilium/cilium/pkg/nodediscovery	1.974s	coverage: 7.5% of statements
+	github.com/cilium/cilium/pkg/nodeipamconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/option	0.175s	coverage: 38.4% of statements
+ok  	github.com/cilium/cilium/pkg/option/resolver	0.595s	coverage: 77.4% of statements
+ok  	github.com/cilium/cilium/pkg/pidfile	0.280s	coverage: 73.2% of statements
+ok  	github.com/cilium/cilium/pkg/policy	8.268s	coverage: 82.9% of statements
+ok  	github.com/cilium/cilium/pkg/policy/api	0.247s	coverage: 39.3% of statements
+ok  	github.com/cilium/cilium/pkg/policy/cell	0.518s	coverage: 37.6% of statements
+ok  	github.com/cilium/cilium/pkg/policy/cookie	0.089s	coverage: 96.7% of statements
+ok  	github.com/cilium/cilium/pkg/policy/correlation	0.267s	coverage: 58.6% of statements
+ok  	github.com/cilium/cilium/pkg/policy/directory	0.322s	coverage: 31.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/groups	0.193s	coverage: 23.6% of statements
+	github.com/cilium/cilium/pkg/policy/groups/aws		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/k8s	0.473s	coverage: 40.5% of statements
+ok  	github.com/cilium/cilium/pkg/policy/testutils	0.116s	coverage: 90.0% of statements
+	github.com/cilium/cilium/pkg/policy/trafficdirection		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/types	0.123s	coverage: 17.5% of statements
+ok  	github.com/cilium/cilium/pkg/policy/utils	0.127s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/pprof	0.175s	coverage: 73.2% of statements
+ok  	github.com/cilium/cilium/pkg/promise	0.119s	coverage: 94.7% of statements
+ok  	github.com/cilium/cilium/pkg/proxy	0.414s	coverage: 18.4% of statements
+ok  	github.com/cilium/cilium/pkg/proxy/accesslog	0.527s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/proxy/accesslog/endpoint		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/proxy/endpoint	[no test files]
+ok  	github.com/cilium/cilium/pkg/proxy/proxyports	0.577s	coverage: 55.1% of statements
+	github.com/cilium/cilium/pkg/proxy/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/rate	9.623s	coverage: 98.5% of statements
+	github.com/cilium/cilium/pkg/rate/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/resiliency	0.083s	coverage: 91.7% of statements
+ok  	github.com/cilium/cilium/pkg/revert	0.139s	coverage: 83.3% of statements
+ok  	github.com/cilium/cilium/pkg/safeio	0.083s	coverage: 35.3% of statements
+ok  	github.com/cilium/cilium/pkg/safetime	0.104s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/shortener	0.118s	coverage: 66.7% of statements
+ok  	github.com/cilium/cilium/pkg/signal	1.711s	coverage: 74.2% of statements
+ok  	github.com/cilium/cilium/pkg/slices	0.138s	coverage: 87.0% of statements
+ok  	github.com/cilium/cilium/pkg/socketlb	0.493s	coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/source	0.048s	coverage: 85.7% of statements
+ok  	github.com/cilium/cilium/pkg/spanstat	0.151s	coverage: 100.0% of statements
+ok  	github.com/cilium/cilium/pkg/status	1.432s	coverage: 11.7% of statements
+ok  	github.com/cilium/cilium/pkg/subnet	0.507s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/svcrouteconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/testutils	0.393s	coverage: 6.7% of statements
+ok  	github.com/cilium/cilium/pkg/testutils/identity	0.514s	coverage: 32.9% of statements
+	github.com/cilium/cilium/pkg/testutils/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/ipcache		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/mockmaps		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/netns		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/scriptnet		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/sockets		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/time		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/trigger	0.516s	coverage: 93.4% of statements
+	github.com/cilium/cilium/pkg/tuple		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/types	0.129s	coverage: 76.9% of statements
+	github.com/cilium/cilium/pkg/u8proto		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/util		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/version	0.152s	coverage: 65.5% of statements
+ok  	github.com/cilium/cilium/pkg/versioncheck	0.134s	coverage: 60.9% of statements
+ok  	github.com/cilium/cilium/pkg/wal	0.330s	coverage: 66.7% of statements
+ok  	github.com/cilium/cilium/pkg/wireguard/agent	0.411s	coverage: 44.3% of statements
+?   	github.com/cilium/cilium/pkg/wireguard/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/xds/experimental/client	5.664s	coverage: 89.3% of statements
+	github.com/cilium/cilium/pkg/ztunnel		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ztunnel/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/iptables	0.152s	coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ztunnel/pb		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/reconciler	1.074s	coverage: 73.6% of statements
+	github.com/cilium/cilium/pkg/ztunnel/table		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/xds	0.864s	coverage: 45.8% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/zds	0.392s	coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/chaining/api	0.204s	coverage: 100.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/awscni		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/azure		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/flannel		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/generic-veth		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/cmd		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/lib	1.127s	coverage: 70.7% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/types	0.103s	coverage: 58.3% of statements
+	github.com/cilium/cilium/plugins/cilium-docker		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-docker/driver		coverage: 0.0% of statements
+	github.com/cilium/cilium/standalone-dns-proxy		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/cmd	2.393s	coverage: 60.0% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/client	50.582s	coverage: 72.8% of statements
+?   	github.com/cilium/cilium/standalone-dns-proxy/pkg/defaults	[no test files]
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/lookup	1.637s	coverage: 89.4% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/messagehandler	1.061s	coverage: 75.0% of statements
+	github.com/cilium/cilium/standalone-dns-proxy/pkg/shell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test	0.726s	coverage: [no statements]
+	github.com/cilium/cilium/test/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test/controlplane	6.946s	coverage: 100.0% of statements
+	github.com/cilium/cilium/test/controlplane/node		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/controlplane/node/ciliumnodes		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/controlplane/suite		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/ginkgo-ext		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test/helpers	0.546s	coverage: 0.3% of statements
+?   	github.com/cilium/cilium/test/helpers/constants	[no test files]
+ok  	github.com/cilium/cilium/test/helpers/logutils	0.134s	coverage: 95.9% of statements
+	github.com/cilium/cilium/test/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/logger		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/runtime		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/alignchecker		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/api-flaggen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/complexity-diff		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/crdcheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/crdlistgen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/dev-doctor		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/dpgen		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/tools/feature-helm-generator	0.031s	coverage: 88.4% of statements
+	github.com/cilium/cilium/tools/legacyhguardcheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/licensecheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/licensegen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/metricslint		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/tools/metricslint/pkg/analyzer	2.018s	coverage: 74.0% of statements
+	github.com/cilium/cilium/tools/mount		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/slogloggercheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/spdxconv		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/sysctlfix		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/testowners		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/testowners/codeowners		coverage: 0.0% of statements
+FAIL
+make: *** [Makefile:165: integration-tests] Error 1

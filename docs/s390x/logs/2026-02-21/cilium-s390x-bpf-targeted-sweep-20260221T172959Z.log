@@ -1,0 +1,169 @@
+=== tc_lxc_policy_drop ===
+PASS tc_lxc_policy_drop
+=== tc_policy_reject_response_test ===
+PASS tc_policy_reject_response_test
+=== tc_lxc_lb4_no_backend ===
+FAIL tc_lxc_lb4_no_backend
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_lxc_lb4_no_backend \
+| cat;
+time=2026-02-21T09:30:27.077168276-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (0.39s)
+    --- FAIL: TestBPF/tc_lxc_lb4_no_backend.o (0.39s)
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        --- FAIL: TestBPF/tc_lxc_lb4_no_backend.o/tc_lxc_no_backend (0.00s)
+            bpf_test.go:576: tc_lxc_lb4_no_backend.c:91: Status code: 0
+            bpf_test.go:576: tc_lxc_lb4_no_backend.c:126: assert failed at tc_lxc_lb4_no_backend.c:126
+        bpf_test.go:64: -> 1: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.443s
+FAIL
+make: *** [Makefile:114: run] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== tc_lxc_lb6_no_backend ===
+FAIL tc_lxc_lb6_no_backend
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_lxc_lb6_no_backend \
+| cat;
+time=2026-02-21T09:30:35.792620619-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (0.49s)
+    --- FAIL: TestBPF/tc_lxc_lb6_no_backend.o (0.49s)
+        --- FAIL: TestBPF/tc_lxc_lb6_no_backend.o/tc_lxc_no_backend (0.00s)
+            bpf_test.go:576: tc_lxc_lb6_no_backend.c:100: Status code: 0
+            bpf_test.go:576: tc_lxc_lb6_no_backend.c:130: assert failed at tc_lxc_lb6_no_backend.c:130
+        bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:1]:22330 dst=[::0:2]:80
+        bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        bpf_test.go:64: -> 1: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.558s
+FAIL
+make: *** [Makefile:114: run] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== tc_nodeport_lb4_no_backend ===
+FAIL tc_nodeport_lb4_no_backend
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_nodeport_lb4_no_backend \
+| cat;
+time=2026-02-21T09:30:44.391357709-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (0.60s)
+    --- FAIL: TestBPF/tc_nodeport_lb4_no_backend.o (0.60s)
+        --- FAIL: TestBPF/tc_nodeport_lb4_no_backend.o/tc_nodeport_no_backend (0.00s)
+            bpf_test.go:576: tc_nodeport_lb4_no_backend.c:93: Status code: 0
+            bpf_test.go:576: tc_nodeport_lb4_no_backend.c:131: assert failed at tc_nodeport_lb4_no_backend.c:131
+        bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Failed to map addr=110.0.11.1 to identity
+        bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.2:80
+        bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        --- FAIL: TestBPF/tc_nodeport_lb4_no_backend.o/tc_nodeport_no_backend2_reply (0.00s)
+            bpf_test.go:576: tc_nodeport_lb4_no_backend.c:93: Status code: 0
+            bpf_test.go:576: tc_nodeport_lb4_no_backend.c:131: assert failed at tc_nodeport_lb4_no_backend.c:131
+        bpf_test.go:64: -> 1: [error]
+        bpf_test.go:64: -> 1: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.654s
+FAIL
+make: *** [Makefile:114: run] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== tc_nodeport_lb6_no_backend ===
+FAIL tc_nodeport_lb6_no_backend
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_nodeport_lb6_no_backend \
+| cat;
+time=2026-02-21T09:30:53.081597079-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (0.71s)
+    --- FAIL: TestBPF/tc_nodeport_lb6_no_backend.o (0.71s)
+        --- FAIL: TestBPF/tc_nodeport_lb6_no_backend.o/tc_nodeport_no_backend (0.00s)
+            bpf_test.go:576: tc_nodeport_lb6_no_backend.c:102: Status code: 0
+            bpf_test.go:576: tc_nodeport_lb6_no_backend.c:135: assert failed at tc_nodeport_lb6_no_backend.c:135
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:1] to identity
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:1]:22330 dst=[::0:2]:80
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        --- FAIL: TestBPF/tc_nodeport_lb6_no_backend.o/tc_nodeport_no_backend2_reply (0.00s)
+            bpf_test.go:576: tc_nodeport_lb6_no_backend.c:102: Status code: 0
+            bpf_test.go:576: tc_nodeport_lb6_no_backend.c:135: assert failed at tc_nodeport_lb6_no_backend.c:135
+        bpf_test.go:64: -> 1: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.762s
+FAIL
+make: *** [Makefile:114: run] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== tc_nodeport_test ===
+FAIL tc_nodeport_test
+            bpf_test.go:576: tc_nodeport_test.c:384: L4 checksum is invalid: 0000 != 0000
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:1]:22331 dst=[::0:1]:22330
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=1 dir=0 scope=2
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=512959, revnat=0
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=0
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:1] to identity
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 0 from seclabel 0
+        --- FAIL: TestBPF/tc_nodeport_test.o/hairpin_flow_3_reverse_v6 (0.00s)
+            bpf_test.go:576: tc_nodeport_test.c:833: L4 checksum is invalid: 0000 != 0000
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Inheriting identity=9 from stack
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:22331 dst=10.245.255.31:22330
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=2
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=512959, revnat=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.1 to identity=112233
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 0 from seclabel 0
+        --- FAIL: TestBPF/tc_nodeport_test.o/hairpin_flow_4_reverse_ingress_v4 (0.00s)
+            bpf_test.go:576: tc_nodeport_test.c:474: L4 checksum is invalid: 0000 != 0000
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Inheriting identity=10 from stack
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:1]:22331 dst=[::0:1]:22330
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=2
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=512959, revnat=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:1] to identity=112233
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Attempting local delivery for container id 0 from seclabel 0
+        --- FAIL: TestBPF/tc_nodeport_test.o/hairpin_flow_4_reverse_ingress_v6 (0.00s)
+            bpf_test.go:576: tc_nodeport_test.c:917: L4 checksum is invalid: 0000 != 0000
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.1:33440 dst=172.16.10.1:80
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        bpf_test.go:64: xx drop (Service backend not found) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:1]:33440 dst=[::0:3]:80
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        bpf_test.go:64: xx drop (Service backend not found) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	1.525s
+FAIL
+make: *** [Makefile:114: run] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== hairpin_sctp_flow ===
+PASS hairpin_sctp_flow

@@ -1,0 +1,269 @@
+[INFO] 2026-02-25T06:32:56Z start kdz runtime bootstrap
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cwd=/root/work/cilium-s390x
+[CHECK] kubectl=
+[CHECK] helm=
+[CHECK] kubeadm=
+[CHECK] kubelet=
+[CHECK] containerd=
+[CHECK] runc=
+[CHECK] crictl=
+[CHECK] rpm versions:
+package kubeadm is not installed
+package kubelet is not installed
+package kubernetes-cni is not installed
+package cri-tools is not installed
+package conntrack-tools is not installed
+package socat is not installed
+iproute-tc-6.11.0-1.el9.s390x
+ethtool-6.11-1.el9.s390x
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root  232G   61G  172G  26% /
+[INFO] 2026-02-25T06:34:42Z writing kubernetes yum repo
+[INFO] 2026-02-25T06:34:42Z installing host prerequisites
+Updating Subscription Management repositories.
+Kubernetes                                       11 kB/s | 7.7 kB     00:00    
+Red Hat Enterprise Linux 9 for IBM z Systems -  111 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux 9 for IBM z Systems -  102 kB/s | 4.1 kB     00:00    
+Package ethtool-2:6.11-1.el9.s390x is already installed.
+Dependencies resolved.
+================================================================================
+ Package              Arch  Version       Repository                       Size
+================================================================================
+Installing:
+ conntrack-tools      s390x 1.4.7-4.el9_5 rhel-9-for-s390x-appstream-rpms 234 k
+ socat                s390x 1.7.4.1-8.el9 rhel-9-for-s390x-appstream-rpms 297 k
+Upgrading:
+ ethtool              s390x 2:6.15-2.el9  rhel-9-for-s390x-baseos-rpms    306 k
+Installing dependencies:
+ libnetfilter_cthelper
+                      s390x 1.0.0-22.el9  rhel-9-for-s390x-appstream-rpms  25 k
+ libnetfilter_cttimeout
+                      s390x 1.0.0-19.el9  rhel-9-for-s390x-appstream-rpms  25 k
+ libnetfilter_queue   s390x 1.0.5-1.el9   rhel-9-for-s390x-appstream-rpms  30 k
+
+Transaction Summary
+================================================================================
+Install  5 Packages
+Upgrade  1 Package
+
+Total download size: 917 k
+Downloading Packages:
+(1/6): libnetfilter_cthelper-1.0.0-22.el9.s390x 346 kB/s |  25 kB     00:00    
+(2/6): libnetfilter_queue-1.0.5-1.el9.s390x.rpm 328 kB/s |  30 kB     00:00    
+(3/6): libnetfilter_cttimeout-1.0.0-19.el9.s390 215 kB/s |  25 kB     00:00    
+(4/6): conntrack-tools-1.4.7-4.el9_5.s390x.rpm  3.9 MB/s | 234 kB     00:00    
+(5/6): socat-1.7.4.1-8.el9.s390x.rpm            3.9 MB/s | 297 kB     00:00    
+(6/6): ethtool-6.15-2.el9.s390x.rpm             4.0 MB/s | 306 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                           4.7 MB/s | 917 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : libnetfilter_cttimeout-1.0.0-19.el9.s390x              1/7 
+  Installing       : libnetfilter_queue-1.0.5-1.el9.s390x                   2/7 
+  Installing       : libnetfilter_cthelper-1.0.0-22.el9.s390x               3/7 
+  Installing       : conntrack-tools-1.4.7-4.el9_5.s390x                    4/7 
+  Running scriptlet: conntrack-tools-1.4.7-4.el9_5.s390x                    4/7 
+  Upgrading        : ethtool-2:6.15-2.el9.s390x                             5/7 
+  Installing       : socat-1.7.4.1-8.el9.s390x                              6/7 
+  Cleanup          : ethtool-2:6.11-1.el9.s390x                             7/7 
+  Running scriptlet: ethtool-2:6.11-1.el9.s390x                             7/7 
+  Verifying        : libnetfilter_cthelper-1.0.0-22.el9.s390x               1/7 
+  Verifying        : libnetfilter_queue-1.0.5-1.el9.s390x                   2/7 
+  Verifying        : libnetfilter_cttimeout-1.0.0-19.el9.s390x              3/7 
+  Verifying        : conntrack-tools-1.4.7-4.el9_5.s390x                    4/7 
+  Verifying        : socat-1.7.4.1-8.el9.s390x                              5/7 
+  Verifying        : ethtool-2:6.15-2.el9.s390x                             6/7 
+  Verifying        : ethtool-2:6.11-1.el9.s390x                             7/7 
+Installed products updated.
+
+Upgraded:
+  ethtool-2:6.15-2.el9.s390x                                                    
+Installed:
+  conntrack-tools-1.4.7-4.el9_5.s390x                                           
+  libnetfilter_cthelper-1.0.0-22.el9.s390x                                      
+  libnetfilter_cttimeout-1.0.0-19.el9.s390x                                     
+  libnetfilter_queue-1.0.5-1.el9.s390x                                          
+  socat-1.7.4.1-8.el9.s390x                                                     
+
+Complete!
+[INFO] 2026-02-25T06:34:46Z installing kube packages
+Updating Subscription Management repositories.
+Waiting for process with pid 1000214 to finish.
+Red Hat Enterprise Linux 9 for IBM z Systems -  109 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux 9 for IBM z Systems -   99 kB/s | 4.1 kB     00:00    
+Dependencies resolved.
+================================================================================
+ Package             Arch       Version                   Repository       Size
+================================================================================
+Installing:
+ cri-tools           s390x      1.35.0-150500.1.1         kubernetes      6.8 M
+ kubeadm             s390x      1.35.1-150500.1.1         kubernetes       11 M
+ kubelet             s390x      1.35.1-150500.1.1         kubernetes       11 M
+ kubernetes-cni      s390x      1.8.0-150500.1.1          kubernetes      8.4 M
+
+Transaction Summary
+================================================================================
+Install  4 Packages
+
+Total download size: 37 M
+Installed size: 237 M
+Downloading Packages:
+(1/4): cri-tools-1.35.0-150500.1.1.s390x.rpm    4.4 MB/s | 6.8 MB     00:01    
+(2/4): kubelet-1.35.1-150500.1.1.s390x.rpm      7.0 MB/s |  11 MB     00:01    
+(3/4): kubeadm-1.35.1-150500.1.1.s390x.rpm      6.5 MB/s |  11 MB     00:01    
+(4/4): kubernetes-cni-1.8.0-150500.1.1.s390x.rp 6.0 MB/s | 8.4 MB     00:01    
+--------------------------------------------------------------------------------
+Total                                            13 MB/s |  37 MB     00:02     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : kubernetes-cni-1.8.0-150500.1.1.s390x                  1/4 
+  Installing       : cri-tools-1.35.0-150500.1.1.s390x                      2/4 
+  Installing       : kubeadm-1.35.1-150500.1.1.s390x                        3/4 
+  Installing       : kubelet-1.35.1-150500.1.1.s390x                        4/4 
+  Running scriptlet: kubelet-1.35.1-150500.1.1.s390x                        4/4 
+  Verifying        : cri-tools-1.35.0-150500.1.1.s390x                      1/4 
+  Verifying        : kubeadm-1.35.1-150500.1.1.s390x                        2/4 
+  Verifying        : kubelet-1.35.1-150500.1.1.s390x                        3/4 
+  Verifying        : kubernetes-cni-1.8.0-150500.1.1.s390x                  4/4 
+Installed products updated.
+
+Installed:
+  cri-tools-1.35.0-150500.1.1.s390x    kubeadm-1.35.1-150500.1.1.s390x         
+  kubelet-1.35.1-150500.1.1.s390x      kubernetes-cni-1.8.0-150500.1.1.s390x   
+
+Complete!
+[INFO] 2026-02-25T06:34:57Z installing kubectl and helm from cached binaries
+[INFO] 2026-02-25T06:34:57Z installing containerd from cached tarball
+[INFO] 2026-02-25T06:34:57Z downloading runc v1.2.6 (s390x)
+[INFO] 2026-02-25T06:34:58Z installing CNI plugins from cached tarball
+[INFO] 2026-02-25T06:34:58Z configuring kernel modules and sysctls
+[INFO] 2026-02-25T06:34:58Z disabling swap
+[INFO] 2026-02-25T06:34:58Z configuring containerd systemd service
+[INFO] 2026-02-25T06:34:58Z starting containerd and kubelet
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /etc/systemd/system/containerd.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /usr/lib/systemd/system/kubelet.service.
+[INFO] 2026-02-25T06:34:59Z running kubeadm init
+[init] Using Kubernetes version: v1.35.1
+[preflight] Running pre-flight checks
+	[WARNING ContainerRuntimeVersion]: You must update your container runtime to a version that supports the CRI method RuntimeConfig. Falling back to using cgroupDriver from kubelet config will be removed in 1.36. For more information, see https://git.k8s.io/enhancements/keps/sig-node/4033-group-driver-detection-over-cri
+	[WARNING SystemVerification]: kernel release 5.14.0-570.62.1.el9_6.s390x is unsupported. Supported LTS versions from the 5.x series are 5.4, 5.10 and 5.15. Any 6.x version is also supported. For cgroups v2 support, the recommended version is 5.10 or newer
+[preflight] Some fatal errors occurred:
+	[ERROR FileContent--proc-sys-net-ipv4-ip_forward]: /proc/sys/net/ipv4/ip_forward contents are not set to 1
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+error: error execution phase preflight: preflight checks failed
+To see the stack trace of this error execute with --v=5 or higher
+[INFO] bootstrap rc=1
+[INFO] 2026-02-25T06:35:22Z remediation: ip_forward + kubeadm retry
+active
+activating
+net.ipv4.ip_forward = 1
+net.ipv4.ip_forward = 1
+[init] Using Kubernetes version: v1.35.1
+[preflight] Running pre-flight checks
+	[WARNING ContainerRuntimeVersion]: You must update your container runtime to a version that supports the CRI method RuntimeConfig. Falling back to using cgroupDriver from kubelet config will be removed in 1.36. For more information, see https://git.k8s.io/enhancements/keps/sig-node/4033-group-driver-detection-over-cri
+	[WARNING SystemVerification]: kernel release 5.14.0-570.62.1.el9_6.s390x is unsupported. Supported LTS versions from the 5.x series are 5.4, 5.10 and 5.15. Any 6.x version is also supported. For cgroups v2 support, the recommended version is 5.10 or newer
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action beforehand using 'kubeadm config images pull'
+W0224 22:35:22.547438 1001098 checks.go:906] detected that the sandbox image "registry.k8s.io/pause:3.8" of the container runtime is inconsistent with that used by kubeadm. It is recommended to use "registry.k8s.io/pause:3.10.1" as the CRI sandbox image.
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [kdz.dev.fyre.ibm.com kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.14.125.157]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [kdz.dev.fyre.ibm.com localhost] and IPs [10.14.125.157 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [kdz.dev.fyre.ibm.com localhost] and IPs [10.14.125.157 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "super-admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/instance-config.yaml"
+[patches] Applied patch of type "application/strategic-merge-patch+json" to target "kubeletconfiguration"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
+[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 501.21226ms
+[control-plane-check] Waiting for healthy control plane components. This can take up to 4m0s
+[control-plane-check] Checking kube-apiserver at https://10.14.125.157:6443/livez
+[control-plane-check] Checking kube-controller-manager at https://127.0.0.1:10257/healthz
+[control-plane-check] Checking kube-scheduler at https://127.0.0.1:10259/livez
+[control-plane-check] kube-controller-manager is healthy after 2.505756219s
+[control-plane-check] kube-scheduler is healthy after 3.527627077s
+[control-plane-check] kube-apiserver is healthy after 5.000942907s
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node kdz.dev.fyre.ibm.com as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node kdz.dev.fyre.ibm.com as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: zvhyru.8r07obai7xxyp4nh
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 10.14.125.157:6443 --token zvhyru.8r07obai7xxyp4nh \
+	--discovery-token-ca-cert-hash sha256:d77c8f71f16e341169b2a5093a9d07dd8aef516d1ab86adf1490bef3c2b28eef 
+node/kdz.dev.fyre.ibm.com untainted
+error: taint "node-role.kubernetes.io/master" not found
+NAME                   STATUS     ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+kdz.dev.fyre.ibm.com   NotReady   control-plane   3s    v1.35.1   10.14.125.157   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+[INFO] retry rc=0
+[INFO] 2026-02-25T06:36:14Z image inventory
+quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs d1b1956bfe9d
+[INFO] 2026-02-25T06:52:31Z importing seeded images into containerd
+unpacking docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z (sha256:52d54011f6c1b9f7ad92925031ec4b218c08c51723128d74af2b518c88ce2018)...done
+unpacking docker.io/cilium/operator-dev:1233512912-nogit-wip (sha256:b4d3de5bb328d9b3e9f97a31829349473cbd71fbe805b82d7ccfb5d1a8c91287)...done
+unpacking quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x (sha256:3d1a3fe0c62ecf760149451777f0ec23caa2c33d610453e02584c11f4de4c0ad)...done
+[INFO] imported image inventory
+docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z                                                application/vnd.docker.distribution.manifest.v2+json      sha256:52d54011f6c1b9f7ad92925031ec4b218c08c51723128d74af2b518c88ce2018 831.6 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 
+docker.io/cilium/operator-dev:1233512912-nogit-wip                                                              application/vnd.docker.distribution.manifest.v2+json      sha256:b4d3de5bb328d9b3e9f97a31829349473cbd71fbe805b82d7ccfb5d1a8c91287 128.6 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 
+quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x                                             application/vnd.docker.distribution.manifest.v2+json      sha256:3d1a3fe0c62ecf760149451777f0ec23caa2c33d610453e02584c11f4de4c0ad 223.1 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 

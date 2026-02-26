@@ -1,0 +1,30 @@
+[INFO] 2026-02-25T15:39:56Z start s390x-harness-strict r101
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] root_dir=/root/work/cilium-s390x
+[INFO] git_rev=unknown
+[INFO] harness_script=/root/work/cilium-s390x/test/s390x/run_harness.sh
+[INFO] command=/root/work/cilium-s390x/test/s390x/run_harness.sh 
+Deploying cilium into kube-system from ./install/kubernetes/cilium
+Release "cilium" has been upgraded. Happy Helming!
+NAME: cilium
+LAST DEPLOYED: Wed Feb 25 07:39:57 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 6
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium.
+
+Your release version is 1.20.0-dev.
+
+For any further help, visit https://docs.cilium.io/en/v1.20/gettinghelp
+Waiting for Cilium workloads
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+[INFO] 2026-02-25T15:43:02Z end rc=143
+Waiting for daemon set spec update to be observed...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Deployment completed

@@ -1,0 +1,26 @@
+=== RUN   TestPrivilegedUpgradeMap
+    collection_test.go:49: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bpf/collection_test.go:49
+        	Error:      	Received unexpected error:
+        	            	loading eBPF collection into the kernel: program dummy: can't load LittleEndian program on BigEndian
+        	Test:       	TestPrivilegedUpgradeMap
+--- FAIL: TestPrivilegedUpgradeMap (0.00s)
+=== RUN   TestPrivilegedUnusedMaps
+    unused_maps_test.go:65: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:27
+        	            				/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:65
+        	Error:      	Received unexpected error:
+        	            	program entry: can't load LittleEndian program on BigEndian
+        	Test:       	TestPrivilegedUnusedMaps
+--- FAIL: TestPrivilegedUnusedMaps (0.00s)
+=== RUN   TestPrivilegedUnusedMapsFalseNegative
+    unused_maps_test.go:107: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:27
+        	            				/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:107
+        	Error:      	Received unexpected error:
+        	            	program false_negative: can't load LittleEndian program on BigEndian
+        	Test:       	TestPrivilegedUnusedMapsFalseNegative
+--- FAIL: TestPrivilegedUnusedMapsFalseNegative (0.00s)
+FAIL
+FAIL	github.com/cilium/cilium/pkg/bpf	0.051s
+FAIL

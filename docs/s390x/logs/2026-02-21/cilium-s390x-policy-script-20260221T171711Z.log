@@ -1,0 +1,7 @@
+Creating namespace s390x-policy-20260221171711
+pod/server condition met
+pod/client condition met
+Baseline connectivity to 10.244.0.53:8080 (expected: allow)
+Connectivity without access label (expected: deny)
+Connectivity with access label after CEP convergence (expected: allow)
+Policy integration test passed

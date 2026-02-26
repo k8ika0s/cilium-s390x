@@ -1,0 +1,35 @@
+Updating Subscription Management repositories.
+Red Hat Enterprise Linux 9 for IBM z Systems -   61 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux 9 for IBM z Systems -   92 kB/s | 4.1 kB     00:00    
+Dependencies resolved.
+================================================================================
+ Package         Arch     Version       Repository                         Size
+================================================================================
+Installing:
+ python3-scapy   noarch   2.6.1-1.el9   rhel-9-for-s390x-appstream-rpms   3.6 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 3.6 M
+Installed size: 16 M
+Downloading Packages:
+python3-scapy-2.6.1-1.el9.noarch.rpm             13 MB/s | 3.6 MB     00:00    
+--------------------------------------------------------------------------------
+Total                                            13 MB/s | 3.6 MB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : python3-scapy-2.6.1-1.el9.noarch                       1/1 
+  Running scriptlet: python3-scapy-2.6.1-1.el9.noarch                       1/1 
+  Verifying        : python3-scapy-2.6.1-1.el9.noarch                       1/1 
+Installed products updated.
+
+Installed:
+  python3-scapy-2.6.1-1.el9.noarch                                              
+
+Complete!

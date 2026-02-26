@@ -1,0 +1,10 @@
+[meta] started_at_utc=20260225T200958Z
+[meta] host=kdz image-integrated
+[2026-02-25T20:10:01Z] namespace=s390x-policy-mn-postimg client_node=kdz.dev.fyre.ibm.com server_node=zkd01.fyre.ibm.com
+[2026-02-25T20:10:04Z] baseline allow expected target=10.244.1.20:8080
+[PASS] baseline-allow
+[2026-02-25T20:10:09Z] deny expected (client has no access label)
+[PASS] policy-deny
+[2026-02-25T20:10:47Z] allow expected after CEP convergence
+[PASS] policy-allow-after-label
+multinode policy enforcement passed

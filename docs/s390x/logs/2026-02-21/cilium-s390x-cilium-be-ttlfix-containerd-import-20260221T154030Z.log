@@ -1,0 +1,24 @@
+[START] 2026-02-21T15:40:30Z /root/work/logs/cilium-s390x-cilium-be-ttlfix-containerd-import-20260221T154030Z.log
+Copying blob sha256:bcca76fbad7a7ac532837969a9d606ff63e58434f7c8be166a944f61482c37a3
+Copying blob sha256:a302b986fc2a9b65d59d0dfc759fbc0279bb44dde6ace95e0ed171afbc39f70f
+Copying blob sha256:29f7bc23700e0d3683eff2c54ca5d1fd1ee57f20b6c0263440539a5b999b9419
+Copying blob sha256:fb8aa589a67dec67cf44241123fc9601c5c4e3a4c2ff0aa8d47feb50d17cc712
+Copying blob sha256:e5d7a66432900b2d12ef15427e71544cd6d0d522ecfdb0b1a996b9077699b713
+Copying config sha256:0346820c2f077c89745addcab9c002fb0acc85273ab8940fc39d7cc366716e4f
+Writing manifest to image destination
+unpacking docker.io/cilium/cilium-dev:1053606339-nogit-wip (sha256:32da091557eac697da61330f87fd545af2d18acb3bdcad928ce40f2d48718102)...done
+docker.io/cilium/cilium-dev:1053606339-nogit-wip                                                                application/vnd.docker.distribution.manifest.v2+json      sha256:32da091557eac697da61330f87fd545af2d18acb3bdcad928ce40f2d48718102 831.6 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 
+Warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
+pod "cilium-qtbpr" force deleted from kube-system namespace
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+Waiting for daemon set spec update to be observed...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+cilium-dg2tr                                 1/1     Running   0                15s   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+cilium-envoy-rz5ch                           1/1     Running   0                45m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+cilium-operator-7d796b74f8-bmc6k             1/1     Running   0                45m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+coredns-7d764666f9-gj2fg                     0/1     Running   10 (6m49s ago)   33m   10.244.0.249   zkd01.fyre.ibm.com   <none>           <none>
+coredns-7d764666f9-hsmgg                     0/1     Running   10 (6m24s ago)   33m   10.244.0.108   zkd01.fyre.ibm.com   <none>           <none>
+[END] 2026-02-21T15:42:48Z

@@ -1,0 +1,133 @@
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -c bpf_ct_tests.c -o bpf_ct_tests.o
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -c bpf_nat_tests.c -o bpf_nat_tests.o
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -c bpf_skb_255_tests.c -o bpf_skb_255_tests.o
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -c bpf_skb_511_tests.c -o bpf_skb_511_tests.o
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -c builtins.c -o builtins.o
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+In file included from builtins.c:6:
+In file included from /root/work/cilium-s390x/bpf/node_config.h:15:
+In file included from /root/work/cilium-s390x/bpf/lib/static_data.h:7:
+In file included from /root/work/cilium-s390x/bpf/lib/endian.h:6:
+In file included from /root/work/cilium-s390x/bpf/include/bpf/api.h:14:
+/root/work/cilium-s390x/bpf/include/bpf/builtins.h:165:2: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+  165 |         __builtin_memcpy(d, s, len);
+      |         ^
+/root/work/cilium-s390x/bpf/include/bpf/builtins.h:165:2: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+In file included from builtins.c:6:
+In file included from /root/work/cilium-s390x/bpf/node_config.h:15:
+In file included from /root/work/cilium-s390x/bpf/lib/static_data.h:7:
+In file included from /root/work/cilium-s390x/bpf/lib/endian.h:6:
+In file included from /root/work/cilium-s390x/bpf/include/bpf/api.h:14:
+/root/work/cilium-s390x/bpf/include/bpf/builtins.h:165:2: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+  165 |         __builtin_memcpy(d, s, len);
+      |         ^
+/root/work/cilium-s390x/bpf/include/bpf/builtins.h:165:2: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+In file included from builtins.c:6:
+In file included from /root/work/cilium-s390x/bpf/node_config.h:15:
+In file included from /root/work/cilium-s390x/bpf/lib/static_data.h:7:
+In file included from /root/work/cilium-s390x/bpf/lib/endian.h:6:
+In file included from /root/work/cilium-s390x/bpf/include/bpf/api.h:14:
+/root/work/cilium-s390x/bpf/include/bpf/builtins.h:165:2: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+  165 |         __builtin_memcpy(d, s, len);
+      |         ^
+/root/work/cilium-s390x/bpf/include/bpf/builtins.h:165:2: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: error: Looks like the BPF stack limit is exceeded. Please move large on stack variables into BPF per-cpu array map. For non-kernel uses, the stack can be increased using -mllvm -bpf-stack-size.
+
+   66 | int test_builtin_memmove2(__maybe_unused struct __ctx_buff *ctx)
+      |     ^
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+builtins.c:66:5: note: could not determine the original source location for include/bpf/builtins.h:0:0
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make: *** [Makefile:58: builtins.o] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'

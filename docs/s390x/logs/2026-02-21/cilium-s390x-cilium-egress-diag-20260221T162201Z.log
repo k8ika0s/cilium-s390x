@@ -1,0 +1,53 @@
++ echo 'cilium_pod=cilium-87qxf cid=8c8767cc2845f7f196b8e4b172b6409b3691cb84467db9667dc7f02deeb53b7d pid=2619591 ep_id='
+cilium_pod=cilium-87qxf cid=8c8767cc2845f7f196b8e4b172b6409b3691cb84467db9667dc7f02deeb53b7d pid=2619591 ep_id=
++ monpid=2622830
++ sleep 2
++ timeout 18 kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium monitor --type trace --type drop --related-to '' --hex -vv
++ nsenter -t 2619591 -n curl -k -sS --max-time 4 https://10.96.0.1:443/version
+curl: (28) Connection timed out after 4001 milliseconds
++ true
++ nsenter -t 2619591 -n curl -k -sS --max-time 4 https://10.11.59.172:6443/version
+curl: (28) Connection timed out after 4001 milliseconds
++ true
++ nsenter -t 2619591 -n ping -c 2 -W 1 10.244.0.88
+PING 10.244.0.88 (10.244.0.88) 56(84) bytes of data.
+
+--- 10.244.0.88 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1075ms
+
++ true
++ nsenter -t 2619591 -n ping -c 2 -W 1 10.11.59.172
+PING 10.11.59.172 (10.11.59.172) 56(84) bytes of data.
+
+--- 10.11.59.172 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1078ms
+
++ true
++ wait 2622830
++ true
++ sed -n 1,320p /tmp/cilium-egress-monitor-20260221T162201Z.log
+Usage:
+  cilium-dbg monitor [flags]
+
+Flags:
+      --from []uint16           Filter by source endpoint id
+  -h, --help                    help for monitor
+      --hex                     Do not dissect, print payload in HEX
+  -j, --json                    Enable json output. Shadows -v flag
+      --monitor-socket string   Configure monitor socket path
+  -n, --numeric                 Display all security identities as numeric values
+      --related-to []uint16     Filter by either source or destination endpoint id
+      --to []uint16             Filter by destination endpoint id
+  -t, --type []string           Filter by event types [agent capture debug drop l7 policy-verdict trace trace-sock]
+  -v, --verbose bools[=false]   Enable verbose output (-v, -vv) (default [])
+
+Global Flags:
+      --config string        Config file (default is $HOME/.cilium.yaml)
+  -D, --debug                Enable debug messages
+  -H, --host string          URI to server-side API
+      --log-driver strings   Logging endpoints to use (example: syslog)
+      --log-opt map          Log driver options (example: format=json)
+
+invalid argument "" for "--related-to" flag: strconv.ParseUint: parsing "": invalid syntax
+Error: invalid argument "" for "--related-to" flag: strconv.ParseUint: parsing "": invalid syntax
+command terminated with exit code 1

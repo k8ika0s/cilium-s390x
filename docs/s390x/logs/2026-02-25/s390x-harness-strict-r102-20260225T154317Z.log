@@ -1,0 +1,171 @@
+[INFO] 2026-02-25T15:43:17Z start s390x-harness-strict r102
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] root_dir=/root/work/cilium-s390x
+[INFO] git_rev=unknown
+[INFO] harness_script=/root/work/cilium-s390x/test/s390x/run_harness.sh
+[INFO] command=/root/work/cilium-s390x/test/s390x/run_harness.sh 
+Default image docker.io/cilium/cilium-dev:1233512912-nogit-wip not cached; using docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+Deploying cilium into kube-system from ./install/kubernetes/cilium
+Release "cilium" has been upgraded. Happy Helming!
+NAME: cilium
+LAST DEPLOYED: Wed Feb 25 07:43:17 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 7
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium.
+
+Your release version is 1.20.0-dev.
+
+For any further help, visit https://docs.cilium.io/en/v1.20/gettinghelp
+Waiting for Cilium workloads
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Deployment completed
+Cluster nodes
+NAME                   STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+kdz.dev.fyre.ibm.com   Ready    control-plane   9h    v1.35.1   10.14.125.157   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+Waiting for node readiness
+node/kdz.dev.fyre.ibm.com condition met
+Waiting for Cilium DaemonSets/Deployments
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Cilium pod status
+NAME           READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-c8hvc   1/1     Running   0          11s   10.14.125.157   kdz.dev.fyre.ibm.com   <none>           <none>
+NAME                 READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-envoy-nb78x   1/1     Running   0          8h    10.14.125.157   kdz.dev.fyre.ibm.com   <none>           <none>
+NAME                               READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-operator-7d796b74f8-xv6bp   1/1     Running   0          8h    10.14.125.157   kdz.dev.fyre.ibm.com   <none>           <none>
+cilium status from cilium-c8hvc
+KVStore:                Disabled   
+Kubernetes:             Ok         1.35 (v1.35.1) [linux/s390x]
+Kubernetes APIs:        ["cilium/v2::CiliumCIDRGroup", "cilium/v2::CiliumClusterwideNetworkPolicy", "cilium/v2::CiliumEndpoint", "cilium/v2::CiliumNetworkPolicy", "cilium/v2::CiliumNode", "core/v1::Pods", "networking.k8s.io/v1::NetworkPolicy"]
+KubeProxyReplacement:   False   
+Host firewall:          Disabled
+SRv6:                   Disabled
+CNI Chaining:           none
+CNI Config file:        successfully wrote CNI configuration file to /host/etc/cni/net.d/05-cilium.conflist
+Cilium:                 Ok    (v-)
+NodeMonitor:            Disabled
+IPAM:                   IPv4: 4/254 allocated from 10.244.0.0/24, 
+Allocated addresses:
+  10.244.0.100 (health)
+  10.244.0.221 (router)
+  10.244.0.33 (kube-system/coredns-7d764666f9-7xmj5 [restored])
+  10.244.0.74 (kube-system/coredns-7d764666f9-p66tq [restored])
+IPv4 BIG TCP:           Disabled
+IPv6 BIG TCP:           Disabled
+BandwidthManager:       Disabled
+Routing:                Network: Tunnel [vxlan]   Host: Legacy
+Attach Mode:            TCX
+Device Mode:            veth
+Masquerading:           IPTables [IPv4: Enabled, IPv6: Disabled]
+Clock Source for BPF:   ktime
+Controller Status:      5/5 healthy
+  Name                                                  Last success   Last error   Count   Message
+  ipcache-inject-labels                                 never          never        0       no error   
+  k8s-heartbeat                                         4s ago         never        0       no error   
+  resolve-labels-kube-system/coredns-7d764666f9-7xmj5   never          never        0       no error   
+  resolve-labels-kube-system/coredns-7d764666f9-p66tq   never          never        0       no error   
+  write-cni-file                                        4s ago         never        0       no error   
+Proxy Status:            OK, ip 10.244.0.221, 0 redirects active on ports 10000-20000, Envoy: external
+Global Identity Range:   min 256, max 65535
+Hubble:                  Disabled   Metrics: Disabled
+KubeProxyReplacement Details:
+  Status:               False
+  Socket LB:            Disabled
+  Socket LB Tracing:    Disabled
+  Socket LB Coverage:   Full
+  Session Affinity:     Enabled
+  NAT46/64 Support:     Disabled
+  Services:
+  - ClusterIP:      Enabled
+  - NodePort:       Disabled 
+  - LoadBalancer:   Disabled 
+  - externalIPs:    Disabled 
+  - HostPort:       Disabled
+  Annotations:      (n/a)
+BPF Maps:   dynamic sizing: on (ratio: 0.002500)
+  Name                          Size
+  Auth                          524288
+  Non-TCP connection tracking   287994
+  TCP connection tracking       575988
+  Endpoints                     65535
+  IP cache                      512000
+  IPv4 masquerading agent       16384
+  IPv6 masquerading agent       16384
+  IPv4 fragmentation            8192
+  IPv4 service                  65536
+  IPv6 service                  65536
+  IPv4 service backend          65536
+  IPv6 service backend          65536
+  IPv4 service reverse NAT      65536
+  IPv6 service reverse NAT      65536
+  Metrics                       1024
+  Ratelimit metrics             64
+  NAT                           575988
+  Neighbor table                575988
+  Endpoint policy               16384
+  Policy stats                  65536
+  Session affinity              65536
+  Sock reverse NAT              287994
+Encryption:       Disabled   
+Cluster health:   Probe disabled
+Smoke checks passed
+Creating namespace s390x-policy-20260225154331
+pod/server condition met
+pod/client condition met
+Baseline connectivity to 10.244.0.151:8080 (expected: allow)
+Connectivity without access label (expected: deny)
+Connectivity with access label after CEP convergence (expected: allow)
+Policy integration test passed
+Running BPF regression test: tc_lxc_policy_drop
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_lxc_policy_drop \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.292s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+Running BPF regression test: tc_policy_reject_response_test
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_policy_reject_response_test \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.269s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+Running BPF regression test: hairpin_sctp_flow
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test hairpin_sctp_flow \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.325s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+BPF regression subset passed
+Artifacts collected in /tmp/cilium-s390x-artifacts-20260225T154401Z
+[INFO] 2026-02-25T15:44:01Z end rc=0

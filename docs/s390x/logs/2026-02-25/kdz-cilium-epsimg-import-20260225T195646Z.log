@@ -1,0 +1,8 @@
+[meta] started_at_utc=20260225T195646Z
+[meta] host=kdz
+a191af97967c37c05e768833c893b03a92859b993b2e9e2b821e029eae44ddb3
+unpacking docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z (sha256:82202798c702fbfb2a1c909e26dbb8cb7b0cee426c2e447b411e2cfe78e7a590)...done
+docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z                                                    application/vnd.docker.distribution.manifest.v2+json      sha256:82202798c702fbfb2a1c909e26dbb8cb7b0cee426c2e447b411e2cfe78e7a590 831.6 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 
+eps.h-layer-found:/tmp/epsimg-check-s390x-be-epsimg-20260225T195619Z/f2af0f00776fbe5bf8bb458ac92b693ca524be87b713bdb6d11c71c93a3d3da0/layer.tar
+NEW_IMAGE=docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z
+NEW_TAG=s390x-be-epsimg-20260225T195619Z

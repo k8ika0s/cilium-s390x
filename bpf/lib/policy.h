@@ -56,8 +56,8 @@ enum {
 struct policy_key {
 	struct bpf_lpm_trie_key lpm_key;
 	__u32		sec_label;
-	__u8		egress:1,
-			pad:7;
+	/* Keep this as a full byte so layout is identical on LE and BE. */
+	__u8		egress;
 	__u8		protocol; /* can be wildcarded if 'dport' is fully wildcarded */
 	__be16		dport; /* can be wildcarded with CIDR-like prefix */
 };
@@ -68,14 +68,48 @@ struct policy_key {
 
 struct policy_entry {
 	__be16		proxy_port;
-	__u8		deny:1,
-			reserved:2, /* bits used in Cilium 1.16, keep unused for Cilium 1.17 */
-			lpm_prefix_length:5; /* map key protocol and dport prefix length */
-	__u8		auth_type:7,
-			has_explicit_auth_type:1;
+	/* Bit layout must match userspace policyEntryFlags exactly:
+	 * bit 0: deny, bits 1-2: reserved, bits 3-7: L4 prefix length.
+	 */
+	__u8		deny;
+	/* Bit layout must match userspace AuthRequirement exactly:
+	 * bits 0-6: auth type, bit 7: explicit-auth marker.
+	 */
+	__u8		auth_type;
 	__u32		precedence;
 	__u32		cookie;
 };
+
+#define POLICY_ENTRY_DENY_MASK ((__u8)0x01)
+#define POLICY_ENTRY_LPM_PREFIX_SHIFT 3
+#define POLICY_ENTRY_LPM_PREFIX_MASK ((__u8)0xF8)
+#define POLICY_ENTRY_AUTH_TYPE_MASK ((__u8)0x7F)
+#define POLICY_ENTRY_HAS_EXPLICIT_AUTH_TYPE_MASK ((__u8)0x80)
+
+static __always_inline bool
+policy_entry_is_deny(const struct policy_entry *entry)
+{
+	return !!(entry->deny & POLICY_ENTRY_DENY_MASK);
+}
+
+static __always_inline __u8
+policy_entry_lpm_prefix_length(const struct policy_entry *entry)
+{
+	return (entry->deny & POLICY_ENTRY_LPM_PREFIX_MASK) >>
+	       POLICY_ENTRY_LPM_PREFIX_SHIFT;
+}
+
+static __always_inline __u8
+policy_entry_auth_type(const struct policy_entry *entry)
+{
+	return entry->auth_type & POLICY_ENTRY_AUTH_TYPE_MASK;
+}
+
+static __always_inline bool
+policy_entry_has_explicit_auth_type(const struct policy_entry *entry)
+{
+	return !!(entry->auth_type & POLICY_ENTRY_HAS_EXPLICIT_AUTH_TYPE_MASK);
+}
 
 /*
  * LPM_FULL_PREFIX_BITS is the maximum length in 'lpm_prefix_length' when none of the protocol or
@@ -95,8 +129,8 @@ struct policy_stats_key {
 	__u8		pad1;
 	__u8		prefix_len;
 	__u32		sec_label;
-	__u8		egress:1,
-			pad:7;
+	/* Keep this as a full byte so layout is identical on LE and BE. */
+	__u8		egress;
 	__u8		protocol; /* can be wildcarded if 'dport' is fully wildcarded */
 	__be16		dport; /* can be wildcarded with CIDR-like prefix */
 };
@@ -127,7 +161,6 @@ __policy_account(__u32 remote_id, __u8 egress, __u8 proto, __be16 dport, __u8 lp
 		.prefix_len = lpm_prefix_length,
 		.sec_label = remote_id,
 		.egress = egress,
-		.pad = 0,
 	};
 
 	/*
@@ -187,7 +220,7 @@ __policy_check(const struct policy_entry *policy, const struct policy_entry *pol
 
 	*cookie = policy->cookie;
 
-	if (unlikely(policy->deny))
+	if (unlikely(policy_entry_is_deny(policy)))
 		return DROP_POLICY_DENY;
 
 	/* The chosen 'policy' has higher precedence or if on the same precedence it has more
@@ -199,11 +232,12 @@ __policy_check(const struct policy_entry *policy, const struct policy_entry *pol
 	 */
 	*proxy_port = policy->proxy_port;
 
-	auth_type = policy->auth_type;
+	auth_type = policy_entry_auth_type(policy);
 	/* Propagate the auth type from the same precedence, more general policy2 if needed. */
 	if (unlikely(policy2 && policy2->precedence == policy->precedence &&
-		     !policy->has_explicit_auth_type && policy2->auth_type > auth_type)) {
-		auth_type = policy2->auth_type;
+		     !policy_entry_has_explicit_auth_type(policy) &&
+		     policy_entry_auth_type(policy2) > auth_type)) {
+		auth_type = policy_entry_auth_type(policy2);
 	}
 
 	if (unlikely(auth_type)) {
@@ -228,7 +262,6 @@ __policy_can_access(const void *map, struct __ctx_buff *ctx, __u32 local_id,
 		.lpm_key = { POLICY_FULL_PREFIX, {} }, /* always look up with unwildcarded data */
 		.sec_label = remote_id,
 		.egress = !dir,
-		.pad = 0,
 		.protocol = proto,
 		.dport = dport,
 	};
@@ -311,7 +344,8 @@ __policy_can_access(const void *map, struct __ctx_buff *ctx, __u32 local_id,
 	    (!policy ||
 	     l4policy->precedence > policy->precedence ||
 	     (l4policy->precedence == policy->precedence &&
-	      l4policy->lpm_prefix_length > policy->lpm_prefix_length)))
+	      policy_entry_lpm_prefix_length(l4policy) >
+		      policy_entry_lpm_prefix_length(policy))))
 		goto check_l4_policy;
 
 	/* 4. Otherwise select L3 policy if found. */
@@ -325,7 +359,7 @@ __policy_can_access(const void *map, struct __ctx_buff *ctx, __u32 local_id,
 
 check_policy:
 	cilium_dbg3(ctx, DBG_L4_CREATE, remote_id, local_id, dport << 16 | proto);
-	p_len = policy->lpm_prefix_length;
+	p_len = policy_entry_lpm_prefix_length(policy);
 	if (CONFIG(enable_policy_accounting))
 		__policy_account(remote_id, key.egress, proto, dport, p_len, ctx_full_len(ctx));
 
@@ -336,7 +370,7 @@ check_policy:
 	return __policy_check(policy, l4policy, ext_err, proxy_port, cookie);
 
 check_l4_policy:
-	p_len = l4policy->lpm_prefix_length;
+	p_len = policy_entry_lpm_prefix_length(l4policy);
 	if (CONFIG(enable_policy_accounting))
 		__policy_account(0, key.egress, proto, dport, p_len, ctx_full_len(ctx));
 

@@ -1,0 +1,23 @@
+[2026-02-21T21:12:43Z] rerun targeted go tests on zkd0
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+ok  	github.com/cilium/cilium/pkg/act	0.272s
+ok  	github.com/cilium/cilium/pkg/datapath/iptables	4.353s
+ok  	github.com/cilium/cilium/pkg/datapath/sockets	0.166s
+ok  	github.com/cilium/cilium/pkg/hubble/parser/debug	0.239s
+ok  	github.com/cilium/cilium/pkg/hubble/parser/threefour	0.298s
+ok  	github.com/cilium/cilium/pkg/hubble/testutils	0.159s

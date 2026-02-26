@@ -1,0 +1,5 @@
+tag=s390x-be-policyfix2-20260221T163855Z
+image_tar=/root/work/cilium-dev-s390x-be-policyfix2-20260221T163855Z.tar
+import_log=/root/work/logs/cilium-s390x-cilium-be-policyfix2-import-20260221T164434Z.log
+deploy_log=/root/work/logs/cilium-s390x-cilium-be-policyfix2-deploy-20260221T164434Z.log
+post_log=/root/work/logs/cilium-s390x-cilium-be-policyfix2-postcheck-20260221T164434Z.log

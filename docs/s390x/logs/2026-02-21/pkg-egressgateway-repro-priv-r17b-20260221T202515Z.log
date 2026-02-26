@@ -1,0 +1,7 @@
+=== RUN   TestPrivilegedEgressGatewayManager
+    logger.go:256: time=2026-02-21T12:25:23.057-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bpf/bpffs_linux.go:266 msg="Detected mounted BPF filesystem" bpffsRoot=/sys/fs/bpf
+    manager_privileged_test.go:307: permission denied
+--- FAIL: TestPrivilegedEgressGatewayManager (0.07s)
+FAIL
+FAIL	github.com/cilium/cilium/pkg/egressgateway	0.123s
+FAIL

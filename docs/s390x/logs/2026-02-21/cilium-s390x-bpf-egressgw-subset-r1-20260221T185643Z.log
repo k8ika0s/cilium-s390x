@@ -1,0 +1,295 @@
+===== RUN tc_egressgw_redirect_from_host =====
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_egressgw_redirect_from_host.c -o tc_egressgw_redirect_from_host.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_egressgw_redirect_from_host \
+| cat;
+time=2026-02-21T10:57:02.860858867-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (1.86s)
+    --- FAIL: TestBPF/tc_egressgw_redirect_from_host.o (1.86s)
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0 lb=0.0.0.0
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.1 to identity=9
+        bpf_test.go:64: xx drop (No Egress IP configured) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=10
+        bpf_test.go:64: xx drop (No Egress IP configured) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0 lb=0.0.0.0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.1 to identity=9
+        --- FAIL: TestBPF/tc_egressgw_redirect_from_host.o/tc_egressgw_redirect (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:259: assert failed at ./lib/egressgw.h:259
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=10
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774722 (0xa000a02) from seclabel 0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0 lb=0.0.0.0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.1 to identity=9
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=10
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0 lb=0.0.0.0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr=192.168.0.1 to identity=9
+        bpf_test.go:64: xx drop (No egress gateway found) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=10
+        bpf_test.go:64: xx drop (No egress gateway found) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	1.932s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+===== DONE tc_egressgw_redirect_from_host =====
+===== RUN tc_egressgw_redirect_from_overlay =====
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_egressgw_redirect_from_overlay.c -o tc_egressgw_redirect_from_overlay.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_egressgw_redirect_from_overlay \
+| cat;
+time=2026-02-21T10:57:17.227898139-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (1.76s)
+    --- FAIL: TestBPF/tc_egressgw_redirect_from_overlay.o (1.09s)
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: xx drop (No Egress IP configured) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity 1048575->unknown: [error]
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: xx drop (No Egress IP configured) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity 1048575->unknown: [error]
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: -> 1: [error]
+        --- FAIL: TestBPF/tc_egressgw_redirect_from_overlay.o/tc_egressgw_redirect_from_overlay (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:259: assert failed at ./lib/egressgw.h:259
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: -> 1: [error]
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: -> 1: [error]
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: -> 1: [error]
+        bpf_test.go:64: CPU 05: MARK 0x0 FROM 0 DEBUG: Tunnel decap: id=1048575 flowlabel=0
+        bpf_test.go:64: -> 1: [error]
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	1.824s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+===== DONE tc_egressgw_redirect_from_overlay =====
+===== RUN tc_egressgw_redirect_from_overlay_with_egress_interface =====
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_egressgw_redirect_from_overlay_with_egress_interface.c -o tc_egressgw_redirect_from_overlay_with_egress_interface.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_egressgw_redirect_from_overlay_with_egress_interface \
+| cat;
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.799s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+===== DONE tc_egressgw_redirect_from_overlay_with_egress_interface =====
+===== RUN tc_egressgw_snat =====
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_egressgw_snat.c -o tc_egressgw_snat.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_egressgw_snat \
+| cat;
+--- FAIL: TestBPF (2.51s)
+    --- FAIL: TestBPF/tc_egressgw_snat.o (2.51s)
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_fib_redirect (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:152: assert failed at ./lib/egressgw.h:152
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat1 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat1_2_reply (0.00s)
+            bpf_test.go:455: error while running pktgen prog: status code (100)
+            bpf_test.go:590: Test failed due to unknown error in test framework
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat2 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision1 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        bpf_test.go:64: CPU 06: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision2 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision2_reply (0.00s)
+            bpf_test.go:455: error while running pktgen prog: status code (100)
+            bpf_test.go:590: Test failed due to unknown error in test framework
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:111
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:111
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=518170, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:111
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774721 (0xa000a01) from seclabel 2
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:112
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=518170, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: Established, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=518170, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774721 (0xa000a01) from seclabel 2
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	2.568s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+===== DONE tc_egressgw_snat =====
+===== RUN xdp_egressgw_reply =====
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c xdp_egressgw_reply.c -o xdp_egressgw_reply.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test xdp_egressgw_reply \
+| cat;
+--- FAIL: TestBPF (1.03s)
+    --- FAIL: TestBPF/xdp_egressgw_reply.o (1.03s)
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:1234 dst=192.168.0.1:118
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        --- FAIL: TestBPF/xdp_egressgw_reply.o/xdp_egressgw_reply (0.00s)
+            bpf_test.go:584: xdp_egressgw_reply.c:151: assert failed at xdp_egressgw_reply.c:151
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:118
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 07: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774721 (0xa000a01) from seclabel 2
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	1.085s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+===== DONE xdp_egressgw_reply =====

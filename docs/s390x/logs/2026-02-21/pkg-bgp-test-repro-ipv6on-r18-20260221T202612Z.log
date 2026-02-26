@@ -1,0 +1,265 @@
+=== RUN   TestPrivilegedScript
+=== RUN   TestPrivilegedScript/interface.txtar
+=== PAUSE TestPrivilegedScript/interface.txtar
+=== CONT  TestPrivilegedScript/interface.txtar
+    scripttest.go:253: 2026-02-21T20:26:20Z
+    scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptinterface.txtar2336791037/001
+    logger.go:256: time=2026-02-21T12:26:20.122-08:00 level=INFO source=/root/work/cilium-s390x/pkg/loadbalancer/config.go:371 msg="option bpf-sock-rev-map-max set by dynamic sizing to 262144"
+    scripttest.go:72: 
+        [stdout]
+        PATH=/usr/lib/golang/bin:/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+        DATADIR=/root/work/cilium-s390x/pkg/bgp/test/testdata
+        PWD=/tmp/TestPrivilegedScriptinterface.txtar2336791037/001
+        WORK=/tmp/TestPrivilegedScriptinterface.txtar2336791037/001
+        TMPDIR=/tmp/TestPrivilegedScriptinterface.txtar2336791037/001/tmp
+    logger.go:256: time=2026-02-21T12:26:20.125-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:385 msg="Starting hive"
+    logger.go:256: time=2026-02-21T12:26:20.125-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:389 msg="Started hive" duration=179.746µs
+    scripttest.go:72: #! --test-peering-ips=10.99.5.1,10.99.5.2,fd00::aa:bb:55:1,fd00::aa:bb:55:2
+        # Tests Interface advertisements for IPv4-only and dual-stack peers.
+        # Start the hive (0.001s)
+        > hive start
+    scripttest.go:72: # Configure GoBGP servers (0.001s)
+        > gobgp/add-server v4-only   65010 10.99.5.1        1790
+        Started GoBGP Server Name: v4-only, ASN: 65010, ip: 10.99.5.1, port: 1790
+        > gobgp/add-server dualstack 65010 fd00::aa:bb:55:1 1790 --router-id 1.0.0.1
+        Started GoBGP Server Name: dualstack, ASN: 65010, ip: fd00::aa:bb:55:1, port: 1790
+2026/02/21 12:26:20 INFO Add a peer configuration Topic=Peer Key=10.99.5.2 asn=65010 component=test subsys=gobgp
+    logger.go:256: time=2026-02-21T12:26:20.127-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/agent/controller.go:124 msg="Cilium BGP Control Plane Controller now running..." module=bgp-control-plane component=Controller.Run
+2026/02/21 12:26:20 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.5.2 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:20 DEBUG state changed old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=10.99.5.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:20 INFO Add a peer configuration Topic=Peer Key=fd00::aa:bb:55:2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:20 DEBUG IdleHoldTimer expired Topic=Peer Key=fd00::aa:bb:55:2 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:20 DEBUG state changed new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=fd00::aa:bb:55:2 old=BGP_FSM_IDLE asn=65010 component=test subsys=gobgp
+    scripttest.go:72: # Configure peers on GoBGP (0.004s)
+        > gobgp/add-peer -s v4-only   10.99.5.2        65001
+        Added peer to GoBGP Server: conf:{neighbor_address:"10.99.5.2" peer_asn:65001} transport:{passive_mode:true} graceful_restart:{enabled:true} afi_safis:{config:{family:{afi:AFI_IP safi:SAFI_UNICAST}} add_paths:{config:{receive:true}}} afi_safis:{config:{family:{afi:AFI_IP6 safi:SAFI_UNICAST}} add_paths:{config:{receive:true}}}
+        > gobgp/add-peer -s dualstack fd00::aa:bb:55:2 65001
+        Added peer to GoBGP Server: conf:{neighbor_address:"fd00::aa:bb:55:2" peer_asn:65001} transport:{passive_mode:true} graceful_restart:{enabled:true} afi_safis:{config:{family:{afi:AFI_IP safi:SAFI_UNICAST}} add_paths:{config:{receive:true}}} afi_safis:{config:{family:{afi:AFI_IP6 safi:SAFI_UNICAST}} add_paths:{config:{receive:true}}}
+    scripttest.go:72: # Configure BGP on Cilium (0.002s)
+        > k8s/add cilium-node.yaml bgp-node-config.yaml bgp-peer-config-v4.yaml bgp-peer-config-dualstack.yaml bgp-advertisement.yaml
+    logger.go:256: time=2026-02-21T12:26:20.329-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/manager/manager.go:500 msg="Registering BGP instance" module=bgp-control-plane instance=tor
+    logger.go:256: time=2026-02-21T12:26:20.330-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/manager/reconciler/neighbor.go:256 msg="Reconciling peers for instance" module=bgp-control-plane reconciler=Neighbor instance=tor
+    logger.go:256: time=2026-02-21T12:26:20.330-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/manager/reconciler/neighbor.go:285 msg="Adding peer" module=bgp-control-plane reconciler=Neighbor instance=tor peer=dualstack-peer
+    logger.go:256: time=2026-02-21T12:26:20.330-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Add a peer configuration" module=bgp-control-plane instance=tor Topic=Peer Key=fd00::aa:bb:55:1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:20.330-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/manager/reconciler/neighbor.go:285 msg="Adding peer" module=bgp-control-plane reconciler=Neighbor instance=tor peer=v4-peer
+    logger.go:256: time=2026-02-21T12:26:20.330-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Add a peer configuration" module=bgp-control-plane instance=tor Topic=Peer Key=10.99.5.1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:20.330-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/manager/manager.go:551 msg="Successfully registered BGP instance" module=bgp-control-plane asn=65001 listen_port=-1 router_id=10.99.5.2
+2026/02/21 12:26:21 DEBUG Accepted a new passive connection Key=10.99.5.2 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:21 DEBUG state changed Key=10.99.5.2 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:21 DEBUG state changed old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer Key=10.99.5.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:21 INFO Peer Up Topic=Peer Key=10.99.5.2 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:21 DEBUG state changed new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated Topic=Peer Key=10.99.5.2 old=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+    logger.go:256: time=2026-02-21T12:26:21.598-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Peer Up" module=bgp-control-plane instance=tor Topic=Peer Key=10.99.5.1 State=BGP_FSM_OPENCONFIRM asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 DEBUG Accepted a new passive connection Topic=Peer Key=fd00::aa:bb:55:2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG state changed Topic=Peer Key=fd00::aa:bb:55:2 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG state changed Topic=Peer Key=fd00::aa:bb:55:2 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 INFO Peer Up Topic=Peer Key=fd00::aa:bb:55:2 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG state changed Key=fd00::aa:bb:55:2 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated Topic=Peer asn=65010 component=test subsys=gobgp
+    scripttest.go:72: # Wait for peerings to be established (2.076s)
+        > gobgp/wait-state -s v4-only   10.99.5.2        ESTABLISHED
+        peer 10.99.5.2 OPENSENT
+        peer 10.99.5.2 OPENCONFIRM
+        peer 10.99.5.2 ESTABLISHED
+        > gobgp/wait-state -s dualstack fd00::aa:bb:55:2 ESTABLISHED
+        peer fd00::aa:bb:55:2 OPENSENT
+        peer fd00::aa:bb:55:2 OPENCONFIRM
+        peer fd00::aa:bb:55:2 ESTABLISHED
+    logger.go:256: time=2026-02-21T12:26:22.208-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Peer Up" module=bgp-control-plane instance=tor Topic=Peer Key=fd00::aa:bb:55:1 State=BGP_FSM_OPENCONFIRM asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    scripttest.go:72: # Validate that no IPv4 routes are advertised yet (0.000s)
+        > gobgp/routes -s v4-only -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: # Validate that no IPv6 routes are advertised yet (0.001s)
+        > gobgp/routes -s dualstack -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: # Add devices to statedb (0.000s)
+        > db/insert devices device-eth0.yaml device-loop1.yaml
+    scripttest.go:72: # Validate IPv4 loop1 interface routes on the v4 peer
+        > gobgp/routes -s v4-only -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-ipv4.expected routes.actual
+        diff gobgp-routes-ipv4.expected routes.actual
+        --- gobgp-routes-ipv4.expected
+        +++ routes.actual
+        @@ -1,3 +1,1 @@
+        -Prefix               NextHop     Attrs
+        -192.168.100.100/32   10.99.5.2   [{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]
+        -192.168.100.101/32   10.99.5.2   [{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]
+        +Prefix   NextHop   Attrs
+        
+    logger.go:256: time=2026-02-21T12:26:22.211-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Topic=Operation Key=10.99.5.1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.211-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Key=fd00::aa:bb:55:1 Topic=Operation asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=10.99.5.2 nlri=[192.168.100.101/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.101/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=10.99.5.2 nlri=[192.168.100.100/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv4-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [192.168.100.101/32]}}]" Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.101/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.100/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv4-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [192.168.100.100/32]}}]" Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Nlri=192.168.100.100/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.100/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv6-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [fd00::aabb:2/128]}}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Nlri=fd00::aabb:2/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=fd00::aabb:2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Key=fd00::aa:bb:55:2 Data="{ fd00::aabb:2/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv6-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [fd00::aabb:1/128]}}]" Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=fd00::aabb:1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Nlri=fd00::aabb:1/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Data="{ fd00::aabb:1/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" Topic=Peer Key=fd00::aa:bb:55:2 asn=65010 component=test subsys=gobgp
+    scripttest.go:72: (command "* cmp gobgp-routes-ipv4.expected routes.actual" failed, retrying in 100ms...)
+    scripttest.go:72: (command "* cmp gobgp-routes-ipv4.expected routes.actual" succeeded after 1 retries in 0.102s)
+        # Validate IPv4 loop1 interface routes on the dualstack peer (0.000s)
+        > gobgp/routes -s dualstack -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-ipv4-ds.expected routes.actual
+    scripttest.go:72: # Validate no IPv6 loop1 interface routes on the v4 peer (0.000s)
+        > gobgp/routes -s v4-only -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: # Validate IPv6 loop1 interface routes on the dualstack peer (0.000s)
+        > gobgp/routes -s dualstack -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-ipv6.expected routes.actual
+    scripttest.go:72: # Set loop1 device to admin-down (0.000s)
+        > db/insert devices device-loop1-down.yaml
+    scripttest.go:72: # Validate that no IPv4 routes are advertised
+        > gobgp/routes -s v4-only -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+        diff gobgp-routes-empty.expected routes.actual
+        --- gobgp-routes-empty.expected
+        +++ routes.actual
+        @@ -1,1 +1,3 @@
+        -Prefix   NextHop   Attrs
+        +Prefix               NextHop     Attrs
+        +192.168.100.100/32   10.99.5.2   [{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]
+        +192.168.100.101/32   10.99.5.2   [{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]
+        
+    logger.go:256: time=2026-02-21T12:26:22.314-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Topic=Operation Key=10.99.5.1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.314-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Topic=Operation Key=fd00::aa:bb:55:1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=10.99.5.2 nlri=[] withdrawals=[192.168.100.101/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Key=192.168.100.101/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[192.168.100.101/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Key=10.99.5.2 Data="{ 192.168.100.101/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update attributes=[] Topic=Peer Key=10.99.5.2 nlri=[] withdrawals=[192.168.100.100/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.100/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.101/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[192.168.100.100/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.100/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00::aabb:2/128]}}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=fd00::aabb:2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Key=fd00::aa:bb:55:2 Data="{ fd00::aabb:2/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00::aabb:1/128]}}]" Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=fd00::aabb:1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Data="{ fd00::aabb:1/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" Topic=Peer Key=fd00::aa:bb:55:2 asn=65010 component=test subsys=gobgp
+    scripttest.go:72: (command "* cmp gobgp-routes-empty.expected routes.actual" failed, retrying in 100ms...)
+    scripttest.go:72: (command "* cmp gobgp-routes-empty.expected routes.actual" succeeded after 1 retries in 0.101s)
+        # Validate that no IPv6 routes are advertised (0.000s)
+        > gobgp/routes -s dualstack -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: # Set loop1 device to admin-up again (0.000s)
+        > db/insert devices device-loop1.yaml
+    scripttest.go:72: # Validate IPv4 loop1 interface routes on the v4 peer
+        > gobgp/routes -s v4-only -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-ipv4.expected routes.actual
+        diff gobgp-routes-ipv4.expected routes.actual
+        --- gobgp-routes-ipv4.expected
+        +++ routes.actual
+        @@ -1,3 +1,1 @@
+        -Prefix               NextHop     Attrs
+        -192.168.100.100/32   10.99.5.2   [{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]
+        -192.168.100.101/32   10.99.5.2   [{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]
+        +Prefix   NextHop   Attrs
+        
+    logger.go:256: time=2026-02-21T12:26:22.416-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Key=10.99.5.1 Topic=Operation asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.416-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Topic=Operation Key=fd00::aa:bb:55:1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]" Topic=Peer Key=10.99.5.2 nlri=[192.168.100.100/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.100/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update nlri=[192.168.100.101/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.2} {Communities: 65001:100}]" Topic=Peer Key=10.99.5.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.101/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv4-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [192.168.100.100/32]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Key=fd00::aa:bb:55:2 Data="{ 192.168.100.100/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv4-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [192.168.100.101/32]}}]" Topic=Peer Key=fd00::aa:bb:55:2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Nlri=192.168.100.101/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.101/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv6-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [fd00::aabb:1/128]}}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=fd00::aabb:1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=fd00::aabb:1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Key=fd00::aa:bb:55:2 Data="{ fd00::aabb:1/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv6-unicast): {Nexthop: fd00::aa:bb:55:2, NLRIs: [fd00::aabb:2/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=fd00::aabb:2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG create Destination Topic=Table Nlri=fd00::aabb:2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ fd00::aabb:2/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2 }" asn=65010 component=test subsys=gobgp
+    scripttest.go:72: (command "* cmp gobgp-routes-ipv4.expected routes.actual" failed, retrying in 100ms...)
+    scripttest.go:72: (command "* cmp gobgp-routes-ipv4.expected routes.actual" succeeded after 1 retries in 0.105s)
+        # Validate IPv4 loop1 interface routes on the dualstack peer (0.000s)
+        > gobgp/routes -s dualstack -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-ipv4-ds.expected routes.actual
+    scripttest.go:72: # Validate no IPv6 loop1 interface routes on the v4 peer (0.005s)
+        > gobgp/routes -s v4-only -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: # Validate IPv6 loop1 interface routes on the dualstack peer (0.001s)
+        > gobgp/routes -s dualstack -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-ipv6.expected routes.actual
+    scripttest.go:72: # Delete loop1 device from statedb (0.000s)
+        > db/delete devices device-loop1.yaml
+    logger.go:256: time=2026-02-21T12:26:22.527-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Topic=Operation Key=10.99.5.1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.527-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Neighbor soft reset out" module=bgp-control-plane instance=tor Key=fd00::aa:bb:55:1 Topic=Operation asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 DEBUG received update nlri=[] withdrawals=[192.168.100.100/32] attributes=[] Topic=Peer Key=10.99.5.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.100/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=10.99.5.2 nlri=[] withdrawals=[192.168.100.101/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[192.168.100.100/32] attributes=[] Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=10.99.5.2 Data="{ 192.168.100.101/32 | src: { 10.99.5.2 | as: 65001, id: 10.99.5.2 }, nh: 10.99.5.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.100/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.100/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[192.168.100.101/32] attributes=[] Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=192.168.100.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ 192.168.100.101/32 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00::aabb:2/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=fd00::aabb:2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ fd00::aabb:2/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG received update Topic=Peer Key=fd00::aa:bb:55:2 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00::aabb:1/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG Removing withdrawals Topic=Table Key=fd00::aabb:1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG From me, ignore Topic=Peer Key=fd00::aa:bb:55:2 Data="{ fd00::aabb:1/128 | src: { fd00::aa:bb:55:2 | as: 65001, id: 10.99.5.2 }, nh: fd00::aa:bb:55:2, withdraw }" asn=65010 component=test subsys=gobgp
+    scripttest.go:72: # Validate that no IPv4 routes are advertised (0.006s)
+        > gobgp/routes -s v4-only -o routes.actual ipv4 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: # Validate that no IPv6 routes are advertised (0.000s)
+        > gobgp/routes -s dualstack -o routes.actual ipv6 unicast
+        > * cmp gobgp-routes-empty.expected routes.actual
+    scripttest.go:72: #####
+2026/02/21 12:26:22 INFO Delete a peer configuration Topic=Peer Key=10.99.5.2 asn=65010 component=test subsys=gobgp
+    logger.go:256: time=2026-02-21T12:26:22.533-08:00 level=WARN source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:103 msg="received notification" module=bgp-control-plane instance=tor Topic=Peer Key=10.99.5.1 Code=6 Subcode=3 Data="" asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 INFO Peer Down Topic=Peer Key=10.99.5.2 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+    logger.go:256: time=2026-02-21T12:26:22.533-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Peer Down" module=bgp-control-plane instance=tor Key=10.99.5.1 State=BGP_FSM_ESTABLISHED Reason="notification-received code 6(cease) subcode 3(peer deconfigured)" Topic=Peer asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+2026/02/21 12:26:22 DEBUG freed fsm.h Topic=Peer Key=10.99.5.2 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 INFO Delete a peer configuration Topic=Peer Key=fd00::aa:bb:55:2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 INFO Peer Down Topic=Peer Key=fd00::aa:bb:55:2 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:26:22 DEBUG freed fsm.h Key=fd00::aa:bb:55:2 State=BGP_FSM_ESTABLISHED Topic=Peer asn=65010 component=test subsys=gobgp
+    logger.go:256: time=2026-02-21T12:26:22.533-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:26:22.533-08:00 level=WARN source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:103 msg="received notification" module=bgp-control-plane instance=tor Topic=Peer Key=fd00::aa:bb:55:1 Code=6 Subcode=3 Data="" asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.534-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Peer Down" module=bgp-control-plane instance=tor Topic=Peer Key=fd00::aa:bb:55:1 State=BGP_FSM_ESTABLISHED Reason="notification-received code 6(cease) subcode 3(peer deconfigured)" asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.534-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/agent/controller.go:142 msg="Cilium BGP Control Plane Controller shut down" module=bgp-control-plane component=Controller.Run
+    logger.go:256: time=2026-02-21T12:26:22.534-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Delete a peer configuration" module=bgp-control-plane instance=tor Topic=Peer Key=10.99.5.1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.534-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bgp/gobgp/logger.go:120 msg="Delete a peer configuration" module=bgp-control-plane instance=tor Topic=Peer Key=fd00::aa:bb:55:1 asn=65001 component=gobgp.BgpServerInstance subsys=bgp-control-plane
+    logger.go:256: time=2026-02-21T12:26:22.534-08:00 level=ERROR source=/root/work/cilium-s390x/pkg/hive/health/provider.go:223 msg="failed to delete reporter status tree" module=health error="reporting for \"bgp-control-plane.job-bgpcp-resource-store-events\" has been stopped"
+    logger.go:256: time=2026-02-21T12:26:22.534-08:00 level=ERROR source=/root/work/cilium-s390x/pkg/hive/health/provider.go:223 msg="failed to delete reporter status tree" module=health error="reporting for \"bgp-control-plane.job-bgpcp-resource-store-events\" has been stopped"
+    logger.go:256: time=2026-02-21T12:26:22.535-08:00 level=ERROR source=/root/work/cilium-s390x/pkg/hive/health/provider.go:223 msg="failed to delete reporter status tree" module=health error="reporting for \"bgp-control-plane.job-bgpcp-resource-store-events\" has been stopped"
+    logger.go:256: time=2026-02-21T12:26:22.535-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.152542ms
+--- PASS: TestPrivilegedScript (0.05s)
+    --- PASS: TestPrivilegedScript/interface.txtar (2.42s)
+PASS
+ok  	github.com/cilium/cilium/pkg/bgp/test	2.537s

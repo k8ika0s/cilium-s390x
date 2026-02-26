@@ -1,0 +1,4 @@
+NAMESPACE     NAME           TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE    SELECTOR
+default       kubernetes     ClusterIP   10.96.0.1    <none>        443/TCP                  151m   <none>
+kube-system   cilium-envoy   ClusterIP   None         <none>        9964/TCP                 148m   k8s-app=cilium-envoy
+kube-system   kube-dns       ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   151m   k8s-app=kube-dns

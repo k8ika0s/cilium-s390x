@@ -1,0 +1,6 @@
+=== RUN   TestPrivilegedEgressGatewayManager
+    logger.go:256: time=2026-02-21T12:26:19.203-08:00 level=INFO source=/root/work/cilium-s390x/pkg/bpf/bpffs_linux.go:266 msg="Detected mounted BPF filesystem" bpffsRoot=/sys/fs/bpf
+    logger.go:256: time=2026-02-21T12:26:20.090-08:00 level=ERROR source=/root/work/cilium-s390x/pkg/egressgateway/policy.go:146 msg="Failed to derive policy gateway configuration" error="failed to retrieve egress interface no_interface: Link not found" ciliumEgressGatewayPolicyName=/policy-3 interface=no_interface egressIP=""
+--- PASS: TestPrivilegedEgressGatewayManager (1.06s)
+PASS
+ok  	github.com/cilium/cilium/pkg/egressgateway	1.110s

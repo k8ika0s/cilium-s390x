@@ -1,0 +1,19 @@
+Cluster nodes
+NAME                 STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+zkd01.fyre.ibm.com   Ready    control-plane   110m   v1.35.1   10.11.59.172   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+Waiting for node readiness
+node/zkd01.fyre.ibm.com condition met
+Waiting for Cilium DaemonSets/Deployments
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Cilium pod status
+NAME           READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-4s2k4   1/1     Running   0          49s   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                 READY   STATUS    RESTARTS   AGE    IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-envoy-rz5ch   1/1     Running   0          108m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                               READY   STATUS    RESTARTS   AGE    IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-operator-7d796b74f8-bmc6k   1/1     Running   0          108m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+Smoke checks failed: cluster-health
+----- cluster-health -----
+cluster health has zero reachable endpoints

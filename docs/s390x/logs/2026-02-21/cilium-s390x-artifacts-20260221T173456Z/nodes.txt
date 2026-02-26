@@ -1,0 +1,2 @@
+NAME                 STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+zkd01.fyre.ibm.com   Ready    control-plane   159m   v1.35.1   10.11.59.172   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27

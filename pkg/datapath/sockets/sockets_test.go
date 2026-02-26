@@ -4,6 +4,7 @@
 package sockets
 
 import (
+	"encoding/binary"
 	"fmt"
 	"io"
 	"net"
@@ -30,9 +31,8 @@ import (
 
 func TestSocketReqSerialize(t *testing.T) {
 	testCases := []struct {
-		name     string
-		req      SocketRequest
-		expected []byte
+		name string
+		req  SocketRequest
 	}{
 		{
 			name: "nil addresses",
@@ -51,7 +51,6 @@ func TestSocketReqSerialize(t *testing.T) {
 					Cookie:          [2]uint32{0, 0},
 				},
 			},
-			expected: []byte{2, 6, 0, 0, 255, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		},
 		{
 			name: "non-nil addresses",
@@ -70,26 +69,53 @@ func TestSocketReqSerialize(t *testing.T) {
 					Cookie:          [2]uint32{4144, 0},
 				},
 			},
-			expected: []byte{2, 6, 0, 0, 255, 15, 0, 0, 231, 76, 117, 48, 127, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 16, 0, 0, 0, 0, 0, 0},
 		},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			assert.Equal(t, tc.expected, tc.req.Serialize())
+			serialized := tc.req.Serialize()
+			require.Len(t, serialized, sizeofSocketRequest)
+			assert.Equal(t, tc.req.Family, serialized[0])
+			assert.Equal(t, tc.req.Protocol, serialized[1])
+			assert.Equal(t, tc.req.Ext, serialized[2])
+			assert.Equal(t, tc.req.pad, serialized[3])
+			assert.Equal(t, tc.req.States, binary.NativeEndian.Uint32(serialized[4:8]))
+			assert.Equal(t, tc.req.ID.SourcePort, binary.BigEndian.Uint16(serialized[8:10]))
+			assert.Equal(t, tc.req.ID.DestinationPort, binary.BigEndian.Uint16(serialized[10:12]))
+
+			expectedSource := make(net.IP, net.IPv6len)
+			if tc.req.ID.Source != nil {
+				if tc.req.Family == unix.AF_INET6 {
+					copy(expectedSource, tc.req.ID.Source.To16())
+				} else {
+					copy(expectedSource, tc.req.ID.Source.To4())
+				}
+			}
+			expectedDestination := make(net.IP, net.IPv6len)
+			if tc.req.ID.Destination != nil {
+				if tc.req.Family == unix.AF_INET6 {
+					copy(expectedDestination, tc.req.ID.Destination.To16())
+				} else {
+					copy(expectedDestination, tc.req.ID.Destination.To4())
+				}
+			}
+			assert.Equal(t, expectedSource, net.IP(serialized[12:28]))
+			assert.Equal(t, expectedDestination, net.IP(serialized[28:44]))
+			assert.Equal(t, tc.req.ID.Interface, binary.NativeEndian.Uint32(serialized[44:48]))
+			assert.Equal(t, tc.req.ID.Cookie[0], binary.NativeEndian.Uint32(serialized[48:52]))
+			assert.Equal(t, tc.req.ID.Cookie[1], binary.NativeEndian.Uint32(serialized[52:56]))
 		})
 	}
 }
 
 func TestSocketDeserialize(t *testing.T) {
 	testCases := []struct {
-		name     string
-		buf      []byte
-		expected Socket
+		name string
+		sock Socket
 	}{
 		{
 			name: "default route addresses",
-			buf:  []byte{2, 7, 0, 0, 170, 213, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 89, 101, 0, 0, 5, 0, 8, 0, 0, 0, 0, 0, 8, 0, 15, 0, 0, 0, 0, 0, 12, 0, 21, 0, 157, 14, 0, 0, 0, 0, 0, 0, 6, 0, 22, 0, 80, 0, 0, 0},
-			expected: Socket{
+			sock: Socket{
 				Family:  2,
 				State:   7,
 				Timer:   0,
@@ -111,8 +137,7 @@ func TestSocketDeserialize(t *testing.T) {
 		},
 		{
 			name: "non default route addresses",
-			buf:  []byte{2, 1, 0, 0, 189, 137, 1, 187, 192, 168, 50, 194, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 151, 99, 52, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 232, 3, 0, 0, 146, 138, 10, 0, 5, 0, 8, 0, 0, 0, 0, 0, 8, 0, 15, 0, 0, 0, 0, 0, 12, 0, 21, 0, 1, 42, 0, 0, 0, 0, 0, 0, 6, 0, 22, 0, 80, 0, 0, 0},
-			expected: Socket{
+			sock: Socket{
 				Family:  2,
 				State:   1,
 				Timer:   0,
@@ -135,12 +160,49 @@ func TestSocketDeserialize(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
+			buf := encodeSocketDiagForTest(tc.sock)
+			// Include trailing attrs to match netlink response framing behavior.
+			buf = append(buf, 0x06, 0x00, 0x16, 0x00, 0x50, 0x00, 0x00, 0x00)
+
 			var sock Socket
-			err := sock.Deserialize(tc.buf)
+			err := sock.Deserialize(buf)
 			assert.NoError(t, err)
-			assert.Equal(t, tc.expected, sock)
+			assert.Equal(t, tc.sock, sock)
 		})
 	}
+}
+
+func encodeSocketDiagForTest(sock Socket) []byte {
+	buf := make([]byte, 0, sizeofSocket)
+	buf = append(buf, sock.Family, sock.State, sock.Timer, sock.Retrans)
+	buf = binary.BigEndian.AppendUint16(buf, sock.ID.SourcePort)
+	buf = binary.BigEndian.AppendUint16(buf, sock.ID.DestinationPort)
+
+	src := make([]byte, net.IPv6len)
+	if sock.Family == unix.AF_INET6 {
+		copy(src, sock.ID.Source.To16())
+	} else {
+		copy(src, sock.ID.Source.To4())
+	}
+	dst := make([]byte, net.IPv6len)
+	if sock.Family == unix.AF_INET6 {
+		copy(dst, sock.ID.Destination.To16())
+	} else {
+		copy(dst, sock.ID.Destination.To4())
+	}
+	buf = append(buf, src...)
+	buf = append(buf, dst...)
+
+	buf = binary.NativeEndian.AppendUint32(buf, sock.ID.Interface)
+	buf = binary.NativeEndian.AppendUint32(buf, sock.ID.Cookie[0])
+	buf = binary.NativeEndian.AppendUint32(buf, sock.ID.Cookie[1])
+	buf = binary.NativeEndian.AppendUint32(buf, sock.Expires)
+	buf = binary.NativeEndian.AppendUint32(buf, sock.RQueue)
+	buf = binary.NativeEndian.AppendUint32(buf, sock.WQueue)
+	buf = binary.NativeEndian.AppendUint32(buf, sock.UID)
+	buf = binary.NativeEndian.AppendUint32(buf, sock.INode)
+
+	return buf
 }
 
 func BenchmarkSocketReqSerialize(b *testing.B) {

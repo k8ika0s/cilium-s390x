@@ -1,0 +1,49 @@
+Updating Subscription Management repositories.
+Red Hat Enterprise Linux 9 for IBM z Systems -  101 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux 9 for IBM z Systems -   80 kB/s | 4.1 kB     00:00    
+Dependencies resolved.
+================================================================================
+ Package            Arch   Version        Repository                       Size
+================================================================================
+Installing:
+ python3-jinja2     noarch 2.11.3-8.el9_5 rhel-9-for-s390x-appstream-rpms 253 k
+Installing dependencies:
+ python3-babel      noarch 2.9.1-2.el9    rhel-9-for-s390x-appstream-rpms 6.0 M
+ python3-markupsafe s390x  1.1.1-12.el9   rhel-9-for-s390x-appstream-rpms  39 k
+ python3-pytz       noarch 2021.1-5.el9   rhel-9-for-s390x-appstream-rpms  55 k
+
+Transaction Summary
+================================================================================
+Install  4 Packages
+
+Total download size: 6.3 M
+Installed size: 28 M
+Downloading Packages:
+(1/4): python3-markupsafe-1.1.1-12.el9.s390x.rp 337 kB/s |  39 kB     00:00    
+(2/4): python3-pytz-2021.1-5.el9.noarch.rpm     438 kB/s |  55 kB     00:00    
+(3/4): python3-babel-2.9.1-2.el9.noarch.rpm      35 MB/s | 6.0 MB     00:00    
+(4/4): python3-jinja2-2.11.3-8.el9_5.noarch.rpm 3.6 MB/s | 253 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                            34 MB/s | 6.3 MB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : python3-pytz-2021.1-5.el9.noarch                       1/4 
+  Installing       : python3-babel-2.9.1-2.el9.noarch                       2/4 
+  Installing       : python3-markupsafe-1.1.1-12.el9.s390x                  3/4 
+  Installing       : python3-jinja2-2.11.3-8.el9_5.noarch                   4/4 
+  Running scriptlet: python3-jinja2-2.11.3-8.el9_5.noarch                   4/4 
+  Verifying        : python3-markupsafe-1.1.1-12.el9.s390x                  1/4 
+  Verifying        : python3-babel-2.9.1-2.el9.noarch                       2/4 
+  Verifying        : python3-pytz-2021.1-5.el9.noarch                       3/4 
+  Verifying        : python3-jinja2-2.11.3-8.el9_5.noarch                   4/4 
+Installed products updated.
+
+Installed:
+  python3-babel-2.9.1-2.el9.noarch        python3-jinja2-2.11.3-8.el9_5.noarch  
+  python3-markupsafe-1.1.1-12.el9.s390x   python3-pytz-2021.1-5.el9.noarch      
+
+Complete!

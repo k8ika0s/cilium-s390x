@@ -1,0 +1,71 @@
+[INFO] 2026-02-25T07:16:31Z start s390x-harness r99
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] root_dir=/root/work/cilium-s390x
+[INFO] git_rev=unknown
+[INFO] harness_script=/root/work/cilium-s390x/test/s390x/run_harness.sh
+[INFO] command=/root/work/cilium-s390x/test/s390x/run_harness.sh 
+Deploying cilium into kube-system from ./install/kubernetes/cilium
+Release "cilium" has been upgraded. Happy Helming!
+NAME: cilium
+LAST DEPLOYED: Tue Feb 24 23:16:31 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 4
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium.
+
+Your release version is 1.20.0-dev.
+
+For any further help, visit https://docs.cilium.io/en/v1.20/gettinghelp
+Waiting for Cilium workloads
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Deployment completed
+Cluster nodes
+NAME                   STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+kdz.dev.fyre.ibm.com   Ready    control-plane   40m   v1.35.1   10.14.125.157   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+Waiting for node readiness
+node/kdz.dev.fyre.ibm.com condition met
+Waiting for Cilium DaemonSets/Deployments
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Cilium pod status
+NAME           READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-fg9mq   1/1     Running   0          23m   10.14.125.157   kdz.dev.fyre.ibm.com   <none>           <none>
+NAME                 READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-envoy-cf9jt   1/1     Running   0          23m   10.14.125.157   kdz.dev.fyre.ibm.com   <none>           <none>
+NAME                               READY   STATUS    RESTARTS   AGE   IP              NODE                   NOMINATED NODE   READINESS GATES
+cilium-operator-7d796b74f8-xv6bp   1/1     Running   0          23m   10.14.125.157   kdz.dev.fyre.ibm.com   <none>           <none>
+Smoke checks failed: cluster-health host-to-pod-health
+----- cluster-health -----
+cluster health has zero reachable endpoints (0/1)
+----- host-to-pod-health -----
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3001 milliseconds
+curl: (28) Connection timed out after 3000 milliseconds
+host-to-pod cilium-health probe failed after 20 attempts
+Skipping policy integration because smoke checks failed
+Skipping BPF regression subset because smoke checks failed
+Artifacts collected in /tmp/cilium-s390x-artifacts-20260225T071814Z
+Smoke checks failed; artifacts still collected
+[INFO] 2026-02-25T07:18:15Z end rc=1

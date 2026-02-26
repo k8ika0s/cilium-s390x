@@ -25,7 +25,7 @@ GINKGO = $(QUIET) ginkgo
 
 REGISTRY_CREDENTIALS ?= "${DOCKER_LOGIN}:${DOCKER_PASSWORD}"
 
-.PHONY: all build build-darwin test k8s-kind clean
+.PHONY: all build build-darwin test k8s-kind s390x-deploy s390x-smoke s390x-policy s390x-bpf-subset s390x-collect s390x-harness s390x-integration-wide clean
 
 all: build
 
@@ -64,6 +64,27 @@ k8s-kind:
 			-cilium.operator-image="quay.io/cilium/operator" \
 			-cilium.operator-suffix="-ci" \
 			-cilium.holdEnvironment=$(HOLD_ENVIRONMENT)
+
+s390x-deploy:
+	./s390x/deploy_cilium_s390x.sh
+
+s390x-smoke:
+	./s390x/smoke_status.sh
+
+s390x-policy:
+	./s390x/policy_integration.sh
+
+s390x-bpf-subset:
+	./s390x/bpf_regression_subset.sh
+
+s390x-collect:
+	./s390x/collect_artifacts.sh
+
+s390x-harness:
+	./s390x/run_harness.sh
+
+s390x-integration-wide:
+	./s390x/integration_wide.sh
 
 clean:
 	@$(ECHO_CLEAN)

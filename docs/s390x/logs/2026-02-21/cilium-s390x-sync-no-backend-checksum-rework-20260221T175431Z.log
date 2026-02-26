@@ -1,0 +1,9 @@
+Transfer starting: 20 files
+bpf/tests/
+bpf/tests/tc_lxc_lb4_no_backend.c
+bpf/tests/tc_lxc_lb6_no_backend.c
+bpf/tests/tc_nodeport_lb4_no_backend.c
+bpf/tests/tc_nodeport_lb6_no_backend.c
+
+sent 4290 bytes  received 270 bytes  17072 bytes/sec
+total size is 15608  speedup is 3.42

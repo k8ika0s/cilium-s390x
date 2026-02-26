@@ -55,6 +55,9 @@ BENCH ?= $(BENCH_EVAL)
 BENCHFLAGS_EVAL := -bench=$(BENCH) -run=^$$ -benchtime=10s
 BENCHFLAGS ?= $(BENCHFLAGS_EVAL)
 SKIP_KVSTORES ?= "false"
+KVSTORE_USE_PODMAN_MTU_WORKAROUND ?= false
+KVSTORE_NETWORK_NAME ?= cilium-etcd-net
+KVSTORE_NETWORK_MTU ?= 1500
 SKIP_K8S_CODE_GEN_CHECK ?= "true"
 SKIP_CUSTOMVET_CHECK ?= "false"
 
@@ -130,17 +133,36 @@ start-kvstores: ## Start running kvstores (etcd container) for integration tests
 ifeq ($(SKIP_KVSTORES),"false")
 	@echo Starting key-value store container...
 	-$(QUIET)$(CONTAINER_ENGINE) rm -f "cilium-etcd-test-container" 2> /dev/null
-	$(QUIET)$(CONTAINER_ENGINE) run -d \
-		-e ETCD_UNSUPPORTED_ARCH=$(GOARCH) \
-		--name "cilium-etcd-test-container" \
-		-p 4002:4001 \
-		$(ETCD_IMAGE) \
-		etcd -name etcd0 \
-		-advertise-client-urls http://0.0.0.0:4001 \
-		-listen-client-urls http://0.0.0.0:4001 \
-		-listen-peer-urls http://0.0.0.0:2380 \
-		-initial-cluster-token etcd-cluster-1 \
-		-initial-cluster-state new
+	$(QUIET)if [ "$(KVSTORE_USE_PODMAN_MTU_WORKAROUND)" = "true" ] && \
+		$(CONTAINER_ENGINE) --version 2>/dev/null | grep -qi podman; then \
+		echo "Using podman MTU workaround network $(KVSTORE_NETWORK_NAME) (mtu=$(KVSTORE_NETWORK_MTU))"; \
+		$(CONTAINER_ENGINE) network exists "$(KVSTORE_NETWORK_NAME)" || \
+			$(CONTAINER_ENGINE) network create --driver bridge --opt "mtu=$(KVSTORE_NETWORK_MTU)" "$(KVSTORE_NETWORK_NAME)" >/dev/null; \
+		$(CONTAINER_ENGINE) run -d \
+			-e ETCD_UNSUPPORTED_ARCH=$(GOARCH) \
+			--name "cilium-etcd-test-container" \
+			--network "$(KVSTORE_NETWORK_NAME)" \
+			-p 4002:4001 \
+			$(ETCD_IMAGE) \
+			etcd -name etcd0 \
+			-advertise-client-urls http://0.0.0.0:4001 \
+			-listen-client-urls http://0.0.0.0:4001 \
+			-listen-peer-urls http://0.0.0.0:2380 \
+			-initial-cluster-token etcd-cluster-1 \
+			-initial-cluster-state new; \
+	else \
+		$(CONTAINER_ENGINE) run -d \
+			-e ETCD_UNSUPPORTED_ARCH=$(GOARCH) \
+			--name "cilium-etcd-test-container" \
+			-p 4002:4001 \
+			$(ETCD_IMAGE) \
+			etcd -name etcd0 \
+			-advertise-client-urls http://0.0.0.0:4001 \
+			-listen-client-urls http://0.0.0.0:4001 \
+			-listen-peer-urls http://0.0.0.0:2380 \
+			-initial-cluster-token etcd-cluster-1 \
+			-initial-cluster-state new; \
+	fi
 endif
 
 stop-kvstores: ## Forcefully removes running kvstore components (etcd container) for integration tests.

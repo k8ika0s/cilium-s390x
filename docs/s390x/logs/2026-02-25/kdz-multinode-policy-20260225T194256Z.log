@@ -1,0 +1,9 @@
+[meta] started_at_utc=20260225T194256Z
+[meta] host=kdz cluster=kubeadm-two-cp
+Creating namespace s390x-policy-multinode
+pod/server condition met
+pod/client condition met
+Baseline connectivity to 10.244.0.254:8080 (expected: allow)
+Connectivity without access label (expected: deny)
+Connectivity with access label after CEP convergence (expected: allow)
+Policy integration test passed

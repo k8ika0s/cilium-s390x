@@ -1,0 +1,11 @@
+[ts] 2026-02-25T20:27:51Z
+[2026-02-25T20:27:51Z] node_a=kdz.dev.fyre.ibm.com node_b=zkd01.fyre.ibm.com namespace=s390x-proof-nodeport
+[2026-02-25T20:27:56Z] node_a_ip=10.14.125.157 node_b_ip=10.11.59.172 nodeport=32084 cluster_ip=10.108.187.219
+[endpoints] 10.244.0.150 10.244.1.110
+[PASS] pod-a-to-node-b-nodeport
+[PASS] pod-b-to-node-a-nodeport
+[PASS] hostnet-a-to-node-b-nodeport
+[PASS] hostnet-b-to-node-a-nodeport
+[PASS] pod-a-to-clusterip
+[PASS] pod-b-to-clusterip
+nodeport cross-node test passed

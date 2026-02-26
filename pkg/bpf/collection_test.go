@@ -31,8 +31,7 @@ func TestPrivilegedUpgradeMap(t *testing.T) {
 	}, ebpf.MapOptions{PinPath: temp})
 	require.NoError(t, err)
 
-	spec, err := ebpf.LoadCollectionSpec("testdata/upgrade-map.o")
-	require.NoError(t, err)
+	spec := loadCollectionSpecNativeEndian(t, "testdata/upgrade-map.o")
 
 	// Use LoadAndAssign to make sure commit works through map upgrades. This is a
 	// regression test, as [ebpf.Collection.Assign] deletes Map objects from the

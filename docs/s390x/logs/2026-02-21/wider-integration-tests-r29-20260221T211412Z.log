@@ -1,0 +1,60 @@
+[2026-02-21T21:14:12Z] run make integration-tests (BASHRCSOURCED=1) on zkd0
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+docker rm -f "cilium-etcd-test-container" 2> /dev/null
+docker run -d \
+	-e ETCD_UNSUPPORTED_ARCH=s390x \
+	--name "cilium-etcd-test-container" \
+	-p 4002:4001 \
+	gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+	etcd -name etcd0 \
+	-advertise-client-urls http://0.0.0.0:4001 \
+	-listen-client-urls http://0.0.0.0:4001 \
+	-listen-peer-urls http://0.0.0.0:2380 \
+	-initial-cluster-token etcd-cluster-1 \
+	-initial-cluster-state new
+Error: netavark: create veth pair: Netlink error: Invalid argument (os error 22)
+make: *** [Makefile:133: start-kvstores] Error 126
+integration-tests RC=2
+[2026-02-21T21:14:17Z] cleanup cilium-etcd-test-container
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
