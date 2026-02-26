@@ -1,0 +1,334 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+=== RUN   TestPrivilegedScript
+    script_test.go:63: sysctl net.core.fb_tunnels_only_for_init_net was set to  2
+=== RUN   TestPrivilegedScript/desired-neighbors.txtar
+=== PAUSE TestPrivilegedScript/desired-neighbors.txtar
+=== RUN   TestPrivilegedScript/neighbor-initialization.txtar
+=== PAUSE TestPrivilegedScript/neighbor-initialization.txtar
+=== RUN   TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar
+=== PAUSE TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar
+=== RUN   TestPrivilegedScript/neighbor-reconciler.txtar
+=== PAUSE TestPrivilegedScript/neighbor-reconciler.txtar
+=== CONT  TestPrivilegedScript/desired-neighbors.txtar
+=== CONT  TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar
+=== CONT  TestPrivilegedScript/neighbor-reconciler.txtar
+=== CONT  TestPrivilegedScript/neighbor-initialization.txtar
+    scripttest.go:253: 2026-02-21T20:37:06Z
+    scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptneighbor-initialization.txtar689515879/001
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    scripttest.go:253: 2026-02-21T20:37:06Z
+    scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptneighbor-reconciler.txtar664271299/001
+=== NAME  TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar
+    scripttest.go:253: 2026-02-21T20:37:06Z
+    scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptneighbor-reconciler-kernel-arp.txtar767988961/001
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    scripttest.go:253: 2026-02-21T20:37:06Z
+    scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptdesired-neighbors.txtar2853900396/001
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    logger.go:256: time=2026-02-21T12:37:06.491-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/xdp/cell.go:55 msg="Determined final XDP mode" module=datapath-xdp-config accelarationMode=disabled mode=disabled
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    logger.go:256: time=2026-02-21T12:37:06.492-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/xdp/cell.go:55 msg="Determined final XDP mode" module=datapath-xdp-config accelarationMode=disabled mode=disabled
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    logger.go:256: time=2026-02-21T12:37:06.492-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/xdp/cell.go:55 msg="Determined final XDP mode" module=datapath-xdp-config accelarationMode=disabled mode=disabled
+=== NAME  TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar
+    logger.go:256: time=2026-02-21T12:37:06.493-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/xdp/cell.go:55 msg="Determined final XDP mode" module=datapath-xdp-config accelarationMode=disabled mode=disabled
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    scripttest.go:72: 
+        [stdout]
+        PATH=/usr/lib/golang/bin:/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+        DATADIR=/root/work/cilium-s390x/pkg/datapath/neighbor/test/testdata
+        PWD=/tmp/TestPrivilegedScriptneighbor-reconciler.txtar664271299/001
+        WORK=/tmp/TestPrivilegedScriptneighbor-reconciler.txtar664271299/001
+        TMPDIR=/tmp/TestPrivilegedScriptneighbor-reconciler.txtar664271299/001/tmp
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    scripttest.go:72: 
+        [stdout]
+        PATH=/usr/lib/golang/bin:/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+        DATADIR=/root/work/cilium-s390x/pkg/datapath/neighbor/test/testdata
+        PWD=/tmp/TestPrivilegedScriptneighbor-initialization.txtar689515879/001
+        WORK=/tmp/TestPrivilegedScriptneighbor-initialization.txtar689515879/001
+        TMPDIR=/tmp/TestPrivilegedScriptneighbor-initialization.txtar689515879/001/tmp
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    scripttest.go:72: 
+        [stdout]
+        PATH=/usr/lib/golang/bin:/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+        DATADIR=/root/work/cilium-s390x/pkg/datapath/neighbor/test/testdata
+        PWD=/tmp/TestPrivilegedScriptdesired-neighbors.txtar2853900396/001
+        WORK=/tmp/TestPrivilegedScriptdesired-neighbors.txtar2853900396/001
+        TMPDIR=/tmp/TestPrivilegedScriptdesired-neighbors.txtar2853900396/001/tmp
+=== NAME  TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar
+    scripttest.go:72: 
+        [stdout]
+        PATH=/usr/lib/golang/bin:/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+        DATADIR=/root/work/cilium-s390x/pkg/datapath/neighbor/test/testdata
+        PWD=/tmp/TestPrivilegedScriptneighbor-reconciler-kernel-arp.txtar767988961/001
+        WORK=/tmp/TestPrivilegedScriptneighbor-reconciler-kernel-arp.txtar767988961/001
+        TMPDIR=/tmp/TestPrivilegedScriptneighbor-reconciler-kernel-arp.txtar767988961/001/tmp
+    scripttest.go:72: #! --use-kernel-managed-arp-ping --metrics=+cilium_neighbor_entry_refresh_count
+        # Test that when running with kernel-managed ARP ping, the neighbor entry is
+        # created as EXT_MANAGED and automatically refreshed by the kernel.
+        #
+        # Skip this test if the kernel does not support managed ARP ping. (0.000s)
+        > [!kernel-can-manage-arp-ping] stop
+    scripttest.go:72: stop
+    logger.go:256: time=2026-02-21T12:37:06.502-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:37:06.502-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=2.32µs
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    scripttest.go:72: # This test asserts that we only start pruning neighbor entries
+        # after we have been fully initialized and know all desired neighbor entries. (0.022s)
+        > netns/create otherns
+        [stdout]
+        Created network namespace "otherns"
+        > link/set lo up --netns otherns
+        > link/add veth0 veth --peername eth0 --peerns otherns
+        [stdout]
+        Created link "veth0" of type veth
+        > addr/add 192.168.1.1/24 veth0
+        [stdout]
+        Added address 192.168.1.1/24 to interface veth0
+    scripttest.go:72: # Add two addresses to the other end of the veth pair, so we can switch the gateway later. (0.001s)
+        > addr/add 192.168.1.2/24 eth0 --netns otherns
+        [stdout]
+        Added address 192.168.1.2/24 to interface eth0
+        > addr/add 192.168.1.3/24 eth0 --netns otherns
+        [stdout]
+        Added address 192.168.1.3/24 to interface eth0
+        > link/set veth0 up
+        > link/set eth0 --netns otherns up
+    logger.go:256: time=2026-02-21T12:37:06.523-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:385 msg="Starting hive"
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    scripttest.go:72: #! --metrics=+cilium_neighbor_entry_refresh_count (0.025s)
+        > netns/create otherns
+        [stdout]
+        Created network namespace "otherns"
+        > link/set lo up --netns otherns
+        > link/add veth0 veth --peername veth1 --peerns otherns
+        [stdout]
+        Created link "veth0" of type veth
+        > addr/add 192.168.1.1/24 veth0
+        [stdout]
+        Added address 192.168.1.1/24 to interface veth0
+        > addr/add 192.168.1.2/24 veth1 --netns otherns
+        [stdout]
+        Added address 192.168.1.2/24 to interface veth1
+        > link/set veth0 up
+        > link/set veth1 --netns otherns up
+        > route/add 0.0.0.0/0 --gateway 192.168.1.2 --dev veth0
+        [stdout]
+        Added route 0.0.0.0/0
+    logger.go:256: time=2026-02-21T12:37:06.524-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:385 msg="Starting hive"
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    logger.go:256: time=2026-02-21T12:37:06.524-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:385 msg="Starting hive"
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    logger.go:256: time=2026-02-21T12:37:06.524-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/linux/devices_controller.go:601 msg="Devices changed" module=devices-controller devices=[veth0]
+    logger.go:256: time=2026-02-21T12:37:06.531-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:389 msg="Started hive" duration=8.617456ms
+    scripttest.go:72: # Set our default gateway to the first address initially. (0.009s)
+        > route/add 0.0.0.0/0 --gateway 192.168.1.2 --dev veth0
+        [stdout]
+        Added route 0.0.0.0/0
+        > hive/start
+        > db/show devices
+        [stdout]
+        Name    Index   Selected   Type     MTU     HWAddr              Flags                            Addresses                               OperStatus
+        lo      1       false      device   65536                       loopback                                                                 down
+        veth0   2       true       veth     1500    36:5c:80:3f:0e:4a   up|broadcast|multicast|running   192.168.1.1, fe80::345c:80ff:fe3f:e4a   up
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    logger.go:256: time=2026-02-21T12:37:06.535-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/linux/devices_controller.go:601 msg="Devices changed" module=devices-controller devices="[dummy0 dummy1]"
+    logger.go:256: time=2026-02-21T12:37:06.553-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:389 msg="Started hive" duration=28.536398ms
+    scripttest.go:72: > link/add dummy0 dummy
+        [stdout]
+        Created link "dummy0" of type dummy
+        > link/set dummy0 hwaddr=aa:02:03:04:05:06
+        > addr/add 192.168.0.2/24 dummy0
+        [stdout]
+        Added address 192.168.0.2/24 to interface dummy0
+        > addr/add 00FF::AA01/112 dummy0
+        [stdout]
+        Added address 00FF::AA01/112 to interface dummy0
+        > link/set dummy0 up
+        > route/add 0.0.0.0/0 --gateway 192.168.0.1 --dev dummy0
+        [stdout]
+        Added route 0.0.0.0/0
+        > route/add ::/0 --gateway 00FF::AA00 --dev dummy0
+        [stdout]
+        Added route ::/0
+        > link/add dummy1 dummy
+        [stdout]
+        Created link "dummy1" of type dummy
+        > link/set dummy1 hwaddr=aa:0b:0c:0d:0e:0f
+        > addr/add 192.168.1.2/24 dummy1
+        [stdout]
+        Added address 192.168.1.2/24 to interface dummy1
+        > addr/add 00CC::AA01/112 dummy1
+        [stdout]
+        Added address 00CC::AA01/112 to interface dummy1
+        > link/set dummy1 up
+        > route/add 200.0.0.0/16 --gateway 192.168.1.1 --dev dummy1
+        [stdout]
+        Added route 200.0.0.0/16
+        > route/add DDDD:EEEE::/16 --gateway 00CC::AA00 --dev dummy1
+        [stdout]
+        Added route DDDD:EEEE::/16
+        > hive start
+        > db/initialized
+        devices initialized
+        routes initialized
+        neighbors initialized
+        Waiting for desired-neighbors to initialize ([desired-neighbor-calculator-initializer])...
+        desired-neighbors initialized
+        forwardable-ip initialized
+        health initialized
+        > db/show devices
+        [stdout]
+        Name     Index   Selected   Type     MTU     HWAddr              Flags                  Addresses                                        OperStatus
+        lo       1       false      device   65536                       loopback                                                                down
+        dummy0   2       true       dummy    1500    aa:02:03:04:05:06   up|broadcast|running   192.168.0.2, ff::aa01, fe80::a802:3ff:fe04:506   unknown
+        dummy1   3       true       dummy    1500    aa:0b:0c:0d:0e:0f   up|broadcast|running   192.168.1.2, cc::aa01, fe80::a80b:cff:fe0d:e0f   unknown
+    scripttest.go:72: # Insert a forwardable IP, which should only use the default route (0.000s)
+        > db/insert forwardable-ip node2-ipv4.yaml
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    logger.go:256: time=2026-02-21T12:37:06.563-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/linux/devices_controller.go:601 msg="Devices changed" module=devices-controller devices=[veth0]
+    logger.go:256: time=2026-02-21T12:37:06.563-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:389 msg="Started hive" duration=39.372295ms
+    scripttest.go:72: # Tell the kernel to mark neighbor entries as stale in 1000ms and disable the first probe delay. (0.041s)
+        > sysctl/set net ipv4 neigh veth0 base_reachable_time_ms 1000
+        [stdout]
+        Set net.ipv4.neigh.veth0.base_reachable_time_ms = 1000
+        > sysctl/set net ipv4 neigh veth0 delay_first_probe_time 0
+        [stdout]
+        Set net.ipv4.neigh.veth0.delay_first_probe_time = 0
+        > hive start
+        > db/initialized
+        devices initialized
+        routes initialized
+        neighbors initialized
+        Waiting for desired-neighbors to initialize ([desired-neighbor-calculator-initializer])...
+        desired-neighbors initialized
+        forwardable-ip initialized
+        health initialized
+        > db/show devices
+        [stdout]
+        Name    Index   Selected   Type     MTU     HWAddr              Flags                            Addresses                                OperStatus
+        lo      1       false      device   65536                       loopback                                                                  down
+        veth0   2       true       veth     1500    d6:eb:b4:91:20:02   up|broadcast|multicast|running   192.168.1.1, fe80::d4eb:b4ff:fe91:2002   up
+        > db/insert forwardable-ip node1-ipv4.yaml
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    scripttest.go:72: # Result should be 1 desired neighbor, for the next hop of dummy0 (0.014s)
+        > db/cmp desired-neighbors node2-neighbors.table
+    scripttest.go:72: # Add another forwardable IP, which is reachable over both interfaces but via different
+        # next hops. (0.000s)
+        > db/insert forwardable-ip node1-ipv4.yaml
+    scripttest.go:72: # Result should be 2 desired neighbors, one for each link, with their respective next hops (0.000s)
+        > db/cmp desired-neighbors both-node-neighbors.table
+    scripttest.go:72: # Add IPv6 forwardable IPs (0.000s)
+        > db/insert forwardable-ip node1-ipv6.yaml
+    scripttest.go:72: # Result should be 4 desired neighbors, one for each link, each protocol, with their respective next hops (0.000s)
+        > db/cmp desired-neighbors with-v6-neighbors.table
+    scripttest.go:72: # Change the default gateway of dummy1 (0.001s)
+        > route/del 200.0.0.0/16
+        [stdout]
+        Deleted route 200.0.0.0/16
+        > route/add 200.0.0.0/16 --gateway 192.168.1.200 --dev dummy1
+        [stdout]
+        Added route 200.0.0.0/16
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    logger.go:256: time=2026-02-21T12:37:06.625-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:37:06.626-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=806.977µs
+    scripttest.go:72: # Add the forwardable IP for our node, and assert that the neighbor entry is created. (0.095s)
+        > db/insert forwardable-ip node1-ipv4.yaml
+        > db/cmp neighbors neighbors.initial.table
+        > hive/stop
+    logger.go:256: time=2026-02-21T12:37:06.631-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/xdp/cell.go:55 msg="Determined final XDP mode" module=datapath-xdp-config accelarationMode=disabled mode=disabled
+    scripttest.go:72: # While hive is stopped, change the default gateway to the second address. (0.006s)
+        > route/del 0.0.0.0/0
+        [stdout]
+        Deleted route 0.0.0.0/0
+        > route/add 0.0.0.0/0 --gateway 192.168.1.3 --dev veth0
+        [stdout]
+        Added route 0.0.0.0/0
+        > hive/recreate
+    scripttest.go:72: # After hive is recreated, but before it is started we register a initializer
+        # just like the node-manager does. (0.000s)
+        > forwardable-ip/register-initializer node-manager
+    logger.go:256: time=2026-02-21T12:37:06.633-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:385 msg="Starting hive"
+    logger.go:256: time=2026-02-21T12:37:06.634-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/linux/devices_controller.go:601 msg="Devices changed" module=devices-controller devices=[veth0]
+    logger.go:256: time=2026-02-21T12:37:06.635-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:389 msg="Started hive" duration=1.298669ms
+    scripttest.go:72: # We insert the forwardable IP again (0.002s)
+        > db/insert forwardable-ip node1-ipv4.yaml
+        > db
+        Name                Object count   Zombie objects   Indexes                 Initializers                                Go type                     Last WriteTxn
+        desired-neighbors   0              0                id                      [desired-neighbor-calculator-initializer]   *neighbor.DesiredNeighbor   neighbor (2.9ms ago, locked for 11.9us)
+        devices             0              0                id, name, selected      []                                          *tables.Device              
+        forwardable-ip      1              0                id                      [node-manager]                              *neighbor.ForwardableIP     statedb (318.2us ago, locked for 272.2us)
+        health              0              0                identifier, level       []                                          types.Status                
+        neighbors           0              0                ID, IPAddr, LinkIndex   []                                          *tables.Neighbor            
+        routes              0              0                LinkIndex, id           []                                          *tables.Route               
+        > hive/start
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    scripttest.go:72: # The desired neighbors should reflect the route change (0.064s)
+        > db/cmp desired-neighbors new-gateway-neighbors.table
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    scripttest.go:72: # Assert neighbor entry exists and is reachable (0.099s)
+        > db/cmp neighbors neighbors.reachable.table
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    scripttest.go:72: # Delete dummy1 (0.064s)
+        > link/del dummy1
+        [stdout]
+        Deleted link "dummy1"
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    scripttest.go:72: # Now check that the neighbor entry for the new default gateway is created.
+        # But the old neighbor entry is still there, because we haven't pruned it yet. (0.100s)
+        > db/cmp neighbors neighbors.before-prune.table
+    scripttest.go:72: # Now we finish the initialization, which will trigger the pruning of the neighbor entries. (0.000s)
+        > forwardable-ip/finish-initializer node-manager
+=== NAME  TestPrivilegedScript/desired-neighbors.txtar
+    logger.go:256: time=2026-02-21T12:37:06.736-08:00 level=INFO source=/root/work/cilium-s390x/pkg/datapath/linux/devices_controller.go:601 msg="Devices changed" module=devices-controller devices=[dummy0]
+    scripttest.go:72: # The desired neighbors should reflect the route change (0.042s)
+        > db/cmp desired-neighbors no-dummy1-neighbors.table
+    logger.go:256: time=2026-02-21T12:37:06.742-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:37:06.744-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.106162ms
+=== NAME  TestPrivilegedScript/neighbor-initialization.txtar
+    scripttest.go:72: # After the initialization is finished, the reconciler will prune any neighbor entries
+        # that are not in the desired neighbor table at that time. (1.000s)
+        > db/cmp neighbors neighbors.after-prune.table
+    logger.go:256: time=2026-02-21T12:37:07.736-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:37:07.736-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=3.322µs
+=== NAME  TestPrivilegedScript/neighbor-reconciler.txtar
+    scripttest.go:72: # Assert neighbor entry becomes stale (1.100s)
+        > db/cmp neighbors neighbors.stale.table
+    scripttest.go:72: # Wait for the refresh to happen, which will trigger the neighbor table to change (0.900s)
+        > db/cmp neighbors neighbors.reachable.table
+    scripttest.go:72: # Assert the agent actively refreshes the neighbor entry (0.002s)
+        > metrics cilium_neighbor_entry_refresh_count -o refresh-count.actual
+        > !* cmp refresh-count.not-expected refresh-count.actual
+        diff refresh-count.not-expected refresh-count.actual
+        --- refresh-count.not-expected
+        +++ refresh-count.actual
+        @@ -1,2 +1,2 @@
+         Metric                                Labels   Value
+        -cilium_neighbor_entry_refresh_count            0.000000
+        +cilium_neighbor_entry_refresh_count            1.000000
+        
+    logger.go:256: time=2026-02-21T12:37:08.666-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+    logger.go:256: time=2026-02-21T12:37:08.667-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.122088ms
+--- PASS: TestPrivilegedScript (0.00s)
+    --- PASS: TestPrivilegedScript/neighbor-reconciler-kernel-arp.txtar (0.02s)
+    --- PASS: TestPrivilegedScript/desired-neighbors.txtar (0.27s)
+    --- PASS: TestPrivilegedScript/neighbor-initialization.txtar (1.26s)
+    --- PASS: TestPrivilegedScript/neighbor-reconciler.txtar (2.19s)
+PASS
+ok  	github.com/cilium/cilium/pkg/datapath/neighbor/test	2.252s

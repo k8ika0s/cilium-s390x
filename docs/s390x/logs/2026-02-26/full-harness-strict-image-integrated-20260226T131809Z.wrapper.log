@@ -1,0 +1,7 @@
+[INFO] 2026-02-26T13:18:15Z start s390x-harness-strict-image-integrated
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/cilium-s390x && RUN_COMPONENT=s390x-harness-strict RUN_ID=full-strict-img-20260226T131809Z REQUIRE_COREDNS=true HOST_TO_POD_TARGET=coredns RUN_POLICY_INTEGRATION=true RUN_BPF_REGRESSION_SUBSET=true CILIUM_IMAGE_REPO=docker.io/cilium/cilium-dev-eps CILIUM_IMAGE_TAG=s390x-be-epsimg-20260225T195619Z ./test/s390x/launch_logged_run.sh
+log=/root/work/cilium-s390x/docs/s390x/logs/2026-02-26/s390x-harness-strict-full-strict-img-20260226T131809Z-20260226T131815Z.log
+status=/root/work/cilium-s390x/docs/s390x/logs/2026-02-26/s390x-harness-strict-full-strict-img-20260226T131809Z-20260226T131815Z.status
+rc=0
+[INFO] 2026-02-26T13:19:24Z end rc=0

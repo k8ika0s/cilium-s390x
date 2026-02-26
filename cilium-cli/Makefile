@@ -35,7 +35,7 @@ local-release: clean
 				ARCHS='amd64 arm64'; \
 				;; \
 			linux) \
-				ARCHS='amd64 arm64'; \
+				ARCHS='amd64 arm64 s390x'; \
 				;; \
 			windows) \
 				ARCHS='amd64 arm64'; \

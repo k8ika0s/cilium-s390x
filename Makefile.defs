@@ -51,7 +51,7 @@ endif
 
 ifneq ($(CI_BUILD),)
     DOCKER_IMAGE_SUFFIX=-ci
-    DOCKER_IMAGE_TAG=$(shell git rev-parse HEAD)
+    DOCKER_IMAGE_TAG=$(shell git rev-parse --verify HEAD >/dev/null 2>&1 && git rev-parse HEAD || echo unknown)
 endif
 
 # Set DOCKER_IMAGE_TAG with "latest" by default
@@ -137,7 +137,7 @@ VERSION = $(shell cat $(dir $(lastword $(MAKEFILE_LIST)))/VERSION)
 VERSION_MAJOR = $(shell cat $(dir $(lastword $(MAKEFILE_LIST)))/VERSION | cut -d. -f1)
 # Use git only if in a Git repo
 ifneq ($(wildcard $(dir $(lastword $(MAKEFILE_LIST)))/.git/HEAD),)
-    GIT_VERSION = $(shell git show -s --format='format:%h %aI')
+    GIT_VERSION = $(shell git rev-parse --verify HEAD >/dev/null 2>&1 && git show -s --format='format:%h %aI' || cat 2>/dev/null $(ROOT_DIR)/GIT_VERSION || echo unknown)
 else
     GIT_VERSION = $(shell cat 2>/dev/null $(ROOT_DIR)/GIT_VERSION)
 endif
@@ -205,7 +205,7 @@ CGO_ENABLED ?= 0
 # See https://pkg.go.dev/internal/goexperiment
 GOEXPERIMENT ?=
 
-# Support CGO cross-compiling for amd64 and arm64 targets
+# Support CGO cross-compiling for amd64, arm64, and s390x targets
 GO_BUILD_ENV = CGO_ENABLED=$(CGO_ENABLED)
 CROSS_ARCH =
 ifneq ($(GOARCH),$(NATIVE_ARCH))
@@ -215,6 +215,8 @@ ifeq ($(CROSS_ARCH),arm64)
     GO_BUILD_ENV += CC=aarch64-linux-gnu-gcc
 else ifeq ($(CROSS_ARCH),amd64)
     GO_BUILD_ENV += CC=x86_64-linux-gnu-gcc
+else ifeq ($(CROSS_ARCH),s390x)
+    GO_BUILD_ENV += CC=s390x-linux-gnu-gcc
 endif
 
 ifneq ($(GOARCH),)

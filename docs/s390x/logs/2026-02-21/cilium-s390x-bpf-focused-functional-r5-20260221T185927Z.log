@@ -1,0 +1,26 @@
+[INFO] started 2026-02-21T18:59:27Z
+
+===== TEST ip_options_trace_id =====
+[RC] ip_options_trace_id => 0
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/ip_options_trace_id-20260221T185927Z.log
+
+===== TEST tc_egressgw_redirect_from_host =====
+[RC] tc_egressgw_redirect_from_host => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/tc_egressgw_redirect_from_host-20260221T185927Z.log
+
+===== TEST tc_egressgw_redirect_from_overlay =====
+[RC] tc_egressgw_redirect_from_overlay => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/tc_egressgw_redirect_from_overlay-20260221T185927Z.log
+
+===== TEST tc_egressgw_snat =====
+[RC] tc_egressgw_snat => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/tc_egressgw_snat-20260221T185927Z.log
+
+===== TEST xdp_egressgw_reply =====
+[RC] xdp_egressgw_reply => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/xdp_egressgw_reply-20260221T185927Z.log
+
+===== TEST xdp_nodeport_lb4_test =====
+[RC] xdp_nodeport_lb4_test => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/xdp_nodeport_lb4_test-20260221T185927Z.log
+[INFO] finished 2026-02-21T19:00:33Z

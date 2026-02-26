@@ -1,0 +1,218 @@
+Name:           cilium
+Namespace:      kube-system
+Selector:       k8s-app=cilium
+Node-Selector:  kubernetes.io/os=linux
+Labels:         app.kubernetes.io/managed-by=Helm
+                app.kubernetes.io/name=cilium-agent
+                app.kubernetes.io/part-of=cilium
+                k8s-app=cilium
+Annotations:    deprecated.daemonset.template.generation: 10
+                meta.helm.sh/release-name: cilium
+                meta.helm.sh/release-namespace: kube-system
+Desired Number of Nodes Scheduled: 1
+Current Number of Nodes Scheduled: 1
+Number of Nodes Scheduled with Up-to-date Pods: 1
+Number of Nodes Scheduled with Available Pods: 1
+Number of Nodes Misscheduled: 0
+Pods Status:  1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:           app.kubernetes.io/name=cilium-agent
+                    app.kubernetes.io/part-of=cilium
+                    k8s-app=cilium
+  Annotations:      kubectl.kubernetes.io/default-container: cilium-agent
+                    kubectl.kubernetes.io/restartedAt: 2026-02-21T07:32:30-08:00
+  Service Account:  cilium
+  Init Containers:
+   config:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      cilium-dbg
+      build-config
+    Environment:
+      K8S_NODE_NAME:          (v1:spec.nodeName)
+      CILIUM_K8S_NAMESPACE:   (v1:metadata.namespace)
+    Mounts:
+      /tmp from tmp (rw)
+   mount-cgroup:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -ec
+      cp /usr/bin/cilium-mount /hostbin/cilium-mount;
+      nsenter --cgroup=/hostproc/1/ns/cgroup --mount=/hostproc/1/ns/mnt "${BIN_PATH}/cilium-mount" $CGROUP_ROOT;
+      rm /hostbin/cilium-mount
+      
+    Environment:
+      CGROUP_ROOT:  /run/cilium/cgroupv2
+      BIN_PATH:     /opt/cni/bin
+    Mounts:
+      /hostbin from cni-path (rw)
+      /hostproc from hostproc (rw)
+   apply-sysctl-overwrites:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -ec
+      cp /usr/bin/cilium-sysctlfix /hostbin/cilium-sysctlfix;
+      nsenter --mount=/hostproc/1/ns/mnt "${BIN_PATH}/cilium-sysctlfix";
+      rm /hostbin/cilium-sysctlfix
+      
+    Environment:
+      BIN_PATH:  /opt/cni/bin
+    Mounts:
+      /hostbin from cni-path (rw)
+      /hostproc from hostproc (rw)
+   mount-bpf-fs:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      /bin/bash
+      -c
+      --
+    Args:
+      mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf
+    Environment:  <none>
+    Mounts:
+      /sys/fs/bpf from bpf-maps (rw)
+   clean-cilium-state:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      /init-container.sh
+    Environment:
+      CILIUM_ALL_STATE:           <set to the key 'clean-cilium-state' of config map 'cilium-config'>         Optional: true
+      CILIUM_BPF_STATE:           <set to the key 'clean-cilium-bpf-state' of config map 'cilium-config'>     Optional: true
+      WRITE_CNI_CONF_WHEN_READY:  <set to the key 'write-cni-conf-when-ready' of config map 'cilium-config'>  Optional: true
+    Mounts:
+      /run/cilium/cgroupv2 from cilium-cgroup (rw)
+      /sys/fs/bpf from bpf-maps (rw)
+      /var/run/cilium from cilium-run (rw)
+   install-cni-binaries:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      /install-plugin.sh
+    Limits:
+      cpu:     1
+      memory:  1Gi
+    Requests:
+      cpu:        100m
+      memory:     10Mi
+    Environment:  <none>
+    Mounts:
+      /host/opt/cni/bin from cni-path (rw)
+  Containers:
+   cilium-agent:
+    Image:      docker.io/cilium/cilium-dev:s390x-be-policyfix2-20260221T163855Z
+    Port:       9879/TCP (health)
+    Host Port:  9879/TCP (health)
+    Command:
+      cilium-agent
+    Args:
+      --config-dir=/tmp/cilium/config-map
+    Liveness:   http-get http://127.0.0.1:health/healthz delay=0s timeout=5s period=30s #success=1 #failure=10
+    Readiness:  http-get http://127.0.0.1:health/healthz delay=0s timeout=5s period=30s #success=1 #failure=3
+    Startup:    http-get http://127.0.0.1:health/healthz delay=5s timeout=1s period=2s #success=1 #failure=300
+    Environment:
+      K8S_NODE_NAME:                  (v1:spec.nodeName)
+      CILIUM_K8S_NAMESPACE:           (v1:metadata.namespace)
+      CILIUM_CLUSTERMESH_CONFIG:     /var/lib/cilium/clustermesh/
+      GOMEMLIMIT:                    node allocatable (limits.memory)
+      KUBE_CLIENT_BACKOFF_BASE:      1
+      KUBE_CLIENT_BACKOFF_DURATION:  120
+    Mounts:
+      /host/etc/cni/net.d from etc-cni-netd (rw)
+      /host/proc/sys/kernel from host-proc-sys-kernel (rw)
+      /host/proc/sys/net from host-proc-sys-net (rw)
+      /lib/modules from lib-modules (ro)
+      /run/xtables.lock from xtables-lock (rw)
+      /sys/fs/bpf from bpf-maps (rw)
+      /tmp from tmp (rw)
+      /var/lib/cilium/clustermesh from clustermesh-secrets (ro)
+      /var/run/cilium from cilium-run (rw)
+      /var/run/cilium/envoy/sockets from envoy-sockets (rw)
+      /var/run/cilium/netns from cilium-netns (rw)
+  Volumes:
+   tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+   cilium-run:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/cilium
+    HostPathType:  DirectoryOrCreate
+   cilium-netns:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/netns
+    HostPathType:  DirectoryOrCreate
+   bpf-maps:
+    Type:          HostPath (bare host directory volume)
+    Path:          /sys/fs/bpf
+    HostPathType:  DirectoryOrCreate
+   hostproc:
+    Type:          HostPath (bare host directory volume)
+    Path:          /proc
+    HostPathType:  Directory
+   cilium-cgroup:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/cilium/cgroupv2
+    HostPathType:  DirectoryOrCreate
+   cni-path:
+    Type:          HostPath (bare host directory volume)
+    Path:          /opt/cni/bin
+    HostPathType:  DirectoryOrCreate
+   etc-cni-netd:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/cni/net.d
+    HostPathType:  DirectoryOrCreate
+   lib-modules:
+    Type:          HostPath (bare host directory volume)
+    Path:          /lib/modules
+    HostPathType:  
+   xtables-lock:
+    Type:          HostPath (bare host directory volume)
+    Path:          /run/xtables.lock
+    HostPathType:  FileOrCreate
+   envoy-sockets:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/cilium/envoy/sockets
+    HostPathType:  DirectoryOrCreate
+   clustermesh-secrets:
+    Type:        Projected (a volume that contains injected data from multiple sources)
+    SecretName:  cilium-clustermesh
+    Optional:    true
+    SecretName:  clustermesh-apiserver-remote-cert
+    Optional:    true
+    SecretName:  clustermesh-apiserver-local-cert
+    Optional:    true
+   host-proc-sys-net:
+    Type:          HostPath (bare host directory volume)
+    Path:          /proc/sys/net
+    HostPathType:  Directory
+   host-proc-sys-kernel:
+    Type:               HostPath (bare host directory volume)
+    Path:               /proc/sys/kernel
+    HostPathType:       Directory
+  Priority Class Name:  system-node-critical
+  Node-Selectors:       kubernetes.io/os=linux
+  Tolerations:          op=Exists
+Events:
+  Type    Reason            Age    From                  Message
+  ----    ------            ----   ----                  -------
+  Normal  SuccessfulDelete  52m    daemonset-controller  Deleted pod: cilium-87qxf
+  Normal  SuccessfulCreate  52m    daemonset-controller  Created pod: cilium-j5jwg
+  Normal  SuccessfulDelete  41m    daemonset-controller  Deleted pod: cilium-j5jwg
+  Normal  SuccessfulCreate  41m    daemonset-controller  Created pod: cilium-4s2k4
+  Normal  SuccessfulDelete  8m21s  daemonset-controller  Deleted pod: cilium-4s2k4
+  Normal  SuccessfulCreate  8m20s  daemonset-controller  Created pod: cilium-sgjp4
+  Normal  SuccessfulDelete  91s    daemonset-controller  Deleted pod: cilium-sgjp4
+  Normal  SuccessfulCreate  88s    daemonset-controller  Created pod: cilium-qcpq4

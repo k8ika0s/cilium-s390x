@@ -1,0 +1,7 @@
+TS=20260221T170814Z
+NS=s390x-validate
+namespace/s390x-validate created
+pod/server created
+pod/client created
+timed out waiting for the condition on pods/server
+timed out waiting for the condition on pods/client

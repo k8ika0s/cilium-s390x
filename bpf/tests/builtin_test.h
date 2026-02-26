@@ -190,19 +190,20 @@ static void __fill_cnt(void *buff, __u32 len)
 #define test___builtin_memmove4_single(len)					\
 	do {									\
 		__u8 __xbuf[ROUNDUP8(len)] __align_stack_8;			\
-		__u8 __ybuf[ROUNDUP8(len)] __align_stack_8;			\
 		__u8 *__x = __xbuf + ALIGN8_OFFSET(len);			\
-		__u8 *__y = __ybuf + ALIGN8_OFFSET(len);			\
 		__u8 *__p_x = (__u8 *)__x;					\
 		const __u32 off = (len / 2) & ~7U;				\
+		const __u32 copied = len - off;				\
+		__u32 __i;							\
 		__fill_cnt(__x, len);						\
-		__bpf_memcpy_builtin(__y, __x, len);				\
-		__bpf_memcpy_builtin(__y, __p_x + off, len - off);		\
 		barrier_data(__x);						\
-		__bpf_memmove(__x, __p_x + off, len - off);			\
+		__bpf_memmove(__x, __p_x + off, copied);			\
 		barrier_data(__x);						\
-		barrier_data(__y);						\
-		assert(!__cmp_mem(__x, __y, len));				\
+		for (__i = 0; __i < len; __i++) {				\
+			__u8 expected = __i < copied ?				\
+				       (__u8)(__i + off) : (__u8)__i;		\
+			assert(__x[__i] == expected);				\
+		}								\
 	} while (0)
 
 /* Same as test___builtin_memmove1_single(), but fwd. */
@@ -210,17 +211,14 @@ static void __fill_cnt(void *buff, __u32 len)
 	do {									\
 		__u8 __xbuf[ROUNDUP8(len)] __align_stack_8;			\
 		__u8 __ybuf[ROUNDUP8(len)] __align_stack_8;			\
-		__u8 __zbuf[ROUNDUP8(len)] __align_stack_8;			\
 		__u8 *__x = __xbuf + ALIGN8_OFFSET(len);			\
 		__u8 *__y = __ybuf + ALIGN8_OFFSET(len);			\
-		__u8 *__z = __zbuf + ALIGN8_OFFSET(len);			\
 		__bpf_memset_builtin(__x, 0, len);				\
 		__fill_rnd(__y, len);						\
-		__bpf_memcpy_builtin(__z, __y, len);				\
 		barrier_data(__x);						\
 		barrier_data(__y);						\
 		__bpf_memmove_fwd(__x, __y, len);				\
 		barrier_data(__x);						\
-		barrier_data(__z);						\
-		assert(!__cmp_mem(__x, __z, len));				\
+		barrier_data(__y);						\
+		assert(!__cmp_mem(__x, __y, len));				\
 	} while (0)

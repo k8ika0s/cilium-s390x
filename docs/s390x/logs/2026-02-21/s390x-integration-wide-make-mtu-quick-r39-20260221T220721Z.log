@@ -1,0 +1,60 @@
+[2026-02-21T22:07:21Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T22:07:21Z] Starting kvstore via make start-kvstores (attempt 1/1)
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+1b019d4636fbe9e9ea38a6422af390d3fe9d79219ddfed78ebc3063519aa5dfb
+[2026-02-21T22:07:24Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T22:07:24Z] Integration sweep completed
+[summary] rc=0

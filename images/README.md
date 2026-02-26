@@ -113,6 +113,13 @@ RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium --mount=
       # HOST_CC and HOST_STRIP are required by `bpf/Makefile`
       HOST_CC=aarch64-linux-gnu-gcc HOST_STRIP=aarch64-linux-gnu-strip
 
+RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium --mount=target=/root/.cache,type=cache --mount=target=/go/pkg/mod,type=cache \
+  ## optionally cross-compile for s390x and install binaries to /out/linux/s390x
+  env GOARCH=s390x CC=s390x-linux-gnu-gcc \
+    make build-container install-container \
+      DESTDIR=/out/linux/s390x \
+      HOST_CC=s390x-linux-gnu-gcc HOST_STRIP=s390x-linux-gnu-strip
+
 ## this section will get to run on each of the platform, and in GitHub Actions
 ## it will run on top of qemu, which is slow, but sufficient for these minor
 ## steps
@@ -129,3 +136,46 @@ RUN groupadd -f cilium \
 
 CMD ["/usr/bin/cilium-dbg"]
 ```
+
+Use `INCLUDE_S390X=true` with `make` targets in `images/Makefile` and `Makefile.docker`
+to append `linux/s390x` to default multi-platform image builds without changing the
+existing default platforms.
+
+### Overriding base image references (opt-in)
+
+When an upstream base image does not publish `linux/s390x`, you can override the
+default `ARG` values used by Cilium image Dockerfiles.
+
+Supported opt-in variables:
+
+```
+CILIUM_BUILDER_IMAGE
+CILIUM_RUNTIME_IMAGE
+CILIUM_ENVOY_IMAGE
+CILIUM_LLVM_IMAGE
+CILIUM_BPFTOOL_IMAGE
+CILIUM_IPTABLES_IMAGE
+```
+
+Examples:
+
+```bash
+# Build runtime against internal s390x tool images.
+INCLUDE_S390X=true \
+CILIUM_LLVM_IMAGE=registry.internal/cilium-llvm:s390x \
+CILIUM_BPFTOOL_IMAGE=registry.internal/cilium-bpftool:s390x \
+CILIUM_IPTABLES_IMAGE=registry.internal/cilium-iptables:s390x \
+make -C images runtime-image
+```
+
+```bash
+# Build cilium image against internal builder/runtime/envoy images.
+INCLUDE_S390X=true \
+CILIUM_BUILDER_IMAGE=registry.internal/cilium-builder:s390x \
+CILIUM_RUNTIME_IMAGE=registry.internal/cilium-runtime:s390x \
+CILIUM_ENVOY_IMAGE=registry.internal/cilium-envoy:s390x \
+make -C images cilium-image
+```
+
+The same variables are also honored by top-level `make docker-*` targets through
+`Makefile.docker`.

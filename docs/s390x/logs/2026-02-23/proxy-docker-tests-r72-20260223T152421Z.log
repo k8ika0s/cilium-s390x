@@ -1,0 +1,410 @@
+[INFO] 2026-02-23T15:24:21Z start r72 proxy docker-tests (targeted + repin true override)
+[INFO] git_rev=9e7e35f1
+[INFO] cmd=CARGO_BAZEL_REPIN=true ARCH=s390x make docker-tests
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Skip registering C++ toolchains via BAZEL_BUILD_OPTS. Local C++ toolchain needs to be available!
+Using Docker Buildx builder "" with build flags "--platform=linux/s390x".
+echo "/.git/" >.dockerignore
+echo ./ | tr ' ' '\n' | xargs -P1 -n1 -I {DIR} sed \
+    -e '# Remove lines with white space, comments and files that must be passed to docker, "$" due to make. #' \
+	-e '/^[[:space:]]*$/d' -e '/^#/d' -e '/SOURCE_VERSION/d' \
+    -e '# Apply pattern in all directories if it contains no "/", keep "!" up front. #' \
+	-e '/^[^!/][^/]*$/s<^<**/<' -e '/^![^/]*$/s<^!<!**/<' \
+            -e '# Prepend with the directory name, keep "!" up front. #' \
+	-e '/^[^!]/s<^<{DIR}<' -e '/^!/s<^!<!{DIR}<' \
+    -e '# Remove leading "./", keep "!" up front. #' \
+	-e 's<^\./<<' -e 's<^!\./<!<' \
+    -e '# Append newline to the last line if missing. GNU sed does not do this automatically. #' \
+	-e "$a" \
+    .gitignore >>.dockerignore
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+echo "/.gitignore" >>.dockerignore
+echo "/Dockerfile*" >>.dockerignore
+echo "/Makefile.docker" >>.dockerignore
+echo "/README*" >>.dockerignore
+echo "/type=docker/" >>.dockerignore
+cp .dockerignore Dockerfile.tests.dockerignore
+echo "/Makefile.api" >>Dockerfile.tests.dockerignore
+DOCKER_BUILDKIT=1 docker buildx build --progress=plain --platform=linux/s390x --network=host  --build-arg BUILDER_BASE="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg PROXYLIB_BUILDER="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg BAZEL_BUILD_OPTS="--jobs=1 --local_ram_resources=2048 --local_cpu_resources=1" --build-arg BAZEL_TEST_OPTS="--jobs=1 --local_ram_resources=2048 --local_cpu_resources=1 --test_timeout=300 --local_test_jobs=1 --flaky_test_attempts=3 --test_output=errors" --build-arg CARGO_BAZEL_REPIN="true" --build-arg TEST_TARGETS="//tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test" -f Dockerfile.tests -t quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs .
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-23T07:24:21-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+[1/8] STEP 1/5: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS proxylib
+[1/8] STEP 2/5: WORKDIR /go/src/github.com/cilium/proxy
+--> Using cache a9fe44fed2b4658006871384e1e6dbb2312faf46eeb7378ab1a5c9dec1b50ec5
+--> a9fe44fed2b4
+[1/8] STEP 3/5: COPY --chown=1337:1337 . ./
+--> Using cache c8e6ecbf6675a3988bd4898e2102b3f8e1350d70a3cbd9793e4b933919957c3e
+--> c8e6ecbf6675
+[1/8] STEP 4/5: ARG TARGETARCH
+--> Using cache 08ffcc11282ea3bd7e7cdb28d0a754b29ddbfc597df2ec6ab5e1396ad0de3804
+--> 08ffcc11282e
+[1/8] STEP 5/5: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/go/pkg,type=cache,id=$TARGETARCH     PATH=$PATH:/usr/local/go/bin GOFLAGS=-buildvcs=false GOARCH=${TARGETARCH} make -C proxylib all && mv proxylib/libcilium.so /tmp/libcilium.so
+--> Using cache 79c5de2c5be3710bfe3bb76b4a1a023b4a526d2a647c39961921b7561dd62622
+--> 79c5de2c5be3
+[2/8] STEP 1/15: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS builder-fresh
+[2/8] STEP 2/15: LABEL maintainer="maintainer@cilium.io"
+--> Using cache dbc9cb9ae77091d2b719b9032d800403b7b34e788e83b7dd59652d71893580b4
+--> dbc9cb9ae770
+[2/8] STEP 3/15: WORKDIR /cilium/proxy
+--> Using cache 8d1546cbd57d59600c0bec9d1c9b20714ae08be0855813f9dc1a47f32d37acc3
+--> 8d1546cbd57d
+[2/8] STEP 4/15: COPY . ./
+--> Using cache e12496e1213163411376e66f864885affb4d62c3ddf71909a19e5681c91059e0
+--> e12496e12131
+[2/8] STEP 5/15: ARG V
+--> Using cache 9759efd491a60e7151e1d8d642d5118540f074bb9493081aca6690e8e2f7bb5f
+--> 9759efd491a6
+[2/8] STEP 6/15: ARG BAZEL_BUILD_OPTS
+--> Using cache a4b6290ee0ff7561810799080bc4fd23896f3e36e7e5e5fd129142788a3f7431
+--> a4b6290ee0ff
+[2/8] STEP 7/15: ARG CARGO_BAZEL_REPIN=true
+--> Using cache 379b24a82f03b239a511b06443c8e14d56d87a14b817537ea33cae7aae4a3a50
+--> 379b24a82f03
+[2/8] STEP 8/15: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> Using cache 1dac1fa1adefb1137bd777c4fc9119b554d6fd22768a9b09a22b278cc948ec0d
+--> 1dac1fa1adef
+[2/8] STEP 9/15: ARG DEBUG
+--> Using cache 9af52bbbcf930499cfc27136723753fd54cebff8d12751ff635816549dde08b6
+--> 9af52bbbcf93
+[2/8] STEP 10/15: ARG BUILDARCH
+--> Using cache e93ab08090dcdf3f15fbabe59ec148d3b7f20c523cba7b7e0aa73d3ce41c444b
+--> e93ab08090dc
+[2/8] STEP 11/15: ARG TARGETARCH
+--> Using cache cf87ac680e525ebe6b834d43292a429b0f220e0a657974aa9eb882ee15a1cb18
+--> cf87ac680e52
+[2/8] STEP 12/15: ARG NO_CACHE
+--> Using cache a0d3a6a297f2005af8ade49f210155300fa9fd404d280c059d1ba138bb52babd
+--> a0d3a6a297f2
+[2/8] STEP 13/15: ENV TARGETARCH=$TARGETARCH
+--> Using cache 4908532aa4c0a63670d1c95cde3ed7172de171161ef03513fc2b7f2c1e7e4f60
+--> 4908532aa4c0
+[2/8] STEP 14/15: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> Using cache cf9abbe71d80ba53b97b2a7a3332b201f9d8a4d2aa1520ddb97f8e819123f89a
+--> cf9abbe71d80
+[2/8] STEP 15/15: RUN if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Registering C++ toolchains via BAZEL_BUILD_OPTS
+echo "Clang assumed to be installed in the builder image"
+Clang assumed to be installed in the builder image
+bazel/setup_clang.sh /usr/lib/llvm-18
+[0mecho "build --config=clang" >> clang.bazelrc
+CARGO_BAZEL_REPIN=true  bazel  build --jobs=1 --local_ram_resources=2048 --local_cpu_resources=1 --disk_cache=/tmp/bazel-cache --platforms=//bazel:linux_s390x --config=release --extra_toolchains=//bazel/toolchains:all --jobs=HOST_RAM*.0003 --test_timeout=300 --local_test_jobs=1 --flaky_test_attempts=3 --test_output=errors //tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test 
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mINFO: [0mInvocation ID: 912d23e4-379f-43fc-9d9b-32a8b084c7f5
+[32mComputing main repo mapping:[0m 
+[32mComputing main repo mapping:[0m 
+[32mComputing main repo mapping:[0m 
+[33mDEBUG: [0mRule 'dynamic_modules_rust_sdk_crate_index' indicated that a canonical reproducible form can be obtained by modifying arguments _action_listener = <unknown object com.google.devtools.build.lib.packages.Attribute$LabelListLateBoundDefault>, _config_dependencies = [], _configure = False, _environ = ["CARGO_BAZEL_GENERATOR_URL", "CARGO_BAZEL_GENERATOR_SHA256", "CARGO_BAZEL_REPIN", "REPIN", "CARGO_BAZEL_REPIN_ONLY", "CARGO_BAZEL_ISOLATED", "CARGO_BAZEL_DEBUG"], _original_name = "", generator_sha256s = {"s390x-unknown-linux-gnu": "5e7a4acf62f6dfe0386d11bd6ace9c5fa6651d233cadc0ac63a4e4e17656c949"}
+[33mDEBUG: [0mRepository dynamic_modules_rust_sdk_crate_index instantiated at:
+  /cilium/proxy/WORKSPACE:91:25: in <toplevel>
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:74:24: in envoy_dependency_imports
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:229:22: in crates_repositories
+Repository rule crates_repository defined at:
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/crates_repository.bzl:124:36: in <toplevel>
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mLoading:[0m 
+[32mLoading:[0m 3 packages loaded
+[32mAnalyzing:[0m 4 targets (5 packages loaded, 0 targets configured)
+[32mAnalyzing:[0m 4 targets (5 packages loaded, 0 targets configured)
+
+[32mAnalyzing:[0m 4 targets (124 packages loaded, 74 targets configured)
+
+[32mAnalyzing:[0m 4 targets (124 packages loaded, 74 targets configured)
+
+[32mAnalyzing:[0m 4 targets (124 packages loaded, 74 targets configured)
+
+[32mAnalyzing:[0m 4 targets (142 packages loaded, 814 targets configured)
+
+[33mDEBUG: [0m/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/com_google_protobuf/protobuf.bzl:654:10: The py_proto_library macro is deprecated and will be removed in the 30.x release. switch to the rule defined by rules_python or the one in bazel/py_proto_library.bzl.
+[32mAnalyzing:[0m 4 targets (487 packages loaded, 3656 targets configured)
+
+[35mWARNING: [0mDownload from https://mirror.bazel.build/github.com/ninja-build/ninja/archive/v1.13.0.tar.gz failed: class java.io.FileNotFoundException GET returned 404 Not Found
+[32mAnalyzing:[0m 4 targets (577 packages loaded, 11808 targets configured)
+
+[32mAnalyzing:[0m 4 targets (665 packages loaded, 18487 targets configured)
+
+[32mAnalyzing:[0m 4 targets (676 packages loaded, 19506 targets configured)
+
+[32mAnalyzing:[0m 4 targets (679 packages loaded, 21860 targets configured)
+
+[32mAnalyzing:[0m 4 targets (679 packages loaded, 21860 targets configured)
+
+[32mAnalyzing:[0m 4 targets (680 packages loaded, 48225 targets configured)
+
+[32mAnalyzing:[0m 4 targets (685 packages loaded, 50062 targets configured)
+
+[32mINFO: [0mAnalyzed 4 targets (685 packages loaded, 50345 targets configured).
+[32m[57 / 4,366][0m Creating runfiles tree bazel-out/s390x-opt-exec-ST-a828a81199fe/bin/external/com_google_protobuf/upb_generator/minitable/protoc-gen-upb_minitable_stage0.runfiles [for tool]; 0s local ... (2 actions, 1 running)
+[32m[201 / 5,177][0m Compiling absl/debugging/internal/utf8_for_code_point.cc [for tool]; 0s disk-cache, processwrapper-sandbox ... (3 actions, 1 running)
+[32m[446 / 5,177][0m Compiling absl/time/internal/cctz/src/civil_time_detail.cc; 0s disk-cache, processwrapper-sandbox ... (5 actions, 1 running)
+[32m[448 / 5,177][0m [Sched] Compiling src/contrib/graphbuilderadapter.cpp ... (5 actions, 1 running)
+[32m[448 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_fixed.cc ... (5 actions, 2 running)
+[32m[451 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_fixed.cc [for tool] ... (5 actions, 1 running)
+[32m[452 / 5,177][0m [Sched] Compiling absl/flags/internal/commandlineflag.cc [for tool]; 4s ... (5 actions, 1 running)
+[32m[453 / 5,177][0m [Sched] Compiling src/core/util/tchar.cc ... (5 actions, 1 running)
+[32m[455 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_format.cc [for tool] ... (5 actions, 2 running)
+[32m[456 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_format.cc [for tool] ... (5 actions, 1 running)
+[32m[456 / 5,177][0m [Sched] Compiling absl/flags/internal/commandlineflag.cc; 4s ... (5 actions, 2 running)
+[32m[457 / 5,177][0m [Sched] Compiling absl/flags/internal/commandlineflag.cc; 5s ... (5 actions, 1 running)
+[32m[457 / 5,177][0m [Sched] Compiling src/core/util/linux/env.cc; 7s ... (5 actions, 2 running)
+[32m[464 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_if.cc [for tool] ... (5 actions, 2 running)
+[32m[465 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_if.cc [for tool] ... (5 actions, 1 running)
+[32m[466 / 5,177][0m [Sched] Compiling test/test_common/test_version_linkstamp.cc ... (5 actions, 1 running)
+[32m[466 / 5,177][0m [Sched] Compiling src/core/util/posix/env.cc; 4s ... (5 actions, 2 running)
+[32m[533 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_impl.cc [for tool] ... (5 actions, 1 running)
+[32m[534 / 5,177][0m [Sched] Compiling src/core/lib/event_engine/thread_local.cc ... (5 actions, 1 running)
+[32m[534 / 5,177][0m [Sched] Compiling src/core/ext/transport/chttp2/transport/decode_huff.cc ... (5 actions, 2 running)
+[32m[540 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_info.cc [for tool] ... (5 actions, 2 running)
+[32m[541 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_info.cc [for tool] ... (5 actions, 1 running)
+[32m[541 / 5,177][0m [Sched] Compiling upb/wire/reader.c [for tool]; 4s ... (5 actions, 2 running)
+[32m[542 / 5,177][0m [Sched] Compiling upb/wire/reader.c [for tool]; 6s ... (5 actions, 1 running)
+[32m[542 / 5,177][0m [Sched] Compiling src/core/ext/filters/channel_idle/idle_filter_state.cc; 7s ... (5 actions, 2 running)
+[32m[557 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_libc.cc [for tool] ... (5 actions, 2 running)
+[32m[558 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_libc.cc [for tool] ... (5 actions, 1 running)
+[32m[559 / 5,177][0m [Sched] Compiling upb/wire/eps_copy_input_stream.c [for tool] ... (5 actions, 1 running)
+[32m[561 / 5,177][0m [Sched] Compiling src/emitter.cpp ... (5 actions, 1 running)
+[32m[562 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_posix.cc ... (5 actions, 1 running)
+[32m[564 / 5,177][0m [Sched] Compiling upb/mem/alloc.c [for tool] ... (5 actions, 1 running)
+[32m[566 / 5,177][0m [Sched] Compiling src/emitterstate.cpp ... (5 actions, 1 running)
+[32m[567 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/civil_time_detail.cc [for tool] ... (5 actions, 2 running)
+[32m[569 / 5,177][0m [Sched] Compiling src/emitterutils.cpp ... (5 actions, 2 running)
+[32m[571 / 5,177][0m [Sched] Compiling src/nodebuilder.cpp ... (5 actions, 1 running)
+[32m[572 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/zone_info_source.cc [for tool] ... (5 actions, 1 running)
+[32m[574 / 5,177][0m [Sched] Compiling upb/mem/arena.c ... (5 actions, 1 running)
+[32m[574 / 5,177][0m [Sched] Compiling src/exceptions.cpp ... (5 actions, 2 running)
+[32m[577 / 5,177][0m [Sched] Compiling absl/time/internal/cctz/src/time_zone_lookup.cc [for tool] ... (5 actions, 2 running)
+[32m[579 / 5,177][0m [Sched] Compiling upb/mem/alloc.c ... (5 actions, 1 running)
+[32m[579 / 5,177][0m [Sched] Compiling src/exp.cpp ... (5 actions, 2 running)
+[32m[582 / 5,177][0m [Sched] Compiling absl/base/internal/raw_logging.cc ... (5 actions, 2 running)
+[32m[585 / 5,177][0m [Sched] Compiling src/scanscalar.cpp ... (5 actions, 2 running)
+[32m[587 / 5,177][0m [Sched] Compiling absl/base/internal/throw_delegate.cc [for tool] ... (5 actions, 1 running)
+[32m[588 / 5,177][0m [Sched] Compiling absl/base/internal/spinlock_wait.cc ... (5 actions, 1 running)
+[32m[591 / 5,177][0m [Sched] Compiling src/scantag.cpp ... (5 actions, 1 running)
+[32m[592 / 5,177][0m [Sched] Compiling absl/base/internal/spinlock_wait.cc [for tool] ... (5 actions, 2 running)
+[32m[596 / 5,177][0m [Sched] Compiling src/scantoken.cpp ... (5 actions, 1 running)
+[32m[597 / 5,177][0m [Sched] Compiling absl/base/log_severity.cc [for tool] ... (5 actions, 1 running)
+[32m[599 / 5,177][0m [Sched] Compiling upb/hash/common.c [for tool] ... (5 actions, 1 running)
+[32m[600 / 5,177][0m [Sched] Compiling src/parse.cpp ... (5 actions, 1 running)
+[32m[601 / 5,177][0m [Sched] Compiling src/simplekey.cpp ... (5 actions, 1 running)
+[32m[602 / 5,177][0m [Sched] Compiling absl/base/internal/spinlock.cc ... (5 actions, 2 running)
+[32m[604 / 5,177][0m [Sched] Compiling src/parser.cpp ... (5 actions, 2 running)
+[32m[606 / 5,177][0m [Sched] Compiling src/singledocparser.cpp ... (5 actions, 1 running)
+[32m[607 / 5,177][0m [Sched] Compiling absl/strings/string_view.cc ... (5 actions, 1 running)
+[32m[609 / 5,177][0m [Sched] Compiling src/regex_yaml.cpp ... (5 actions, 2 running)
+[32m[612 / 5,177][0m [Sched] Compiling absl/hash/internal/city.cc ... (5 actions, 1 running)
+[32m[613 / 5,177][0m [Sched] Compiling absl/base/internal/unscaledcycleclock.cc ... (5 actions, 1 running)
+[32m[617 / 5,177][0m [Sched] Compiling absl/hash/internal/city.cc [for tool] ... (5 actions, 2 running)
+[32m[619 / 5,177][0m [Sched] Compiling upb/mini_table/extension_registry.c ... (5 actions, 1 running)
+[32m[623 / 5,177][0m [Sched] Compiling absl/strings/string_view.cc [for tool] ... (5 actions, 1 running)
+[32m[623 / 5,177][0m [Sched] Compiling absl/strings/string_view.cc [for tool]; 10s ... (5 actions, 1 running)
+[32m[623 / 5,177][0m [Sched] Compiling upb/message/internal/message.c; 30s ... (5 actions, 2 running)
+[32m[628 / 5,177][0m [Sched] Compiling absl/base/internal/cycleclock.cc [for tool] ... (5 actions, 1 running)
+[32m[628 / 5,177][0m [Sched] Compiling absl/base/internal/cycleclock.cc [for tool]; 11s ... (5 actions, 1 running)
+[32m[628 / 5,177][0m [Sched] Compiling absl/base/internal/cycleclock.cc [for tool]; 41s ... (5 actions, 1 running)
+[32m[628 / 5,177][0m [Sched] Compiling upb/message/internal/compare_unknown.c; 91s ... (5 actions, 2 running)
+[32m[629 / 5,177][0m [Sched] Compiling upb/message/internal/compare_unknown.c; 93s ... (5 actions, 1 running)
+[32m[633 / 5,177][0m [Sched] Compiling absl/base/internal/spinlock.cc [for tool] ... (5 actions, 1 running)
+[32m[634 / 5,177][0m [Sched] Compiling upb/message/internal/extension.c ... (5 actions, 1 running)
+[32m[638 / 5,177][0m [Sched] Compiling absl/base/internal/sysinfo.cc [for tool] ... (5 actions, 1 running)
+[32m[639 / 5,177][0m [Sched] Compiling absl/base/internal/unscaledcycleclock.cc [for tool] ... (5 actions, 2 running)
+[32m[644 / 5,177][0m [Sched] Compiling upb/wire/internal/decode_fast.c ... (5 actions, 2 running)
+[32m[650 / 5,177][0m [Sched] Compiling upb/message/copy.c [for tool] ... (5 actions, 2 running)
+[32m[653 / 5,177][0m [Sched] Compiling absl/strings/internal/ostringstream.cc [for tool] ... (5 actions, 1 running)
+[32m[657 / 5,177][0m [Sched] Compiling upb/message/merge.c [for tool] ... (5 actions, 1 running)
+[32m[659 / 5,177][0m [Sched] Compiling src/core/lib/surface/channel_stack_type.cc ... (5 actions, 2 running)
+[32m[663 / 5,177][0m [Sched] Compiling source/common/html/utility.cc ... (5 actions, 2 running)
+[32m[664 / 5,177][0m [Sched] Compiling third_party/address_sorting/address_sorting.c ... (5 actions, 2 running)
+[32m[668 / 5,177][0m [Sched] Compiling absl/log/internal/fnmatch.cc ... (5 actions, 2 running)
+[32m[670 / 5,177][0m [Sched] Compiling src/core/lib/surface/init_internally.cc ... (5 actions, 1 running)
+[32m[674 / 5,177][0m [Sched] Compiling absl/strings/internal/charconv_bigint.cc ... (5 actions, 1 running)
+[32m[675 / 5,177][0m [Sched] Compiling absl/random/seed_gen_exception.cc ... (5 actions, 2 running)
+[32m[678 / 5,177][0m [Sched] Compiling absl/strings/internal/charconv_parse.cc ... (5 actions, 2 running)
+[32m[679 / 5,177][0m [Sched] Compiling absl/strings/internal/charconv_parse.cc ... (5 actions, 1 running)
+[32m[680 / 5,177][0m [Sched] Compiling absl/random/internal/randen_slow.cc ... (5 actions, 1 running)
+[32m[681 / 5,177][0m [Sched] Compiling upb/message/array.c [for tool] ... (5 actions, 2 running)
+[32m[685 / 5,177][0m [Sched] Compiling starter/privileged_service_protocol.cc ... (5 actions, 2 running)
+[32m[741 / 5,177][0m [Sched] Compiling absl/strings/internal/stringify_sink.cc ... (5 actions, 1 running)
+[32m[743 / 5,177][0m [Sched] Compiling absl/strings/charconv.cc ... (5 actions, 2 running)
+[32m[745 / 5,177][0m [Sched] Compiling absl/strings/match.cc ... (5 actions, 2 running)
+[32m[747 / 5,177][0m [Sched] Compiling upb/message/message.c [for tool] ... (5 actions, 1 running)
+[32m[750 / 5,177][0m [Sched] Compiling absl/synchronization/internal/graphcycles.cc ... (5 actions, 1 running)
+[32m[751 / 5,177][0m [Sched] Compiling absl/base/internal/low_level_alloc.cc ... (5 actions, 2 running)
+[32m[752 / 5,177][0m [Sched] Compiling absl/debugging/internal/decode_rust_punycode.cc ... (5 actions, 2 running)
+[32m[754 / 5,177][0m [Sched] Compiling absl/random/discrete_distribution.cc ... (5 actions, 1 running)
+[32m[755 / 5,177][0m [Sched] Compiling absl/synchronization/internal/graphcycles.cc [for tool] ... (5 actions, 1 running)
+[32m[756 / 5,177][0m [Sched] Compiling absl/debugging/internal/demangle_rust.cc ... (5 actions, 2 running)
+[32m[757 / 5,177][0m [Sched] Compiling absl/debugging/internal/demangle_rust.cc [for tool] ... (5 actions, 2 running)
+[32m[759 / 5,177][0m [Sched] Compiling absl/base/internal/low_level_alloc.cc [for tool] ... (5 actions, 2 running)
+[32m[761 / 5,177][0m [Sched] Compiling upb_generator/c/names_internal.cc [for tool] ... (5 actions, 1 running)
+[32m[763 / 5,177][0m [Sched] Compiling absl/debugging/internal/decode_rust_punycode.cc [for tool] ... (5 actions, 1 running)
+[32m[763 / 5,177][0m [Sched] Compiling absl/random/internal/randen.cc ... (5 actions, 2 running)
+[32m[765 / 5,177][0m [Sched] Compiling upb_generator/minitable/names.cc [for tool] ... (5 actions, 2 running)
+[32m[766 / 5,177][0m [Sched] Compiling upb_generator/minitable/names.cc [for tool]; 4s ... (5 actions, 1 running)
+[32m[766 / 5,177][0m [Sched] Compiling upb_generator/minitable/names.cc [for tool]; 15s ... (5 actions, 1 running)
+[32m[766 / 5,177][0m [Sched] Compiling upb_generator/minitable/names.cc [for tool]; 45s ... (5 actions, 1 running)
+[32m[766 / 5,177][0m [Sched] Compiling upb_generator/minitable/names.cc [for tool]; 105s ... (5 actions, 1 running)
+[32m[766 / 5,177][0m [Sched] Compiling absl/debugging/internal/demangle.cc [for tool]; 113s ... (5 actions, 2 running)
+[32m[768 / 5,177][0m [Sched] Compiling absl/debugging/internal/vdso_support.cc; 114s ... (5 actions, 1 running)
+[32m[769 / 5,177][0m [Sched] Compiling base/strings/utf_string_conversions.cc; 115s ... (5 actions, 1 running)
+[32m[770 / 5,177][0m [Sched] Compiling absl/log/internal/fnmatch.cc [for tool] ... (5 actions, 2 running)
+[32m[772 / 5,177][0m [Sched] Compiling absl/debugging/internal/vdso_support.cc [for tool] ... (5 actions, 2 running)
+[32m[774 / 5,177][0m [Sched] Compiling base/strings/utf_string_conversion_utils.cc ... (5 actions, 1 running)
+[32m[776 / 5,177][0m [Sched] Compiling absl/debugging/internal/address_is_readable.cc [for tool] ... (5 actions, 2 running)
+[32m[778 / 5,177][0m [Sched] Compiling base/strings/string_util_constants.cc ... (5 actions, 2 running)
+[32m[779 / 5,177][0m [Sched] Compiling absl/debugging/stacktrace.cc ... (5 actions, 2 running)
+[32m[781 / 5,177][0m [Sched] Compiling absl/base/internal/tracing.cc ... (5 actions, 2 running)
+[32m[782 / 5,177][0m [Sched] Compiling absl/base/internal/tracing.cc ... (5 actions, 1 running)
+[32m[784 / 5,177][0m [Sched] Compiling base/strings/string_util.cc ... (5 actions, 1 running)
+[32m[785 / 5,177][0m [Sched] Compiling absl/debugging/stacktrace.cc [for tool] ... (5 actions, 1 running)
+[32m[785 / 5,177][0m [Sched] Compiling absl/strings/escaping.cc [for tool] ... (5 actions, 2 running)
+[32m[787 / 5,177][0m [Sched] Compiling absl/base/internal/tracing.cc [for tool]; 4s ... (5 actions, 1 running)
+[32m[789 / 5,177][0m [Sched] Compiling base/strings/string_piece.cc ... (5 actions, 1 running)
+[32m[790 / 5,177][0m [Sched] Compiling absl/hash/internal/hash.cc; 4s ... (5 actions, 1 running)
+[32m[791 / 5,177][0m [Sched] Compiling absl/strings/internal/charconv_bigint.cc [for tool] ... (5 actions, 1 running)
+[32m[792 / 5,177][0m [Sched] Compiling absl/profiling/internal/exponential_biased.cc [for tool]; 4s ... (5 actions, 1 running)
+[32m[792 / 5,177][0m [Sched] Compiling absl/random/internal/seed_material.cc; 4s ... (5 actions, 2 running)
+[32m[794 / 5,177][0m [Sched] Compiling base/debug/crash_logging.cc; 4s ... (5 actions, 1 running)
+[32m[795 / 5,177][0m [Sched] Compiling absl/strings/internal/cordz_functions.cc [for tool]; 4s ... (5 actions, 1 running)
+[32m[796 / 5,177][0m [Sched] Compiling absl/strings/internal/cordz_functions.cc ... (5 actions, 2 running)
+[32m[798 / 5,177][0m [Sched] Compiling absl/random/internal/entropy_pool.cc ... (5 actions, 1 running)
+[32m[799 / 5,177][0m [Sched] Compiling absl/debugging/leak_check.cc ... (5 actions, 2 running)
+[32m[802 / 5,177][0m [Sched] Compiling absl/profiling/internal/exponential_biased.cc ... (5 actions, 1 running)
+[32m[804 / 5,177][0m [Sched] Compiling url/url_util.cc ... (5 actions, 1 running)
+[32m[805 / 5,177][0m [Sched] Compiling absl/debugging/leak_check.cc [for tool] ... (5 actions, 1 running)
+[32m[807 / 5,177][0m [Sched] Compiling absl/log/internal/structured_proto.cc ... (5 actions, 2 running)
+[32m[809 / 5,177][0m [Sched] Compiling url/url_parse_file.cc ... (5 actions, 1 running)
+[32m[811 / 5,177][0m [Sched] Compiling absl/base/internal/strerror.cc [for tool] ... (5 actions, 2 running)
+[32m[813 / 5,177][0m [Sched] Compiling url/url_constants.cc ... (5 actions, 2 running)
+[32m[814 / 5,177][0m [Sched] Compiling absl/debugging/internal/examine_stack.cc ... (5 actions, 2 running)
+[32m[817 / 5,177][0m [Sched] Compiling absl/flags/internal/private_handle_accessor.cc ... (5 actions, 1 running)
+[32m[819 / 5,177][0m [Sched] Compiling url/url_canon_stdurl.cc ... (5 actions, 1 running)
+[32m[819 / 5,177][0m [Sched] Compiling absl/debugging/internal/examine_stack.cc [for tool] ... (5 actions, 2 running)
+[32m[821 / 5,177][0m [Sched] Compiling absl/flags/commandlineflag.cc ... (5 actions, 2 running)
+[32m[822 / 5,177][0m [Sched] Compiling src/core/util/strerror.cc ... (5 actions, 2 running)
+[32m[824 / 5,177][0m [Sched] Compiling url/url_canon_stdstring.cc ... (5 actions, 1 running)
+[32m[825 / 5,177][0m [Sched] Compiling absl/log/internal/nullguard.cc ... (5 actions, 1 running)
+[32m[827 / 5,177][0m [Sched] Compiling quiche/common/quiche_text_utils.cc ... (5 actions, 2 running)
+[32m[828 / 5,177][0m [Sched] Compiling quiche/common/quiche_text_utils.cc ... (5 actions, 1 running)
+[32m[829 / 5,177][0m [Sched] Compiling url/url_canon_relative.cc; 4s ... (5 actions, 1 running)
+[32m[830 / 5,177][0m [Sched] Compiling absl/strings/str_replace.cc [for tool]; 4s ... (5 actions, 2 running)
+[32m[838 / 5,177][0m [Sched] Compiling absl/strings/internal/str_format/arg.cc ... (5 actions, 2 running)
+[32m[840 / 5,177][0m [Sched] Compiling url/url_canon_query.cc ... (5 actions, 1 running)
+[32m[842 / 5,177][0m [Sched] Compiling absl/strings/str_split.cc [for tool] ... (5 actions, 1 running)
+[32m[842 / 5,177][0m [Sched] Compiling absl/log/internal/conditions.cc [for tool] ... (5 actions, 2 running)
+[32m[868 / 5,177][0m [Sched] Compiling url/url_canon_pathurl.cc ... (5 actions, 2 running)
+[32m[888 / 5,177][0m [Sched] Compiling third_party/utf8_range/utf8_validity.cc ... (5 actions, 2 running)
+[32m[890 / 5,177][0m [Sched] Compiling third_party/fiat/asm/fiat_curve25519_adx_square.S ... (5 actions, 2 running)
+[32m[891 / 5,177][0m [Sched] Compiling absl/strings/internal/str_format/extension.cc ... (5 actions, 2 running)
+[32m[894 / 5,177][0m [Sched] Compiling third_party/utf8_range/utf8_validity.cc [for tool] ... (5 actions, 1 running)
+[32m[895 / 5,177][0m [Sched] Compiling tools/cpp/runfiles/runfiles.cc ... (5 actions, 1 running)
+[32m[896 / 5,177][0m [Sched] Compiling third_party/fiat/asm/fiat_curve25519_adx_mul.S ... (5 actions, 1 running)
+[32m[897 / 5,177][0m [Sched] Compiling absl/strings/internal/str_format/float_conversion.cc ... (5 actions, 1 running)
+[32m[898 / 5,177][0m [Sched] Compiling url/url_canon_mailtourl.cc; 4s ... (5 actions, 1 running)
+[32m[900 / 5,177][0m [Sched] GoToolchainBinaryBuild external/go_sdk/builder [for tool] ... (5 actions, 1 running)
+[32m[901 / 5,177][0m [Sched] Compiling gen/crypto/md5-x86_64-linux.S ... (5 actions, 1 running)
+[32m[901 / 5,177][0m [Sched] Compiling gen/crypto/md5-x86_64-linux.S; 13s ... (5 actions, 1 running)
+[32m[901 / 5,177][0m [Sched] Compiling absl/strings/internal/str_format/output.cc; 22s ... (5 actions, 2 running)
+[32m[906 / 5,177][0m [Sched] Compiling upb/mini_descriptor/internal/encode.c; 22s ... (5 actions, 1 running)
+[32m[908 / 5,177][0m [Sched] Compiling gen/crypto/md5-586-linux.S ... (5 actions, 1 running)
+[32m[908 / 5,177][0m [Sched] Compiling gen/crypto/md5-586-linux.S; 11s ... (5 actions, 1 running)
+[32m[908 / 5,177][0m [Sched] Compiling absl/strings/internal/str_format/parser.cc; 20s ... (5 actions, 2 running)
+[32m[910 / 5,177][0m [Sched] Compiling url/url_canon_internal.cc; 20s ... (5 actions, 1 running)
+[32m[911 / 5,177][0m [Sched] Compiling gen/crypto/md5-586-apple.S ... (5 actions, 2 running)
+[32m[915 / 5,177][0m [Sched] Compiling url/url_canon_host.cc ... (5 actions, 1 running)
+[32m[915 / 5,177][0m [Sched] Compiling url/url_canon_host.cc; 11s ... (5 actions, 1 running)
+[32m[916 / 5,177][0m [Sched] Compiling gen/crypto/chacha20_poly1305_x86_64-apple.S; 12s ... (5 actions, 2 running)
+[32m[920 / 5,177][0m [Sched] Compiling upb/mini_descriptor/decode.c ... (5 actions, 2 running)
+[32m[922 / 5,177][0m [Sched] Compiling gen/crypto/chacha20_poly1305_armv8-win.S ... (5 actions, 1 running)
+[32m[926 / 5,177][0m [Sched] Compiling upb/mini_descriptor/internal/base92.c ... (5 actions, 1 running)
+[32m[930 / 5,177][0m [Sched] Compiling url/url_canon_etc.cc ... (5 actions, 1 running)
+[32m[931 / 5,177][0m [Sched] Compiling upb_generator/stage0/google/protobuf/compiler/plugin.upb.c [for tool] ... (5 actions, 1 running)
+[32m[935 / 5,177][0m [Sched] Compiling url/url_canon.cc ... (5 actions, 1 running)
+[32m[936 / 5,177][0m [Sched] Compiling gen/crypto/chacha-x86_64-linux.S ... (5 actions, 2 running)
+[32m[940 / 5,177][0m [Sched] Compiling upb/reflection/def_type.c [for tool] ... (5 actions, 2 running)
+[32m[941 / 5,177][0m [Sched] Compiling gen/crypto/chacha-x86-linux.S ... (5 actions, 2 running)
+[32m[945 / 5,177][0m [Sched] Compiling url/gurl.cc ... (5 actions, 1 running)
+[32m[946 / 5,177][0m [Sched] Compiling upb/reflection/desc_state.c [for tool] ... (5 actions, 1 running)
+[32m[950 / 5,177][0m [Sched] Compiling upb/reflection/enum_def.c [for tool] ... (5 actions, 2 running)
+[32m[951 / 5,177][0m [Sched] Compiling upb/reflection/enum_def.c [for tool] ... (5 actions, 1 running)
+[32m[954 / 5,177][0m [Sched] Compiling upb/lex/unicode.c ... (5 actions, 1 running)
+[32m[956 / 5,177][0m [Sched] Compiling upb/reflection/enum_reserved_range.c [for tool] ... (5 actions, 1 running)
+[32m[960 / 5,177][0m [Sched] Compiling upb/reflection/enum_value_def.c [for tool] ... (5 actions, 2 running)
+[32m[961 / 5,177][0m [Sched] Compiling gen/crypto/chacha-armv4-linux.S ... (5 actions, 2 running)
+[32m[966 / 5,177][0m [Sched] Compiling upb/reflection/extension_range.c [for tool] ... (5 actions, 1 running)
+[32m[970 / 5,177][0m [Sched] Compiling absl/strings/internal/cord_rep_consume.cc ... (5 actions, 1 running)
+[32m[971 / 5,177][0m [Sched] Compiling upb/reflection/field_def.c [for tool] ... (5 actions, 1 running)
+[32m[973 / 5,177][0m [Sched] GoCompilePkg external/org_golang_google_protobuf/internal/encoding/defval/defval.a [for tool] ... (5 actions, 1 running)
+[32m[976 / 5,177][0m [Sched] Compiling crypto/curve25519/asm/x25519-asm-arm.S ... (5 actions, 2 running)
+[32m[980 / 5,177][0m [Sched] Compiling upb/reflection/internal/def_builder.c [for tool] ... (5 actions, 2 running)
+[32m[981 / 5,177][0m [Sched] Compiling upb/reflection/internal/def_builder.c [for tool] ... (5 actions, 1 running)
+[32m[985 / 5,177][0m [Sched] Compiling absl/crc/crc32c.cc ... (5 actions, 1 running)
+[32m[986 / 5,177][0m [Sched] Compiling third_party/fiat/asm/fiat_p256_adx_mul.S ... (5 actions, 2 running)
+[32m[991 / 5,177][0m [Sched] Compiling upb/reflection/message.c [for tool] ... (5 actions, 1 running)
+[32m[992 / 5,177][0m [Sched] GoCompilePkg external/org_golang_google_protobuf/reflect/protoregistry/protoregistry.a [for tool] ... (5 actions, 2 running)
+[32m[1,000 / 5,177][0m [Sched] Compiling gen/bcm/x86_64-mont5-apple.S ... (5 actions, 2 running)
+[32m[1,005 / 5,177][0m [Sched] Compiling upb/reflection/message_reserved_range.c [for tool] ... (5 actions, 1 running)
+[32m[1,008 / 5,177][0m [Sched] Compiling absl/crc/internal/crc.cc ... (5 actions, 2 running)
+[32m[1,010 / 5,177][0m [Sched] Compiling gen/bcm/x86_64-mont-apple.S ... (5 actions, 2 running)
+[32m[1,024 / 5,177][0m [Sched] Compiling upb/reflection/oneof_def.c [for tool] ... (5 actions, 1 running)
+[32m[1,028 / 5,177][0m [Sched] Compiling absl/crc/internal/cpu_detect.cc ... (5 actions, 1 running)
+[32m[1,028 / 5,177][0m [Sched] Compiling upb/reflection/service_def.c [for tool]; 5s ... (5 actions, 2 running)
+[32m[1,033 / 5,177][0m [Sched] Compiling source/common/quic/platform/quiche_time_utils_impl.cc ... (5 actions, 1 running)
+[32m[1,034 / 5,177][0m [Sched] Compiling upb/reflection/stage0/google/protobuf/descriptor.upb.c [for tool] ... (5 actions, 1 running)
+[32m[1,036 / 5,177][0m [Sched] GoCompilePkg external/org_golang_google_protobuf/reflect/protorange/protorange.a [for tool] ... (5 actions, 1 running)
+[32m[1,039 / 5,177][0m [Sched] Compiling upb/mini_descriptor/build_enum.c [for tool] ... (5 actions, 1 running)
+[32m[1,039 / 5,177][0m [Sched] Compiling gen/bcm/vpaes-x86-apple.S ... (5 actions, 2 running)
+[32m[1,044 / 5,177][0m [Sched] Compiling upb/mini_descriptor/decode.c [for tool] ... (5 actions, 1 running)
+[32m[1,044 / 5,177][0m [Sched] Compiling gen/bcm/vpaes-armv8-win.S ... (5 actions, 2 running)
+[32m[1,049 / 5,177][0m [Sched] Compiling upb/mini_descriptor/link.c [for tool] ... (5 actions, 1 running)
+[32m[1,054 / 5,177][0m [Sched] Compiling upb/mini_descriptor/internal/base92.c [for tool] ... (5 actions, 1 running)
+[32m[1,057 / 5,177][0m [Sched] Compiling gen/bcm/ghash-x86-apple.S ... (5 actions, 1 running)
+[32m[1,058 / 5,177][0m [Sched] Compiling upb/mini_descriptor/internal/encode.c [for tool] ... (5 actions, 2 running)
+[32m[1,059 / 5,177][0m [Sched] Compiling gen/bcm/vpaes-armv7-linux.S ... (5 actions, 2 running)
+[32m[1,064 / 5,177][0m [Sched] Compiling gen/bcm/ghashv8-armv8-linux.S ... (5 actions, 1 running)
+[32m[1,064 / 5,177][0m [Sched] Compiling gen/bcm/sha512-armv4-linux.S ... (5 actions, 2 running)
+[32m[1,073 / 5,177][0m [Sched] Compiling gen/bcm/sha1-armv8-win.S ... (5 actions, 2 running)
+[32m[1,074 / 5,177][0m [Sched] Compiling gen/bcm/sha512-586-apple.S ... (5 actions, 2 running)
+[32m[1,079 / 5,177][0m [Sched] Compiling gen/bcm/sha512-armv8-linux.S ... (5 actions, 1 running)
+[32m[1,079 / 5,177][0m [Sched] Compiling gen/bcm/sha256-x86_64-linux.S ... (5 actions, 2 running)
+[32m[1,089 / 5,177][0m [Sched] Compiling gen/bcm/x86-mont-apple.S ... (5 actions, 1 running)
+[32m[1,089 / 5,177][0m [Sched] Compiling gen/bcm/x86-mont-apple.S ... (5 actions, 1 running)
+[32m[1,094 / 5,177][0m [Sched] Compiling crypto/hrss/asm/poly_rq_mul.S ... (5 actions, 1 running)
+[32m[1,094 / 5,177][0m [Sched] Compiling gen/bcm/sha256-armv8-linux.S ... (5 actions, 2 running)
+[32m[1,099 / 5,177][0m [Sched] Compiling gen/crypto/chacha-armv8-linux.S ... (5 actions, 1 running)
+[32m[1,099 / 5,177][0m [Sched] Compiling gen/bcm/sha256-armv8-apple.S ... (5 actions, 2 running)
+[32m[1,107 / 5,177][0m [Sched] Compiling src/core/util/posix/time.cc ... (5 actions, 2 running)
+[32m[1,110 / 5,177][0m [Sched] Compiling upb_generator/minitable/names_internal.cc [for tool] ... (5 actions, 1 running)
+[32m[1,112 / 5,177][0m [Sched] GoCompilePkg external/io_bazel_rules_go/go/tools/builders/go-protoc-bin.a [for tool] ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 11s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 41s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 101s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 161s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 221s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 281s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 341s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 401s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 461s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 521s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 581s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 641s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 701s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 761s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 821s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 881s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 941s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 1001s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 1061s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 1121s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 1181s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 1241s ... (5 actions, 1 running)
+[32m[1,114 / 5,177][0m [Sched] Compiling src/core/util/gpr_time.cc; 1301s ... (5 actions, 1 running)
+make: *** [Makefile.docker:252: docker-tests] Error 1

@@ -31,8 +31,7 @@ func mustNewCollection(t *testing.T, spec *ebpf.CollectionSpec) *ebpf.Collection
 func TestPrivilegedUnusedMaps(t *testing.T) {
 	testutils.PrivilegedTest(t)
 
-	spec, err := ebpf.LoadCollectionSpec("testdata/unused-map-pruning.o")
-	require.NoError(t, err)
+	spec := loadCollectionSpecNativeEndian(t, "testdata/unused-map-pruning.o")
 
 	obj := struct {
 		Program      *ebpf.ProgramSpec  `ebpf:"entry"`
@@ -95,8 +94,7 @@ func TestPrivilegedUnusedMaps(t *testing.T) {
 func TestPrivilegedUnusedMapsFalseNegative(t *testing.T) {
 	testutils.PrivilegedTest(t)
 
-	spec, err := ebpf.LoadCollectionSpec("testdata/unused-map-false-negative.o")
-	require.NoError(t, err)
+	spec := loadCollectionSpecNativeEndian(t, "testdata/unused-map-false-negative.o")
 
 	reach, err := computeReachability(spec)
 	require.NoError(t, err)
@@ -112,8 +110,7 @@ func TestPrivilegedUnusedMapsFalseNegative(t *testing.T) {
 
 // Regression test for removeUnusedMaps modifying the fixed set.
 func TestUnusedMapsFixedSet(t *testing.T) {
-	spec, err := ebpf.LoadCollectionSpec("testdata/unused-map-pruning.o")
-	require.NoError(t, err)
+	spec := loadCollectionSpecNativeEndian(t, "testdata/unused-map-pruning.o")
 
 	reach, err := computeReachability(spec)
 	require.NoError(t, err)

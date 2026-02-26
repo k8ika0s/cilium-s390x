@@ -1,0 +1,3 @@
+[meta] started_at_utc=20260225T195736Z
+[meta] image=docker.io/cilium/cilium-dev:s390x-be-epsimg-20260225T195619Z
+[step] stream tar kdz -> zkd0

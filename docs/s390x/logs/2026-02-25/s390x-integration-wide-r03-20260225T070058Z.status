@@ -1,0 +1,8 @@
+run=r03
+component=s390x-integration-wide
+host=kdz.dev.fyre.ibm.com
+started_at=2026-02-25T07:00:58Z
+ended_at=2026-02-25T07:06:52Z
+rc=0
+log=/root/work/cilium-s390x/docs/s390x/logs/2026-02-25/s390x-integration-wide-r03-20260225T070058Z.log
+harness_script=/root/work/cilium-s390x/test/s390x/integration_wide.sh

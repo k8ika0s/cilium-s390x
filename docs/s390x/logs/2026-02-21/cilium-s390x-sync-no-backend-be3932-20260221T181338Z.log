@@ -1,0 +1,31 @@
+# 2026-02-21T18:13:38Z sync ipv4 no-backend expected checksum update
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+Number of files: 2
+Number of files transferred: 2
+Total file size: 7509 B
+Total transferred file size: 7509 B
+Unmatched data: 1142 B
+Matched data: 6367 B
+File list size: 141 B
+File list generation time: 0.001 seconds
+File list transfer time: 0.003 seconds
+Total sent: 673 B
+Total received: 136 B
+
+sent 673 bytes  received 136 bytes  3609 bytes/sec
+total size is 7509  speedup is 9.28

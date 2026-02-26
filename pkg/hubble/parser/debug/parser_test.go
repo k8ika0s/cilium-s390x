@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"net"
 	"testing"
 
 	"github.com/cilium/hive/hivetest"
@@ -14,6 +15,7 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	flowpb "github.com/cilium/cilium/api/v1/flow"
+	"github.com/cilium/cilium/pkg/byteorder"
 	"github.com/cilium/cilium/pkg/hubble/parser/getters"
 	"github.com/cilium/cilium/pkg/hubble/parser/options"
 	"github.com/cilium/cilium/pkg/hubble/testutils"
@@ -88,7 +90,7 @@ func TestDecodeDebugEvent(t *testing.T) {
 				SubType: monitor.DbgIPIDMapSucceed4,
 				Source:  1234,
 				Hash:    705182630,
-				Arg1:    3909094154,
+				Arg1:    byteorder.NetIPv4ToHost32(net.ParseIP("10.11.0.233")),
 				Arg2:    2,
 			}),
 			cpu: 2,
@@ -110,7 +112,7 @@ func TestDecodeDebugEvent(t *testing.T) {
 					},
 				},
 				Hash:    wrapperspb.UInt32(705182630),
-				Arg1:    wrapperspb.UInt32(3909094154),
+				Arg1:    wrapperspb.UInt32(byteorder.NetIPv4ToHost32(net.ParseIP("10.11.0.233"))),
 				Arg2:    wrapperspb.UInt32(2),
 				Arg3:    wrapperspb.UInt32(0),
 				Message: "Successfully mapped addr=10.11.0.233 to identity=2",

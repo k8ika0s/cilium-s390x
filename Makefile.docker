@@ -8,12 +8,17 @@ export DOCKER_BUILDKIT=1
 
 # Docker Buildx support. If ARCH is defined, a builder instance 'cross'
 # on the local node is configured for amd64 and arm64 platform targets.
+# Set INCLUDE_S390X=true to also include linux/s390x in multi-arch builds.
 # Otherwise build on the current (typically default) builder for the host
 # platform only.
+DOCKER_PLATFORMS ?= linux/arm64,linux/amd64
+ifeq ($(INCLUDE_S390X),true)
+  DOCKER_PLATFORMS := $(DOCKER_PLATFORMS),linux/s390x
+endif
+
 ifdef ARCH
-  # Default to multi-arch builds, always create the builder for all the platforms we support
-  DOCKER_PLATFORMS := linux/arm64,linux/amd64
-  DOCKER_BUILDER := $(shell docker buildx ls --format '{{ .Name }}' | head -n1)
+  # Default to multi-arch builds, always create the builder for all enabled platforms.
+  DOCKER_BUILDER := $(shell docker buildx ls --format '{{ .Name }}' 2>/dev/null | head -n1)
   ifneq (,$(filter $(DOCKER_BUILDER),default desktop-linux))
     DOCKER_BUILDKIT_DRIVER :=
     ifdef DOCKER_BUILDKIT_IMAGE
@@ -36,7 +41,7 @@ else
 endif
 DOCKER_EXISTS := $(shell command -v docker 2>/dev/null)
 ifdef DOCKER_EXISTS
-DOCKER_BUILDER := $(shell docker buildx ls --format '{{ .Name }}' | head -n1)
+DOCKER_BUILDER := $(shell docker buildx ls --format '{{ .Name }}' 2>/dev/null | head -n1)
 endif
 
 ##@ Docker Images
@@ -92,6 +97,12 @@ endif
 	$(QUIET) $(CONTAINER_ENGINE) buildx build -f $(subst %,$$*,$(2)) \
 		$(DOCKER_BUILD_FLAGS) $(DOCKER_FLAGS) \
 		$(if $(BASE_IMAGE),--build-arg BASE_IMAGE=$(BASE_IMAGE),) \
+		$(if $(CILIUM_BUILDER_IMAGE),--build-arg CILIUM_BUILDER_IMAGE=$(CILIUM_BUILDER_IMAGE),) \
+		$(if $(CILIUM_RUNTIME_IMAGE),--build-arg CILIUM_RUNTIME_IMAGE=$(CILIUM_RUNTIME_IMAGE),) \
+		$(if $(CILIUM_ENVOY_IMAGE),--build-arg CILIUM_ENVOY_IMAGE=$(CILIUM_ENVOY_IMAGE),) \
+		$(if $(CILIUM_LLVM_IMAGE),--build-arg CILIUM_LLVM_IMAGE=$(CILIUM_LLVM_IMAGE),) \
+		$(if $(CILIUM_BPFTOOL_IMAGE),--build-arg CILIUM_BPFTOOL_IMAGE=$(CILIUM_BPFTOOL_IMAGE),) \
+		$(if $(CILIUM_IPTABLES_IMAGE),--build-arg CILIUM_IPTABLES_IMAGE=$(CILIUM_IPTABLES_IMAGE),) \
 		--build-arg MODIFIERS="NOSTRIP=$${NOSTRIP} NOOPT=${NOOPT} LOCKDEBUG=${LOCKDEBUG} RACE=${RACE} V=${V} LIBNETWORK_PLUGIN=${LIBNETWORK_PLUGIN} ${ADDITIONAL_MODIFIERS}" \
 		--build-arg CILIUM_SHA=$(firstword $(GIT_VERSION)) \
 		--build-arg OPERATOR_VARIANT=$(IMAGE_NAME) \

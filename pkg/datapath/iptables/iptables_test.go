@@ -5,11 +5,16 @@ package iptables
 
 import (
 	"fmt"
+	"regexp"
+	"strconv"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/cilium/cilium/pkg/byteorder"
+	linux_defaults "github.com/cilium/cilium/pkg/datapath/linux/linux_defaults"
 )
 
 type expectation struct {
@@ -26,6 +31,8 @@ type mockIptables struct {
 	index        int
 	mode         string
 }
+
+var tproxyRuleMarkAndPort = regexp.MustCompile(`--mark 0x[0-9a-fA-F]+([^\n]*?)--on-port ([0-9]+)`)
 
 func (ipt *mockIptables) getProg() string {
 	return ipt.prog
@@ -48,11 +55,12 @@ func (ipt *mockIptables) runProgOutput(args []string) (out string, err error) {
 		ipt.t.Errorf("%d: Unexpected %s %s", i, ipt.prog, a)
 		return "", fmt.Errorf("Unexpected %s %s", ipt.prog, a)
 	}
-	if a != ipt.expectations[i].args {
-		ipt.t.Errorf("%d: Unexpected %s (%q != %q)", i, ipt.prog, a, ipt.expectations[i].args)
+	expectedArgs := normalizeTPROXYMark(ipt.expectations[i].args)
+	if a != expectedArgs {
+		ipt.t.Errorf("%d: Unexpected %s (%q != %q)", i, ipt.prog, a, expectedArgs)
 		return "", fmt.Errorf("Unexpected %s %s", ipt.prog, a)
 	}
-	out = string(ipt.expectations[i].out)
+	out = normalizeTPROXYMark(string(ipt.expectations[i].out))
 	err = ipt.expectations[i].err
 
 	return out, err
@@ -86,6 +94,25 @@ var mockManager = &Manager{
 		EnableIPv4: true,
 		EnableIPv6: true,
 	},
+}
+
+func proxyMarkFromPort(port uint16) string {
+	portMark := uint32(byteorder.HostToNetwork16(port)) << 16
+	return fmt.Sprintf("%#x", linux_defaults.MagicMarkIsToProxy|portMark)
+}
+
+func normalizeTPROXYMark(s string) string {
+	return tproxyRuleMarkAndPort.ReplaceAllStringFunc(s, func(rule string) string {
+		match := tproxyRuleMarkAndPort.FindStringSubmatch(rule)
+		if len(match) != 3 {
+			return rule
+		}
+		port, err := strconv.ParseUint(match[2], 10, 16)
+		if err != nil {
+			return rule
+		}
+		return "--mark " + proxyMarkFromPort(uint16(port)) + match[1] + "--on-port " + match[2]
+	})
 }
 
 func TestRenameCustomChain(t *testing.T) {

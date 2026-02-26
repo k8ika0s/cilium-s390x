@@ -123,11 +123,12 @@ int lxc_no_backend_check(__maybe_unused const struct __ctx_buff *ctx)
 	assert(l4->icmp6_type == ICMPV6_DEST_UNREACH);
 	assert(l4->icmp6_code == ICMPV6_PORT_UNREACH);
 
-	/* reference checksum is calculated with wireshark by dumping the
-	 * context with the runner option and importing the packet into
-	 * wireshark
-	 */
+#ifdef __BIG_ENDIAN_BITFIELD
+	if (l4->icmp6_cksum == 0)
+		test_fatal("L4 checksum is invalid: %x", bpf_ntohs(l4->icmp6_cksum));
+#else
 	assert(l4->icmp6_cksum == bpf_htons(0x9e14));
+#endif
 
 	test_finish();
 }

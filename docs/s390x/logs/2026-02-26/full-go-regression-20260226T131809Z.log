@@ -1,0 +1,11 @@
+[INFO] 2026-02-26T13:18:09Z start go-regression-packages
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/cilium-s390x && GOMAXPROCS=4 go test ./pkg/act ./pkg/bpf ./pkg/datapath/iptables ./pkg/datapath/sockets ./pkg/hubble/parser/debug ./pkg/hubble/parser/threefour ./pkg/hubble/testutils
+ok  	github.com/cilium/cilium/pkg/act	(cached)
+ok  	github.com/cilium/cilium/pkg/bpf	(cached)
+ok  	github.com/cilium/cilium/pkg/datapath/iptables	(cached)
+ok  	github.com/cilium/cilium/pkg/datapath/sockets	(cached)
+ok  	github.com/cilium/cilium/pkg/hubble/parser/debug	(cached)
+ok  	github.com/cilium/cilium/pkg/hubble/parser/threefour	(cached)
+ok  	github.com/cilium/cilium/pkg/hubble/testutils	(cached)
+[INFO] 2026-02-26T13:18:10Z end rc=0

@@ -27,7 +27,7 @@ RUN \
     apt-get update && \
     apt-get upgrade -y --no-install-recommends && \
     apt-get install -y --no-install-recommends \
-    # Install cross tools for both arm64 on amd64
+    # Install cross tools for arm64, amd64, and s390x
     gcc-aarch64-linux-gnu \
     g++-aarch64-linux-gnu \
     libc6-dev-arm64-cross \
@@ -36,6 +36,10 @@ RUN \
     g++-x86-64-linux-gnu \
     libc6-dev-amd64-cross \
     binutils-x86-64-linux-gnu \
+    gcc-s390x-linux-gnu \
+    g++-s390x-linux-gnu \
+    libc6-dev-s390x-cross \
+    binutils-s390x-linux-gnu \
     # Dependencies to unzip protoc
     unzip \
     # Base Cilium-build dependencies
@@ -53,7 +57,11 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY --from=compilers-image /usr/lib/aarch64-linux-gnu /usr/lib/aarch64-linux-gnu
+RUN --mount=from=compilers-image,source=/usr/lib,target=/tmp/compilers-usrlib,readonly \
+    if [ -d /tmp/compilers-usrlib/aarch64-linux-gnu ]; then \
+      mkdir -p /usr/lib/aarch64-linux-gnu && \
+      cp -a /tmp/compilers-usrlib/aarch64-linux-gnu/. /usr/lib/aarch64-linux-gnu/; \
+    fi
 
 COPY --from=golang-dist /usr/local/go /usr/local/go
 RUN mkdir -p /go
@@ -61,7 +69,10 @@ ENV GOROOT=/usr/local/go
 ENV GOPATH=/go
 ENV PATH="${GOROOT}/bin:${GOPATH}/bin:${PATH}"
 
-RUN GOARCH=${TARGETARCH} CGO_ENABLED=0 go install github.com/go-delve/delve/cmd/dlv@latest
+RUN case "${TARGETARCH}" in \
+      amd64|arm64) GOARCH=${TARGETARCH} CGO_ENABLED=0 go install github.com/go-delve/delve/cmd/dlv@latest ;; \
+      *) mkdir -p /go/bin && printf '#!/bin/sh\necho "dlv is unavailable on %s" >&2\nexit 1\n' "${TARGETARCH}" > /go/bin/dlv && chmod +x /go/bin/dlv ;; \
+    esac
 
 WORKDIR /go/src/github.com/cilium/cilium/images/builder
 RUN --mount=type=bind,readwrite,target=/go/src/github.com/cilium/cilium/images/builder \

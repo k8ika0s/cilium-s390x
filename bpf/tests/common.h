@@ -98,6 +98,22 @@ struct {
 #define MKR_LOG_FMT	PROTOBUF_WIRE_TYPE(1, PROTOBUF_LENGTH_DELIMITED)
 #define MKR_LOG_ARG	PROTOBUF_WIRE_TYPE(2, PROTOBUF_FIXED64)
 
+/* Helper for places where we reserve two bytes for a varint and fill it later.
+ * For values <= 127 we intentionally emit a non-canonical 2-byte varint to keep
+ * cursor math simple and avoid memmove in eBPF test code.
+ */
+#define __test_write_varint2(ptr, value)						\
+	do {										\
+		__u16 __v = (__u16)(value);						\
+		if (__v > 127) {							\
+			*(ptr) = (__u8)(__v & 0b01111111) | 0b10000000;		\
+			*((ptr) + 1) = (__u8)(__v >> 7);				\
+		} else {								\
+			*(ptr) = (__u8)__v | 0b10000000;				\
+			*((ptr) + 1) = 0;						\
+		}									\
+	} while (0)
+
 /* Write a message to the unit log
  *	The conversion specifiers supported by *fmt* are the same as for
  *      bpf_trace_printk(). They are **%d**, **%i**, **%u**, **%x**, **%ld**,
@@ -113,15 +129,22 @@ struct {
 ({											\
 	static const char ____fileline[] = __FILE__ ":" LINE_STRING  ": ";		\
 	static const char ____fmt[] = fmt;						\
+	const __u16 ____fmt_len = sizeof(____fileline) - 1 + sizeof(____fmt);		\
+	const __u16 ____log_len = 3 + ____fmt_len +					\
+		(___bpf_narg(args) * (1 + sizeof(unsigned long long)));		\
+	char *____log_len_cursor, *____fmt_len_cursor;					\
 	if (test_result_cursor) {							\
 		*(suite_result_cursor++) = MKR_TEST_LOG;				\
 	} else {									\
 		*(suite_result_cursor++) = MKR_SUITE_LOG;				\
 	}										\
-	*(suite_result_cursor++) = 2 + sizeof(____fileline) - 1 + sizeof(____fmt) +	\
-		___bpf_narg(args) + (___bpf_narg(args) * sizeof(unsigned long long));	\
+	____log_len_cursor = suite_result_cursor;					\
+	suite_result_cursor += 2;							\
 	*(suite_result_cursor++) = MKR_LOG_FMT;						\
-	*(suite_result_cursor++) = sizeof(____fileline) - 1 + sizeof(____fmt);		\
+	____fmt_len_cursor = suite_result_cursor;					\
+	suite_result_cursor += 2;							\
+	__test_write_varint2(____log_len_cursor, ____log_len);				\
+	__test_write_varint2(____fmt_len_cursor, ____fmt_len);				\
 	memcpy(suite_result_cursor, ____fileline, sizeof(____fileline) - 1);		\
 	suite_result_cursor += sizeof(____fileline) - 1;				\
 	memcpy(suite_result_cursor, ____fmt, sizeof(____fmt));				\
@@ -245,14 +268,7 @@ do {									   \
 /* Write the total size of the test result in bytes as varint */	   \
 test_result_size = (__u16)((long)suite_result_cursor -			   \
 	(long)test_result_cursor) - 2;					   \
-if (test_result_size > 127) {						   \
-	*(test_result_cursor) = (__u8)(test_result_size & 0b01111111) |	   \
-		0b10000000;						   \
-	test_result_size >>= 7;						   \
-	*(test_result_cursor + 1) = (__u8)test_result_size;		   \
-} else {								   \
-	*test_result_cursor = (__u8)(test_result_size) | 0b10000000;	   \
-}									   \
+__test_write_varint2(test_result_cursor, test_result_size);		   \
 test_result_cursor = 0;
 
 #define test_finish()		\

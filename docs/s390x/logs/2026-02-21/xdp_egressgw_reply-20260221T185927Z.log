@@ -1,0 +1,43 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test xdp_egressgw_reply \
+| cat;
+--- FAIL: TestBPF (1.24s)
+    --- FAIL: TestBPF/xdp_egressgw_reply.o (1.24s)
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:1234 dst=192.168.0.1:118
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        --- FAIL: TestBPF/xdp_egressgw_reply.o/xdp_egressgw_reply (0.00s)
+            bpf_test.go:584: xdp_egressgw_reply.c:151: assert failed at xdp_egressgw_reply.c:151
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:118
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774721 (0xa000a01) from seclabel 2
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	1.298s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1

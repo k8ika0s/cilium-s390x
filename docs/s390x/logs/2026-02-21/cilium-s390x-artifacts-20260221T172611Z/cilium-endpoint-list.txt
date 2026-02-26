@@ -1,0 +1,38 @@
+ENDPOINT   POLICY (ingress)   POLICY (egress)   IDENTITY   LABELS (source:key[=value])                                                                  IPv6   IPv4           STATUS   
+           ENFORCEMENT        ENFORCEMENT                                                                                                                                     
+365        Disabled           Disabled          4          reserved:health                                                                                     10.244.0.29    ready   
+766        Disabled           Disabled          1          k8s:node-role.kubernetes.io/control-plane                                                                          ready   
+                                                           k8s:node.kubernetes.io/exclude-from-external-load-balancers                                                                
+                                                           reserved:host                                                                                                              
+1053       Disabled           Disabled          7910       k8s:access=granted                                                                                  10.244.0.240   ready   
+                                                           k8s:app=client                                                                                                             
+                                                           k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=s390x-validate                                              
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=default                                                                            
+                                                           k8s:io.kubernetes.pod.namespace=s390x-validate                                                                             
+1190       Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system                          10.244.0.163   ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                                       
+1462       Disabled           Disabled          5643       k8s:access=granted                                                                                  10.244.0.12    ready   
+                                                           k8s:app=client                                                                                                             
+                                                           k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=s390x-policy-20260221172552                                 
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=default                                                                            
+                                                           k8s:io.kubernetes.pod.namespace=s390x-policy-20260221172552                                                                
+2047       Enabled            Disabled          38619      k8s:app=server                                                                                      10.244.0.186   ready   
+                                                           k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=s390x-validate                                              
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=default                                                                            
+                                                           k8s:io.kubernetes.pod.namespace=s390x-validate                                                                             
+3338       Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system                          10.244.0.56    ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                                       
+3409       Enabled            Disabled          2901       k8s:app=server                                                                                      10.244.0.78    ready   
+                                                           k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=s390x-policy-20260221172552                                 
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=default                                                                            
+                                                           k8s:io.kubernetes.pod.namespace=s390x-policy-20260221172552                                                                

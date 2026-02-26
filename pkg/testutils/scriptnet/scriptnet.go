@@ -1042,23 +1042,26 @@ func sysctlGetCmd(nsm *NetNSManager) script.Cmd {
 			}
 
 			var sb strings.Builder
-			err = nsm.exec(nsName, func() error {
-				sc := sysctl.NewDirectSysctl(afero.NewOsFs(), "/proc")
-				val, err := sc.Read(args)
+				err = nsm.exec(nsName, func() error {
+					sc := sysctl.NewDirectSysctl(afero.NewOsFs(), "/proc")
+					val, err := sc.Read(args)
+					if err != nil {
+						return fmt.Errorf("failed to read sysctl parameter %q: %w", strings.Join(args, "."), err)
+					}
+					fmt.Fprintf(&sb, "%s = %s\n", strings.Join(args, "."), strings.TrimSpace(val))
+
+					return nil
+				})
 				if err != nil {
-					return fmt.Errorf("failed to read sysctl parameter %q: %w", strings.Join(args, "."), err)
+					return nil, err
 				}
-				fmt.Fprintf(&sb, "%s = %s\n", strings.Join(args, "."), strings.TrimSpace(val))
 
-				return nil
-			})
-
-			return func(s *script.State) (stdout string, stderr string, err error) {
-				return sb.String(), "", nil
-			}, err
-		},
-	)
-}
+				return func(s *script.State) (stdout string, stderr string, err error) {
+					return sb.String(), "", nil
+				}, nil
+			},
+		)
+	}
 
 func sysctlSetCmd(nsm *NetNSManager) script.Cmd {
 	return script.Command(
@@ -1082,18 +1085,21 @@ func sysctlSetCmd(nsm *NetNSManager) script.Cmd {
 				nsName = nsm.currentNamespaceName()
 			}
 
-			err = nsm.exec(nsName, func() error {
-				sc := sysctl.NewDirectSysctl(afero.NewOsFs(), "/proc")
-				if err := sc.Write(args[:len(args)-1], args[len(args)-1]); err != nil {
-					return fmt.Errorf("failed to set sysctl parameter %q: %w", strings.Join(args[:len(args)-1], "."), err)
+				err = nsm.exec(nsName, func() error {
+					sc := sysctl.NewDirectSysctl(afero.NewOsFs(), "/proc")
+					if err := sc.Write(args[:len(args)-1], args[len(args)-1]); err != nil {
+						return fmt.Errorf("failed to set sysctl parameter %q: %w", strings.Join(args[:len(args)-1], "."), err)
+					}
+
+					return nil
+				})
+				if err != nil {
+					return nil, err
 				}
 
-				return nil
-			})
-
-			return func(s *script.State) (stdout string, stderr string, err error) {
-				return fmt.Sprintf("Set %s = %s\n", strings.Join(args[:len(args)-1], "."), args[len(args)-1]), "", nil
-			}, err
-		},
-	)
-}
+				return func(s *script.State) (stdout string, stderr string, err error) {
+					return fmt.Sprintf("Set %s = %s\n", strings.Join(args[:len(args)-1], "."), args[len(args)-1]), "", nil
+				}, nil
+			},
+		)
+	}

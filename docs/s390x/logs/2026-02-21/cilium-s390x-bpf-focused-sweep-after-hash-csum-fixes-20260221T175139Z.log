@@ -1,0 +1,839 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+rm -f output/*
+rm -f 
+rm -f session_affinity_maglev_test.o
+rm -f 
+rm -f session_affinity_maglev_test.d
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== RUN tc_nodeport_lb4_no_backend ===
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb4_no_backend.c -o tc_nodeport_lb4_no_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_nodeport_lb4_no_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_nodeport_lb4_no_backend.o
+    bpf_test.go:194: verifier error: load program: permission denied:
+        	0: R1=ctx() R10=fp0
+        	; int nodeport_no_backend2_reply_check(__maybe_unused const struct __ctx_buff *ctx) @ tc_nodeport_lb4_no_backend.c:165
+        	0: (bf) r6 = r1                       ; R1=ctx() R6_w=ctx()
+        	1: (b4) w1 = 0                        ; R1_w=0
+        	; test_init(); @ tc_nodeport_lb4_no_backend.c:83
+        	2: (63) *(u32 *)(r10 -4) = r1         ; R1_w=0 R10=fp0 fp-8=0000????
+        	3: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0
+        	4: (07) r2 += -4                      ; R2_w=fp-4
+        	5: (18) r1 = 0x220054000              ; R1_w=map_ptr(map=suite_result_ma,ks=4,vs=8192)
+        	7: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=suite_result_ma,ks=4,vs=8192)
+        	8: (b4) w1 = 100                      ; R1_w=100
+        	9: (15) if r0 == 0x0 goto pc+260      ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; DEFINE_FUNC_CTX_POINTER(data) @ skb.h:81
+        	10: (61) r7 = *(u32 *)(r6 +76)        ; R6_w=ctx() R7_w=pkt(r=0)
+        	; data_end = (void *)(long)ctx->data_end; @ tc_nodeport_lb4_no_backend.c:86
+        	11: (61) r1 = *(u32 *)(r6 +80)        ; R1_w=pkt_end() R6_w=ctx()
+        	12: (b4) w2 = 10                      ; R2_w=10
+        	13: (73) *(u8 *)(r0 +3) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=10
+        	14: (b4) w2 = 18                      ; R2_w=18
+        	15: (73) *(u8 *)(r0 +0) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=18
+        	; if (data + sizeof(__u32) > data_end) @ tc_nodeport_lb4_no_backend.c:88
+        	16: (bf) r2 = r7                      ; R2_w=pkt(r=0) R7_w=pkt(r=0)
+        	17: (07) r2 += 4                      ; R2=pkt(off=4,r=0)
+        	18: (bd) if r2 <= r1 goto pc+33 52: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=4,r=4) R6=ctx() R7=pkt(r=4) R10=fp0 fp-8=mmmm????
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	52: (b4) w3 = 32                      ; R3_w=32
+        	; __it_mob(d, s, 8); @ builtins.h:177
+        	53: (73) *(u8 *)(r0 +38) = r3         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=32
+        	54: (b4) w2 = 177                     ; R2_w=177
+        	; test_log("Status code: %d", *status_code); @ tc_nodeport_lb4_no_backend.c:93
+        	55: (73) *(u8 *)(r0 +4) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=177
+        	56: (b4) w2 = 0                       ; R2_w=0
+        	57: (73) *(u8 *)(r0 +5) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0
+        	58: (73) *(u8 *)(r0 +2) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0
+        	59: (b4) w4 = 189                     ; R4_w=189
+        	60: (73) *(u8 *)(r0 +1) = r4          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=189
+        	61: (18) r4 = 0x6e642e633a39333a      ; R4_w=0x6e642e633a39333a
+        	; case  32: jmp_32:  __it_mob(d, s, 64); fallthrough; @ builtins.h:194
+        	63: (7b) *(u64 *)(r0 +30) = r4        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=0x6e642e633a39333a
+        	64: (18) r4 = 0x6e6f5f6261636b65      ; R4_w=0x6e6f5f6261636b65
+        	; case  24: jmp_24:  __it_mob(d, s, 64); fallthrough; @ builtins.h:195
+        	66: (7b) *(u64 *)(r0 +22) = r4        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=0x6e6f5f6261636b65
+        	67: (18) r5 = 0x6f72745f6c62345f      ; R5_w=0x6f72745f6c62345f
+        	; case  16: jmp_16:  __it_mob(d, s, 64); fallthrough; @ builtins.h:196
+        	69: (7b) *(u64 *)(r0 +14) = r5        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R5_w=0x6f72745f6c62345f
+        	70: (18) r6 = 0x6f64653a20256400      ; R6_w=0x6f64653a20256400
+        	72: (7b) *(u64 *)(r0 +47) = r6        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x6f64653a20256400
+        	73: (18) r6 = 0x74635f6e6f646570      ; R6_w=0x74635f6e6f646570
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	75: (7b) *(u64 *)(r0 +6) = r6         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x74635f6e6f646570
+        	76: (b4) w8 = 17                      ; R8_w=17
+        	; test_log("Status code: %d", *status_code); @ tc_nodeport_lb4_no_backend.c:93
+        	77: (73) *(u8 *)(r0 +55) = r8         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R8_w=17
+        	78: (18) r8 = 0x5374617475732063      ; R8_w=0x5374617475732063
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	80: (7b) *(u64 *)(r0 +39) = r8        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R8_w=0x5374617475732063
+        	; test_log("Status code: %d", *status_code); @ tc_nodeport_lb4_no_backend.c:93
+        	81: (61) r8 = *(u32 *)(r7 +0)         ; R7=pkt(r=4) R8_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	82: (7b) *(u64 *)(r0 +56) = r8        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R8_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(*status_code == retval); @ tc_nodeport_lb4_no_backend.c:94
+        	83: (16) if w8 == 0x0 goto pc+37 121: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=0 R3=32 R4=0x6e6f5f6261636b65 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=4) R8=0 R10=fp0 fp-8=mmmm????
+        	; if ((void *)l2 + sizeof(struct ethhdr) > data_end) @ tc_nodeport_lb4_no_backend.c:97
+        	121: (bf) r2 = r7                     ; R2_w=pkt(r=4) R7=pkt(r=4)
+        	122: (07) r2 += 18                    ; R2_w=pkt(off=18,r=4)
+        	123: (bd) if r2 <= r1 goto pc+35 159: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3=32 R4=0x6e6f5f6261636b65 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=18) R8=0 R10=fp0 fp-8=mmmm????
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	159: (69) r3 = *(u16 *)(r7 +8)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=18)
+        	160: (a4) w3 ^= 57071                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	161: (61) r4 = *(u32 *)(r7 +4)        ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=18)
+        	162: (a4) w4 ^= -559038737            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	163: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_dest, (__u8 *)client_mac, ETH_ALEN) == 0); @ tc_nodeport_lb4_no_backend.c:100
+        	164: (16) if w4 == 0x0 goto pc+24 189: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=0 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=18) R8=0 R10=fp0 fp-8=mmmm????
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	189: (69) r3 = *(u16 *)(r7 +14)       ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=18)
+        	190: (a4) w3 ^= 34902                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	191: (61) r4 = *(u32 *)(r7 +10)       ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=18)
+        	192: (a4) w4 ^= -831346941            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	193: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_source, (__u8 *)lb_mac, ETH_ALEN) == 0); @ tc_nodeport_lb4_no_backend.c:101
+        	194: (16) if w4 == 0x0 goto pc+24 219: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4=0 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=18) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l2->h_proto == __bpf_htons(ETH_P_IP)); @ tc_nodeport_lb4_no_backend.c:102
+        	219: (71) r3 = *(u8 *)(r7 +17)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=18)
+        	220: (71) r4 = *(u8 *)(r7 +16)        ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=18)
+        	221: (64) w4 <<= 8                    ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))
+        	222: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	223: (16) if w4 == 0x800 goto pc+48 272: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=2048 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=18) R8=0 R10=fp0 fp-8=mmmm????
+        	; if ((void *)l3 + sizeof(struct iphdr) > data_end) @ tc_nodeport_lb4_no_backend.c:105
+        	272: (bf) r3 = r7                     ; R3_w=pkt(r=18) R7=pkt(r=18)
+        	273: (07) r3 += 38                    ; R3_w=pkt(off=38,r=18)
+        	274: (bd) if r3 <= r1 goto pc+34 309: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=38) R3_w=pkt(off=38,r=38) R4_w=2048 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l3->saddr == FRONTEND_IP); @ tc_nodeport_lb4_no_backend.c:108
+        	309: (61) r4 = *(u32 *)(r7 +30)       ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=38)
+        	310: (16) if w4 == 0xac100a02 goto pc+24 335: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=38) R3=pkt(off=38,r=38) R4=0xac100a02 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l3->daddr == CLIENT_IP); @ tc_nodeport_lb4_no_backend.c:109
+        	335: (61) r4 = *(u32 *)(r7 +34)       ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=38)
+        	336: (16) if w4 == 0x6e000b01 goto pc+24 361: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=38) R3=pkt(off=38,r=38) R4=0x6e000b01 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l3->ihl == 5); @ tc_nodeport_lb4_no_backend.c:111
+        	361: (71) r2 = *(u8 *)(r2 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))
+        	362: (bc) w4 = w2                     ; R2_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))
+        	363: (54) w4 &= 15                    ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=15,var_off=(0x0; 0xf))
+        	364: (16) if w4 == 0x5 goto pc+24 389: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=38,r=38) R4_w=5 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l3->version == 4); @ tc_nodeport_lb4_no_backend.c:112
+        	389: (54) w2 &= 240                   ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=240,var_off=(0x0; 0xf0))
+        	390: (16) if w2 == 0x40 goto pc+24 415: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=64 R3=pkt(off=38,r=38) R4=5 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l3->tos == 0); @ tc_nodeport_lb4_no_backend.c:113
+        	415: (71) r2 = *(u8 *)(r7 +19)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=38)
+        	416: (16) if w2 == 0x0 goto pc+30 447: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=0 R3=pkt(off=38,r=38) R4=5 R5=0x6f72745f6c62345f R6=0x74635f6e6f646570 R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; case  48: jmp_48:  __it_mob(d, s, 64); fallthrough; @ builtins.h:192
+        	447: (bf) r6 = r0                     ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; assert(l3->ttl == 64); @ tc_nodeport_lb4_no_backend.c:114
+        	448: (71) r2 = *(u8 *)(r7 +26)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=38)
+        	449: (16) if w2 == 0x40 goto pc+24 474: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=64 R3=pkt(off=38,r=38) R4=5 R5=0x6f72745f6c62345f R6_w=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l3->protocol == IPPROTO_ICMP); @ tc_nodeport_lb4_no_backend.c:115
+        	474: (71) r2 = *(u8 *)(r7 +27)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=38)
+        	475: (16) if w2 == 0x1 goto pc+46 522: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=1 R3=pkt(off=38,r=38) R4=5 R5=0x6f72745f6c62345f R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; if (l3->check != bpf_htons(0x4b8e)) @ tc_nodeport_lb4_no_backend.c:117
+        	522: (69) r2 = *(u16 *)(r7 +28)       ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=38)
+        	523: (16) if w2 == 0x4b8e goto pc+42 566: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=19342 R3=pkt(off=38,r=38) R4=5 R5=0x6f72745f6c62345f R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=38) R8=0 R10=fp0 fp-8=mmmm????
+        	; if ((void *) l4 + sizeof(struct icmphdr) > data_end) @ tc_nodeport_lb4_no_backend.c:121
+        	566: (bf) r2 = r7                     ; R2_w=pkt(r=38) R7=pkt(r=38)
+        	567: (07) r2 += 46                    ; R2_w=pkt(off=46,r=38)
+        	568: (bd) if r2 <= r1 goto pc+35 604: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=46,r=46) R3=pkt(off=38,r=46) R4=5 R5=0x6f72745f6c62345f R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l4->type == ICMP_DEST_UNREACH); @ tc_nodeport_lb4_no_backend.c:124
+        	604: (71) r2 = *(u8 *)(r3 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=38,r=46)
+        	605: (16) if w2 == 0x3 goto pc+24 630: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=3 R3=pkt(off=38,r=46) R4=5 R5=0x6f72745f6c62345f R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R8=0 R10=fp0 fp-8=mmmm????
+        	; assert(l4->code == ICMP_PORT_UNREACH); @ tc_nodeport_lb4_no_backend.c:125
+        	630: (71) r2 = *(u8 *)(r7 +39)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=46)
+        	631: (16) if w2 == 0x3 goto pc+30 662: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=3 R3=pkt(off=38,r=46) R4=5 R5=0x6f72745f6c62345f R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R8=0 R10=fp0 fp-8=mmmm????
+        	; __u16 icmp_len = bpf_ntohs(l3->tot_len) - sizeof(struct iphdr); @ tc_nodeport_lb4_no_backend.c:128
+        	662: (69) r4 = *(u16 *)(r7 +20)       ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=46)
+        	663: (04) w4 += -20                   ; R4_w=scalar(smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff))
+        	; if ((void *)l4 + icmp_len > data_end) @ tc_nodeport_lb4_no_backend.c:130
+        	664: (bf) r2 = r4                     ; R2_w=scalar(id=3,smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff)) R4_w=scalar(id=3,smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff))
+        	665: (57) r2 &= 65535                 ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	666: (bf) r5 = r3                     ; R3=pkt(off=38,r=46) R5_w=pkt(off=38,r=46)
+        	667: (0f) r5 += r2                    ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R5_w=pkt(id=4,off=38,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	668: (bd) if r5 <= r1 goto pc+38 707: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=pkt(off=38,r=46) R4=scalar(id=3,smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff)) R5=pkt(id=4,off=38,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R8=0 R10=fp0 fp-8=mmmm????
+        	; if ((void *)l4 + icmp_len > data_end) @ tc_nodeport_lb4_no_backend.c:130
+        	707: (54) w4 &= 65535                 ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	708: (b4) w8 = 0                      ; R8_w=0
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	709: (b7) r1 = 0                      ; R1_w=0
+        	710: (b4) w2 = 0                      ; R2_w=0
+        	711: (b4) w5 = 0                      ; R5_w=0
+        	712: (85) call bpf_csum_diff#28
+        	invalid access to packet, off=38 size=65535, R3(id=0,off=38,r=46)
+        	R3 offset is outside of the packet
+        	processed 644 insns (limit 1000000) max_states_per_insn 0 total_states 18 peak_states 18 mark_read 6
+--- FAIL: TestBPF (0.34s)
+    --- FAIL: TestBPF/tc_nodeport_lb4_no_backend.o (0.33s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.402s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== FAIL tc_nodeport_lb4_no_backend ===
+=== RUN tc_lxc_lb4_no_backend ===
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_lxc_lb4_no_backend.c -o tc_lxc_lb4_no_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_lxc_lb4_no_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_lxc_lb4_no_backend.o
+    bpf_test.go:194: verifier error: load program: permission denied:
+        	0: R1=ctx() R10=fp0
+        	; int lxc_no_backend_check(__maybe_unused const struct __ctx_buff *ctx) @ tc_lxc_lb4_no_backend.c:73
+        	0: (bf) r6 = r1                       ; R1=ctx() R6_w=ctx()
+        	1: (b4) w1 = 0                        ; R1_w=0
+        	; test_init(); @ tc_lxc_lb4_no_backend.c:81
+        	2: (63) *(u32 *)(r10 -4) = r1         ; R1_w=0 R10=fp0 fp-8=0000????
+        	3: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0
+        	4: (07) r2 += -4                      ; R2_w=fp-4
+        	5: (18) r1 = 0x18aee4000              ; R1_w=map_ptr(map=suite_result_ma,ks=4,vs=8192)
+        	7: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=suite_result_ma,ks=4,vs=8192)
+        	8: (b4) w1 = 100                      ; R1_w=100
+        	9: (15) if r0 == 0x0 goto pc+193      ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; DEFINE_FUNC_CTX_POINTER(data) @ skb.h:81
+        	10: (61) r7 = *(u32 *)(r6 +76)        ; R6_w=ctx() R7_w=pkt(r=0)
+        	; data_end = (void *)(long)ctx->data_end; @ tc_lxc_lb4_no_backend.c:84
+        	11: (61) r1 = *(u32 *)(r6 +80)        ; R1_w=pkt_end() R6_w=ctx()
+        	12: (b4) w2 = 10                      ; R2_w=10
+        	13: (73) *(u8 *)(r0 +3) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=10
+        	14: (b4) w2 = 18                      ; R2_w=18
+        	15: (73) *(u8 *)(r0 +0) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=18
+        	; if (data + sizeof(__u32) > data_end) @ tc_lxc_lb4_no_backend.c:86
+        	16: (bf) r2 = r7                      ; R2_w=pkt(r=0) R7_w=pkt(r=0)
+        	17: (07) r2 += 4                      ; R2=pkt(off=4,r=0)
+        	18: (bd) if r2 <= r1 goto pc+30 49: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=4,r=4) R6=ctx() R7=pkt(r=4) R10=fp0 fp-8=mmmm????
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	49: (b4) w2 = 959527456               ; R2_w=0x39313a20
+        	; case  28: __it_mob(d, s, 32); goto jmp_24; @ builtins.h:230
+        	50: (63) *(u32 *)(r0 +30) = r2        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0x39313a20
+        	51: (b4) w2 = 172                     ; R2_w=172
+        	; test_log("Status code: %d", *status_code); @ tc_lxc_lb4_no_backend.c:91
+        	52: (73) *(u8 *)(r0 +4) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=172
+        	53: (b4) w2 = 0                       ; R2_w=0
+        	54: (73) *(u8 *)(r0 +5) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0
+        	55: (73) *(u8 *)(r0 +2) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0
+        	56: (b4) w3 = 184                     ; R3_w=184
+        	57: (73) *(u8 *)(r0 +1) = r3          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=184
+        	58: (18) r3 = 0x636b656e642e633a      ; R3_w=0x636b656e642e633a
+        	; case  24: jmp_24:  __it_mob(d, s, 64); fallthrough; @ builtins.h:195
+        	60: (7b) *(u64 *)(r0 +22) = r3        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=0x636b656e642e633a
+        	61: (18) r4 = 0x62345f6e6f5f6261      ; R4_w=0x62345f6e6f5f6261
+        	; case  16: jmp_16:  __it_mob(d, s, 64); fallthrough; @ builtins.h:196
+        	63: (7b) *(u64 *)(r0 +14) = r4        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=0x62345f6e6f5f6261
+        	64: (18) r5 = 0x6f64653a20256400      ; R5_w=0x6f64653a20256400
+        	66: (7b) *(u64 *)(r0 +42) = r5        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R5_w=0x6f64653a20256400
+        	67: (18) r5 = 0x74635f6c78635f6c      ; R5_w=0x74635f6c78635f6c
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	69: (7b) *(u64 *)(r0 +6) = r5         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R5_w=0x74635f6c78635f6c
+        	70: (b4) w6 = 17                      ; R6_w=17
+        	; test_log("Status code: %d", *status_code); @ tc_lxc_lb4_no_backend.c:91
+        	71: (73) *(u8 *)(r0 +50) = r6         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=17
+        	72: (18) r6 = 0x5374617475732063      ; R6_w=0x5374617475732063
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	74: (7b) *(u64 *)(r0 +34) = r6        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x5374617475732063
+        	; test_log("Status code: %d", *status_code); @ tc_lxc_lb4_no_backend.c:91
+        	75: (61) r6 = *(u32 *)(r7 +0)         ; R6_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=4)
+        	76: (7b) *(u64 *)(r0 +51) = r6        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(*status_code == CTX_ACT_REDIRECT); @ tc_lxc_lb4_no_backend.c:92
+        	77: (16) if w6 == 0x7 goto pc+18 96: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=0 R3_w=0x636b656e642e633a R4_w=0x62345f6e6f5f6261 R5_w=0x74635f6c78635f6c R6_w=7 R7=pkt(r=4) R10=fp0 fp-8=mmmm????
+        	; if ((void *)l2 + sizeof(struct ethhdr) > data_end) @ tc_lxc_lb4_no_backend.c:95
+        	96: (bf) r2 = r7                      ; R2_w=pkt(r=4) R7=pkt(r=4)
+        	97: (07) r2 += 18                     ; R2_w=pkt(off=18,r=4)
+        	98: (bd) if r2 <= r1 goto pc+31 130: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=0x636b656e642e633a R4_w=0x62345f6e6f5f6261 R5_w=0x74635f6c78635f6c R6_w=7 R7=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	130: (69) r3 = *(u16 *)(r7 +8)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=18)
+        	131: (a4) w3 ^= 57071                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	132: (61) r4 = *(u32 *)(r7 +4)        ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=18)
+        	133: (a4) w4 ^= -559038737            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	134: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_dest, (__u8 *)client_mac, ETH_ALEN) == 0); @ tc_lxc_lb4_no_backend.c:98
+        	135: (16) if w4 == 0x0 goto pc+21 157: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=0 R5_w=0x74635f6c78635f6c R6_w=7 R7=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	157: (69) r3 = *(u16 *)(r7 +14)       ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=18)
+        	158: (a4) w3 ^= 34902                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	159: (61) r4 = *(u32 *)(r7 +10)       ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R7=pkt(r=18)
+        	160: (a4) w4 ^= -831346941            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	161: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_source, (__u8 *)lb_mac, ETH_ALEN) == 0); @ tc_lxc_lb4_no_backend.c:99
+        	162: (16) if w4 == 0x0 goto pc+42 205: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=0 R5_w=0x74635f6c78635f6c R6_w=7 R7=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; assert(l2->h_proto == __bpf_htons(ETH_P_IP)); @ tc_lxc_lb4_no_backend.c:100
+        	205: (71) r3 = *(u8 *)(r7 +17)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=18)
+        	206: (71) r4 = *(u8 *)(r7 +16)        ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=18)
+        	207: (64) w4 <<= 8                    ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))
+        	208: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	209: (16) if w4 == 0x800 goto pc+43 253: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=2048 R5_w=0x74635f6c78635f6c R6_w=7 R7=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; if ((void *)l3 + sizeof(struct iphdr) > data_end) @ tc_lxc_lb4_no_backend.c:103
+        	253: (bf) r3 = r7                     ; R3_w=pkt(r=18) R7=pkt(r=18)
+        	254: (07) r3 += 38                    ; R3_w=pkt(off=38,r=18)
+        	255: (bd) if r3 <= r1 goto pc+34 290: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=38) R3=pkt(off=38,r=38) R4=2048 R5=0x74635f6c78635f6c R6=7 R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	; assert(l3->ihl == 5); @ tc_lxc_lb4_no_backend.c:106
+        	290: (71) r2 = *(u8 *)(r2 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))
+        	291: (bc) w4 = w2                     ; R2_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))
+        	292: (54) w4 &= 15                    ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=15,var_off=(0x0; 0xf))
+        	293: (16) if w4 == 0x5 goto pc+27 321: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=38,r=38) R4=5 R5=0x74635f6c78635f6c R6=7 R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	; assert(l3->version == 4); @ tc_lxc_lb4_no_backend.c:107
+        	321: (54) w2 &= 240                   ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=240,var_off=(0x0; 0xf0))
+        	322: (16) if w2 == 0x40 goto pc+27 350: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=64 R3=pkt(off=38,r=38) R4=5 R5=0x74635f6c78635f6c R6=7 R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	; assert(l3->tos == 0); @ tc_lxc_lb4_no_backend.c:108
+        	350: (71) r2 = *(u8 *)(r7 +19)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=38)
+        	351: (16) if w2 == 0x0 goto pc+27 379: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=0 R3=pkt(off=38,r=38) R4=5 R5=0x74635f6c78635f6c R6=7 R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	; assert(l3->ttl == 64); @ tc_lxc_lb4_no_backend.c:109
+        	379: (71) r2 = *(u8 *)(r7 +26)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=38)
+        	380: (16) if w2 == 0x40 goto pc+27 408: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=64 R3=pkt(off=38,r=38) R4=5 R5=0x74635f6c78635f6c R6=7 R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	; assert(l3->protocol == IPPROTO_ICMP); @ tc_lxc_lb4_no_backend.c:110
+        	408: (71) r2 = *(u8 *)(r7 +27)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=38)
+        	409: (16) if w2 == 0x1 goto pc+27 437: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=1 R3=pkt(off=38,r=38) R4=5 R5=0x74635f6c78635f6c R6=7 R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	437: (bf) r6 = r0                     ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; if (l3->check != bpf_htons(0x4b8e)) @ tc_lxc_lb4_no_backend.c:112
+        	438: (69) r2 = *(u16 *)(r7 +28)       ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=38)
+        	439: (16) if w2 == 0x4b8e goto pc+41 481: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=19342 R3=pkt(off=38,r=38) R4=5 R5=0x74635f6c78635f6c R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=38) R10=fp0 fp-8=mmmm????
+        	; if ((void *) l4 + sizeof(struct icmphdr) > data_end) @ tc_lxc_lb4_no_backend.c:116
+        	481: (bf) r2 = r7                     ; R2_w=pkt(r=38) R7=pkt(r=38)
+        	482: (07) r2 += 46                    ; R2_w=pkt(off=46,r=38)
+        	483: (bd) if r2 <= r1 goto pc+34 518: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=46,r=46) R3=pkt(off=38,r=46) R4=5 R5=0x74635f6c78635f6c R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R10=fp0 fp-8=mmmm????
+        	; assert(l4->type == ICMP_DEST_UNREACH); @ tc_lxc_lb4_no_backend.c:119
+        	518: (71) r2 = *(u8 *)(r3 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R3=pkt(off=38,r=46)
+        	519: (16) if w2 == 0x3 goto pc+27 547: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=3 R3=pkt(off=38,r=46) R4=5 R5=0x74635f6c78635f6c R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R10=fp0 fp-8=mmmm????
+        	; assert(l4->code == ICMP_PORT_UNREACH); @ tc_lxc_lb4_no_backend.c:120
+        	547: (71) r2 = *(u8 *)(r7 +39)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R7=pkt(r=46)
+        	548: (16) if w2 == 0x3 goto pc+43 592: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=3 R3=pkt(off=38,r=46) R4=5 R5=0x74635f6c78635f6c R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R10=fp0 fp-8=mmmm????
+        	; __u16 icmp_len = bpf_ntohs(l3->tot_len) - sizeof(struct iphdr); @ tc_lxc_lb4_no_backend.c:123
+        	592: (69) r4 = *(u16 *)(r7 +20)       ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=pkt(r=46)
+        	593: (04) w4 += -20                   ; R4_w=scalar(smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff))
+        	; if ((void *)l4 + icmp_len > data_end) @ tc_lxc_lb4_no_backend.c:125
+        	594: (bf) r2 = r4                     ; R2_w=scalar(id=3,smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff)) R4_w=scalar(id=3,smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff))
+        	595: (57) r2 &= 65535                 ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	596: (bf) r5 = r3                     ; R3=pkt(off=38,r=46) R5_w=pkt(off=38,r=46)
+        	597: (0f) r5 += r2                    ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R5_w=pkt(id=4,off=38,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	598: (bd) if r5 <= r1 goto pc+37 636: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=pkt(off=38,r=46) R4=scalar(id=3,smin=0,smax=umax=0xffffffff,smin32=-20,smax32=0xffeb,var_off=(0x0; 0xffffffff)) R5=pkt(id=4,off=38,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R6=map_value(map=suite_result_ma,ks=4,vs=8192) R7=pkt(r=46) R10=fp0 fp-8=mmmm????
+        	; if ((void *)l4 + icmp_len > data_end) @ tc_lxc_lb4_no_backend.c:125
+        	636: (54) w4 &= 65535                 ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	637: (b4) w8 = 0                      ; R8_w=0
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	638: (b7) r1 = 0                      ; R1_w=0
+        	639: (b4) w2 = 0                      ; R2_w=0
+        	640: (b4) w5 = 0                      ; R5_w=0
+        	641: (85) call bpf_csum_diff#28
+        	invalid access to packet, off=38 size=65535, R3(id=0,off=38,r=46)
+        	R3 offset is outside of the packet
+        	processed 573 insns (limit 1000000) max_states_per_insn 0 total_states 17 peak_states 17 mark_read 8
+--- FAIL: TestBPF (0.18s)
+    --- FAIL: TestBPF/tc_lxc_lb4_no_backend.o (0.18s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.244s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+=== FAIL tc_lxc_lb4_no_backend ===
+=== RUN tc_nodeport_lb6_no_backend ===
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_nodeport_lb6_no_backend.c -o tc_nodeport_lb6_no_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_nodeport_lb6_no_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_nodeport_lb6_no_backend.o
+    bpf_test.go:194: verifier error: load program: permission denied:
+        	0: R1=ctx() R10=fp0
+        	; int nodeport_no_backend_check(__maybe_unused const struct __ctx_buff *ctx) @ tc_nodeport_lb6_no_backend.c:171
+        	0: (bf) r6 = r1                       ; R1=ctx() R6_w=ctx()
+        	1: (b4) w7 = 0                        ; R7_w=0
+        	; test_init(); @ tc_nodeport_lb6_no_backend.c:92
+        	2: (63) *(u32 *)(r10 -8) = r7         ; R7_w=0 R10=fp0 fp-8=????0
+        	3: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0
+        	4: (07) r2 += -8                      ; R2_w=fp-8
+        	5: (18) r1 = 0x1813f0000              ; R1_w=map_ptr(map=suite_result_ma,ks=4,vs=8192)
+        	7: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=suite_result_ma,ks=4,vs=8192)
+        	8: (b4) w1 = 100                      ; R1_w=100
+        	9: (15) if r0 == 0x0 goto pc+180      ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; DEFINE_FUNC_CTX_POINTER(data) @ skb.h:81
+        	10: (61) r9 = *(u32 *)(r6 +76)        ; R6_w=ctx() R9_w=pkt(r=0)
+        	; data_end = (void *)(long)ctx->data_end; @ tc_nodeport_lb6_no_backend.c:95
+        	11: (61) r1 = *(u32 *)(r6 +80)        ; R1_w=pkt_end() R6_w=ctx()
+        	12: (b4) w2 = 10                      ; R2_w=10
+        	13: (73) *(u8 *)(r0 +3) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=10
+        	14: (73) *(u8 *)(r0 +2) = r7          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=0
+        	15: (b4) w2 = 190                     ; R2_w=190
+        	16: (73) *(u8 *)(r0 +1) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=190
+        	17: (b4) w2 = 18                      ; R2_w=18
+        	18: (73) *(u8 *)(r0 +0) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=18
+        	; if (data + sizeof(__u32) > data_end) @ tc_nodeport_lb6_no_backend.c:97
+        	19: (bf) r2 = r9                      ; R2_w=pkt(r=0) R9_w=pkt(r=0)
+        	20: (07) r2 += 4                      ; R2=pkt(off=4,r=0)
+        	21: (bd) if r2 <= r1 goto pc+30 52: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=4,r=4) R6=ctx() R7=0 R9=pkt(r=4) R10=fp0 fp-8=????mmmm
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	52: (b4) w4 = 14880                   ; R4_w=14880
+        	; case  34: __it_mob(d, s, 16); goto jmp_32; @ builtins.h:247
+        	53: (6b) *(u16 *)(r0 +38) = r4        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=14880
+        	54: (b4) w2 = 0                       ; R2_w=0
+        	; test_log("Status code: %d", *status_code); @ tc_nodeport_lb6_no_backend.c:102
+        	55: (73) *(u8 *)(r0 +5) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0
+        	56: (b4) w3 = 178                     ; R3_w=178
+        	57: (73) *(u8 *)(r0 +4) = r3          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=178
+        	58: (18) r3 = 0x6e642e633a313032      ; R3_w=0x6e642e633a313032
+        	; case  32: jmp_32:  __it_mob(d, s, 64); fallthrough; @ builtins.h:194
+        	60: (7b) *(u64 *)(r0 +30) = r3        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=0x6e642e633a313032
+        	61: (18) r3 = 0x6e6f5f6261636b65      ; R3_w=0x6e6f5f6261636b65
+        	; case  24: jmp_24:  __it_mob(d, s, 64); fallthrough; @ builtins.h:195
+        	63: (7b) *(u64 *)(r0 +22) = r3        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=0x6e6f5f6261636b65
+        	64: (18) r5 = 0x6f72745f6c62365f      ; R5_w=0x6f72745f6c62365f
+        	; case  16: jmp_16:  __it_mob(d, s, 64); fallthrough; @ builtins.h:196
+        	66: (7b) *(u64 *)(r0 +14) = r5        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R5_w=0x6f72745f6c62365f
+        	67: (18) r6 = 0x6f64653a20256400      ; R6_w=0x6f64653a20256400
+        	69: (7b) *(u64 *)(r0 +48) = r6        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x6f64653a20256400
+        	70: (18) r6 = 0x74635f6e6f646570      ; R6_w=0x74635f6e6f646570
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	72: (7b) *(u64 *)(r0 +6) = r6         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x74635f6e6f646570
+        	73: (b4) w7 = 17                      ; R7_w=17
+        	; test_log("Status code: %d", *status_code); @ tc_nodeport_lb6_no_backend.c:102
+        	74: (73) *(u8 *)(r0 +56) = r7         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=17
+        	75: (18) r7 = 0x5374617475732063      ; R7_w=0x5374617475732063
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	77: (7b) *(u64 *)(r0 +40) = r7        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=0x5374617475732063
+        	; test_log("Status code: %d", *status_code); @ tc_nodeport_lb6_no_backend.c:102
+        	78: (61) r7 = *(u32 *)(r9 +0)         ; R7_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R9=pkt(r=4)
+        	79: (7b) *(u64 *)(r0 +57) = r7        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(*status_code == retval); @ tc_nodeport_lb6_no_backend.c:103
+        	80: (16) if w7 == 0x7 goto pc+20 101: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=0 R3_w=0x6e6f5f6261636b65 R4_w=14880 R5_w=0x6f72745f6c62365f R6_w=0x74635f6e6f646570 R7_w=7 R9=pkt(r=4) R10=fp0 fp-8=????mmmm
+        	; if ((void *)l2 + sizeof(struct ethhdr) > data_end) @ tc_nodeport_lb6_no_backend.c:106
+        	101: (bf) r2 = r9                     ; R2_w=pkt(r=4) R9=pkt(r=4)
+        	102: (07) r2 += 18                    ; R2_w=pkt(off=18,r=4)
+        	103: (bd) if r2 <= r1 goto pc+34 138: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=0x6e6f5f6261636b65 R4_w=14880 R5_w=0x6f72745f6c62365f R6_w=0x74635f6e6f646570 R7_w=7 R9=pkt(r=18) R10=fp0 fp-8=????mmmm
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	138: (69) r3 = *(u16 *)(r9 +8)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=18)
+        	139: (a4) w3 ^= 57071                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	140: (61) r4 = *(u32 *)(r9 +4)        ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R9=pkt(r=18)
+        	141: (a4) w4 ^= -559038737            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	142: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_dest, (__u8 *)client_mac, ETH_ALEN) == 0); @ tc_nodeport_lb6_no_backend.c:109
+        	143: (16) if w4 == 0x0 goto pc+48 192: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=0 R5_w=0x6f72745f6c62365f R6_w=0x74635f6e6f646570 R7_w=7 R9=pkt(r=18) R10=fp0 fp-8=????mmmm
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	192: (69) r3 = *(u16 *)(r9 +14)       ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=18)
+        	193: (a4) w3 ^= 34902                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	194: (61) r4 = *(u32 *)(r9 +10)       ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R9=pkt(r=18)
+        	195: (a4) w4 ^= -831346941            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	196: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_source, (__u8 *)lb_mac, ETH_ALEN) == 0); @ tc_nodeport_lb6_no_backend.c:110
+        	197: (16) if w4 == 0x0 goto pc+24 222: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=0 R5_w=0x6f72745f6c62365f R6_w=0x74635f6e6f646570 R7_w=7 R9=pkt(r=18) R10=fp0 fp-8=????mmmm
+        	; assert(l2->h_proto == __bpf_htons(ETH_P_IPV6)); @ tc_nodeport_lb6_no_backend.c:111
+        	222: (71) r3 = *(u8 *)(r9 +17)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=18)
+        	223: (71) r4 = *(u8 *)(r9 +16)        ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=18)
+        	224: (64) w4 <<= 8                    ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))
+        	225: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	226: (16) if w4 == 0x86dd goto pc+30 257: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4=0x86dd R5=0x6f72745f6c62365f R6=0x74635f6e6f646570 R7=7 R9=pkt(r=18) R10=fp0 fp-8=????mmmm
+        	; if ((void *)l3 + sizeof(struct ipv6hdr) > data_end) @ tc_nodeport_lb6_no_backend.c:114
+        	257: (bf) r6 = r9                     ; R6_w=pkt(r=18) R9=pkt(r=18)
+        	258: (07) r6 += 58                    ; R6_w=pkt(off=58,r=18)
+        	259: (bd) if r6 <= r1 goto pc+34 294: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=58) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4=0x86dd R5=0x6f72745f6c62365f R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=????mmmm
+        	; case  16: jmp_16:  __it_xor(x, y, r, 64); fallthrough; @ builtins.h:329
+        	294: (79) r3 = *(u64 *)(r9 +34)       ; R3_w=scalar() R9=pkt(r=58)
+        	; assert(!memcmp(&l3->saddr, (const void *)FRONTEND_IP, sizeof(l3->saddr))); @ tc_nodeport_lb6_no_backend.c:117
+        	295: (55) if r3 != 0x2 goto pc+4      ; R3_w=2
+        	296: (79) r3 = *(u64 *)(r9 +26)       ; R3_w=scalar() R9=pkt(r=58)
+        	297: (18) r4 = 0xfd04000000000000     ; R4_w=0xfd04000000000000
+        	299: (1d) if r3 == r4 goto pc+24 324: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=58) R3=0xfd04000000000000 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=????mmmm
+        	; case  16: jmp_16:  __it_xor(x, y, r, 64); fallthrough; @ builtins.h:329
+        	324: (79) r3 = *(u64 *)(r9 +50)       ; R3_w=scalar() R9=pkt(r=58)
+        	; assert(!memcmp(&l3->daddr, (const void *)CLIENT_IP, sizeof(l3->daddr))); @ tc_nodeport_lb6_no_backend.c:118
+        	325: (55) if r3 != 0x1 goto pc+2      ; R3_w=1
+        	326: (79) r3 = *(u64 *)(r9 +42)       ; R3_w=scalar() R9=pkt(r=58)
+        	327: (1d) if r3 == r4 goto pc+24 352: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=58) R3=0xfd04000000000000 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=????mmmm
+        	; assert(l3->hop_limit == 64); @ tc_nodeport_lb6_no_backend.c:120
+        	352: (71) r3 = *(u8 *)(r9 +25)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=58)
+        	353: (16) if w3 == 0x40 goto pc+24 378: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=58) R3_w=64 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=????mmmm
+        	; assert(l3->version == 6); @ tc_nodeport_lb6_no_backend.c:121
+        	378: (71) r2 = *(u8 *)(r2 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))
+        	379: (54) w2 &= 240                   ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=240,var_off=(0x0; 0xf0))
+        	380: (16) if w2 == 0x60 goto pc+24 405: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=96 R3=64 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=????mmmm
+        	; assert(l3->nexthdr == IPPROTO_ICMPV6); @ tc_nodeport_lb6_no_backend.c:122
+        	405: (71) r2 = *(u8 *)(r9 +24)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=58)
+        	406: (16) if w2 == 0x3a goto pc+30 437: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=58 R3=64 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=????mmmm
+        	; if ((void *) l4 + sizeof(struct icmp6hdr) > data_end) @ tc_nodeport_lb6_no_backend.c:125
+        	437: (bf) r2 = r9                     ; R2_w=pkt(r=58) R9=pkt(r=58)
+        	438: (07) r2 += 66                    ; R2_w=pkt(off=66,r=58)
+        	439: (bd) if r2 <= r1 goto pc+34 474: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=66,r=66) R3=64 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=66) R7=7 R9=pkt(r=66) R10=fp0 fp-8=????mmmm
+        	474: (bf) r7 = r0                     ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; assert(l4->icmp6_type == ICMPV6_DEST_UNREACH); @ tc_nodeport_lb6_no_backend.c:128
+        	475: (71) r2 = *(u8 *)(r6 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R6=pkt(off=58,r=66)
+        	476: (16) if w2 == 0x1 goto pc+24 501: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=1 R3=64 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=66) R7_w=map_value(map=suite_result_ma,ks=4,vs=8192) R9=pkt(r=66) R10=fp0 fp-8=????mmmm
+        	; assert(l4->icmp6_code == ICMPV6_PORT_UNREACH); @ tc_nodeport_lb6_no_backend.c:129
+        	501: (71) r2 = *(u8 *)(r9 +59)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=66)
+        	502: (16) if w2 == 0x4 goto pc+46 549: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=4 R3=64 R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=66) R7=map_value(map=suite_result_ma,ks=4,vs=8192) R9=pkt(r=66) R10=fp0 fp-8=????mmmm
+        	; __u16 icmp_len = bpf_ntohs(l3->payload_len); @ tc_nodeport_lb6_no_backend.c:132
+        	549: (69) r3 = *(u16 *)(r9 +22)       ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=66)
+        	; if ((void *)l4 + icmp_len > data_end) @ tc_nodeport_lb6_no_backend.c:136
+        	550: (bf) r2 = r6                     ; R2_w=pkt(off=58,r=66) R6=pkt(off=58,r=66)
+        	551: (7b) *(u64 *)(r10 -16) = r3      ; R3_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	552: (0f) r2 += r3                    ; R2_w=pkt(id=3,off=58,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	553: (bd) if r2 <= r1 goto pc+37 591: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(id=3,off=58,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4=0xfd04000000000000 R5=0x6f72745f6c62365f R6=pkt(off=58,r=66) R7=map_value(map=suite_result_ma,ks=4,vs=8192) R9=pkt(r=66) R10=fp0 fp-8=????mmmm fp-16_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	591: (bf) r3 = r9                     ; R3_w=pkt(r=66) R9=pkt(r=66)
+        	592: (07) r3 += 26                    ; R3_w=pkt(off=26,r=66)
+        	593: (bf) r8 = r9                     ; R8_w=pkt(r=66) R9=pkt(r=66)
+        	594: (07) r8 += 42                    ; R8_w=pkt(off=42,r=66)
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	595: (b7) r1 = 0                      ; R1_w=0
+        	596: (b4) w2 = 0                      ; R2_w=0
+        	597: (b4) w4 = 16                     ; R4_w=16
+        	598: (b4) w5 = 0                      ; R5_w=0
+        	599: (85) call bpf_csum_diff#28       ; R0=scalar()
+        	600: (b7) r1 = 0                      ; R1_w=0
+        	601: (b4) w2 = 0                      ; R2_w=0
+        	602: (bf) r3 = r8                     ; R3_w=pkt(off=42,r=66) R8=pkt(off=42,r=66)
+        	603: (b4) w4 = 16                     ; R4_w=16
+        	604: (bc) w5 = w0                     ; R0=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	605: (85) call bpf_csum_diff#28       ; R0_w=scalar()
+        	606: (79) r1 = *(u64 *)(r10 -16)      ; R1_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	; tmp = bpf_htonl((__u32)icmp_len); @ tc_nodeport_lb6_no_backend.c:141
+        	607: (63) *(u32 *)(r10 -8) = r1       ; R1_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=????scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	608: (bf) r8 = r10                    ; R8_w=fp0 R10=fp0
+        	609: (07) r8 += -8                    ; R8_w=fp-8
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	610: (b7) r1 = 0                      ; R1_w=0
+        	611: (b4) w2 = 0                      ; R2_w=0
+        	612: (bf) r3 = r8                     ; R3_w=fp-8 R8_w=fp-8
+        	613: (b4) w4 = 4                      ; R4_w=4
+        	614: (bc) w5 = w0                     ; R0_w=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	615: (85) call bpf_csum_diff#28       ; R0=scalar()
+        	616: (b4) w1 = 58                     ; R1_w=58
+        	; tmp = bpf_htonl((__u32)IPPROTO_ICMPV6); @ tc_nodeport_lb6_no_backend.c:143
+        	617: (63) *(u32 *)(r10 -8) = r1       ; R1_w=58 R10=fp0 fp-8=????58
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	618: (b7) r1 = 0                      ; R1_w=0
+        	619: (b4) w2 = 0                      ; R2_w=0
+        	620: (bf) r3 = r8                     ; R3_w=fp-8 R8=fp-8
+        	621: (b4) w4 = 4                      ; R4_w=4
+        	622: (bc) w5 = w0                     ; R0=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	623: (85) call bpf_csum_diff#28       ; R0_w=scalar()
+        	624: (b7) r1 = 0                      ; R1_w=0
+        	625: (b4) w2 = 0                      ; R2_w=0
+        	626: (bf) r3 = r6                     ; R3_w=pkt(off=58,r=66) R6=pkt(off=58,r=66)
+        	627: (79) r4 = *(u64 *)(r10 -16)      ; R4_w=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-16=scalar(id=2,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	628: (bc) w5 = w0                     ; R0_w=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	629: (85) call bpf_csum_diff#28
+        	invalid access to packet, off=58 size=65535, R3(id=0,off=58,r=66)
+        	R3 offset is outside of the packet
+        	processed 576 insns (limit 1000000) max_states_per_insn 0 total_states 17 peak_states 17 mark_read 9
+--- FAIL: TestBPF (0.48s)
+    --- FAIL: TestBPF/tc_nodeport_lb6_no_backend.o (0.48s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.544s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== FAIL tc_nodeport_lb6_no_backend ===
+=== RUN tc_lxc_lb6_no_backend ===
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c tc_lxc_lb6_no_backend.c -o tc_lxc_lb6_no_backend.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test tc_lxc_lb6_no_backend \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/tc_lxc_lb6_no_backend.o
+    bpf_test.go:194: verifier error: load program: permission denied:
+        	0: R1=ctx() R10=fp0
+        	; int lxc_no_backend_check(__maybe_unused const struct __ctx_buff *ctx) @ tc_lxc_lb6_no_backend.c:82
+        	0: (bf) r6 = r1                       ; R1=ctx() R6_w=ctx()
+        	1: (b4) w7 = 0                        ; R7_w=0
+        	; test_init(); @ tc_lxc_lb6_no_backend.c:90
+        	2: (63) *(u32 *)(r10 -4) = r7         ; R7_w=0 R10=fp0 fp-8=0000????
+        	3: (bf) r2 = r10                      ; R2_w=fp0 R10=fp0
+        	4: (07) r2 += -4                      ; R2_w=fp-4
+        	5: (18) r1 = 0x17826c000              ; R1_w=map_ptr(map=suite_result_ma,ks=4,vs=8192)
+        	7: (85) call bpf_map_lookup_elem#1    ; R0_w=map_value_or_null(id=1,map=suite_result_ma,ks=4,vs=8192)
+        	8: (b4) w1 = 100                      ; R1_w=100
+        	9: (15) if r0 == 0x0 goto pc+236      ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; DEFINE_FUNC_CTX_POINTER(data) @ skb.h:81
+        	10: (61) r9 = *(u32 *)(r6 +76)        ; R6_w=ctx() R9_w=pkt(r=0)
+        	; data_end = (void *)(long)ctx->data_end; @ tc_lxc_lb6_no_backend.c:93
+        	11: (61) r1 = *(u32 *)(r6 +80)        ; R1_w=pkt_end() R6_w=ctx()
+        	12: (b4) w2 = 10                      ; R2_w=10
+        	13: (73) *(u8 *)(r0 +3) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=10
+        	14: (73) *(u8 *)(r0 +2) = r7          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=0
+        	15: (b4) w2 = 185                     ; R2_w=185
+        	16: (73) *(u8 *)(r0 +1) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=185
+        	17: (b4) w2 = 18                      ; R2_w=18
+        	18: (73) *(u8 *)(r0 +0) = r2          ; R0_w=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=18
+        	; if (data + sizeof(__u32) > data_end) @ tc_lxc_lb6_no_backend.c:95
+        	19: (bf) r2 = r9                      ; R2_w=pkt(r=0) R9_w=pkt(r=0)
+        	20: (07) r2 += 4                      ; R2=pkt(off=4,r=0)
+        	21: (bd) if r2 <= r1 goto pc+27 49: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=4,r=4) R6=ctx() R7=0 R9=pkt(r=4) R10=fp0 fp-8=mmmm????
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	49: (b4) w3 = 32                      ; R3_w=32
+        	; __it_mob(d, s, 8); @ builtins.h:177
+        	50: (73) *(u8 *)(r0 +34) = r3         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R3_w=32
+        	51: (b4) w2 = 0                       ; R2_w=0
+        	; test_log("Status code: %d", *status_code); @ tc_lxc_lb6_no_backend.c:100
+        	52: (73) *(u8 *)(r0 +5) = r2          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R2_w=0
+        	53: (b4) w4 = 173                     ; R4_w=173
+        	54: (73) *(u8 *)(r0 +4) = r4          ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=173
+        	55: (b4) w4 = 825241658               ; R4_w=0x3130303a
+        	; case  28: __it_mob(d, s, 32); goto jmp_24; @ builtins.h:230
+        	56: (63) *(u32 *)(r0 +30) = r4        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=0x3130303a
+        	57: (18) r4 = 0x636b656e642e633a      ; R4_w=0x636b656e642e633a
+        	; case  24: jmp_24:  __it_mob(d, s, 64); fallthrough; @ builtins.h:195
+        	59: (7b) *(u64 *)(r0 +22) = r4        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R4_w=0x636b656e642e633a
+        	60: (18) r5 = 0x62365f6e6f5f6261      ; R5_w=0x62365f6e6f5f6261
+        	; case  16: jmp_16:  __it_mob(d, s, 64); fallthrough; @ builtins.h:196
+        	62: (7b) *(u64 *)(r0 +14) = r5        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R5_w=0x62365f6e6f5f6261
+        	63: (18) r6 = 0x6f64653a20256400      ; R6_w=0x6f64653a20256400
+        	65: (7b) *(u64 *)(r0 +43) = r6        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x6f64653a20256400
+        	66: (18) r6 = 0x74635f6c78635f6c      ; R6_w=0x74635f6c78635f6c
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	68: (7b) *(u64 *)(r0 +6) = r6         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R6_w=0x74635f6c78635f6c
+        	69: (b4) w7 = 17                      ; R7_w=17
+        	; test_log("Status code: %d", *status_code); @ tc_lxc_lb6_no_backend.c:100
+        	70: (73) *(u8 *)(r0 +51) = r7         ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=17
+        	71: (18) r7 = 0x5374617475732063      ; R7_w=0x5374617475732063
+        	; case   8: jmp_8:   __it_mob(d, s, 64); @ builtins.h:197
+        	73: (7b) *(u64 *)(r0 +35) = r7        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=0x5374617475732063
+        	; test_log("Status code: %d", *status_code); @ tc_lxc_lb6_no_backend.c:100
+        	74: (61) r7 = *(u32 *)(r9 +0)         ; R7_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R9=pkt(r=4)
+        	75: (7b) *(u64 *)(r0 +52) = r7        ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R7_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(*status_code == CTX_ACT_REDIRECT); @ tc_lxc_lb6_no_backend.c:101
+        	76: (16) if w7 == 0x7 goto pc+19 96: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=0 R3_w=32 R4_w=0x636b656e642e633a R5_w=0x62365f6e6f5f6261 R6_w=0x74635f6c78635f6c R7_w=7 R9=pkt(r=4) R10=fp0 fp-8=mmmm????
+        	; if ((void *)l2 + sizeof(struct ethhdr) > data_end) @ tc_lxc_lb6_no_backend.c:104
+        	96: (bf) r2 = r9                      ; R2_w=pkt(r=4) R9=pkt(r=4)
+        	97: (07) r2 += 18                     ; R2_w=pkt(off=18,r=4)
+        	98: (bd) if r2 <= r1 goto pc+33 132: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2_w=pkt(off=18,r=18) R3_w=32 R4_w=0x636b656e642e633a R5_w=0x62365f6e6f5f6261 R6_w=0x74635f6c78635f6c R7_w=7 R9=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	132: (69) r3 = *(u16 *)(r9 +8)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=18)
+        	133: (a4) w3 ^= 57071                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	134: (61) r4 = *(u32 *)(r9 +4)        ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R9=pkt(r=18)
+        	135: (a4) w4 ^= -559038737            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	136: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_dest, (__u8 *)client_mac, ETH_ALEN) == 0); @ tc_lxc_lb6_no_backend.c:107
+        	137: (16) if w4 == 0x0 goto pc+27 165: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4=0 R5=0x62365f6e6f5f6261 R6=0x74635f6c78635f6c R7=7 R9=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; case   6: __it_xor(x, y, r, 16); __it_xor(x, y, r, 32); @ builtins.h:348
+        	165: (69) r3 = *(u16 *)(r9 +14)       ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=18)
+        	166: (a4) w3 ^= 34902                 ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	167: (61) r4 = *(u32 *)(r9 +10)       ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff)) R9=pkt(r=18)
+        	168: (a4) w4 ^= -831346941            ; R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	169: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	; assert(memcmp(l2->h_source, (__u8 *)lb_mac, ETH_ALEN) == 0); @ tc_lxc_lb6_no_backend.c:108
+        	170: (16) if w4 == 0x0 goto pc+27 198: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R4=0 R5=0x62365f6e6f5f6261 R6=0x74635f6c78635f6c R7=7 R9=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; assert(l2->h_proto == __bpf_htons(ETH_P_IPV6)); @ tc_lxc_lb6_no_backend.c:109
+        	198: (71) r3 = *(u8 *)(r9 +17)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=18)
+        	199: (71) r4 = *(u8 *)(r9 +16)        ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=18)
+        	200: (64) w4 <<= 8                    ; R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xff00,var_off=(0x0; 0xff00))
+        	201: (4c) w4 |= w3                    ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	202: (16) if w4 == 0x86dd goto pc+45 248: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=18) R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4_w=0x86dd R5=0x62365f6e6f5f6261 R6=0x74635f6c78635f6c R7=7 R9=pkt(r=18) R10=fp0 fp-8=mmmm????
+        	; if ((void *)l3 + sizeof(struct ipv6hdr) > data_end) @ tc_lxc_lb6_no_backend.c:112
+        	248: (bf) r6 = r9                     ; R6_w=pkt(r=18) R9=pkt(r=18)
+        	249: (07) r6 += 58                    ; R6_w=pkt(off=58,r=18)
+        	250: (bd) if r6 <= r1 goto pc+33 284: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=58) R3=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=mmmm????
+        	; assert(l3->hop_limit == 64); @ tc_lxc_lb6_no_backend.c:115
+        	284: (71) r3 = *(u8 *)(r9 +25)        ; R3_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=58)
+        	285: (16) if w3 == 0x40 goto pc+27 313: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=18,r=58) R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=mmmm????
+        	; assert(l3->version == 6); @ tc_lxc_lb6_no_backend.c:116
+        	313: (71) r2 = *(u8 *)(r2 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff))
+        	314: (54) w2 &= 240                   ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=240,var_off=(0x0; 0xf0))
+        	315: (16) if w2 == 0x60 goto pc+27 343: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=96 R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=mmmm????
+        	; assert(l3->nexthdr == IPPROTO_ICMPV6); @ tc_lxc_lb6_no_backend.c:117
+        	343: (71) r2 = *(u8 *)(r9 +24)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=58)
+        	344: (16) if w2 == 0x3a goto pc+27 372: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=58 R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=58) R7=7 R9=pkt(r=58) R10=fp0 fp-8=mmmm????
+        	; if ((void *) l4 + sizeof(struct icmp6hdr) > data_end) @ tc_lxc_lb6_no_backend.c:120
+        	372: (bf) r2 = r9                     ; R2_w=pkt(r=58) R9=pkt(r=58)
+        	373: (07) r2 += 66                    ; R2_w=pkt(off=66,r=58)
+        	374: (bd) if r2 <= r1 goto pc+33 408: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(off=66,r=66) R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=66) R7=7 R9=pkt(r=66) R10=fp0 fp-8=mmmm????
+        	; assert(l4->icmp6_type == ICMPV6_DEST_UNREACH); @ tc_lxc_lb6_no_backend.c:123
+        	408: (71) r2 = *(u8 *)(r6 +0)         ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R6=pkt(off=58,r=66)
+        	409: (16) if w2 == 0x1 goto pc+27 437: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=1 R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=66) R7=7 R9=pkt(r=66) R10=fp0 fp-8=mmmm????
+        	; assert(l4->icmp6_code == ICMPV6_PORT_UNREACH); @ tc_lxc_lb6_no_backend.c:124
+        	437: (71) r2 = *(u8 *)(r9 +59)        ; R2_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=255,var_off=(0x0; 0xff)) R9=pkt(r=66)
+        	438: (16) if w2 == 0x4 goto pc+27 466: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=4 R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=66) R7=7 R9=pkt(r=66) R10=fp0 fp-8=mmmm????
+        	466: (7b) *(u64 *)(r10 -16) = r0      ; R0=map_value(map=suite_result_ma,ks=4,vs=8192) R10=fp0 fp-16_w=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; __u16 icmp_len = bpf_ntohs(l3->payload_len); @ tc_lxc_lb6_no_backend.c:127
+        	467: (69) r7 = *(u16 *)(r9 +22)       ; R7_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=66)
+        	; if ((void *)l4 + icmp_len > data_end) @ tc_lxc_lb6_no_backend.c:131
+        	468: (bf) r2 = r6                     ; R2_w=pkt(off=58,r=66) R6=pkt(off=58,r=66)
+        	469: (0f) r2 += r7                    ; R2_w=pkt(id=2,off=58,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7_w=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	470: (bd) if r2 <= r1 goto pc+38 509: R0=map_value(map=suite_result_ma,ks=4,vs=8192) R1=pkt_end() R2=pkt(id=2,off=58,r=0,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R3=64 R4=0x86dd R5=0x62365f6e6f5f6261 R6=pkt(off=58,r=66) R7=scalar(smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R9=pkt(r=66) R10=fp0 fp-8=mmmm???? fp-16=map_value(map=suite_result_ma,ks=4,vs=8192)
+        	; csum = csum_diff(NULL, 0, &l3->saddr, sizeof(l3->saddr), 0); @ tc_lxc_lb6_no_backend.c:134
+        	509: (bf) r3 = r9                     ; R3_w=pkt(r=66) R9=pkt(r=66)
+        	510: (07) r3 += 26                    ; R3_w=pkt(off=26,r=66)
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	511: (b7) r1 = 0                      ; R1_w=0
+        	512: (b4) w2 = 0                      ; R2_w=0
+        	513: (b4) w4 = 16                     ; R4_w=16
+        	514: (b4) w5 = 0                      ; R5_w=0
+        	515: (85) call bpf_csum_diff#28       ; R0_w=scalar()
+        	; csum = csum_diff(NULL, 0, &l3->daddr, sizeof(l3->daddr), csum); @ tc_lxc_lb6_no_backend.c:135
+        	516: (bf) r3 = r9                     ; R3_w=pkt(r=66) R9=pkt(r=66)
+        	517: (07) r3 += 42                    ; R3_w=pkt(off=42,r=66)
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	518: (b7) r1 = 0                      ; R1_w=0
+        	519: (b4) w2 = 0                      ; R2_w=0
+        	520: (b4) w4 = 16                     ; R4_w=16
+        	521: (bc) w5 = w0                     ; R0_w=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	522: (85) call bpf_csum_diff#28       ; R0=scalar()
+        	; tmp = bpf_htonl((__u32)icmp_len); @ tc_lxc_lb6_no_backend.c:136
+        	523: (63) *(u32 *)(r10 -8) = r7       ; R7=scalar(id=3,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R10=fp0 fp-8=mmmmscalar(id=3,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	524: (bf) r8 = r10                    ; R8_w=fp0 R10=fp0
+        	525: (07) r8 += -8                    ; R8_w=fp-8
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	526: (b7) r1 = 0                      ; R1_w=0
+        	527: (b4) w2 = 0                      ; R2_w=0
+        	528: (bf) r3 = r8                     ; R3_w=fp-8 R8_w=fp-8
+        	529: (b4) w4 = 4                      ; R4_w=4
+        	530: (bc) w5 = w0                     ; R0=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	531: (85) call bpf_csum_diff#28       ; R0_w=scalar()
+        	532: (b4) w1 = 58                     ; R1_w=58
+        	; tmp = bpf_htonl((__u32)IPPROTO_ICMPV6); @ tc_lxc_lb6_no_backend.c:138
+        	533: (63) *(u32 *)(r10 -8) = r1       ; R1_w=58 R10=fp0 fp-8=mmmm58
+        	; return csum_diff_external(from, size_from, to, size_to, seed); @ csum.h:50
+        	534: (b7) r1 = 0                      ; R1_w=0
+        	535: (b4) w2 = 0                      ; R2_w=0
+        	536: (bf) r3 = r8                     ; R3_w=fp-8 R8_w=fp-8
+        	537: (b4) w4 = 4                      ; R4_w=4
+        	538: (bc) w5 = w0                     ; R0_w=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	539: (85) call bpf_csum_diff#28       ; R0=scalar()
+        	540: (b7) r1 = 0                      ; R1_w=0
+        	541: (b4) w2 = 0                      ; R2_w=0
+        	542: (bf) r3 = r6                     ; R3_w=pkt(off=58,r=66) R6=pkt(off=58,r=66)
+        	543: (bc) w4 = w7                     ; R4_w=scalar(id=3,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff)) R7=scalar(id=3,smin=smin32=0,smax=umax=smax32=umax32=0xffff,var_off=(0x0; 0xffff))
+        	544: (bc) w5 = w0                     ; R0=scalar() R5_w=scalar(smin=0,smax=umax=0xffffffff,var_off=(0x0; 0xffffffff))
+        	545: (85) call bpf_csum_diff#28
+        	invalid access to packet, off=58 size=65535, R3(id=0,off=58,r=66)
+        	R3 offset is outside of the packet
+        	processed 495 insns (limit 1000000) max_states_per_insn 0 total_states 16 peak_states 16 mark_read 12
+--- FAIL: TestBPF (0.34s)
+    --- FAIL: TestBPF/tc_lxc_lb6_no_backend.o (0.34s)
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.407s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== FAIL tc_lxc_lb6_no_backend ===
+=== RUN session_affinity_maglev_test ===
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+make: *** [Makefile:114: run] Error 1
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c session_affinity_maglev_test.c -o session_affinity_maglev_test.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test.v -test session_affinity_maglev_test \
+| cat;
+=== RUN   TestBPF
+=== RUN   TestBPF/session_affinity_maglev_test.o
+=== RUN   TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_1_port_1
+=== NAME  TestBPF/session_affinity_maglev_test.o
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.13:8080 dst=110.0.11.1:111
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_1_port_2
+=== NAME  TestBPF/session_affinity_maglev_test.o
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:222 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.13:8080 dst=110.0.11.1:222
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_1_port_3
+=== NAME  TestBPF/session_affinity_maglev_test.o
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=110.0.11.1:333 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.13:8080 dst=110.0.11.1:333
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_2_port_1
+=== NAME  TestBPF/session_affinity_maglev_test.o
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=130.0.13.3:111 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.14:8080 dst=130.0.13.3:111
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 03: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_2_port_2
+=== NAME  TestBPF/session_affinity_maglev_test.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=130.0.13.3:222 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.14:8080 dst=130.0.13.3:222
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+=== RUN   TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_2_port_3
+=== NAME  TestBPF/session_affinity_maglev_test.o
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=130.0.13.3:333 dst=172.16.10.1:80
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=192.168.0.14:8080 dst=130.0.13.3:333
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+    bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+--- PASS: TestBPF (1.04s)
+    --- PASS: TestBPF/session_affinity_maglev_test.o (1.04s)
+        --- PASS: TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_1_port_1 (0.01s)
+        --- PASS: TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_1_port_2 (0.00s)
+        --- PASS: TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_1_port_3 (0.00s)
+        --- PASS: TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_2_port_1 (0.00s)
+        --- PASS: TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_2_port_2 (0.00s)
+        --- PASS: TestBPF/session_affinity_maglev_test.o/session_affinity_maglev_client_2_port_3 (0.00s)
+PASS
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	1.129s
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'
+=== PASS session_affinity_maglev_test ===

@@ -1,0 +1,98 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test tc_egressgw_snat \
+| cat;
+--- FAIL: TestBPF (2.58s)
+    --- FAIL: TestBPF/tc_egressgw_snat.o (2.58s)
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_fib_redirect (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:152: assert failed at ./lib/egressgw.h:152
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        bpf_test.go:64: CPU 00: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat1 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat1_2_reply (0.00s)
+            bpf_test.go:455: error while running pktgen prog: status code (100)
+            bpf_test.go:590: Test failed due to unknown error in test framework
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat2 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision1 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        bpf_test.go:64: CPU 01: MARK 0x0 FROM 0 DEBUG: Failed to map addr=192.168.0.1 to identity
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision2 (0.00s)
+            bpf_test.go:584: ./lib/egressgw.h:194: src IP hasn't been NATed to egress gateway IP
+        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision2_reply (0.00s)
+            bpf_test.go:455: error while running pktgen prog: status code (100)
+            bpf_test.go:590: Test failed due to unknown error in test framework
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:111
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 02: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:111
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=518655, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:111
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774721 (0xa000a01) from seclabel 2
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:112
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=0 src-identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=518655, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: Established, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Failed to map addr.p4=[::0:0] to identity
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT entry found lifetime=518655, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: Reply, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Successfully mapped addr.p4=[::0:0] to identity=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=[::0:0]:1234 dst=[::0:0]:113
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=1 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Encapsulating to node 167774721 (0xa000a01) from seclabel 2
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	2.652s
+FAIL
+make: *** [Makefile:114: run] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'

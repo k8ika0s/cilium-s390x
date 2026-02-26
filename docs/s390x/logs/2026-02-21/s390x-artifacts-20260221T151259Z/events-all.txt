@@ -1,0 +1,156 @@
+NAMESPACE     LAST SEEN   TYPE      REASON                    OBJECT                                           MESSAGE
+default       24m         Normal    Starting                  node/zkd01.fyre.ibm.com                          
+default       24m         Normal    NodeHasSufficientPID      node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeHasSufficientPID
+default       24m         Warning   SystemOOM                 node/zkd01.fyre.ibm.com                          System OOM encountered, victim process: ld, pid: 1076053
+default       24m         Normal    NodeHasSufficientMemory   node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeHasSufficientMemory
+default       24m         Normal    NodeHasNoDiskPressure     node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeHasNoDiskPressure
+default       24m         Warning   InvalidDiskCapacity       node/zkd01.fyre.ibm.com                          invalid capacity 0 on image filesystem
+default       24m         Normal    NodeAllocatableEnforced   node/zkd01.fyre.ibm.com                          Updated Node Allocatable limit across pods
+default       24m         Normal    Starting                  node/zkd01.fyre.ibm.com                          Starting kubelet.
+kube-system   24m         Normal    Pulled                    pod/kube-apiserver-zkd01.fyre.ibm.com            Container image "registry.k8s.io/kube-apiserver:v1.35.1" already present on machine and can be accessed by the pod
+kube-system   24m         Normal    Pulled                    pod/etcd-zkd01.fyre.ibm.com                      Container image "registry.k8s.io/etcd:3.6.6-0" already present on machine and can be accessed by the pod
+kube-system   24m         Normal    Created                   pod/kube-scheduler-zkd01.fyre.ibm.com            Container created
+kube-system   24m         Normal    Started                   pod/kube-controller-manager-zkd01.fyre.ibm.com   Container started
+kube-system   24m         Normal    Started                   pod/kube-scheduler-zkd01.fyre.ibm.com            Container started
+kube-system   24m         Normal    Created                   pod/kube-apiserver-zkd01.fyre.ibm.com            Container created
+kube-system   24m         Normal    Pulled                    pod/kube-scheduler-zkd01.fyre.ibm.com            Container image "registry.k8s.io/kube-scheduler:v1.35.1" already present on machine and can be accessed by the pod
+kube-system   24m         Normal    Pulled                    pod/kube-controller-manager-zkd01.fyre.ibm.com   Container image "registry.k8s.io/kube-controller-manager:v1.35.1" already present on machine and can be accessed by the pod
+kube-system   24m         Normal    Started                   pod/etcd-zkd01.fyre.ibm.com                      Container started
+kube-system   24m         Normal    Created                   pod/etcd-zkd01.fyre.ibm.com                      Container created
+kube-system   24m         Normal    Created                   pod/kube-controller-manager-zkd01.fyre.ibm.com   Container created
+kube-system   24m         Normal    Started                   pod/kube-apiserver-zkd01.fyre.ibm.com            Container started
+kube-system   24m         Warning   DNSConfigForming          pod/kube-scheduler-zkd01.fyre.ibm.com            Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   24m         Warning   DNSConfigForming          pod/kube-controller-manager-zkd01.fyre.ibm.com   Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   24m         Warning   DNSConfigForming          pod/etcd-zkd01.fyre.ibm.com                      Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   24m         Warning   DNSConfigForming          pod/kube-apiserver-zkd01.fyre.ibm.com            Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   24m         Normal    LeaderElection            lease/kube-controller-manager                    zkd01.fyre.ibm.com_1f39a327-dc09-4de7-ace3-728cd3f3d08e became leader
+default       24m         Normal    NodeHasSufficientMemory   node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeHasSufficientMemory
+default       24m         Normal    Starting                  node/zkd01.fyre.ibm.com                          Starting kubelet.
+default       24m         Warning   SystemOOM                 node/zkd01.fyre.ibm.com                          System OOM encountered, victim process: ld, pid: 1076053
+default       24m         Normal    NodeHasSufficientPID      node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeHasSufficientPID
+default       24m         Normal    NodeHasNoDiskPressure     node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeHasNoDiskPressure
+default       24m         Warning   InvalidDiskCapacity       node/zkd01.fyre.ibm.com                          invalid capacity 0 on image filesystem
+default       24m         Normal    NodeAllocatableEnforced   node/zkd01.fyre.ibm.com                          Updated Node Allocatable limit across pods
+kube-system   24m         Normal    LeaderElection            lease/kube-scheduler                             zkd01.fyre.ibm.com_7f8b52a7-3bbf-41fe-ab77-590d3292f118 became leader
+kube-system   24m         Warning   NodeNotReady              pod/kube-scheduler-zkd01.fyre.ibm.com            Node is not ready
+kube-system   24m         Warning   NodeNotReady              pod/etcd-zkd01.fyre.ibm.com                      Node is not ready
+default       24m         Normal    RegisteredNode            node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com event: Registered Node zkd01.fyre.ibm.com in Controller
+kube-system   24m         Warning   NodeNotReady              pod/kube-controller-manager-zkd01.fyre.ibm.com   Node is not ready
+kube-system   24m         Warning   FailedScheduling          pod/coredns-7d764666f9-86vgc                     0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   24m         Normal    Scheduled                 pod/kube-proxy-vhb8x                             Successfully assigned kube-system/kube-proxy-vhb8x to zkd01.fyre.ibm.com
+kube-system   24m         Normal    SuccessfulCreate          daemonset/kube-proxy                             Created pod: kube-proxy-vhb8x
+kube-system   24m         Warning   FailedScheduling          pod/coredns-7d764666f9-787ph                     0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   24m         Normal    SuccessfulCreate          replicaset/coredns-7d764666f9                    Created pod: coredns-7d764666f9-787ph
+kube-system   24m         Normal    SuccessfulCreate          replicaset/coredns-7d764666f9                    Created pod: coredns-7d764666f9-86vgc
+kube-system   24m         Normal    ScalingReplicaSet         deployment/coredns                               Scaled up replica set coredns-7d764666f9 from 0 to 2
+kube-system   24m         Normal    Started                   pod/kube-proxy-vhb8x                             Container started
+kube-system   24m         Normal    Pulled                    pod/kube-proxy-vhb8x                             Container image "registry.k8s.io/kube-proxy:v1.35.1" already present on machine and can be accessed by the pod
+kube-system   24m         Normal    Created                   pod/kube-proxy-vhb8x                             Container created
+kube-system   22m         Warning   FailedScheduling          pod/cilium-envoy-rz5ch                           0/1 nodes are available: 1 node(s) didn't match pod affinity rules. no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system   22m         Normal    Scheduled                 pod/cilium-envoy-rz5ch                           Successfully assigned kube-system/cilium-envoy-rz5ch to zkd01.fyre.ibm.com
+kube-system   22m         Normal    Scheduled                 pod/cilium-czwr7                                 Successfully assigned kube-system/cilium-czwr7 to zkd01.fyre.ibm.com
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    SuccessfulCreate          daemonset/cilium                                 Created pod: cilium-czwr7
+kube-system   22m         Normal    ScalingReplicaSet         deployment/cilium-operator                       Scaled up replica set cilium-operator-7d796b74f8 from 0 to 1
+kube-system   22m         Normal    SuccessfulCreate          replicaset/cilium-operator-7d796b74f8            Created pod: cilium-operator-7d796b74f8-bmc6k
+kube-system   22m         Normal    Scheduled                 pod/cilium-operator-7d796b74f8-bmc6k             Successfully assigned kube-system/cilium-operator-7d796b74f8-bmc6k to zkd01.fyre.ibm.com
+kube-system   22m         Normal    SuccessfulCreate          daemonset/cilium-envoy                           Created pod: cilium-envoy-rz5ch
+kube-system   22m         Normal    Started                   pod/cilium-operator-7d796b74f8-bmc6k             Container started
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Normal    Created                   pod/cilium-operator-7d796b74f8-bmc6k             Container created
+kube-system   22m         Normal    Pulled                    pod/cilium-operator-7d796b74f8-bmc6k             Container image "docker.io/cilium/operator-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Started                   pod/cilium-envoy-rz5ch                           Container started
+kube-system   22m         Normal    Created                   pod/cilium-envoy-rz5ch                           Container created
+kube-system   22m         Normal    Pulled                    pod/cilium-envoy-rz5ch                           Container image "quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Created                   pod/cilium-czwr7                                 Container created
+kube-system   22m         Normal    Pulled                    pod/cilium-czwr7                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   22m         Normal    Started                   pod/cilium-czwr7                                 Container started
+kube-system   22m         Warning   Unhealthy                 pod/cilium-czwr7                                 Startup probe failed: HTTP probe failed with statuscode: 503
+kube-system   21m         Normal    Scheduled                 pod/coredns-7d764666f9-787ph                     Successfully assigned kube-system/coredns-7d764666f9-787ph to zkd01.fyre.ibm.com
+kube-system   21m         Normal    Scheduled                 pod/coredns-7d764666f9-86vgc                     Successfully assigned kube-system/coredns-7d764666f9-86vgc to zkd01.fyre.ibm.com
+default       21m         Normal    NodeReady                 node/zkd01.fyre.ibm.com                          Node zkd01.fyre.ibm.com status is now: NodeReady
+kube-system   21m         Warning   Unhealthy                 pod/cilium-envoy-rz5ch                           Startup probe failed: Get "http://127.0.0.1:9878/healthz": dial tcp 127.0.0.1:9878: connect: connection refused
+kube-system   20m         Warning   Unhealthy                 pod/coredns-7d764666f9-86vgc                     Liveness probe failed: Get "http://10.0.0.170:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   20m         Warning   Unhealthy                 pod/coredns-7d764666f9-787ph                     Liveness probe failed: Get "http://10.0.0.233:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   16m         Warning   Unhealthy                 pod/coredns-7d764666f9-787ph                     Readiness probe failed: Get "http://10.0.0.233:8181/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   16m         Warning   Unhealthy                 pod/coredns-7d764666f9-86vgc                     Readiness probe failed: Get "http://10.0.0.170:8181/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   12m         Normal    Killing                   pod/coredns-7d764666f9-787ph                     Container coredns failed liveness probe, will be restarted
+kube-system   12m         Normal    Killing                   pod/coredns-7d764666f9-86vgc                     Container coredns failed liveness probe, will be restarted
+kube-system   11m         Normal    Pulled                    pod/coredns-7d764666f9-787ph                     Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kube-system   11m         Warning   DNSConfigForming          pod/coredns-7d764666f9-787ph                     Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   11m         Warning   DNSConfigForming          pod/coredns-7d764666f9-86vgc                     Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   11m         Normal    Pulled                    pod/coredns-7d764666f9-86vgc                     Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kube-system   11m         Normal    Created                   pod/coredns-7d764666f9-86vgc                     Container created
+kube-system   11m         Normal    Started                   pod/coredns-7d764666f9-86vgc                     Container started
+kube-system   11m         Normal    Started                   pod/coredns-7d764666f9-787ph                     Container started
+kube-system   11m         Normal    Created                   pod/coredns-7d764666f9-787ph                     Container created
+kube-system   11m         Warning   DNSConfigForming          pod/cilium-czwr7                                 Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   10m         Normal    Killing                   pod/cilium-czwr7                                 Stopping container cilium-agent
+kube-system   10m         Normal    SuccessfulCreate          daemonset/cilium                                 Created pod: cilium-9629w
+kube-system   10m         Normal    Scheduled                 pod/cilium-9629w                                 Successfully assigned kube-system/cilium-9629w to zkd01.fyre.ibm.com
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Normal    Created                   pod/cilium-9629w                                 Container created
+kube-system   10m         Normal    Pulled                    pod/cilium-9629w                                 Container image "docker.io/cilium/cilium-dev:1233512912-nogit-wip" already present on machine and can be accessed by the pod
+kube-system   10m         Normal    Started                   pod/cilium-9629w                                 Container started
+kube-system   10m         Warning   Unhealthy                 pod/cilium-9629w                                 Startup probe failed: HTTP probe failed with statuscode: 503
+kube-system   10m         Normal    SuccessfulCreate          replicaset/coredns-7d764666f9                    Created pod: coredns-7d764666f9-hsmgg
+kube-system   10m         Normal    Killing                   pod/coredns-7d764666f9-787ph                     Stopping container coredns
+kube-system   10m         Normal    Scheduled                 pod/coredns-7d764666f9-hsmgg                     Successfully assigned kube-system/coredns-7d764666f9-hsmgg to zkd01.fyre.ibm.com
+kube-system   10m         Normal    SuccessfulCreate          replicaset/coredns-7d764666f9                    Created pod: coredns-7d764666f9-gj2fg
+kube-system   10m         Normal    Killing                   pod/coredns-7d764666f9-86vgc                     Stopping container coredns
+kube-system   10m         Normal    Scheduled                 pod/coredns-7d764666f9-gj2fg                     Successfully assigned kube-system/coredns-7d764666f9-gj2fg to zkd01.fyre.ibm.com
+kube-system   8m57s       Warning   DNSConfigForming          pod/coredns-7d764666f9-gj2fg                     Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   8m21s       Warning   Unhealthy                 pod/coredns-7d764666f9-hsmgg                     Liveness probe failed: Get "http://10.244.0.108:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   8m16s       Warning   DNSConfigForming          pod/coredns-7d764666f9-hsmgg                     Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   8m6s        Warning   Unhealthy                 pod/coredns-7d764666f9-gj2fg                     Liveness probe failed: Get "http://10.244.0.249:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   4m58s       Warning   Unhealthy                 pod/coredns-7d764666f9-gj2fg                     Readiness probe failed: Get "http://10.244.0.249:8181/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   88s         Warning   DNSConfigForming          pod/cilium-envoy-rz5ch                           Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   66s         Warning   DNSConfigForming          pod/kube-scheduler-zkd01.fyre.ibm.com            Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   63s         Warning   DNSConfigForming          pod/kube-apiserver-zkd01.fyre.ibm.com            Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   62s         Warning   DNSConfigForming          pod/etcd-zkd01.fyre.ibm.com                      Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   51s         Normal    Killing                   pod/coredns-7d764666f9-hsmgg                     Container coredns failed liveness probe, will be restarted
+kube-system   48s         Warning   DNSConfigForming          pod/kube-controller-manager-zkd01.fyre.ibm.com   Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   46s         Normal    Killing                   pod/coredns-7d764666f9-gj2fg                     Container coredns failed liveness probe, will be restarted
+kube-system   46s         Normal    Pulled                    pod/coredns-7d764666f9-hsmgg                     Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kube-system   46s         Normal    Created                   pod/coredns-7d764666f9-hsmgg                     Container created
+kube-system   46s         Normal    Started                   pod/coredns-7d764666f9-hsmgg                     Container started
+kube-system   41s         Normal    Pulled                    pod/coredns-7d764666f9-gj2fg                     Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kube-system   41s         Normal    Created                   pod/coredns-7d764666f9-gj2fg                     Container created
+kube-system   41s         Normal    Started                   pod/coredns-7d764666f9-gj2fg                     Container started
+kube-system   38s         Warning   DNSConfigForming          pod/kube-proxy-vhb8x                             Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   24s         Warning   DNSConfigForming          pod/cilium-operator-7d796b74f8-bmc6k             Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21
+kube-system   13s         Warning   Unhealthy                 pod/coredns-7d764666f9-hsmgg                     Readiness probe failed: Get "http://10.244.0.108:8181/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+kube-system   4s          Warning   DNSConfigForming          pod/cilium-9629w                                 Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 9.30.99.253 9.30.6.100 10.11.48.21

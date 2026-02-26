@@ -1,0 +1,8 @@
+IP PREFIX/ADDRESS   IDENTITY
+10.244.0.88/32      identity=1 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>       
+10.244.0.163/32     identity=11329 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>   
+0.0.0.0/0           identity=2 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>       
+9.30.183.125/32     identity=1 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>       
+10.11.59.172/32     identity=1 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>       
+10.244.0.29/32      identity=4 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>       
+10.244.0.56/32      identity=11329 encryptkey=0 tunnelendpoint=0.0.0.0 flags=<none>   

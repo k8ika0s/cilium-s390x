@@ -1,0 +1,7 @@
+[INFO] 2026-02-26T13:19:24Z start s390x-integration-wide
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/cilium-s390x && HARNESS_SCRIPT=test/s390x/integration_wide.sh RUN_COMPONENT=s390x-integration-wide RUN_ID=full-intwide-20260226T131809Z ./test/s390x/launch_logged_run.sh
+log=/root/work/cilium-s390x/docs/s390x/logs/2026-02-26/s390x-integration-wide-full-intwide-20260226T131809Z-20260226T131925Z.log
+status=/root/work/cilium-s390x/docs/s390x/logs/2026-02-26/s390x-integration-wide-full-intwide-20260226T131809Z-20260226T131925Z.status
+rc=0
+[INFO] 2026-02-26T13:20:01Z end rc=0

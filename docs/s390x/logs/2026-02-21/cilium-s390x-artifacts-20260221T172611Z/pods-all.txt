@@ -1,0 +1,15 @@
+NAMESPACE                     NAME                                         READY   STATUS    RESTARTS       AGE    IP             NODE                 NOMINATED NODE   READINESS GATES
+kube-system                   cilium-envoy-rz5ch                           1/1     Running   0              148m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   cilium-operator-7d796b74f8-bmc6k             1/1     Running   0              148m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   cilium-qcpq4                                 1/1     Running   0              88s    10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   coredns-5bf8685f84-nsmbr                     1/1     Running   4 (103s ago)   40m    10.244.0.56    zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   coredns-5bf8685f84-v2t8x                     1/1     Running   4 (103s ago)   40m    10.244.0.163   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   etcd-zkd01.fyre.ibm.com                      1/1     Running   0              151m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   kube-apiserver-zkd01.fyre.ibm.com            1/1     Running   0              151m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   kube-controller-manager-zkd01.fyre.ibm.com   1/1     Running   0              151m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   kube-proxy-vhb8x                             1/1     Running   0              150m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system                   kube-scheduler-zkd01.fyre.ibm.com            1/1     Running   0              151m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+s390x-policy-20260221172552   client                                       1/1     Running   0              18s    10.244.0.12    zkd01.fyre.ibm.com   <none>           <none>
+s390x-policy-20260221172552   server                                       1/1     Running   0              18s    10.244.0.78    zkd01.fyre.ibm.com   <none>           <none>
+s390x-validate                client                                       1/1     Running   0              11m    10.244.0.240   zkd01.fyre.ibm.com   <none>           <none>
+s390x-validate                server                                       1/1     Running   0              11m    10.244.0.186   zkd01.fyre.ibm.com   <none>           <none>

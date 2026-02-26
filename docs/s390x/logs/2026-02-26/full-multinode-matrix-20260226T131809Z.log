@@ -1,0 +1,34 @@
+[INFO] 2026-02-26T13:20:01Z start multinode-matrix
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/cilium-s390x && MATRIX_NAMESPACE=s390x-mn-full-131809 MATRIX_RESET_NAMESPACE=true MATRIX_KEEP_NAMESPACE=false MATRIX_TIMEOUT_SECONDS=300 ./test/s390x/multinode_matrix.sh
+[2026-02-26T13:20:02Z] node_a=kdz.dev.fyre.ibm.com node_b=zkd01.fyre.ibm.com namespace=s390x-mn-full-131809
+[2026-02-26T13:20:02Z] Resetting namespace s390x-mn-full-131809
+[2026-02-26T13:20:02Z] Applying matrix pods/services
+[2026-02-26T13:20:04Z] Waiting for matrix pods
+[2026-02-26T13:20:11Z] server_a=10.244.0.112 server_b=10.244.1.132 svc_a=10.102.151.37 svc_b=10.111.7.216
+[2026-02-26T13:20:11Z] check=same-node-a client=client-a target=10.244.0.112:8080
+[PASS] same-node-a
+[2026-02-26T13:20:12Z] check=same-node-b client=client-b target=10.244.1.132:8080
+[PASS] same-node-b
+[2026-02-26T13:20:13Z] check=cross-a-to-b client=client-a target=10.244.1.132:8080
+[PASS] cross-a-to-b
+[2026-02-26T13:20:13Z] check=cross-b-to-a client=client-b target=10.244.0.112:8080
+[PASS] cross-b-to-a
+[2026-02-26T13:20:14Z] check=service-a-to-b client=client-a target=10.111.7.216:8080
+[PASS] service-a-to-b
+[2026-02-26T13:20:14Z] check=service-b-to-a client=client-b target=10.102.151.37:8080
+[PASS] service-b-to-a
+[2026-02-26T13:20:14Z] cilium-health snapshot
+== pod/cilium-mcvfz
+Cluster health:                      2/2 reachable   (2026-02-26T13:18:06Z)   (Probe interval: 1m36.566274746s)
+Name                                 IP              Node                     Endpoints
+  kdz.dev.fyre.ibm.com (localhost)   10.14.125.157   1/1                      1/1
+  zkd01.fyre.ibm.com                 10.11.59.172    1/1                      1/1
+== pod/cilium-s72pd
+Cluster health:                    2/2 reachable   (2026-02-26T13:18:09Z)   (Probe interval: 1m36.566274746s)
+Name                               IP              Node                     Endpoints
+  zkd01.fyre.ibm.com (localhost)   10.11.59.172    1/1                      1/1
+  kdz.dev.fyre.ibm.com             10.14.125.157   1/1                      1/1
+multinode matrix passed
+[2026-02-26T13:20:16Z] Deleting namespace s390x-mn-full-131809
+[INFO] 2026-02-26T13:20:16Z end rc=0

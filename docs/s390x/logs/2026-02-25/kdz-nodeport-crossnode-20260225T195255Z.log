@@ -1,0 +1,8 @@
+[meta] started_at_utc=20260225T195255Z
+[meta] scenario=nodeport-host-service-crossnode
+[addr] node-a=10.14.125.157 node-b=10.11.59.172 nodeport=32080
+[endpoints] 10.244.0.199 10.244.1.114
+[test] pod-a-to-node-b
+[FAIL] pod-a-to-node-b
+REFUSED
+command terminated with exit code 1

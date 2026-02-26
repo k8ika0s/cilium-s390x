@@ -1,0 +1,10 @@
+[INFO] 2026-02-26T13:23:10Z start go-regression-packages-nocache
+[INFO] cmd=cd /root/work/cilium-s390x && GOMAXPROCS=4 go test -count=1 ./pkg/act ./pkg/bpf ./pkg/datapath/iptables ./pkg/datapath/sockets ./pkg/hubble/parser/debug ./pkg/hubble/parser/threefour ./pkg/hubble/testutils
+ok  	github.com/cilium/cilium/pkg/act	0.037s
+ok  	github.com/cilium/cilium/pkg/bpf	0.025s
+ok  	github.com/cilium/cilium/pkg/datapath/iptables	3.085s
+ok  	github.com/cilium/cilium/pkg/datapath/sockets	0.023s
+ok  	github.com/cilium/cilium/pkg/hubble/parser/debug	0.024s
+ok  	github.com/cilium/cilium/pkg/hubble/parser/threefour	0.049s
+ok  	github.com/cilium/cilium/pkg/hubble/testutils	0.025s
+[INFO] 2026-02-26T13:23:17Z end rc=0

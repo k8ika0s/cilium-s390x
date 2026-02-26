@@ -1,0 +1,156 @@
+[INFO] 2026-02-23T15:21:24Z start r70 proxy docker-tests (fast s390x iteration mode)
+[INFO] pwd=/root/work/proxy-s390x
+[INFO] git_rev=9e7e35f1
+[INFO] make defaults:
+Makefile:29:CARGO_BAZEL_REPIN ?= true
+Makefile:30:TEST_TARGETS ?= //tests/... @envoy//test/integration:tcp_proxy_integration_test
+Makefile:128:	CARGO_BAZEL_REPIN=$(CARGO_BAZEL_REPIN) $(BAZEL) $(BAZEL_OPTS) build $(BAZEL_BUILD_OPTS) //:cilium-envoy $(BAZEL_FILTER)
+Makefile:136:	CARGO_BAZEL_REPIN=$(CARGO_BAZEL_REPIN) $(BAZEL) $(BAZEL_OPTS) build $(BAZEL_BUILD_OPTS) //:cilium-envoy-starter $(BAZEL_FILTER)
+Makefile:176:	CARGO_BAZEL_REPIN=$(CARGO_BAZEL_REPIN) $(BAZEL) $(BAZEL_OPTS) build $(BAZEL_BUILD_OPTS) $(BAZEL_TEST_OPTS) $(TEST_TARGETS) $(BAZEL_FILTER)
+Makefile:183:	CARGO_BAZEL_REPIN=$(CARGO_BAZEL_REPIN) $(BAZEL) $(BAZEL_OPTS) test $(BAZEL_BUILD_OPTS) $(BAZEL_TEST_OPTS) $(TEST_TARGETS) $(BAZEL_FILTER)
+Makefile.docker:103:  ifneq ($(origin CARGO_BAZEL_REPIN),command line)
+Makefile.docker:104:    CARGO_BAZEL_REPIN := false
+Makefile.docker:106:  ifneq ($(origin TEST_TARGETS),command line)
+Makefile.docker:107:    TEST_TARGETS := //tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test
+Makefile.docker:242:	$(DOCKER) build --target builder-archive $(DOCKER_BUILD_OPTS) $(DOCKER_CACHE_OPTS) $(TESTS_IMAGE_OPTS) --build-arg BAZEL_BUILD_OPTS="$(EXTRA_BAZEL_BUILD_OPTS)" --build-arg CARGO_BAZEL_REPIN="$(CARGO_BAZEL_REPIN)" --build-arg TEST_TARGETS="$(TEST_TARGETS)" --build-arg COPY_CACHE_EXT=.new -f $< -t $(DOCKER_DEV_ACCOUNT)/cilium-envoy-builder:$(TESTS_ARCHIVE_TAG) .
+Makefile.docker:252:	$(DOCKER) build --progress=plain $(subst --push,--load,$(DOCKER_BUILD_OPTS)) $(DOCKER_CACHE_OPTS) $(TESTS_IMAGE_OPTS) --build-arg BAZEL_BUILD_OPTS="$(EXTRA_BAZEL_BUILD_OPTS)" --build-arg BAZEL_TEST_OPTS="$(BAZEL_TEST_OPTS)" --build-arg CARGO_BAZEL_REPIN="$(CARGO_BAZEL_REPIN)" --build-arg TEST_TARGETS="$(TEST_TARGETS)" -f $< $(DOCKER_TESTS_TAGS) .
+[INFO] cmd=ARCH=s390x make docker-tests
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Skip registering C++ toolchains via BAZEL_BUILD_OPTS. Local C++ toolchain needs to be available!
+Using Docker Buildx builder "" with build flags "--platform=linux/s390x".
+echo "/.git/" >.dockerignore
+echo ./ | tr ' ' '\n' | xargs -P1 -n1 -I {DIR} sed \
+    -e '# Remove lines with white space, comments and files that must be passed to docker, "$" due to make. #' \
+	-e '/^[[:space:]]*$/d' -e '/^#/d' -e '/SOURCE_VERSION/d' \
+    -e '# Apply pattern in all directories if it contains no "/", keep "!" up front. #' \
+	-e '/^[^!/][^/]*$/s<^<**/<' -e '/^![^/]*$/s<^!<!**/<' \
+            -e '# Prepend with the directory name, keep "!" up front. #' \
+	-e '/^[^!]/s<^<{DIR}<' -e '/^!/s<^!<!{DIR}<' \
+    -e '# Remove leading "./", keep "!" up front. #' \
+	-e 's<^\./<<' -e 's<^!\./<!<' \
+    -e '# Append newline to the last line if missing. GNU sed does not do this automatically. #' \
+	-e "$a" \
+    .gitignore >>.dockerignore
+xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
+echo "/.gitignore" >>.dockerignore
+echo "/Dockerfile*" >>.dockerignore
+echo "/Makefile.docker" >>.dockerignore
+echo "/README*" >>.dockerignore
+echo "/type=docker/" >>.dockerignore
+cp .dockerignore Dockerfile.tests.dockerignore
+echo "/Makefile.api" >>Dockerfile.tests.dockerignore
+DOCKER_BUILDKIT=1 docker buildx build --progress=plain --platform=linux/s390x --network=host  --build-arg BUILDER_BASE="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg PROXYLIB_BUILDER="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg BAZEL_BUILD_OPTS="--jobs=1 --local_ram_resources=2048 --local_cpu_resources=1" --build-arg BAZEL_TEST_OPTS="--jobs=1 --local_ram_resources=2048 --local_cpu_resources=1 --test_timeout=300 --local_test_jobs=1 --flaky_test_attempts=3 --test_output=errors" --build-arg CARGO_BAZEL_REPIN="false" --build-arg TEST_TARGETS="//tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test" -f Dockerfile.tests -t quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs .
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-23T07:21:24-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+[1/8] STEP 1/5: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS proxylib
+[1/8] STEP 2/5: WORKDIR /go/src/github.com/cilium/proxy
+--> Using cache a9fe44fed2b4658006871384e1e6dbb2312faf46eeb7378ab1a5c9dec1b50ec5
+--> a9fe44fed2b4
+[1/8] STEP 3/5: COPY --chown=1337:1337 . ./
+--> c8e6ecbf6675
+[1/8] STEP 4/5: ARG TARGETARCH
+--> 08ffcc11282e
+[1/8] STEP 5/5: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/go/pkg,type=cache,id=$TARGETARCH     PATH=$PATH:/usr/local/go/bin GOFLAGS=-buildvcs=false GOARCH=${TARGETARCH} make -C proxylib all && mv proxylib/libcilium.so /tmp/libcilium.so
+make: Entering directory '/go/src/github.com/cilium/proxy/proxylib'
+go: downloading go1.25.7 (linux/s390x)
+CGO_ENABLED=1  go build -ldflags '-extldflags -Wl,-soname,libcilium.so' -o libcilium.so -buildmode=c-shared
+make: Leaving directory '/go/src/github.com/cilium/proxy/proxylib'
+--> 79c5de2c5be3
+[2/8] STEP 1/15: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS builder-fresh
+[2/8] STEP 2/15: LABEL maintainer="maintainer@cilium.io"
+--> Using cache dbc9cb9ae77091d2b719b9032d800403b7b34e788e83b7dd59652d71893580b4
+--> dbc9cb9ae770
+[2/8] STEP 3/15: WORKDIR /cilium/proxy
+--> Using cache 8d1546cbd57d59600c0bec9d1c9b20714ae08be0855813f9dc1a47f32d37acc3
+--> 8d1546cbd57d
+[2/8] STEP 4/15: COPY . ./
+--> e12496e12131
+[2/8] STEP 5/15: ARG V
+--> 9759efd491a6
+[2/8] STEP 6/15: ARG BAZEL_BUILD_OPTS
+--> a4b6290ee0ff
+[2/8] STEP 7/15: ARG CARGO_BAZEL_REPIN=true
+--> 379b24a82f03
+[2/8] STEP 8/15: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> 1dac1fa1adef
+[2/8] STEP 9/15: ARG DEBUG
+--> 9af52bbbcf93
+[2/8] STEP 10/15: ARG BUILDARCH
+--> e93ab08090dc
+[2/8] STEP 11/15: ARG TARGETARCH
+--> cf87ac680e52
+[2/8] STEP 12/15: ARG NO_CACHE
+--> a0d3a6a297f2
+[2/8] STEP 13/15: ENV TARGETARCH=$TARGETARCH
+--> 4908532aa4c0
+[2/8] STEP 14/15: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> cf9abbe71d80
+[2/8] STEP 15/15: RUN if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Registering C++ toolchains via BAZEL_BUILD_OPTS
+echo "Clang assumed to be installed in the builder image"
+Clang assumed to be installed in the builder image
+bazel/setup_clang.sh /usr/lib/llvm-18
+[0mecho "build --config=clang" >> clang.bazelrc
+CARGO_BAZEL_REPIN=false  bazel  build --jobs=1 --local_ram_resources=2048 --local_cpu_resources=1 --disk_cache=/tmp/bazel-cache --platforms=//bazel:linux_s390x --config=release --extra_toolchains=//bazel/toolchains:all --jobs=HOST_RAM*.0003 --test_timeout=300 --local_test_jobs=1 --flaky_test_attempts=3 --test_output=errors //tests:cilium_tls_http_integration_test //tests:cilium_tls_tcp_integration_test //tests:cilium_websocket_encap_integration_test @envoy//test/integration:tcp_proxy_integration_test 
+[35mWARNING: [0mOption 'local_ram_resources' is deprecated: --local_ram_resources is deprecated, please use --local_resources=memory= instead.
+[35mWARNING: [0mOption 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+[32mINFO: [0mInvocation ID: d157effe-9a85-4abf-9d23-f84669e56e0a
+[32mComputing main repo mapping:[0m 
+[32mINFO: [0mRepository dynamic_modules_rust_sdk_crate_index instantiated at:
+  /cilium/proxy/WORKSPACE:91:25: in <toplevel>
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:74:24: in envoy_dependency_imports
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/envoy/bazel/dependency_imports.bzl:229:22: in crates_repositories
+Repository rule crates_repository defined at:
+  /cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/crates_repository.bzl:124:36: in <toplevel>
+[31m[1mERROR: [0m/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/generate_utils.bzl:422:13: An error occurred during the fetch of repository 'dynamic_modules_rust_sdk_crate_index':
+   Traceback (most recent call last):
+	File "/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/crates_repository.bzl", line 45, column 28, in _crates_repository_impl
+		repin = determine_repin(
+	File "/cilium/proxy/.cache/bazel/_bazel_cilium/5f5d3cf254342807836215c78e76aef5/external/rules_rust/crate_universe/private/generate_utils.bzl", line 422, column 13, in determine_repin
+		fail(msg)
+Error in fail: Error: Digests do not match: Current Digest("c0d467a39180d065453586687649d169eafc9222d6c3352463a214d2b1b6cf84") != Expected Digest("4c6fd9c334b557ab8362c4ec3692911155389d65ac394b59a7fc695630bc330f")
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: anyhow::error::<impl anyhow::Error>::msg
+   2: anyhow::__private::format_err
+   3: cargo_bazel::cli::query::query
+   4: cargo_bazel::main
+   5: std::sys::backtrace::__rust_begin_short_backtrace
+   6: std::rt::lang_start::{{closure}}
+   7: std::rt::lang_start_internal
+   8: main
+   9: <unknown>
+  10: __libc_start_main
+  11: <unknown>
+
+The current `lockfile` is out of date for 'dynamic_modules_rust_sdk_crate_index'. Please re-run bazel using `CARGO_BAZEL_REPIN=true` if this is expected and the lockfile should be updated.
+[31m[1mERROR: [0mError computing the main repository mapping: no such package '@@dynamic_modules_rust_sdk_crate_index//': Error: Digests do not match: Current Digest("c0d467a39180d065453586687649d169eafc9222d6c3352463a214d2b1b6cf84") != Expected Digest("4c6fd9c334b557ab8362c4ec3692911155389d65ac394b59a7fc695630bc330f")
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: anyhow::error::<impl anyhow::Error>::msg
+   2: anyhow::__private::format_err
+   3: cargo_bazel::cli::query::query
+   4: cargo_bazel::main
+   5: std::sys::backtrace::__rust_begin_short_backtrace
+   6: std::rt::lang_start::{{closure}}
+   7: std::rt::lang_start_internal
+   8: main
+   9: <unknown>
+  10: __libc_start_main
+  11: <unknown>
+
+The current `lockfile` is out of date for 'dynamic_modules_rust_sdk_crate_index'. Please re-run bazel using `CARGO_BAZEL_REPIN=true` if this is expected and the lockfile should be updated.
+[0mmake: *** [Makefile:176: envoy-test-deps] Error 1
+Error: building at STEP "RUN if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps": while running runtime: exit status 2
+make: *** [Makefile.docker:252: docker-tests] Error 2
+[INFO] 2026-02-23T15:23:02Z end r70 rc=2
+exit_code=2

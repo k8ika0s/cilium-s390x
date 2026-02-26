@@ -1,0 +1,567 @@
+[meta] ts=20260221T215802Z
+[meta] host=zkd01.fyre.ibm.com
+[meta] podman=podman version 5.6.0
+[loop] attempt=1
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+68a623e689e0054d1f592e54baa7b7c0b12afdb8c62968574846af3a6a36dcef
+[loop] attempt=1 rc=0
+[loop] attempt=2
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+979ded3188359fb542e2df324743b52adfaaf4d8890a097cbc5e5fc391b96c99
+[loop] attempt=2 rc=0
+[loop] attempt=3
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+97873b46463f5894aa3f89336c6e6ebda16defbac5d8961484b059391bc4caaf
+[loop] attempt=3 rc=0
+[loop] attempt=4
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+f1748c92854c719574f4197a681b4de1f7f0c19230daa729d2cd0f601ccbb109
+[loop] attempt=4 rc=0
+[loop] attempt=5
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+f67f9d2c18be50a4c3e80422c5e73f3ab4ceab9d249908b6d0d45d266f59979f
+[loop] attempt=5 rc=0
+[loop] attempt=6
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+b7ee2efdd9bd0d43671a7a221f8b50728472d2438e19b22bd62040b3654fb690
+[loop] attempt=6 rc=0
+[loop] attempt=7
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+66b2209fa6b59a868126cd950841491c98002af11b431cd301a5701588dd9068
+[loop] attempt=7 rc=0
+[loop] attempt=8
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+fe69d86aa28ac384e84daca6d220a2b7ecb5812183400b16498fbdc645c8785c
+[loop] attempt=8 rc=0
+[loop] attempt=9
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+9daec426ce93e986d7b5e3dad15060811415827eabbc992b890ea14a9c04ad1f
+[loop] attempt=9 rc=0
+[loop] attempt=10
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+5162c05d9132d0897ee251ebef5ce511c3b03e6f4e8a6ae36b5cee7bb7357995
+[loop] attempt=10 rc=0
+[loop] attempt=11
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+18544eb48e69070693a1aa2bf51bcc14b9e7aa21d847e45b97e157407361ce75
+[loop] attempt=11 rc=0
+[loop] attempt=12
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+Starting key-value store container...
+podman rm -f "cilium-etcd-test-container" 2> /dev/null
+cilium-etcd-test-container
+if [ "true" = "true" ] && \
+	podman --version 2>/dev/null | grep -qi podman; then \
+	echo "Using podman MTU workaround network cilium-etcd-net (mtu=1500)"; \
+	podman network exists "cilium-etcd-net" || \
+		podman network create --driver bridge --opt "mtu=1500" "cilium-etcd-net" >/dev/null; \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		--network "cilium-etcd-net" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+else \
+	podman run -d \
+		-e ETCD_UNSUPPORTED_ARCH=s390x \
+		--name "cilium-etcd-test-container" \
+		-p 4002:4001 \
+		gcr.io/etcd-development/etcd:v3.6.7@sha256:70cd5d29d2efcbc4c15f2a63183fd537aae77ddbc46b3b97a8a97bc8751ec3b4 \
+		etcd -name etcd0 \
+		-advertise-client-urls http://0.0.0.0:4001 \
+		-listen-client-urls http://0.0.0.0:4001 \
+		-listen-peer-urls http://0.0.0.0:2380 \
+		-initial-cluster-token etcd-cluster-1 \
+		-initial-cluster-state new; \
+fi
+Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+f35e1b74a96cdf05d1536054af587d44a58a102958359645927f96a61839dc3a
+[loop] attempt=12 rc=0
+[summary] failures=0

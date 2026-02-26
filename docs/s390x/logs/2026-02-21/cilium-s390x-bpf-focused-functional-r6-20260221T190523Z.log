@@ -1,0 +1,58 @@
+[INFO] started 2026-02-21T19:05:23Z
+
+===== TEST tc_egressgw_redirect_from_host =====
+[RC] tc_egressgw_redirect_from_host => 0
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/tc_egressgw_redirect_from_host-r6-20260221T190523Z.log
+28:ok  	github.com/cilium/cilium/bpf/tests/bpftest	2.050s
+
+===== TEST tc_egressgw_redirect_from_overlay =====
+[RC] tc_egressgw_redirect_from_overlay => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/tc_egressgw_redirect_from_overlay-r6-20260221T190523Z.log
+29:--- FAIL: TestBPF (1.99s)
+30:    --- FAIL: TestBPF/tc_egressgw_redirect_from_overlay.o (1.24s)
+32:        bpf_test.go:64: xx drop (No Egress IP configured) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity 1048575->unknown: [error]
+34:        bpf_test.go:64: xx drop (No Egress IP configured) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity 1048575->unknown: [error]
+37:        --- FAIL: TestBPF/tc_egressgw_redirect_from_overlay.o/tc_egressgw_redirect_from_overlay (0.00s)
+38:            bpf_test.go:584: ./lib/egressgw.h:259: assert failed at ./lib/egressgw.h:259
+48:FAIL
+50:FAIL
+
+===== TEST tc_egressgw_snat =====
+[RC] tc_egressgw_snat => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/tc_egressgw_snat-r6-20260221T190523Z.log
+28:--- FAIL: TestBPF (2.58s)
+29:    --- FAIL: TestBPF/tc_egressgw_snat.o (2.58s)
+31:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_fib_redirect (0.00s)
+32:            bpf_test.go:584: ./lib/egressgw.h:152: assert failed at ./lib/egressgw.h:152
+35:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat1 (0.00s)
+37:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat1_2_reply (0.00s)
+38:            bpf_test.go:455: error while running pktgen prog: status code (100)
+41:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_snat2 (0.00s)
+44:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision1 (0.00s)
+47:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision2 (0.00s)
+49:        --- FAIL: TestBPF/tc_egressgw_snat.o/tc_egressgw_tuple_collision2_reply (0.00s)
+50:            bpf_test.go:455: error while running pktgen prog: status code (100)
+94:FAIL
+96:FAIL
+
+===== TEST xdp_egressgw_reply =====
+[RC] xdp_egressgw_reply => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/xdp_egressgw_reply-r6-20260221T190523Z.log
+28:--- FAIL: TestBPF (1.27s)
+29:    --- FAIL: TestBPF/xdp_egressgw_reply.o (1.27s)
+33:        --- FAIL: TestBPF/xdp_egressgw_reply.o/xdp_egressgw_reply (0.00s)
+34:            bpf_test.go:584: xdp_egressgw_reply.c:151: assert failed at xdp_egressgw_reply.c:151
+39:FAIL
+41:FAIL
+
+===== TEST xdp_nodeport_lb4_test =====
+[RC] xdp_nodeport_lb4_test => 2
+[LOG] /Users/kaitlyndavis/dev/github.com/k8ika0s/cilium-s390x/docs/s390x/logs/2026-02-21/xdp_nodeport_lb4_test-r6-20260221T190523Z.log
+29:--- FAIL: TestBPF (0.34s)
+30:    --- FAIL: TestBPF/xdp_nodeport_lb4_test.o (0.34s)
+34:        --- FAIL: TestBPF/xdp_nodeport_lb4_test.o/xdp_lb4_forward_to_other_node (0.00s)
+35:            bpf_test.go:584: xdp_nodeport_lb4_test.c:206: L4 checksum is invalid: 0000 != 0000
+36:        bpf_test.go:64: xx drop (Service backend not found) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+45:FAIL
+47:FAIL
+[INFO] finished 2026-02-21T19:06:18Z

@@ -1,0 +1,12 @@
+[INFO] 2026-02-26T13:20:16Z start multinode-policy-enforcement
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/cilium-s390x && MN_POLICY_NAMESPACE=s390x-pol-full-131809 MN_POLICY_KEEP_NAMESPACE=false MN_POLICY_TIMEOUT_SECONDS=300 ./test/s390x/multinode_policy_enforcement.sh
+[2026-02-26T13:20:16Z] namespace=s390x-pol-full-131809 client_node=kdz.dev.fyre.ibm.com server_node=zkd01.fyre.ibm.com
+[2026-02-26T13:20:22Z] baseline allow expected target=10.244.1.57:8080
+[PASS] baseline-allow
+[2026-02-26T13:20:27Z] deny expected (client has no access label)
+[PASS] policy-deny
+[2026-02-26T13:21:03Z] allow expected after CEP convergence
+[PASS] policy-allow-after-label
+multinode policy enforcement passed
+[INFO] 2026-02-26T13:21:04Z end rc=0

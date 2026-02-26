@@ -1,0 +1,16 @@
+default via 9.30.182.1 dev enc4 proto dhcp src 9.30.183.125 metric 101 
+9.30.182.0/23 dev enc4 proto kernel scope link src 9.30.183.125 metric 101 
+10.11.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.11.48.0/20 dev enc1 proto kernel scope link src 10.11.59.172 metric 100 
+10.12.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.13.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.14.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.15.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.16.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.17.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.18.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.19.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 
+10.244.0.0/24 via 10.244.0.88 dev cilium_host proto kernel src 10.244.0.88 
+10.244.0.88 dev cilium_host proto kernel scope link 
+127.0.0.0/8 dev lo proto kernel scope link src 127.0.0.1 metric 30 
+172.16.0.0/16 via 10.11.48.1 dev enc1 proto dhcp src 10.11.59.172 metric 100 

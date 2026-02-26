@@ -1,0 +1,10 @@
+[meta] started_at_utc=20260225T195107Z
+[meta] host=kdz
+[2026-02-25T19:51:09Z] namespace=s390x-policy-mn-live client_node=kdz.dev.fyre.ibm.com server_node=zkd01.fyre.ibm.com
+[2026-02-25T19:51:12Z] baseline allow expected target=10.244.1.231:8080
+[PASS] baseline-allow
+[2026-02-25T19:51:18Z] deny expected (client has no access label)
+[PASS] policy-deny
+[2026-02-25T19:51:29Z] allow expected after CEP convergence
+[PASS] policy-allow-after-label
+multinode policy enforcement passed

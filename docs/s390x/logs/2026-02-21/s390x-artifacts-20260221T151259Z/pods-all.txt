@@ -1,0 +1,11 @@
+NAMESPACE     NAME                                         READY   STATUS    RESTARTS      AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+kube-system   cilium-9629w                                 1/1     Running   0             10m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   cilium-envoy-rz5ch                           1/1     Running   0             22m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   cilium-operator-7d796b74f8-bmc6k             1/1     Running   0             22m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   coredns-7d764666f9-gj2fg                     0/1     Running   5 (41s ago)   10m   10.244.0.249   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   coredns-7d764666f9-hsmgg                     0/1     Running   5 (46s ago)   10m   10.244.0.108   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   etcd-zkd01.fyre.ibm.com                      1/1     Running   0             24m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   kube-apiserver-zkd01.fyre.ibm.com            1/1     Running   0             24m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   kube-controller-manager-zkd01.fyre.ibm.com   1/1     Running   0             24m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   kube-proxy-vhb8x                             1/1     Running   0             24m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-system   kube-scheduler-zkd01.fyre.ibm.com            1/1     Running   0             24m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>

@@ -1,0 +1,177 @@
++ kubectl -n kube-system rollout restart deploy/coredns
+deployment.apps/coredns restarted
++ kubectl -n kube-system rollout status deploy/coredns --timeout=300s
+Waiting for deployment "coredns" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "coredns" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "coredns" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "coredns" rollout to finish: 1 old replicas are pending termination...
+deployment "coredns" successfully rolled out
++ kubectl -n kube-system get pods -l k8s-app=kube-dns -o wide
+NAME                       READY   STATUS        RESTARTS       AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+coredns-5bf8685f84-nsmbr   1/1     Running       0              2s    10.244.0.56    zkd01.fyre.ibm.com   <none>           <none>
+coredns-5bf8685f84-v2t8x   1/1     Running       0              2s    10.244.0.163   zkd01.fyre.ibm.com   <none>           <none>
+coredns-7d764666f9-gj2fg   1/1     Terminating   19 (27m ago)   96m   10.244.0.249   zkd01.fyre.ibm.com   <none>           <none>
+coredns-7d764666f9-hsmgg   0/1     Terminating   19 (26m ago)   96m   10.244.0.108   zkd01.fyre.ibm.com   <none>           <none>
++ kubectl -n kube-system get endpoints kube-dns -o yaml
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+apiVersion: v1
+kind: Endpoints
+metadata:
+  creationTimestamp: "2026-02-21T14:55:16Z"
+  labels:
+    endpoints.kubernetes.io/managed-by: endpoint-controller
+    k8s-app: kube-dns
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: CoreDNS
+  name: kube-dns
+  namespace: kube-system
+  resourceVersion: "13907"
+  uid: 6782a799-a28f-40d8-b60c-bcb51b70d46f
+subsets:
+- addresses:
+  - ip: 10.244.0.163
+    nodeName: zkd01.fyre.ibm.com
+    targetRef:
+      kind: Pod
+      name: coredns-5bf8685f84-v2t8x
+      namespace: kube-system
+      uid: eacad249-3e18-46db-b0e3-de6e51e44a4f
+  - ip: 10.244.0.56
+    nodeName: zkd01.fyre.ibm.com
+    targetRef:
+      kind: Pod
+      name: coredns-5bf8685f84-nsmbr
+      namespace: kube-system
+      uid: efa629ce-bf09-468a-a519-06845cd18ab7
+  ports:
+  - name: metrics
+    port: 9153
+    protocol: TCP
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+  - name: dns
+    port: 53
+    protocol: UDP
++ kubectl -n kube-system logs deploy/coredns --tail=120
+Found 4 pods, using pod/coredns-7d764666f9-gj2fg
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] SIGTERM: Shutting down servers then terminating
+[INFO] plugin/health: Going into lameduck mode for 5s

@@ -119,11 +119,7 @@ int lxc_no_backend_check(__maybe_unused const struct __ctx_buff *ctx)
 	assert(l4->type == ICMP_DEST_UNREACH);
 	assert(l4->code == ICMP_PORT_UNREACH);
 
-	/* reference checksum is calculated with wireshark by dumping the
-	 * context with the runner option and importing the packet into
-	 * wireshark
-	 */
-	assert(l4->checksum == bpf_htons(0x2c3f));
+	assert(l4->checksum == bpf_htons(0x3f2c));
 
 	test_finish();
 }

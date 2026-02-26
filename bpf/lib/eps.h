@@ -106,11 +106,23 @@ struct remote_endpoint_info {
 	} tunnel_endpoint;
 	__u16		pad;
 	__u8		key;
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 	__u8		flag_skip_tunnel:1,
 			flag_has_tunnel_ep:1,
 			flag_ipv6_tunnel_ep:1,
 			flag_remote_cluster:1,
 			pad2:4;
+#else
+	/* Userspace writes ipcache flags as low-bit masks (1<<n). On BE targets
+	 * bitfield allocation runs from MSB to LSB, so reverse declaration order
+	 * to preserve the same on-wire/on-map bit semantics as LE.
+	 */
+	__u8		pad2:4,
+			flag_remote_cluster:1,
+			flag_ipv6_tunnel_ep:1,
+			flag_has_tunnel_ep:1,
+			flag_skip_tunnel:1;
+#endif
 };
 
 struct ipcache_key {

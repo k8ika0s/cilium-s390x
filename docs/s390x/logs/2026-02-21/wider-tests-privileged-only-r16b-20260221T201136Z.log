@@ -1,0 +1,1570 @@
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+## We split tests into two parts: one that can be run in parallel
+## and tests that cannot be run in parallel with other packages
+## One drawback of this approach is that
+## if first set of tests fails, second one is not run
+{ PRIVILEGED_TESTS=true PATH=/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/work/cilium-s390x/bpf CGO_ENABLED=0 go test -mod=vendor -vet=all -tags=osusergo -ldflags "-X github.com/cilium/cilium/pkg/kvstore.etcdDummyAddress=http://etcd:4002" \
+	./... -timeout 720s -run "TestPrivileged.*" -covermode=count -coverprofile=coverage.out \
+&& PRIVILEGED_TESTS=true PATH=/root/.cargo/bin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/work/cilium-s390x/bpf CGO_ENABLED=0 go test -mod=vendor -vet=all -tags=osusergo -ldflags "-X github.com/cilium/cilium/pkg/kvstore.etcdDummyAddress=http://etcd:4002" \
+	./pkg/datapath/linux/... ./pkg/datapath/loader/... ./pkg/datapath/neighbor/test/... -timeout 720s -run "TestPrivileged.*" \
+	-json -covermode=count -coverprofile=coverage2.out -p 1 --tags=unparallel; } | cat
+	github.com/cilium/cilium/api/v1/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/daemon		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/endpoint		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/prefilter		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/client/service		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/flow		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/client/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/health/server/restapi/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/client/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/kvstoremesh/server/restapi/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/observer		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/client/operator		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/models		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/cluster		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/operator/server/restapi/operator		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/peer		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/relay		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/daemon		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/endpoint		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/prefilter		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/server/restapi/service		coverage: 0.0% of statements
+	github.com/cilium/cilium/api/v1/standalone-dns-proxy		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/bpf/tests/bpftest	0.155s	coverage: 5.8% of statements [no tests to run]
+	github.com/cilium/cilium/bugtool		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/bugtool/cmd	0.039s	coverage: 4.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/api	0.184s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/bgp	0.096s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/cli	0.158s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/clustermesh	0.132s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/cmd/cilium		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/config		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/builder		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/builder/manifests/template	0.033s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/check	0.127s	coverage: 0.2% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/connectivity/filters		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/internal/junit	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/perf/benchmarks/netperf	0.150s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/connectivity/perf/benchmarks/profiler		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/perf/common		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/connectivity/sniff		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/connectivity/tests	0.116s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/cilium-cli/defaults	[no test files]
+ok  	github.com/cilium/cilium/cilium-cli/encrypt	0.159s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/features	0.099s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/hubble		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/install	0.126s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/internal/helm	0.058s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/internal/utils	0.014s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/k8s	0.164s	coverage: 0.3% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/k8s/internal		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/logging		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/multicast		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/status	0.079s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/sysdump	0.231s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/utils/features	0.043s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/cilium-cli/utils/junit	0.021s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/utils/lock		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-cli/utils/log		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-cli/utils/runner	0.034s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-cli/utils/wait		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-dbg		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/cilium-dbg/cmd	0.272s	coverage: 8.5% of statements [no tests to run]
+	github.com/cilium/cilium/cilium-dbg/cmd/troubleshoot		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/cilium-health/responder		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/clustermesh	0.189s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/clustermesh-apiserver/clustermesh/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/clustermesh-dbg		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/common		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/etcdinit		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/health		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/kvstoremesh		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/kvstoremesh-dbg		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/mcsapi-coredns-cfg	0.099s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/clustermesh-apiserver/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/clustermesh-apiserver/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/clustermesh-apiserver/syncstate	0.050s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/clustermesh-apiserver/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/contrib/examples/script	0.050s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/contrib/examples/statedb	0.085s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/contrib/examples/statedb_k8s	0.129s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/daemon		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/daemon/cmd	0.180s	coverage: 1.5% of statements
+ok  	github.com/cilium/cilium/daemon/cmd/cni	0.040s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/daemon/cmd/cni/fake		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/daemon/cmd/legacy	[no test files]
+ok  	github.com/cilium/cilium/daemon/healthz	0.155s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/daemon/infraendpoints	0.242s	coverage: 4.6% of statements
+ok  	github.com/cilium/cilium/daemon/k8s	0.103s	coverage: 1.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/daemon/restapi	0.142s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/hubble		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd	0.111s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/hubble/cmd/common	[no test files]
+	github.com/cilium/cilium/hubble/cmd/common/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/common/conn	0.028s	coverage: 6.1% of statements [no tests to run]
+ok  	github.com/cilium/cilium/hubble/cmd/common/template	0.015s	coverage: 16.7% of statements [no tests to run]
+	github.com/cilium/cilium/hubble/cmd/common/validate		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/list	0.050s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/hubble/cmd/observe	0.083s	coverage: 1.7% of statements [no tests to run]
+	github.com/cilium/cilium/hubble/cmd/reflect		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/status		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/cmd/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/cmd/watch	0.094s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/hubble/pkg		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/pkg/defaults		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble/pkg/logger		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/hubble/pkg/printer	0.117s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/hubble/pkg/time	0.029s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/hubble-relay		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/completion		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/serve		coverage: 0.0% of statements
+	github.com/cilium/cilium/hubble-relay/cmd/version		coverage: 0.0% of statements
+	github.com/cilium/cilium/images/builder		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/api	0.101s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/operator/auth		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/operator/auth/identity	[no test files]
+ok  	github.com/cilium/cilium/operator/auth/spire	0.093s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/cmd	0.157s	coverage: 3.7% of statements [no tests to run]
+	github.com/cilium/cilium/operator/doublewrite		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/endpointgc	0.106s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/endpointslicegc	0.101s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/identitygc	0.130s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/operator/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/option		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/bgp	0.082s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/ciliumendpointslice	0.203s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/operator/pkg/ciliumendpointslice/testutils		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/ciliumenvoyconfig	0.137s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/ciliumidentity	0.237s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/operator/pkg/ciliumidentity/testutils		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/client		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/controller-runtime	0.161s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api	0.121s	coverage: 0.6% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/helpers	0.050s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/indexers	0.116s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/policychecks	0.037s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/gateway-api/routechecks	0.050s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/ingress	0.121s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/ingress/annotations	0.017s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/ipam	0.178s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/kvstore/locksweeper	0.120s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/kvstore/nodesgc	0.103s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/lbipam	0.117s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/model	0.014s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/model/ingestion	0.076s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/model/translation	0.133s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/model/translation/gateway-api	0.094s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/model/translation/ingress	0.137s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/multipool	0.092s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/operator/pkg/networkpolicy		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/networkpolicy/helpers		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/pkg/nodeipam	0.062s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/operator/pkg/secretsync	0.140s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/operator/pkg/workqueuemetrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/pkg/ztunnel		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/policyderivative		coverage: 0.0% of statements
+	github.com/cilium/cilium/operator/unmanagedpods		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/operator/watchers	0.136s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/act	0.074s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/alibabacloud/api		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/api/mock		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/alibabacloud/eni	0.124s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/alibabacloud/eni/limits		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/eni/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/alibabacloud/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/alibabacloud/utils	0.028s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/alignchecker	0.027s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/allocator	0.089s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/annotation	0.012s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/api	0.030s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/api/helpers	0.055s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/api/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/api/metrics/mock	0.022s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/auth	0.082s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/auth/certs	[no test files]
+ok  	github.com/cilium/cilium/pkg/auth/spire	0.027s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/aws/ec2	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/aws/ec2/mock	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/aws/eni	0.084s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/aws/eni/limits	0.030s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/aws/eni/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/metadata/mock		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/aws/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/azure/api	0.024s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/azure/api/mock	0.013s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/azure/ipam	0.106s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/azure/types	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/backoff	0.021s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/bgp		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/agent		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/agent/signaler	0.021s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/bgp/api	0.122s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/bgp/commands		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/gobgp	0.057s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/bgp/manager	0.110s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/bgp/manager/instance		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/manager/reconciler	0.218s	coverage: 0.1% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/bgp/manager/store		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/manager/tables		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/mock		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/bgp/option		coverage: 0.0% of statements
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.0.110 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.0.110 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed Topic=Peer Key=10.99.0.110 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.0.110 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.0.110 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.0.110 Duration=0 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=10.99.0.110 old=BGP_FSM_IDLE asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.0.110 Duration=0 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed Topic=Peer Key=10.99.0.110 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Key=10.99.4.212 Duration=0 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed Topic=Peer Key=10.99.4.212 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.4.112 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.4.112 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed reason=idle-hold-timer-expired Topic=Peer Key=10.99.4.112 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.6.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.6.102 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=10.99.6.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Topic=Peer Key=10.99.2.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Key=10.99.4.252 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.4.252 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed Topic=Peer Key=10.99.4.252 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.2.2 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=10.99.2.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Key=10.99.4.102 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.4.102 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=10.99.4.102 old=BGP_FSM_IDLE asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 INFO Add a peer configuration Key=10.99.4.202 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.4.202 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:26 DEBUG state changed Topic=Peer Key=10.99.4.202 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.4.252 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed reason=new-connection Topic=Peer Key=10.99.4.252 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.252 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.4.252 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed reason=open-msg-negotiated Topic=Peer Key=10.99.4.252 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.2.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.2.2 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.2.2 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.2.2 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.2.2 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: 65001:100} {MpReach(ipv6-unicast): {Nexthop: 10.99.2.2, NLRIs: [fd00::/120]}}]" Topic=Peer Key=10.99.2.2 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.2.2 Data="{ fd00::/120 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri="[10.20.0.0/24 10.30.0.0/24]" withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.2.2} {Communities: 65001:100}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.20.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.30.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.20.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.2.2 Data="{ 10.20.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.30.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ 10.30.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[11.20.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.2.2} {Communities: no-export}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=11.20.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=11.20.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ 11.20.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: no-export} {MpReach(ipv6-unicast): {Nexthop: 10.99.2.2, NLRIs: [fd11::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd11::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd11::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ fd11::/120 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[10.20.0.0/24] attributes=[] Topic=Peer Key=10.99.2.2 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=10.20.0.0/24 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ 10.20.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[10.30.0.0/24] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.30.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.2.2 Data="{ 10.30.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00::/120]}}]" Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ fd00::/120 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.4.112 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.112 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.112 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.4.112 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.112 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[11.20.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.2.2} {Communities: no-export}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=11.20.0.0/24 Path="{ 11.20.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Communities: no-export} {MpReach(ipv6-unicast): {Nexthop: 10.99.2.2, NLRIs: [fd11::/120]}}]" Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd11::/120 Path="{ fd11::/120 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.2.2} {Communities: no-export}]" Topic=Peer Key=10.99.2.2 nlri=[11.30.0.0/24] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=11.30.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=11.30.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ 11.30.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.112 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.112}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.112 Data="{ 172.16.1.1/32 | src: { 10.99.4.112 | as: 65001, id: 10.99.4.112 }, nh: 10.99.4.112 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.252 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.252}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.252 Data="{ 172.16.1.1/32 | src: { 10.99.4.252 | as: 65001, id: 10.99.4.252 }, nh: 10.99.4.252 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[11.20.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.2.2} {Communities: no-export}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=11.20.0.0/24 Path="{ 11.20.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Communities: no-export} {MpReach(ipv6-unicast): {Nexthop: 10.99.2.2, NLRIs: [fd11::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd11::/120 Path="{ fd11::/120 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[11.30.0.0/24] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=11.30.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ 11.30.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Key=10.99.4.212 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.212 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.4.212 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.212 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri="[172.16.1.0/24 10.96.50.0/24 10.10.10.0/24 10.96.50.103/32 10.10.10.3/32 172.16.1.3/32]" withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.103/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.3/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.3/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 172.16.1.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.96.50.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Data="{ 10.10.10.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.103/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.96.50.103/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.3/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.4.212 Data="{ 10.10.10.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=172.16.1.3/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 172.16.1.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::3/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::3/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::3/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:aa:bb::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::3/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=fd00:cc:dd::3/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::3/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:cc:dd::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::100/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::100/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=2001:db8:fd00::100/120 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 2001:db8:fd00::100/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::/120]}}]" Topic=Peer Key=10.99.4.212 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:aa:bb::/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:cc:dd::/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::103/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::103/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::103/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 2001:db8:fd00::103/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[11.20.0.0/24] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=11.20.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ 11.20.0.0/24 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.2.2 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd11::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd11::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.2.2 Data="{ fd11::/120 | src: { 10.99.2.2 | as: 65001, id: 10.99.2.2 }, nh: 10.99.2.2, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri="[172.16.1.0/24 10.96.50.0/24 10.10.10.0/24 10.96.50.103/32 10.10.10.3/32 172.16.1.3/32]" withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=172.16.1.0/24 Path="{ 172.16.1.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.0/24 Path="{ 10.96.50.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.10.10.0/24 Path="{ 10.10.10.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.103/32 Path="{ 10.96.50.103/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.10.10.3/32 Path="{ 10.10.10.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Path="{ 172.16.1.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table Key=172.16.1.3/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::100/120]}}]" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Path="{ 2001:db8:fd00::100/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table Key=2001:db8:fd00::100/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:aa:bb::/120 Path="{ fd00:aa:bb::/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:cc:dd::/120 Path="{ fd00:cc:dd::/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::103/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=2001:db8:fd00::103/128 Path="{ 2001:db8:fd00::103/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::3/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=fd00:aa:bb::3/128 Path="{ fd00:aa:bb::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::3/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=fd00:cc:dd::3/128 Path="{ fd00:cc:dd::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" Topic=Peer Key=10.99.4.212 nlri="[10.96.50.103/32 10.10.10.3/32 172.16.1.3/32]" withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.103/32 Path="{ 10.96.50.103/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.10.10.3/32 Path="{ 10.10.10.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=172.16.1.3/32 Path="{ 172.16.1.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::103/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=2001:db8:fd00::103/128 Path="{ 2001:db8:fd00::103/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::3/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=fd00:aa:bb::3/128 Path="{ fd00:aa:bb::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::3/128]}}]" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:cc:dd::3/128 Path="{ fd00:cc:dd::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[10.96.0.0/16] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.96.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[10.10.0.0/16] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.10.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.6.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.6.102 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.212 nlri=[172.16.0.0/16] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 172.16.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::/64]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Data="{ fd00:aa:bb::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.6.102 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::/64]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:cc:dd::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::/64]}}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=2001:db8:fd00::/64 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.4.212 Data="{ 2001:db8:fd00::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[] withdrawals=[10.10.10.0/24] attributes=[] Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.10.10.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Data="{ 10.10.10.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.6.102 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated Topic=Peer Key=10.99.6.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[] withdrawals=[172.16.1.0/24] attributes=[] Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=172.16.1.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 172.16.1.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[10.96.50.0/24] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.96.50.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.96.50.0/24 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00:cc:dd::/120]}}]" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:cc:dd::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:cc:dd::/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [2001:db8:fd00::100/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.6.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.105/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.105/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.6.102 Data="{ 10.96.50.105/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=2001:db8:fd00::100/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 2001:db8:fd00::100/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00:aa:bb::/120]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:aa:bb::/120 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:aa:bb::/120 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.110 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed new=BGP_FSM_OPENSENT reason=new-connection Topic=Peer Key=10.99.0.110 old=BGP_FSM_ACTIVE asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Key=10.99.0.110 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.0.110 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated Topic=Peer Key=10.99.0.110 old=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG sent update attributes=[] Topic=Peer Key=10.99.0.110 State=BGP_FSM_ESTABLISHED nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[10.244.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=10.244.0.0/24 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[] withdrawals=[] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Delete a peer configuration Topic=Peer Key=10.99.2.2 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Down Topic=Peer Key=10.99.2.2 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG freed fsm.h Key=10.99.2.2 State=BGP_FSM_ESTABLISHED Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.4.202 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.202 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.202 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up State=BGP_FSM_OPENCONFIRM Topic=Peer Key=10.99.4.202 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Key=10.99.4.202 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.202 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.202}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.202 Data="{ 172.16.1.1/32 | src: { 10.99.4.202 | as: 65001, id: 10.99.4.202 }, nh: 10.99.4.202 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" Topic=Peer Key=10.99.4.212 nlri="[10.96.50.103/32 172.16.1.3/32 10.96.0.0/16 10.10.0.0/16 10.10.10.3/32 172.16.0.0/16]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.103/32 Path="{ 10.96.50.103/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=172.16.1.3/32 Path="{ 172.16.1.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.0.0/16 Path="{ 10.96.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.10.0.0/16 Path="{ 10.10.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.10.10.3/32 Path="{ 10.10.10.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=172.16.0.0/16 Path="{ 172.16.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::3/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=fd00:aa:bb::3/128 Path="{ fd00:aa:bb::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::/64]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:aa:bb::/64 Path="{ fd00:aa:bb::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::/64]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:cc:dd::/64 Path="{ fd00:cc:dd::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::/64]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=2001:db8:fd00::/64 Path="{ 2001:db8:fd00::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::103/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=2001:db8:fd00::103/128 Path="{ 2001:db8:fd00::103/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::3/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:cc:dd::3/128 Path="{ fd00:cc:dd::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri="[10.96.50.103/32 172.16.1.3/32 10.10.10.3/32]" withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=10.96.50.103/32 Path="{ 10.96.50.103/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=172.16.1.3/32 Path="{ 172.16.1.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Key=10.10.10.3/32 Path="{ 10.10.10.3/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::3/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Path="{ fd00:aa:bb::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table Key=fd00:aa:bb::3/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::103/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Path="{ 2001:db8:fd00::103/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Table Key=2001:db8:fd00::103/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::3/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=fd00:cc:dd::3/128 Path="{ fd00:cc:dd::3/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::102/128]}}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::102/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::102/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Data="{ 2001:db8:fd00::102/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::2/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.4.212 Data="{ fd00:aa:bb::2/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::2/128]}}]" Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=fd00:cc:dd::2/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:cc:dd::2/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[10.96.50.102/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.102/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.102/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.96.50.102/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[10.10.10.2/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.10.10.2/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" Topic=Peer Key=10.99.4.212 nlri=[172.16.1.2/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 172.16.1.2/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[10.10.0.0/16] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.10.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.10.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[172.16.0.0/16] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=172.16.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Data="{ 172.16.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[10.96.0.0/16] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.96.0.0/16 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Data="{ 10.96.0.0/16 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 172.16.1.1/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" Topic=Peer Key=10.99.4.212 nlri=[10.96.50.101/32] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.101/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.96.50.101/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[10.10.10.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.212}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.10.10.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 10.10.10.1/32 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [2001:db8:fd00::/64]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=2001:db8:fd00::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ 2001:db8:fd00::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00:aa:bb::/64]}}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:aa:bb::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:aa:bb::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{MpUnreach(ipv6-unicast): {NLRIs: [fd00:cc:dd::/64]}}]" Topic=Peer Key=10.99.4.212 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:cc:dd::/64 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.4.212 Data="{ fd00:cc:dd::/64 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [2001:db8:fd00::101/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=2001:db8:fd00::101/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=2001:db8:fd00::101/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.4.212 Data="{ 2001:db8:fd00::101/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.212 nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:aa:bb::1/128]}}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:aa:bb::1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=fd00:aa:bb::1/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:aa:bb::1/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update nlri=[] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {MpReach(ipv6-unicast): {Nexthop: 10.99.4.212, NLRIs: [fd00:cc:dd::1/128]}}]" Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=fd00:cc:dd::1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Nlri=fd00:cc:dd::1/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.212 Data="{ fd00:cc:dd::1/128 | src: { 10.99.4.212 | as: 65001, id: 10.99.4.212 }, nh: 10.99.4.212 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Add a peer configuration Topic=Peer Key=10.99.5.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.5.102 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Key=10.99.5.102 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Delete a peer configuration Topic=Peer Key=10.99.4.212 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=10.96.50.102/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.10.10.3/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=172.16.1.3/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.10.10.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=172.16.1.1/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.96.50.103/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=10.96.50.101/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=10.10.10.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=2001:db8:fd00::103/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:aa:bb::1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:cc:dd::1/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=2001:db8:fd00::102/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:aa:bb::2/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=fd00:cc:dd::2/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=fd00:aa:bb::3/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Key=fd00:cc:dd::3/128 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=2001:db8:fd00::101/128 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Down Key=10.99.4.212 State=BGP_FSM_ESTABLISHED Reason=dying Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG freed fsm.h Key=10.99.4.212 State=BGP_FSM_ESTABLISHED Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Add a peer configuration Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG IdleHoldTimer expired Key=10.99.0.130 Duration=0 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.112 nlri=[] withdrawals=[172.16.1.1/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.112 Data="{ 172.16.1.1/32 | src: { 10.99.4.112 | as: 65001, id: 10.99.4.112 }, nh: 10.99.4.112, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" Topic=Peer Key=10.99.6.102 nlri=[10.96.50.105/32] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" Topic=Peer Key=10.99.6.102 nlri=[10.96.50.104/32] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.6.102 Data="{ 10.96.50.104/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" Topic=Peer Key=10.99.6.102 nlri=[172.16.1.1/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.6.102 Data="{ 172.16.1.1/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" Topic=Peer Key=10.99.6.102 nlri=[9.9.9.9/32] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=9.9.9.9/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=9.9.9.9/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.6.102 Data="{ 9.9.9.9/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update attributes=[] Topic=Peer Key=10.99.4.252 nlri=[] withdrawals=[172.16.1.1/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Key=10.99.4.252 Data="{ 172.16.1.1/32 | src: { 10.99.4.252 | as: 65001, id: 10.99.4.252 }, nh: 10.99.4.252, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.252 nlri=[172.16.1.2/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.252}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.252 Data="{ 172.16.1.2/32 | src: { 10.99.4.252 | as: 65001, id: 10.99.4.252 }, nh: 10.99.4.252 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.202 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.202}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=172.16.1.1/32 Path="{ 172.16.1.1/32 | src: { 10.99.4.202 | as: 65001, id: 10.99.4.202 }, nh: 10.99.4.202 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Topic=Peer Key=10.99.4.202 nlri=[] withdrawals=[172.16.1.1/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.202 Data="{ 172.16.1.1/32 | src: { 10.99.4.202 | as: 65001, id: 10.99.4.202 }, nh: 10.99.4.202, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.4.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.102 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Key=10.99.4.102 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 INFO Peer Up Topic=Peer Key=10.99.4.102 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG state changed Topic=Peer Key=10.99.4.102 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG received update Key=10.99.4.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.105/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG create Destination Topic=Table Nlri=10.96.50.105/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:28 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 10.96.50.105/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 INFO Delete a peer configuration Key=10.99.4.202 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 INFO Peer Down Key=10.99.4.202 State=BGP_FSM_ESTABLISHED Reason=dying Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG freed fsm.h Topic=Peer Key=10.99.4.202 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 INFO Delete a peer configuration Topic=Peer Key=10.99.4.112 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 INFO Peer Down Topic=Peer Key=10.99.4.112 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG freed fsm.h State=BGP_FSM_ESTABLISHED Topic=Peer Key=10.99.4.112 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.6.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.6.102 nlri=[] withdrawals=[9.9.9.9/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=9.9.9.9/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Data="{ 9.9.9.9/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102, withdraw }" Topic=Peer Key=10.99.6.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update withdrawals=[10.96.50.104/32] attributes=[] Topic=Peer Key=10.99.6.102 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Key=10.96.50.104/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Key=10.99.6.102 Data="{ 10.96.50.104/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update withdrawals=[172.16.1.1/32] attributes=[] Topic=Peer Key=10.99.6.102 nlri=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Key=10.99.6.102 Data="{ 172.16.1.1/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102, withdraw }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.4.252 nlri=[] withdrawals=[172.16.1.2/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Key=172.16.1.2/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.4.252 Data="{ 172.16.1.2/32 | src: { 10.99.4.252 | as: 65001, id: 10.99.4.252 }, nh: 10.99.4.252, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 172.16.1.1/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" Topic=Peer Key=10.99.4.102 nlri=[10.96.50.104/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 10.96.50.104/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" Topic=Peer Key=10.99.6.102 nlri=[10.96.50.105/32] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.6.102 nlri=[9.9.9.9/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=9.9.9.9/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=9.9.9.9/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.6.102 Data="{ 9.9.9.9/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.6.102 nlri=[10.96.50.104/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.6.102 Data="{ 10.96.50.104/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.6.102}]" Topic=Peer Key=10.99.6.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.6.102 Data="{ 172.16.1.1/32 | src: { 10.99.6.102 | as: 65001, id: 10.99.6.102 }, nh: 10.99.6.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.4.252 nlri=[172.16.1.2/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.252}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG create Destination Topic=Table Nlri=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Key=10.99.4.252 Data="{ 172.16.1.2/32 | src: { 10.99.4.252 | as: 65001, id: 10.99.4.252 }, nh: 10.99.4.252 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Key=10.99.4.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update nlri=[] withdrawals=[10.96.50.104/32] attributes=[] Topic=Peer Key=10.99.4.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 10.96.50.104/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[] withdrawals=[172.16.1.1/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 172.16.1.1/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 INFO Delete a peer configuration Key=10.99.6.102 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=10.96.50.105/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=9.9.9.9/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Topic=Table Key=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG Removing withdrawals Key=172.16.1.1/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 INFO Peer Down Topic=Peer Key=10.99.6.102 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:29 DEBUG freed fsm.h Topic=Peer Key=10.99.6.102 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.110 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.0.110 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer Key=10.99.0.110 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Up Topic=Peer Key=10.99.0.110 State=BGP_FSM_OPENCONFIRM asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.0.110 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG sent update State=BGP_FSM_ESTABLISHED nlri=[] withdrawals=[] attributes=[] Topic=Peer Key=10.99.0.110 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[10.244.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65002} {Nexthop: 10.99.0.110}]" asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65002, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[] withdrawals=[] attributes=[] asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.110 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed reason=new-connection Topic=Peer Key=10.99.0.110 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Key=10.99.0.110 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Up State=BGP_FSM_OPENCONFIRM Topic=Peer Key=10.99.0.110 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.0.110 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Key=10.99.0.110 nlri=[10.244.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.244.0.0/24 Path="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update nlri=[] withdrawals=[] attributes=[] Topic=Peer Key=10.99.0.110 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[10.244.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[] withdrawals=[] attributes=[] asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG sent update Topic=Peer Key=10.99.0.110 State=BGP_FSM_ESTABLISHED nlri=[] withdrawals=[] attributes=[] asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" Topic=Peer asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65002, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.4.252 nlri=[] withdrawals=[172.16.1.2/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=172.16.1.2/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Data="{ 172.16.1.2/32 | src: { 10.99.4.252 | as: 65001, id: 10.99.4.252 }, nh: 10.99.4.252, withdraw }" Topic=Peer Key=10.99.4.252 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Key=10.99.4.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[172.16.1.1/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Key=10.99.4.102 Data="{ 172.16.1.1/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[10.96.50.104/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 10.96.50.104/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.5.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.5.102 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed new=BGP_FSM_OPENCONFIRM reason=open-msg-received Topic=Peer Key=10.99.5.102 old=BGP_FSM_OPENSENT asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Up State=BGP_FSM_OPENCONFIRM Topic=Peer Key=10.99.5.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated Topic=Peer Key=10.99.5.102 old=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Topic=Peer Key=10.99.4.252 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Key=10.99.5.102 nlri=[172.18.255.200/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.5.102}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Topic=Peer Key=10.99.4.252 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=172.18.255.200/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=172.18.255.200/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.5.102 Data="{ 172.18.255.200/32 | src: { 10.99.5.102 | as: 65001, id: 10.99.5.102 }, nh: 10.99.5.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h Key=10.99.4.252 State=BGP_FSM_ESTABLISHED Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Topic=Peer Key=10.99.5.102 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=172.18.255.200/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Topic=Peer Key=10.99.5.102 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h Topic=Peer Key=10.99.5.102 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Up Topic=Peer Key=10.99.0.130 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.130}]" Topic=Peer Key=10.99.0.130 nlri="[10.244.0.0/24 172.16.1.1/32]" withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.130 Data="{ 10.244.0.0/24 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.130 Data="{ 172.16.1.1/32 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Data="{ 10.244.0.0/24 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Key=10.99.0.130 Data="{ 172.16.1.1/32 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Key=10.99.0.130 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Topic=Peer Key=10.99.0.130 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h State=BGP_FSM_ESTABLISHED Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Add a peer configuration Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.0.130 Duration=0 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG state changed new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired Topic=Peer Key=10.99.0.130 old=BGP_FSM_IDLE asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" Topic=Peer Key=10.99.0.110 nlri=[10.244.0.0/24] withdrawals=[] asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.244.0.0/24 Path="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[] withdrawals=[] attributes=[] asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[10.244.0.0/24] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.244.0.0/24 Path="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update attributes=[] Topic=Peer Key=10.99.0.110 nlri=[] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" Topic=Peer Key=10.99.0.110 nlri=[10.96.50.104/32] withdrawals=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.96.50.104/32 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[10.96.50.104/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.110}]" asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Key=10.99.0.110 Data="{ 10.96.50.104/32 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" Topic=Peer asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update withdrawals=[] attributes="[{Origin: i} {AsPath: 65002} {Nexthop: 10.99.0.110}]" Topic=Peer Key=10.99.0.110 nlri=[10.244.0.0/24] asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.244.0.0/24 Path="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65002, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update nlri=[] withdrawals=[] attributes=[] Topic=Peer Key=10.99.0.110 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG EOR received Topic=Peer Key=10.99.0.110 AddressFamily=ipv4-unicast asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.0.110 nlri=[10.96.50.104/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65002} {Nexthop: 10.99.0.110}]" asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG create Destination Topic=Table Nlri=10.96.50.104/32 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.96.50.104/32 | src: { 10.99.0.110 | as: 65002, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Key=10.99.4.102 nlri=[10.96.50.105/32] withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.4.102}]" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Implicit withdrawal of old path, since we have learned new path from the same peer Topic=Table Key=10.96.50.105/32 Path="{ 10.96.50.105/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[] withdrawals=[10.96.50.104/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Key=10.96.50.104/32 Topic=Table asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 10.96.50.104/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG received update Topic=Peer Key=10.99.4.102 nlri=[] withdrawals=[172.16.1.1/32] attributes=[] asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.4.102 Data="{ 172.16.1.1/32 | src: { 10.99.4.102 | as: 65001, id: 10.99.4.102 }, nh: 10.99.4.102, withdraw }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Key=10.99.4.102 Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.96.50.105/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Reason=dying Topic=Peer Key=10.99.4.102 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h Topic=Peer Key=10.99.4.102 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.96.50.104/32 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG From me, ignore Topic=Peer Key=10.99.0.110 Data="{ 10.244.0.0/24 | src: { 10.99.0.110 | as: 65001, id: 10.99.0.110 }, nh: 10.99.0.110 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Topic=Peer Key=10.99.0.110 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.96.50.104/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Key=10.99.0.110 State=BGP_FSM_ESTABLISHED Reason=dying Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h Topic=Peer Key=10.99.0.110 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Topic=Peer Key=10.99.0.110 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.244.0.0/24 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.96.50.104/32 asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Reason=dying Topic=Peer Key=10.99.0.110 State=BGP_FSM_ESTABLISHED asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h Key=10.99.0.110 State=BGP_FSM_ESTABLISHED Topic=Peer asn=65011 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Delete a peer configuration Topic=Peer Key=10.99.0.110 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.96.50.104/32 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG Removing withdrawals Topic=Table Key=10.244.0.0/24 asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 INFO Peer Down Topic=Peer Key=10.99.0.110 State=BGP_FSM_ESTABLISHED Reason=dying asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:30 DEBUG freed fsm.h Topic=Peer Key=10.99.0.110 State=BGP_FSM_ESTABLISHED asn=65012 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG state changed reason=open-msg-received Topic=Peer Key=10.99.0.130 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 INFO Peer Up Topic=Peer Key=10.99.0.130 State=BGP_FSM_OPENCONFIRM asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG state changed reason=open-msg-negotiated Topic=Peer Key=10.99.0.130 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG received update Topic=Peer Key=10.99.0.130 nlri="[172.16.1.1/32 10.244.0.0/24]" withdrawals=[] attributes="[{Origin: i} {AsPath: 65001} {Nexthop: 10.99.0.130}]" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG create Destination Topic=Table Nlri=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG From me, ignore Topic=Peer Key=10.99.0.130 Data="{ 172.16.1.1/32 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG create Destination Topic=Table Nlri=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG From me, ignore Key=10.99.0.130 Data="{ 10.244.0.0/24 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG From me, ignore Topic=Peer Key=10.99.0.130 Data="{ 172.16.1.1/32 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG From me, ignore Topic=Peer Key=10.99.0.130 Data="{ 10.244.0.0/24 | src: { 10.99.0.130 | as: 65001, id: 10.99.0.130 }, nh: 10.99.0.130 }" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 WARN received notification Data="" Topic=Peer Key=10.99.0.130 Code=6 Subcode=6 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 INFO Peer Down State=BGP_FSM_ESTABLISHED Reason="notification-received code 6(cease) subcode 6(other configuration change)" Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_ESTABLISHED new=BGP_FSM_IDLE reason="notification-received code 6(cease) subcode 6(other configuration change)" asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG Removing withdrawals Topic=Table Key=172.16.1.1/32 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:32 DEBUG Removing withdrawals Topic=Table Key=10.244.0.0/24 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:34 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:34 WARN Closed an accepted connection State=BGP_FSM_IDLE Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:37 DEBUG IdleHoldTimer expired Topic=Peer Key=10.99.0.130 Duration=5 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:37 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_IDLE new=BGP_FSM_ACTIVE reason=idle-hold-timer-expired asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 DEBUG Accepted a new passive connection Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 DEBUG state changed old=BGP_FSM_ACTIVE new=BGP_FSM_OPENSENT reason=new-connection Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_OPENSENT new=BGP_FSM_OPENCONFIRM reason=open-msg-received asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 INFO Peer Up State=BGP_FSM_OPENCONFIRM Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 DEBUG state changed Topic=Peer Key=10.99.0.130 old=BGP_FSM_OPENCONFIRM new=BGP_FSM_ESTABLISHED reason=open-msg-negotiated asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 INFO Delete a peer configuration Topic=Peer Key=10.99.0.130 asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 DEBUG sent update Key=10.99.0.130 State=BGP_FSM_ESTABLISHED nlri=[] withdrawals=[] attributes=[] Topic=Peer asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 INFO Peer Down Topic=Peer Key=10.99.0.130 State=BGP_FSM_ESTABLISHED Reason=dying asn=65010 component=test subsys=gobgp
+2026/02/21 12:17:40 DEBUG freed fsm.h Topic=Peer Key=10.99.0.130 State=BGP_FSM_ESTABLISHED asn=65010 component=test subsys=gobgp
+--- FAIL: TestPrivilegedScript (0.09s)
+    --- FAIL: TestPrivilegedScript/interface.txtar (0.05s)
+        scripttest.go:253: 2026-02-21T20:17:26Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptinterface.txtar3437817983/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/interface.txtar
+        logger.go:256: time=2026-02-21T12:17:26.780-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:26.780-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.508µs
+    --- FAIL: TestPrivilegedScript/pod-cidr.txtar (0.05s)
+        scripttest.go:253: 2026-02-21T20:17:26Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptpod-cidr.txtar3494434859/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/pod-cidr.txtar
+        logger.go:256: time=2026-02-21T12:17:26.784-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:26.784-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.292µs
+    --- FAIL: TestPrivilegedScript/svc-path-attributes.txtar (0.02s)
+        scripttest.go:253: 2026-02-21T20:17:28Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptsvc-path-attributes.txtar1467746930/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/svc-path-attributes.txtar
+        logger.go:256: time=2026-02-21T12:17:28.588-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:28.588-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.461µs
+    --- FAIL: TestPrivilegedScript/peering-default-gateway.txtar (0.02s)
+        scripttest.go:253: 2026-02-21T20:17:28Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptpeering-default-gateway.txtar3577115810/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/peering-default-gateway.txtar
+        logger.go:256: time=2026-02-21T12:17:28.608-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:28.608-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.739µs
+    --- FAIL: TestPrivilegedScript/peering-ipv6.txtar (0.01s)
+        scripttest.go:253: 2026-02-21T20:17:28Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptpeering-ipv6.txtar2867258572/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/peering-ipv6.txtar
+        logger.go:256: time=2026-02-21T12:17:28.621-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:28.621-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.115µs
+    --- FAIL: TestPrivilegedScript/svc-adverts.txtar (0.01s)
+        scripttest.go:253: 2026-02-21T20:17:28Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptsvc-adverts.txtar3300469576/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/svc-adverts.txtar
+        logger.go:256: time=2026-02-21T12:17:28.741-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:28.741-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.873µs
+    --- FAIL: TestPrivilegedScript/peering-auth.txtar (0.01s)
+        scripttest.go:253: 2026-02-21T20:17:29Z
+        scripttest.go:255: $WORK=/tmp/TestPrivilegedScriptpeering-auth.txtar3571821161/001
+        script_test.go:196: 
+            	Error Trace:	/root/work/cilium-s390x/pkg/bgp/test/script_test.go:196
+            	            				/root/work/cilium-s390x/vendor/github.com/cilium/hive/script/scripttest/scripttest.go:261
+            	Error:      	Received unexpected error:
+            	            	permission denied
+            	Test:       	TestPrivilegedScript/peering-auth.txtar
+        logger.go:256: time=2026-02-21T12:17:29.024-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:401 msg="Stopping hive"
+        logger.go:256: time=2026-02-21T12:17:29.024-08:00 level=INFO source=/root/work/cilium-s390x/vendor/github.com/cilium/hive/hive.go:405 msg="Stopped hive" duration=1.995µs
+FAIL
+coverage: 70.8% of statements
+FAIL	github.com/cilium/cilium/pkg/bgp/test	14.469s
+	github.com/cilium/cilium/pkg/bgp/test/commands		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/bgp/types	0.055s	coverage: 0.0% of statements [no tests to run]
+--- FAIL: TestPrivilegedUpgradeMap (0.00s)
+    collection_test.go:49: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bpf/collection_test.go:49
+        	Error:      	Received unexpected error:
+        	            	loading eBPF collection into the kernel: program dummy: can't load LittleEndian program on BigEndian
+        	Test:       	TestPrivilegedUpgradeMap
+time=2026-02-21T12:17:27.73625224-08:00 level=info msg="Unpinning map with incompatible properties" bpfMapPath=cilium_test bpfMapName=cilium_test file-path=/sys/fs/bpf/tc/globals/cilium_test old="[type Hash keySize 4 valueSize 4 maxEntries 16 flags 1]" new="[type Hash keySize 4 valueSize 4 maxEntries 16 flags 0]"
+time=2026-02-21T12:17:27.736586854-08:00 level=info msg="Unpinning map with incompatible properties" bpfMapPath=cilium_test bpfMapName=cilium_test file-path=/sys/fs/bpf/tc/globals/cilium_test old="[type Hash keySize 4 valueSize 4 maxEntries 16 flags 0]" new="[type Hash keySize 4 valueSize 4 maxEntries 16 flags 1]"
+time=2026-02-21T12:17:27.736701911-08:00 level=info msg="Removed map pin, recreating and re-pinning map" bpfMapPath=cilium_test bpfMapName=cilium_test
+time=2026-02-21T12:17:35.341858024-08:00 level=info msg="Unpinning map with incompatible properties" bpfMapPath=cilium_test bpfMapName=cilium_test file-path=/sys/fs/bpf/tc/globals/cilium_test old="[type Hash keySize 4 valueSize 4 maxEntries 16 flags 1]" new="[type Hash keySize 8 valueSize 4 maxEntries 10 flags 1]"
+--- FAIL: TestPrivilegedUnusedMaps (0.00s)
+    unused_maps_test.go:65: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:27
+        	            				/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:65
+        	Error:      	Received unexpected error:
+        	            	program entry: can't load LittleEndian program on BigEndian
+        	Test:       	TestPrivilegedUnusedMaps
+--- FAIL: TestPrivilegedUnusedMapsFalseNegative (0.00s)
+    unused_maps_test.go:107: 
+        	Error Trace:	/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:27
+        	            				/root/work/cilium-s390x/pkg/bpf/unused_maps_test.go:107
+        	Error:      	Received unexpected error:
+        	            	program false_negative: can't load LittleEndian program on BigEndian
+        	Test:       	TestPrivilegedUnusedMapsFalseNegative
+FAIL
+coverage: 55.1% of statements
+FAIL	github.com/cilium/cilium/pkg/bpf	26.564s
+ok  	github.com/cilium/cilium/pkg/bpf/analyze	0.049s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/bufuuid	0.023s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/byteorder	0.032s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/cgroups		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/cgroups/manager	0.122s	coverage: 1.9% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/cidr	0.023s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ciliumenvoyconfig	0.104s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/cleanup	0.035s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/client	0.052s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh	0.121s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/clustercfg	0.097s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/clustermesh/clustercfg/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/common	0.144s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/endpointslicesync	0.196s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/kvstoremesh	0.140s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/kvstoremesh/reflector	0.076s	coverage: 14.6% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/mcsapi	0.129s	coverage: 0.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/mcsapi/types	0.067s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/namespace	0.127s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/clustermesh/observer		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/clustermesh/operator	0.119s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/store	0.064s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/clustermesh/types	0.039s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/clustermesh/wait		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/cmdref		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/command	0.024s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/command/exec	0.022s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/common	0.020s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/common/ipsec	0.048s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/comparator	0.036s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/completion	0.063s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/components		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/container	0.019s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/container/bitlpm	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/container/cache	0.029s	coverage: 2.7% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/container/set	0.013s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/controller	0.049s	coverage: 0.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/counter	0.025s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/crypto/certificatemanager		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/crypto/certloader	0.077s	coverage: 12.7% of statements
+	github.com/cilium/cilium/pkg/datapath		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/agentliveness		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/alignchecker	0.081s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/datapath/bpf		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/config	0.096s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/connector	0.925s	coverage: 31.0% of statements
+	github.com/cilium/cilium/pkg/datapath/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/fake/types	0.107s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/gneigh	0.075s	coverage: 3.2% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/datapath/ipcache		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/iptables	0.104s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/iptables/ipset	0.133s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/l2responder	0.096s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/link	0.209s	coverage: 21.7% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux	0.900s	coverage: 18.2% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/bandwidth	0.098s	coverage: 20.3% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/bigtcp		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/config	1.464s	coverage: 52.2% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/config/defines		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/device		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/device/scripttest	2.199s	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/ethtool	0.076s	coverage: 75.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/ipsec	0.327s	coverage: 16.4% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/linux_defaults		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/netdevice		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/probes	0.034s	coverage: 27.7% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/route	0.129s	coverage: 63.9% of statements
+	github.com/cilium/cilium/pkg/datapath/linux/route/reconciler		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/route/reconciler/scripttest	2.222s	coverage: [no statements]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/routing	0.693s	coverage: 69.5% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/linux/safenetlink	0.016s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/sysctl	0.119s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/linux/utime	0.078s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/loader	8.629s	coverage: 36.5% of statements
+	github.com/cilium/cilium/pkg/datapath/loader/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/loader/tools		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/maps	0.124s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/neighbor	0.119s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/datapath/node		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/datapath/option	[no test files]
+	github.com/cilium/cilium/pkg/datapath/orchestrator		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/prefilter		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/sockets	0.385s	coverage: 73.2% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/tables	0.227s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/datapath/tunnel	0.066s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/datapath/types		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/datapath/vtep		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/datapath/xdp	0.060s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/debug	0.018s	coverage: 5.3% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/debug/api	0.208s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/dial	0.112s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/driftchecker	0.123s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/dynamicconfig	0.144s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/dynamiclifecycle	0.173s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ebpf		coverage: 0.0% of statements
+--- FAIL: TestPrivilegedEgressGatewayManager (0.05s)
+    manager_privileged_test.go:307: permission denied
+--- FAIL: TestPrivilegedNodeSelector (0.07s)
+    manager_privileged_test.go:591: permission denied
+--- FAIL: TestPrivilegedEndpointDataStore (0.06s)
+    manager_privileged_test.go:668: permission denied
+--- FAIL: TestPrivilegedMultigatewayPolicy (0.06s)
+    manager_privileged_test.go:750: permission denied
+FAIL
+coverage: 15.0% of statements
+FAIL	github.com/cilium/cilium/pkg/egressgateway	0.332s
+ok  	github.com/cilium/cilium/pkg/endpoint	0.212s	coverage: 0.2% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/endpoint/api	0.115s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/endpoint/cell	[no test files]
+	github.com/cilium/cilium/pkg/endpoint/creator		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpoint/id	0.036s	coverage: 28.6% of statements
+	github.com/cilium/cilium/pkg/endpoint/metadata		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/endpoint/regeneration		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/endpoint/watchdog		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/endpointcleanup	0.080s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/endpointmanager	0.075s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/endpointstate	[no test files]
+ok  	github.com/cilium/cilium/pkg/envoy	0.139s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/envoy/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/envoy/policy	0.115s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/envoy/resource	[no test files]
+	github.com/cilium/cilium/pkg/envoy/test		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/envoy/xds	0.115s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/eventqueue	0.064s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/flowdebug		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn	0.043s	coverage: 20.7% of statements
+	github.com/cilium/cilium/pkg/fqdn/bootstrap		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/fqdn/cell	[no test files]
+ok  	github.com/cilium/cilium/pkg/fqdn/dns	0.034s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/fqdn/dnsproxy	0.106s	coverage: 53.7% of statements
+	github.com/cilium/cilium/pkg/fqdn/lookup		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/matchpattern	0.021s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/fqdn/messagehandler	0.114s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/fqdn/namemanager	0.111s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/fqdn/proxy	[no test files]
+	github.com/cilium/cilium/pkg/fqdn/proxy/ipfamily		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/fqdn/re		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/restore	0.023s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/fqdn/rules		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/fqdn/service	0.104s	coverage: 1.5% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/fswatcher	0.023s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/gops		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/health		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/health/client	0.023s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/health/defaults	[no test files]
+	github.com/cilium/cilium/pkg/health/probe		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/health/probe/responder	0.021s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/health/server	0.063s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/healthconfig	0.019s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hive	0.068s	coverage: 2.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hive/health	0.039s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hive/health/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble	0.157s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/api/v1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/build	0.016s	coverage: 21.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/cell	0.179s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/container	0.142s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/hubble/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/dropeventemitter	0.207s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/exporter	0.138s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/exporter/cell	0.247s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/filters	0.081s	coverage: 0.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/k8s	0.011s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/math	0.011s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics	0.087s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/api	0.175s	coverage: 1.7% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/metrics/cell		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/hubble/metrics/dns		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/drop	0.142s	coverage: 2.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/flow	0.137s	coverage: 1.8% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/flows-to-world	0.135s	coverage: 1.3% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/http	0.095s	coverage: 1.8% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/metrics/icmp		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/kafka	0.116s	coverage: 1.8% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/policy	0.110s	coverage: 1.5% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/port-distribution	0.115s	coverage: 1.6% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/sctp	0.093s	coverage: 2.1% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/metrics/tcp	0.066s	coverage: 1.8% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/monitor	0.124s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/observer	0.131s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/observer/namespace	0.109s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/observer/observeroption		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/hubble/observer/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/parser	0.069s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/agent	0.071s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/cell	0.149s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/parser/common		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/debug	0.103s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/parser/errors		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/parser/fieldaggregate	0.028s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/fieldmask	0.028s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/hubble/parser/getters	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/options	0.113s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/seven	0.073s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/sock	0.080s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/parser/threefour	0.163s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/peer	0.140s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/peer/cell	0.124s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/peer/serviceoption		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/peer/types	0.105s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/hubble/relay/defaults	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/observer	0.080s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/pool	0.148s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/hubble/relay/pool/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/queue	0.032s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/hubble/relay/server	0.124s	coverage: 1.4% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/hubble/server		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/hubble/server/serveroption		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/hubble/testutils	0.101s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/iana	0.018s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/identity	0.045s	coverage: 6.6% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/identity/api		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/identity/basicallocator	0.036s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/identity/cache	0.131s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/identity/cache/cell		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/identity/cell	[no test files]
+ok  	github.com/cilium/cilium/pkg/identity/identitymanager	0.065s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/identity/key	0.061s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/identity/model		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/idpool	0.020s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ip	0.021s	coverage: 1.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipalloc	0.019s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipam	0.176s	coverage: 1.1% of statements
+?   	github.com/cilium/cilium/pkg/ipam/allocator	[no test files]
+	github.com/cilium/cilium/pkg/ipam/allocator/alibabacloud		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/aws		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/azure		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/allocator/clusterpool		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/allocator/clusterpool/cidralloc	0.035s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipam/allocator/podcidr	0.138s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ipam/api		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ipam/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/cidrset	0.020s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipam/metadata	0.164s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ipam/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipam/metrics/mock	0.014s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/ipam/option	[no test files]
+ok  	github.com/cilium/cilium/pkg/ipam/podippool	0.145s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipam/service/allocator	0.028s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipam/service/ipallocator	0.018s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/ipam/stats	[no test files]
+ok  	github.com/cilium/cilium/pkg/ipam/types	0.028s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipcache	0.055s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipcache/api	0.107s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ipcache/cell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/fake	0.107s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ipcache/restore		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ipcache/types	0.032s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipmasq	0.030s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ipmasq/cell	0.106s	coverage: 92.9% of statements
+ok  	github.com/cilium/cilium/pkg/k8s	0.148s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/apis		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/apis/cilium.io	[no test files]
+	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/client		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/utils	0.051s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2	0.090s	coverage: 0.1% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2/validator	0.082s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2alpha1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/apis/crdhelpers	0.058s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/client	0.114s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/client/applyconfiguration/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/scheme		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2alpha1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/clientset/versioned/typed/cilium.io/v2alpha1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/cilium.io/v2alpha1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/client/informers/externalversions/internalinterfaces	[no test files]
+	github.com/cilium/cilium/pkg/k8s/client/listers/cilium.io/v2		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/client/listers/cilium.io/v2alpha1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/client/testutils	0.057s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/k8s/constants	[no test files]
+	github.com/cilium/cilium/pkg/k8s/hostfirewallbypass		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/identitybackend	0.092s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/informer		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/informer/benchmarks	0.040s	coverage: [no statements] [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/metrics	0.035s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/portforward		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/resource	0.101s	coverage: 0.3% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/resource/example		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/api/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/api/meta		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/labels	0.034s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1/validation		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/meta/v1beta1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/selection	[no test files]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/apis/util/intstr		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/scheme		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/core/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/discovery/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/clientset/versioned/typed/networking/v1/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/core		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/discovery		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/discovery/v1		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/internalinterfaces	[no test files]
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/networking		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/informers/externalversions/networking/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/core/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/discovery/v1		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/slim/k8s/client/listers/networking/v1		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/synced	0.085s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/k8s/testutils	0.099s	coverage: 11.9% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/utils	0.080s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/version		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/k8s/watchers	0.148s	coverage: 0.2% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/k8s/watchers/metrics		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/resources		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/k8s/watchers/subscriber		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/kpr		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/kpr/initializer	0.146s	coverage: 18.8% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore	0.057s	coverage: 0.9% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/kvstore/allocator	0.065s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/kvstore/allocator/doublewrite	0.097s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/kvstore/etcdinit		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/kvstore/heartbeat		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/kvstore/store	0.058s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/l2announcer	0.144s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/labels	0.070s	coverage: 5.0% of statements
+	github.com/cilium/cilium/pkg/labels/model		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/labelsfilter	0.146s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/lbipamconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer	0.101s	coverage: 0.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/benchmark	0.113s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/loadbalancer/benchmark/cmd		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/cell	0.117s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/healthserver	0.188s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/loadbalancer/maps		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/reconciler	1.360s	coverage: 6.8% of statements
+ok  	github.com/cilium/cilium/pkg/loadbalancer/redirectpolicy	0.115s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/reflectors	0.083s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/repl	0.085s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/tests	0.100s	coverage: [no statements] [no tests to run]
+ok  	github.com/cilium/cilium/pkg/loadbalancer/writer	0.112s	coverage: 0.2% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/loadinfo		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/lock	0.022s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/lock/lockfile	0.025s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/logging	0.026s	coverage: 2.2% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/logging/hooks		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/logging/logfields	[no test files]
+ok  	github.com/cilium/cilium/pkg/mac	0.025s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/maglev	0.030s	coverage: 5.6% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/maps	0.113s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/maps/act		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/authmap	0.159s	coverage: 30.0% of statements
+	github.com/cilium/cilium/pkg/maps/authmap/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/bwmap		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/maps/callsmap	[no test files]
+	github.com/cilium/cilium/pkg/maps/cidrmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/configmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ctmap	14.729s	coverage: 61.7% of statements
+	github.com/cilium/cilium/pkg/maps/ctmap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ctmap/gc	0.180s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/maps/egressmap	0.175s	coverage: 50.9% of statements
+	github.com/cilium/cilium/pkg/maps/encrypt		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/encrypt/fake		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/eventsmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/fragmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/ipcache	0.103s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/maps/ipmasq	0.127s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/maps/iptrace	0.111s	coverage: 25.0% of statements
+	github.com/cilium/cilium/pkg/maps/l2respondermap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/l2v6respondermap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/lxcmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/metricsmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/multicast	0.345s	coverage: 58.6% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nat	4.034s	coverage: 35.2% of statements
+	github.com/cilium/cilium/pkg/maps/nat/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nat/stats	0.162s	coverage: 69.0% of statements
+	github.com/cilium/cilium/pkg/maps/neighborsmap		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/netdev	0.318s	coverage: 28.8% of statements
+ok  	github.com/cilium/cilium/pkg/maps/nodemap	0.251s	coverage: 42.6% of statements
+	github.com/cilium/cilium/pkg/maps/nodemap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/policymap	0.135s	coverage: 28.1% of statements
+	github.com/cilium/cilium/pkg/maps/ratelimitmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/signalmap		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/maps/signalmap/fake		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/srv6map	0.110s	coverage: 80.0% of statements
+ok  	github.com/cilium/cilium/pkg/maps/subnet	0.094s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/maps/timestamp	0.090s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/maps/vtep		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/mcastmanager	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/metrics	1.307s	coverage: 5.5% of statements
+ok  	github.com/cilium/cilium/pkg/metrics/features	0.098s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/metrics/features/operator	0.121s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/metrics/metric	0.016s	coverage: 0.6% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/metrics/metric/collections	0.016s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/monitor	0.119s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/monitor/agent	0.083s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/monitor/agent/consumer	[no test files]
+	github.com/cilium/cilium/pkg/monitor/agent/listener		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/monitor/api	0.060s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/monitor/format	0.093s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/pkg/monitor/notifications	[no test files]
+ok  	github.com/cilium/cilium/pkg/monitor/payload	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/mountinfo	0.030s	coverage: 24.5% of statements
+ok  	github.com/cilium/cilium/pkg/mtu	0.080s	coverage: 0.6% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/multicast	0.023s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/murmur3	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/netns	0.028s	coverage: 45.9% of statements
+ok  	github.com/cilium/cilium/pkg/node	0.412s	coverage: 14.6% of statements
+	github.com/cilium/cilium/pkg/node/addressing		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node/manager	0.143s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/node/neighbordiscovery		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/node/store	0.106s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/node/sync	0.118s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/node/types	0.086s	coverage: 1.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/nodediscovery	0.150s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/nodeipamconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/option	0.033s	coverage: 1.5% of statements
+ok  	github.com/cilium/cilium/pkg/option/resolver	0.105s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/pidfile	0.015s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy	0.106s	coverage: 0.5% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/api	0.085s	coverage: 2.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/cell	0.115s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/cookie	0.024s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/correlation	0.110s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/directory	0.135s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/groups	0.109s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/policy/groups/aws		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/k8s	0.088s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/testutils	0.075s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/policy/trafficdirection		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/policy/types	0.052s	coverage: 3.3% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/policy/utils	0.044s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/pprof	0.059s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/promise	0.035s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/proxy	0.588s	coverage: 12.7% of statements
+ok  	github.com/cilium/cilium/pkg/proxy/accesslog	0.077s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/proxy/accesslog/endpoint		coverage: 0.0% of statements
+?   	github.com/cilium/cilium/pkg/proxy/endpoint	[no test files]
+ok  	github.com/cilium/cilium/pkg/proxy/proxyports	0.130s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/proxy/types		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/rate	0.020s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/rate/metrics		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/resiliency	0.042s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/revert	0.018s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/safeio	0.025s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/safetime	0.012s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/shortener	0.028s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/signal	0.071s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/slices	0.014s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/socketlb	0.137s	coverage: 37.8% of statements
+ok  	github.com/cilium/cilium/pkg/source	0.016s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/spanstat	0.027s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/status	0.145s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/subnet	31.155s	coverage: 76.9% of statements
+	github.com/cilium/cilium/pkg/svcrouteconfig		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/testutils	0.040s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/testutils/identity	0.083s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/testutils/ipam		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/ipcache		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/mockmaps		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/netns		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/policy		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/scriptnet		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/testutils/sockets		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/time		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/trigger	0.019s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/tuple		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/types	0.024s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/u8proto		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/util		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/version	0.019s	coverage: 3.4% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/versioncheck	0.014s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/wal	0.013s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/wireguard/agent	0.733s	coverage: 56.3% of statements
+?   	github.com/cilium/cilium/pkg/wireguard/types	[no test files]
+ok  	github.com/cilium/cilium/pkg/xds/experimental/client	0.132s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ztunnel		coverage: 0.0% of statements
+	github.com/cilium/cilium/pkg/ztunnel/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/iptables	5.886s	coverage: 81.0% of statements
+	github.com/cilium/cilium/pkg/ztunnel/pb		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/reconciler	0.083s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/pkg/ztunnel/table		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/pkg/ztunnel/xds	0.117s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/pkg/ztunnel/zds	2.544s	coverage: 80.3% of statements
+	github.com/cilium/cilium/plugins/cilium-cni		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/chaining/api	0.045s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/awscni		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/azure		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/flannel		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/chaining/generic-veth		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-cni/cmd		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/plugins/cilium-cni/lib	0.031s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/plugins/cilium-cni/types	0.018s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/plugins/cilium-docker		coverage: 0.0% of statements
+	github.com/cilium/cilium/plugins/cilium-docker/driver		coverage: 0.0% of statements
+	github.com/cilium/cilium/standalone-dns-proxy		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/standalone-dns-proxy/cmd	0.106s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/client	0.117s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/standalone-dns-proxy/pkg/defaults	[no test files]
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/lookup	0.113s	coverage: 0.0% of statements [no tests to run]
+ok  	github.com/cilium/cilium/standalone-dns-proxy/pkg/messagehandler	0.105s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/standalone-dns-proxy/pkg/shell		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test	0.069s	coverage: [no statements] [no tests to run]
+	github.com/cilium/cilium/test/config		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test/controlplane	0.148s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/test/controlplane/node		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/controlplane/node/ciliumnodes		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/controlplane/suite		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/ginkgo-ext		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/test/helpers	0.107s	coverage: 0.0% of statements [no tests to run]
+?   	github.com/cilium/cilium/test/helpers/constants	[no test files]
+ok  	github.com/cilium/cilium/test/helpers/logutils	0.014s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/test/k8s		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/logger		coverage: 0.0% of statements
+	github.com/cilium/cilium/test/runtime		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/alignchecker		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/api-flaggen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/complexity-diff		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/crdcheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/crdlistgen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/dev-doctor		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/dpgen		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/tools/feature-helm-generator	0.035s	coverage: 3.6% of statements [no tests to run]
+	github.com/cilium/cilium/tools/legacyhguardcheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/licensecheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/licensegen		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/metricslint		coverage: 0.0% of statements
+ok  	github.com/cilium/cilium/tools/metricslint/pkg/analyzer	0.026s	coverage: 0.0% of statements [no tests to run]
+	github.com/cilium/cilium/tools/mount		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/slogloggercheck		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/spdxconv		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/sysctlfix		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/testowners		coverage: 0.0% of statements
+	github.com/cilium/cilium/tools/testowners/codeowners		coverage: 0.0% of statements
+FAIL
+make: *** [Makefile:105: tests-privileged-only] Error 1

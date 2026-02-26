@@ -1,0 +1,61 @@
+# 2026-02-21T18:26:52Z sync pktgen pseudo-header fix
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+Number of files: 2
+Number of files transferred: 2
+Total file size: 43254 B
+Total transferred file size: 43254 B
+Unmatched data: 10219 B
+Matched data: 33035 B
+File list size: 114 B
+File list generation time: 0.002 seconds
+File list transfer time: 0.003 seconds
+Total sent: 3555 B
+Total received: 370 B
+
+sent 3555 bytes  received 370 bytes  19044 bytes/sec
+total size is 43254  speedup is 11.02
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+Number of files: 1
+Number of files transferred: 0
+Total file size: 7881 B
+Total transferred file size: 0 B
+Unmatched data: 0 B
+Matched data: 0 B
+File list size: 81 B
+File list generation time: 0.002 seconds
+File list transfer time: 0.004 seconds
+Total sent: 97 B
+Total received: 20 B
+
+sent 97 bytes  received 20 bytes  407 bytes/sec
+total size is 7881  speedup is 67.36

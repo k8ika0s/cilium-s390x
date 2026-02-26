@@ -1,0 +1,13 @@
+[ts] 2026-02-25T20:26:24Z
+== cilium-mcvfz ==
+Cluster health:                      2/2 reachable   (2026-02-25T20:24:09Z)   (Probe interval: 1m36.566274746s)
+Name                                 IP              Node                     Endpoints
+  kdz.dev.fyre.ibm.com (localhost)   10.14.125.157   1/1                      1/1
+  zkd01.fyre.ibm.com                 10.11.59.172    1/1                      1/1
+
+== cilium-s72pd ==
+Cluster health:                    2/2 reachable   (2026-02-25T20:24:12Z)   (Probe interval: 1m36.566274746s)
+Name                               IP              Node                     Endpoints
+  zkd01.fyre.ibm.com (localhost)   10.11.59.172    1/1                      1/1
+  kdz.dev.fyre.ibm.com             10.14.125.157   1/1                      1/1
+

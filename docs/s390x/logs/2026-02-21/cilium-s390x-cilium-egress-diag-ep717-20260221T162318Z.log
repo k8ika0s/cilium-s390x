@@ -1,0 +1,348 @@
++ echo 'cilium_pod=cilium-87qxf pod=coredns-7d764666f9-gj2fg ip=10.244.0.249 cid=06eb90a1a6a5055bb3670f47cac8a09b0cd16a9cd4c05a459af7dbe6c7c594f2 pid=2619410 ep_id=717'
+cilium_pod=cilium-87qxf pod=coredns-7d764666f9-gj2fg ip=10.244.0.249 cid=06eb90a1a6a5055bb3670f47cac8a09b0cd16a9cd4c05a459af7dbe6c7c594f2 pid=2619410 ep_id=717
++ monpid=2623299
++ sleep 2
++ timeout 18 kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium monitor --type trace --type drop --from 717 --hex -vv
++ nsenter -t 2619410 -n curl -k -sS --max-time 4 https://10.96.0.1:443/version
+curl: (28) Connection timed out after 4001 milliseconds
++ true
++ nsenter -t 2619410 -n curl -k -sS --max-time 4 https://10.11.59.172:6443/version
+curl: (28) Connection timed out after 4001 milliseconds
++ true
++ nsenter -t 2619410 -n ping -c 2 -W 1 10.244.0.88
+PING 10.244.0.88 (10.244.0.88) 56(84) bytes of data.
+
+--- 10.244.0.88 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1075ms
+
++ true
++ nsenter -t 2619410 -n ping -c 2 -W 1 10.11.59.172
+PING 10.11.59.172 (10.11.59.172) 56(84) bytes of data.
+
+--- 10.11.59.172 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1068ms
+
++ true
++ wait 2623299
++ true
++ sed -n 1,320p /tmp/cilium-egress-monitor-20260221T162318Z.log
+Listening for events on 8 CPUs with 64x4096 of shared memory
+Press Ctrl-C to quit
+------------------------------------------------------------------------------
+CPU 06: MARK 0xea9cfa4f FROM 717 to-endpoint: 74 bytes (74 captured), state new, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 3c 81 9d 40 00 3f 06  a2 e6 0a f4 00 58 0a f4  |.<..@.?......X..|
+00000020  00 f9 df a8 1f 90 1f e6  69 e7 00 00 00 00 a0 02  |........i.......|
+00000030  fa f0 17 67 00 00 02 04  05 b4 04 02 08 0a 74 17  |...g..........t.|
+00000040  72 3b 00 00 00 00 01 03  03 07 00 00              |r;..........|
+------------------------------------------------------------------------------
+CPU 06: MARK 0x2e4a306b FROM 717 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 3c 00 00 40 00 40 06  23 84 0a f4 00 f9 0a f4  |.<..@.@.#.......|
+00000020  00 58 1f 90 df a8 0e 07  8d 6e 1f e6 69 e8 a0 12  |.X.......n..i...|
+00000030  fe 88 17 67 00 00 02 04  05 b4 04 02 08 0a 4a ce  |...g..........J.|
+00000040  de 06 74 17 72 3b 01 03  03 07 00 00              |..t.r;......|
+------------------------------------------------------------------------------
+CPU 06: MARK 0xea9cfa4f FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 81 9e 40 00 3f 06  a2 ed 0a f4 00 58 0a f4  |.4..@.?......X..|
+00000020  00 f9 df a8 1f 90 1f e6  69 e8 0e 07 8d 6f 80 10  |........i....o..|
+00000030  01 f6 17 5f 00 00 01 01  08 0a 74 17 72 3b 4a ce  |..._......t.r;J.|
+00000040  de 06 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 03: MARK 0xea9cfa4f FROM 717 to-endpoint: 176 bytes (128 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 a2 81 9f 40 00 3f 06  a2 7e 0a f4 00 58 0a f4  |....@.?..~...X..|
+00000020  00 f9 df a8 1f 90 1f e6  69 e8 0e 07 8d 6f 80 18  |........i....o..|
+00000030  01 f6 17 cd 00 00 01 01  08 0a 74 17 72 3c 4a ce  |..........t.r<J.|
+00000040  de 06 47 45 54 20 2f 68  65 61 6c 74 68 20 48 54  |..GET /health HT|
+00000050  54 50 2f 31 2e 31 0d 0a  48 6f 73 74 3a 20 31 30  |TP/1.1..Host: 10|
+00000060  2e 32 34 34 2e 30 2e 32  34 39 3a 38 30 38 30 0d  |.244.0.249:8080.|
+00000070  0a 55 73 65 72 2d 41 67  65 6e 74 3a 20 6b 75 62  |.User-Agent: kub|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 06: MARK 0x2e4a306b FROM 717 to-stack: 203 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 bd d6 0e 40 00 40 06  4c f4 0a f4 00 f9 0a f4  |....@.@.L.......|
+00000020  00 58 1f 90 df a8 0e 07  8d 6f 1f e6 6a 56 80 18  |.X.......o..jV..|
+00000030  01 fd 17 e8 00 00 01 01  08 0a 4a ce de 08 74 17  |..........J...t.|
+00000040  72 3c 48 54 54 50 2f 31  2e 31 20 32 30 30 20 4f  |r<HTTP/1.1 200 O|
+00000050  4b 0d 0a 44 61 74 65 3a  20 53 61 74 2c 20 32 31  |K..Date: Sat, 21|
+00000060  20 46 65 62 20 32 30 32  36 20 31 36 3a 32 33 3a  | Feb 2026 16:23:|
+00000070  31 39 20 47 4d 54 0d 0a  43 6f 6e 74 65 6e 74 2d  |19 GMT..Content-|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 06: MARK 0x2e4a306b FROM 717 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 34 d6 0f 40 00 40 06  4d 7c 0a f4 00 f9 0a f4  |.4..@.@.M|......|
+00000020  00 58 1f 90 df a8 0e 07  8d f8 1f e6 6a 56 80 11  |.X..........jV..|
+00000030  01 fd 17 5f 00 00 01 01  08 0a 4a ce de 08 74 17  |..._......J...t.|
+00000040  72 3d 00 00                                       |r=..|
+------------------------------------------------------------------------------
+CPU 03: MARK 0xea9cfa4f FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 81 a1 40 00 3f 06  a2 ea 0a f4 00 58 0a f4  |.4..@.?......X..|
+00000020  00 f9 df a8 1f 90 1f e6  6a 56 0e 07 8d f9 80 11  |........jV......|
+00000030  01 f5 17 5f 00 00 01 01  08 0a 74 17 72 3d 4a ce  |..._......t.r=J.|
+00000040  de 08 00 00                                       |....|
+time=2026-02-21T16:23:19.352147055Z level=info msg="Initializing dissection cache..."
+------------------------------------------------------------------------------
+CPU 06: MARK 0x60285bd4 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=65272 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=62906 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=55608 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 06: MARK 0xf23eedbc FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=25075 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=24517 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=44933 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 06: MARK 0xc89e390a FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=62410 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=11143 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=52475 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 07: MARK 0xa5e0a492 FROM 717 DROP: 74 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..62..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..40..] Version=4 IHL=5 TOS=0 Length=60 Id=7526 Flags=DF FragOffset=0 TTL=64 Protocol=TCP Checksum=20686 SrcIP=10.244.0.249 DstIP=9.30.183.125 Options=[] Padding=[]}
+TCP	{Contents=[..40..] Payload=[] SrcPort=57436 DstPort=6443(sun-sr-https) Seq=1881320013 Ack=0 DataOffset=10 FIN=false SYN=true RST=false PSH=false ACK=false URG=false ECE=false CWR=false NS=false Window=64860 Checksum=52406 Urgent=0 Options=[..5..] Padding=[] Multipath=false}
+------------------------------------------------------------------------------
+CPU 05: MARK 0xdefc8172 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=21170 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=41473 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=34970 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x1d9d2218 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=56060 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=59067 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=42764 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x3f37e5b6 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=32870 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=40683 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=54509 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 07: MARK 0xf555a24d FROM 717 DROP: 74 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..62..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..40..] Version=4 IHL=5 TOS=0 Length=60 Id=7527 Flags=DF FragOffset=0 TTL=64 Protocol=TCP Checksum=20685 SrcIP=10.244.0.249 DstIP=9.30.183.125 Options=[] Padding=[]}
+TCP	{Contents=[..40..] Payload=[] SrcPort=57436 DstPort=6443(sun-sr-https) Seq=1881320013 Ack=0 DataOffset=10 FIN=false SYN=true RST=false PSH=false ACK=false URG=false ECE=false CWR=false NS=false Window=64860 Checksum=52406 Urgent=0 Options=[..5..] Padding=[] Multipath=false}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x6f5fbc72 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=28953 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=33690 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=45855 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 06: MARK 0xf32b0c32 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=7279 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=42313 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=35633 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x77050519 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=59288 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=14265 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=54024 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 07: MARK 0xcb93eb7b FROM 717 DROP: 74 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..62..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..40..] Version=4 IHL=5 TOS=0 Length=60 Id=7528 Flags=DF FragOffset=0 TTL=64 Protocol=TCP Checksum=20684 SrcIP=10.244.0.249 DstIP=9.30.183.125 Options=[] Padding=[]}
+TCP	{Contents=[..40..] Payload=[] SrcPort=57436 DstPort=6443(sun-sr-https) Seq=1881320013 Ack=0 DataOffset=10 FIN=false SYN=true RST=false PSH=false ACK=false URG=false ECE=false CWR=false NS=false Window=64860 Checksum=52406 Urgent=0 Options=[..5..] Padding=[] Multipath=false}
+------------------------------------------------------------------------------
+CPU 05: MARK 0xb2204fd6 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=65117 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=63061 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=45624 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x2782043c FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=33385 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=16207 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=52513 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 05: MARK 0xf19cca49 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=13692 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=59861 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=37235 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 04: MARK 0xd2e33fd4 FROM 717 DROP: 74 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..62..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..40..] Version=4 IHL=5 TOS=0 Length=60 Id=61352 Flags=DF FragOffset=0 TTL=64 Protocol=TCP Checksum=63855 SrcIP=10.244.0.249 DstIP=10.11.59.172 Options=[] Padding=[]}
+TCP	{Contents=[..40..] Payload=[] SrcPort=56420 DstPort=6443(sun-sr-https) Seq=3879643517 Ack=0 DataOffset=10 FIN=false SYN=true RST=false PSH=false ACK=false URG=false ECE=false CWR=false NS=false Window=64860 Checksum=20946 Urgent=0 Options=[..5..] Padding=[] Multipath=false}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x888561ee FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=51293 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=11350 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=60354 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 06: MARK 0xc50cc80b FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=29206 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=20386 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=41776 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 04: MARK 0xd0bd0d92 FROM 717 DROP: 74 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..62..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..40..] Version=4 IHL=5 TOS=0 Length=60 Id=61353 Flags=DF FragOffset=0 TTL=64 Protocol=TCP Checksum=63854 SrcIP=10.244.0.249 DstIP=10.11.59.172 Options=[] Padding=[]}
+TCP	{Contents=[..40..] Payload=[] SrcPort=56420 DstPort=6443(sun-sr-https) Seq=3879643517 Ack=0 DataOffset=10 FIN=false SYN=true RST=false PSH=false ACK=false URG=false ECE=false CWR=false NS=false Window=64860 Checksum=20946 Urgent=0 Options=[..5..] Padding=[] Multipath=false}
+------------------------------------------------------------------------------
+CPU 06: MARK 0x23309ec FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=40508 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=33045 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=57414 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 02: MARK 0x58e38cf0 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=51169 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=11474 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=34106 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 02: MARK 0xa75e1816 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=26787 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=22805 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=39015 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x20fdfa74 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=15451 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=58102 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=42030 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 07: MARK 0x8563c7a FROM 717 to-endpoint: 74 bytes (74 captured), state new, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 3c 82 72 40 00 3f 06  a2 11 0a f4 00 58 0a f4  |.<.r@.?......X..|
+00000020  00 f9 98 c0 1f f5 86 e3  e4 9a 00 00 00 00 a0 02  |................|
+00000030  fa f0 17 67 00 00 02 04  05 b4 04 02 08 0a 74 17  |...g..........t.|
+00000040  91 e0 00 00 00 00 01 03  03 07 00 00              |............|
+------------------------------------------------------------------------------
+CPU 07: MARK 0x2a29c6d1 FROM 717 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 3c 00 00 40 00 40 06  23 84 0a f4 00 f9 0a f4  |.<..@.@.#.......|
+00000020  00 58 1f f5 98 c0 bf 48  ce 97 86 e3 e4 9b a0 12  |.X.....H........|
+00000030  fe 88 17 67 00 00 02 04  05 b4 04 02 08 0a 4a ce  |...g..........J.|
+00000040  fd ab 74 17 91 e0 01 03  03 07 00 00              |..t.........|
+------------------------------------------------------------------------------
+CPU 07: MARK 0x8563c7a FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 82 73 40 00 3f 06  a2 18 0a f4 00 58 0a f4  |.4.s@.?......X..|
+00000020  00 f9 98 c0 1f f5 86 e3  e4 9b bf 48 ce 98 80 10  |...........H....|
+00000030  01 f6 17 5f 00 00 01 01  08 0a 74 17 91 e0 4a ce  |..._......t...J.|
+00000040  fd ab 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 05: MARK 0x2a29c6d1 FROM 717 to-stack: 229 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 d7 0c 87 40 00 40 06  16 62 0a f4 00 f9 0a f4  |....@.@..b......|
+00000020  00 58 1f f5 98 c0 bf 48  ce 98 86 e3 e5 08 80 18  |.X.....H........|
+00000030  01 fd 18 02 00 00 01 01  08 0a 4a ce fd ac 74 17  |..........J...t.|
+00000040  91 e1 48 54 54 50 2f 31  2e 31 20 35 30 33 20 53  |..HTTP/1.1 503 S|
+00000050  65 72 76 69 63 65 20 55  6e 61 76 61 69 6c 61 62  |ervice Unavailab|
+00000060  6c 65 0d 0a 44 61 74 65  3a 20 53 61 74 2c 20 32  |le..Date: Sat, 2|
+00000070  31 20 46 65 62 20 32 30  32 36 20 31 36 3a 32 33  |1 Feb 2026 16:23|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 05: MARK 0x8563c7a FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 82 76 40 00 3f 06  a2 15 0a f4 00 58 0a f4  |.4.v@.?......X..|
+00000020  00 f9 98 c0 1f f5 86 e3  e5 08 bf 48 cf 3b 80 11  |...........H.;..|
+00000030  01 f5 17 5f 00 00 01 01  08 0a 74 17 91 e1 4a ce  |..._......t...J.|
+00000040  fd ac 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 01: MARK 0x8563c7a FROM 717 to-endpoint: 175 bytes (128 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 a1 82 74 40 00 3f 06  a1 aa 0a f4 00 58 0a f4  |...t@.?......X..|
+00000020  00 f9 98 c0 1f f5 86 e3  e4 9b bf 48 ce 98 80 18  |...........H....|
+00000030  01 f6 17 cc 00 00 01 01  08 0a 74 17 91 e1 4a ce  |..........t...J.|
+00000040  fd ab 47 45 54 20 2f 72  65 61 64 79 20 48 54 54  |..GET /ready HTT|
+00000050  50 2f 31 2e 31 0d 0a 48  6f 73 74 3a 20 31 30 2e  |P/1.1..Host: 10.|
+00000060  32 34 34 2e 30 2e 32 34  39 3a 38 31 38 31 0d 0a  |244.0.249:8181..|
+00000070  55 73 65 72 2d 41 67 65  6e 74 3a 20 6b 75 62 65  |User-Agent: kube|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 05: MARK 0x2a29c6d1 FROM 717 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 34 0c 88 40 00 40 06  17 04 0a f4 00 f9 0a f4  |.4..@.@.........|
+00000020  00 58 1f f5 98 c0 bf 48  cf 3b 86 e3 e5 09 80 11  |.X.....H.;......|
+00000030  01 fd 17 5f 00 00 01 01  08 0a 4a ce fd ac 74 17  |..._......J...t.|
+00000040  91 e1 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 05: MARK 0x8563c7a FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 82 77 40 00 3f 06  a2 14 0a f4 00 58 0a f4  |.4.w@.?......X..|
+00000020  00 f9 98 c0 1f f5 86 e3  e5 09 bf 48 cf 3c 80 10  |...........H.<..|
+00000030  01 f5 17 5f 00 00 01 01  08 0a 74 17 91 e1 4a ce  |..._......t...J.|
+00000040  fd ac 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0xc7dd1dfc FROM 717 DROP: 74 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..62..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..40..] Version=4 IHL=5 TOS=0 Length=60 Id=61354 Flags=DF FragOffset=0 TTL=64 Protocol=TCP Checksum=63853 SrcIP=10.244.0.249 DstIP=10.11.59.172 Options=[] Padding=[]}
+TCP	{Contents=[..40..] Payload=[] SrcPort=56420 DstPort=6443(sun-sr-https) Seq=3879643517 Ack=0 DataOffset=10 FIN=false SYN=true RST=false PSH=false ACK=false URG=false ECE=false CWR=false NS=false Window=64860 Checksum=20946 Urgent=0 Options=[..5..] Padding=[] Multipath=false}
+------------------------------------------------------------------------------
+CPU 01: MARK 0xdbcaca23 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=6655 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=55988 SrcIP=10.244.0.249 DstIP=10.11.48.21 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=42961 DstPort=53(domain) Length=25 Checksum=17975}
+------------------------------------------------------------------------------
+CPU 01: MARK 0x6c19a2e2 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=22949 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=26643 SrcIP=10.244.0.249 DstIP=9.30.99.253 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=49950 DstPort=53(domain) Length=25 Checksum=31026}
+------------------------------------------------------------------------------
+CPU 05: MARK 0x0 FROM 717 DROP: 98 bytes, reason Policy denied, identity 11329->host
+Ethernet	{Contents=[..14..] Payload=[..86..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..64..] Version=4 IHL=5 TOS=0 Length=84 Id=61511 Flags=DF FragOffset=0 TTL=64 Protocol=ICMPv4 Checksum=13097 SrcIP=10.244.0.249 DstIP=10.244.0.88 Options=[] Padding=[]}
+ICMPv4	{Contents=[..8..] Payload=[..56..] TypeCode=EchoRequest Checksum=57719 Id=19141 Seq=1}
+------------------------------------------------------------------------------
+CPU 07: MARK 0x63989578 FROM 717 DROP: 59 bytes, reason Policy denied, identity 11329->world
+Ethernet	{Contents=[..14..] Payload=[..46..] SrcMAC=56:87:a5:1f:de:7f DstMAC=42:8c:33:0c:b8:03 EthernetType=IPv4 Length=0}
+IPv4	{Contents=[..20..] Payload=[..25..] Version=4 IHL=5 TOS=0 Length=45 Id=28485 Flags=DF FragOffset=0 TTL=64 Protocol=UDP Checksum=45068 SrcIP=10.244.0.249 DstIP=9.30.6.100 Options=[] Padding=[]}
+UDP	{Contents=[..8..] Payload=[..17..] SrcPort=38697 DstPort=53(domain) Length=25 Checksum=7065}
+------------------------------------------------------------------------------
+CPU 03: MARK 0xa72638f0 FROM 717 to-endpoint: 74 bytes (74 captured), state new, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 3c c4 54 40 00 3f 06  60 2f 0a f4 00 58 0a f4  |.<.T@.?.`/...X..|
+00000020  00 f9 ec 3c 1f 90 1b 3b  cd 29 00 00 00 00 a0 02  |...<...;.)......|
+00000030  fa f0 17 67 00 00 02 04  05 b4 04 02 08 0a 74 17  |...g..........t.|
+00000040  99 4a 00 00 00 00 01 03  03 07 00 00              |.J..........|
+------------------------------------------------------------------------------
+CPU 03: MARK 0xa7783e6d FROM 717 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 3c 00 00 40 00 40 06  23 84 0a f4 00 f9 0a f4  |.<..@.@.#.......|
+00000020  00 58 1f 90 ec 3c 8a ca  7a 8f 1b 3b cd 2a a0 12  |.X...<..z..;.*..|
+00000030  fe 88 17 67 00 00 02 04  05 b4 04 02 08 0a 4a cf  |...g..........J.|
+00000040  05 16 74 17 99 4a 01 03  03 07 00 00              |..t..J......|
+------------------------------------------------------------------------------
+CPU 03: MARK 0xa72638f0 FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 c4 55 40 00 3f 06  60 36 0a f4 00 58 0a f4  |.4.U@.?.`6...X..|
+00000020  00 f9 ec 3c 1f 90 1b 3b  cd 2a 8a ca 7a 90 80 10  |...<...;.*..z...|
+00000030  01 f6 17 5f 00 00 01 01  08 0a 74 17 99 4b 4a cf  |..._......t..KJ.|
+00000040  05 16 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 07: MARK 0xa72638f0 FROM 717 to-endpoint: 176 bytes (128 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 a2 c4 56 40 00 3f 06  5f c7 0a f4 00 58 0a f4  |...V@.?._....X..|
+00000020  00 f9 ec 3c 1f 90 1b 3b  cd 2a 8a ca 7a 90 80 18  |...<...;.*..z...|
+00000030  01 f6 17 cd 00 00 01 01  08 0a 74 17 99 4b 4a cf  |..........t..KJ.|
+00000040  05 16 47 45 54 20 2f 68  65 61 6c 74 68 20 48 54  |..GET /health HT|
+00000050  54 50 2f 31 2e 31 0d 0a  48 6f 73 74 3a 20 31 30  |TP/1.1..Host: 10|
+00000060  2e 32 34 34 2e 30 2e 32  34 39 3a 38 30 38 30 0d  |.244.0.249:8080.|
+00000070  0a 55 73 65 72 2d 41 67  65 6e 74 3a 20 6b 75 62  |.User-Agent: kub|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 07: MARK 0xa72638f0 FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 c4 58 40 00 3f 06  60 33 0a f4 00 58 0a f4  |.4.X@.?.`3...X..|
+00000020  00 f9 ec 3c 1f 90 1b 3b  cd 98 8a ca 7b 1a 80 11  |...<...;....{...|
+00000030  01 f5 17 5f 00 00 01 01  08 0a 74 17 99 4b 4a cf  |..._......t..KJ.|
+00000040  05 16 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0xa7783e6d FROM 717 to-stack: 203 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 bd 58 5c 40 00 40 06  ca a6 0a f4 00 f9 0a f4  |..X\@.@.........|
+00000020  00 58 1f 90 ec 3c 8a ca  7a 90 1b 3b cd 98 80 18  |.X...<..z..;....|
+00000030  01 fd 17 e8 00 00 01 01  08 0a 4a cf 05 16 74 17  |..........J...t.|
+00000040  99 4b 48 54 54 50 2f 31  2e 31 20 32 30 30 20 4f  |.KHTTP/1.1 200 O|
+00000050  4b 0d 0a 44 61 74 65 3a  20 53 61 74 2c 20 32 31  |K..Date: Sat, 21|
+00000060  20 46 65 62 20 32 30 32  36 20 31 36 3a 32 33 3a  | Feb 2026 16:23:|
+00000070  32 39 20 47 4d 54 0d 0a  43 6f 6e 74 65 6e 74 2d  |29 GMT..Content-|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0xa7783e6d FROM 717 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 34 58 5d 40 00 40 06  cb 2e 0a f4 00 f9 0a f4  |.4X]@.@.........|
+00000020  00 58 1f 90 ec 3c 8a ca  7b 19 1b 3b cd 98 80 11  |.X...<..{..;....|
+00000030  01 fd 17 5f 00 00 01 01  08 0a 4a cf 05 16 74 17  |..._......J...t.|

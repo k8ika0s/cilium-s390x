@@ -1,0 +1,3 @@
+NAMESPACE     NAME              READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS        IMAGES                                               SELECTOR
+kube-system   cilium-operator   1/1     1            1           157m   cilium-operator   docker.io/cilium/operator-dev:1233512912-nogit-wip   io.cilium/app=operator,name=cilium-operator
+kube-system   coredns           2/2     2            2           159m   coredns           registry.k8s.io/coredns/coredns:v1.13.1              k8s-app=kube-dns

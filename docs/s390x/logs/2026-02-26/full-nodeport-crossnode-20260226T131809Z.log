@@ -1,0 +1,15 @@
+[INFO] 2026-02-26T13:21:04Z start nodeport-crossnode
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/cilium-s390x && NODEPORT_NAMESPACE=s390x-np-full-131809 NODEPORT_SERVICE_NODEPORT=32080 NODEPORT_RESET_NAMESPACE=true NODEPORT_KEEP_NAMESPACE=false NODEPORT_TIMEOUT_SECONDS=300 ./test/s390x/nodeport_crossnode.sh
+[2026-02-26T13:21:04Z] node_a=kdz.dev.fyre.ibm.com node_b=zkd01.fyre.ibm.com namespace=s390x-np-full-131809
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+[2026-02-26T13:21:11Z] node_a_ip=10.14.125.157 node_b_ip=10.11.59.172 nodeport=32080 cluster_ip=10.101.251.76
+[endpoints] 10.244.0.202 10.244.1.103
+[PASS] pod-a-to-node-b-nodeport
+[PASS] pod-b-to-node-a-nodeport
+[PASS] hostnet-a-to-node-b-nodeport
+[PASS] hostnet-b-to-node-a-nodeport
+[PASS] pod-a-to-clusterip
+[PASS] pod-b-to-clusterip
+nodeport cross-node test passed
+[INFO] 2026-02-26T13:21:14Z end rc=0

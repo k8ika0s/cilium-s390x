@@ -1,0 +1,5 @@
+[START] 2026-02-21T16:09:14Z /root/work/logs/cilium-s390x-cilium-be-macfix-build-direct-20260221T160914Z.log
+[1/6] STEP 1/1: FROM quay.io/cilium/cilium-llvm:19.1.7-1769028416-0a7185e@sha256:48ce0bbdf57b21866db310f364f2e0a2552a19ccc85d709d76690a6aa6338f06 AS llvm-dist
+Trying to pull quay.io/cilium/cilium-llvm@sha256:48ce0bbdf57b21866db310f364f2e0a2552a19ccc85d709d76690a6aa6338f06...
+Error: creating build container: unable to copy from source docker://quay.io/cilium/cilium-llvm@sha256:48ce0bbdf57b21866db310f364f2e0a2552a19ccc85d709d76690a6aa6338f06: choosing an image from manifest list docker://quay.io/cilium/cilium-llvm@sha256:48ce0bbdf57b21866db310f364f2e0a2552a19ccc85d709d76690a6aa6338f06: no image found in manifest list for architecture "s390x", variant "", OS "linux"
+[END] 2026-02-21T16:09:15Z rc=125

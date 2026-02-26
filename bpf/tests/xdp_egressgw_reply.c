@@ -102,7 +102,7 @@ SETUP("xdp", "xdp_egressgw_reply")
 int egressgw_reply_setup(struct __ctx_buff *ctx)
 {
 	/* install EgressGW policy for the connection: */
-	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24, GATEWAY_NODE_IP, 0);
+	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24, GATEWAY_NODE_IP, 0);
 
 	/* install RevSNAT entry */
 	struct ipv4_ct_tuple snat_tuple = {
@@ -122,7 +122,7 @@ int egressgw_reply_setup(struct __ctx_buff *ctx)
 	map_update_elem(&cilium_snat_v4_external, &snat_tuple, &snat_entry, BPF_ANY);
 
 	/* install ipcache entry for the CLIENT_IP: */
-	ipcache_v4_add_entry(CLIENT_IP, 0, 0, CLIENT_NODE_IP, 0);
+	ipcache_v4_add_entry(CLIENT_IP, 0, CLIENT_IDENTITY, CLIENT_NODE_IP, 0);
 
 	return xdp_receive_packet(ctx);
 }
@@ -222,7 +222,7 @@ int egressgw_reply_check(__maybe_unused const struct __ctx_buff *ctx)
 	if (inner_l4->dest != client_port(TEST_XDP_REPLY))
 		test_fatal("innerDstPort hasn't been revNATed to client port");
 
-	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24);
+	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24);
 
 	test_finish();
 }

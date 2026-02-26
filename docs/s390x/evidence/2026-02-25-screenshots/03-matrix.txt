@@ -1,0 +1,30 @@
+[ts] 2026-02-25T20:26:59Z
+[2026-02-25T20:26:59Z] node_a=kdz.dev.fyre.ibm.com node_b=zkd01.fyre.ibm.com namespace=s390x-proof-matrix
+[2026-02-25T20:26:59Z] Resetting namespace s390x-proof-matrix
+[2026-02-25T20:27:00Z] Applying matrix pods/services
+[2026-02-25T20:27:01Z] Waiting for matrix pods
+[2026-02-25T20:27:03Z] server_a=10.244.0.170 server_b=10.244.1.9 svc_a=10.98.154.162 svc_b=10.110.250.8
+[2026-02-25T20:27:03Z] check=same-node-a client=client-a target=10.244.0.170:8080
+[PASS] same-node-a
+[2026-02-25T20:27:03Z] check=same-node-b client=client-b target=10.244.1.9:8080
+[PASS] same-node-b
+[2026-02-25T20:27:04Z] check=cross-a-to-b client=client-a target=10.244.1.9:8080
+[PASS] cross-a-to-b
+[2026-02-25T20:27:04Z] check=cross-b-to-a client=client-b target=10.244.0.170:8080
+[PASS] cross-b-to-a
+[2026-02-25T20:27:05Z] check=service-a-to-b client=client-a target=10.110.250.8:8080
+[PASS] service-a-to-b
+[2026-02-25T20:27:05Z] check=service-b-to-a client=client-b target=10.98.154.162:8080
+[PASS] service-b-to-a
+[2026-02-25T20:27:05Z] cilium-health snapshot
+== pod/cilium-mcvfz
+Cluster health:                      2/2 reachable   (2026-02-25T20:25:45Z)   (Probe interval: 1m36.566274746s)
+Name                                 IP              Node                     Endpoints
+  kdz.dev.fyre.ibm.com (localhost)   10.14.125.157   1/1                      1/1
+  zkd01.fyre.ibm.com                 10.11.59.172    1/1                      1/1
+== pod/cilium-s72pd
+Cluster health:                    2/2 reachable   (2026-02-25T20:25:49Z)   (Probe interval: 1m36.566274746s)
+Name                               IP              Node                     Endpoints
+  zkd01.fyre.ibm.com (localhost)   10.11.59.172    1/1                      1/1
+  kdz.dev.fyre.ibm.com             10.14.125.157   1/1                      1/1
+multinode matrix passed

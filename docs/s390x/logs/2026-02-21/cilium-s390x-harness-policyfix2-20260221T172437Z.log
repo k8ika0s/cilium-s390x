@@ -1,0 +1,43 @@
+Deploying cilium into kube-system from ./install/kubernetes/cilium
+Release "cilium" has been upgraded. Happy Helming!
+NAME: cilium
+LAST DEPLOYED: Sat Feb 21 09:24:38 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 13
+TEST SUITE: None
+NOTES:
+You have successfully installed Cilium.
+
+Your release version is 1.20.0-dev.
+
+For any further help, visit https://docs.cilium.io/en/v1.20/gettinghelp
+Waiting for Cilium workloads
+Waiting for daemon set "cilium" rollout to finish: 0 of 1 updated pods are available...
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Deployment completed
+Cluster nodes
+NAME                 STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+zkd01.fyre.ibm.com   Ready    control-plane   149m   v1.35.1   10.11.59.172   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+Waiting for node readiness
+node/zkd01.fyre.ibm.com condition met
+Waiting for Cilium DaemonSets/Deployments
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Cilium pod status
+NAME           READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-qcpq4   1/1     Running   0          13s   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                 READY   STATUS    RESTARTS   AGE    IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-envoy-rz5ch   1/1     Running   0          147m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                               READY   STATUS    RESTARTS   AGE    IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-operator-7d796b74f8-bmc6k   1/1     Running   0          147m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+Smoke checks failed: kube-dns-endpoints
+----- kube-dns-endpoints -----
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+kube-dns service has no ready endpoints
+Skipping policy integration because smoke checks failed
+Artifacts collected in /tmp/cilium-s390x-artifacts-20260221T172510Z
+Smoke checks failed; artifacts still collected

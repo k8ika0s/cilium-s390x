@@ -109,30 +109,30 @@ trace_id_from_ip4(struct __ctx_buff *ctx, __s64 *value,
 			return TRACE_ID_INVALID;
 
 		switch (optlen) {
-			case OPT16_LEN: {
-				__s16 temp;
+		case OPT16_LEN: {
+			__u16 temp;
 
-				if (ctx_load_bytes(ctx, offset + 2, &temp, sizeof(temp)) < 0)
-					return TRACE_ID_ERROR;
-				*value = bpf_ntohs(temp);
-				return 0;
-			}
-			case OPT32_LEN: {
-				__s32 temp;
+			if (ctx_load_bytes(ctx, offset + 2, &temp, sizeof(temp)) < 0)
+				return TRACE_ID_ERROR;
+			*value = (__s64)bpf_ntohs(temp);
+			return 0;
+		}
+		case OPT32_LEN: {
+			__u32 temp;
 
-				if (ctx_load_bytes(ctx, offset + 2, &temp, sizeof(temp)) < 0)
-					return TRACE_ID_ERROR;
-				*value = bpf_ntohl(temp);
-				return 0;
-			}
-			case OPT64_LEN: {
-				__s64 temp;
+			if (ctx_load_bytes(ctx, offset + 2, &temp, sizeof(temp)) < 0)
+				return TRACE_ID_ERROR;
+			*value = (__s64)bpf_ntohl(temp);
+			return 0;
+		}
+		case OPT64_LEN: {
+			__u64 temp;
 
-				if (ctx_load_bytes(ctx, offset + 2, &temp, sizeof(temp)) < 0)
-					return TRACE_ID_ERROR;
-				*value = __bpf_be64_to_cpu(temp);
-				return 0;
-			}
+			if (ctx_load_bytes(ctx, offset + 2, &temp, sizeof(temp)) < 0)
+				return TRACE_ID_ERROR;
+			*value = (__s64)__bpf_be64_to_cpu(temp);
+			return 0;
+		}
 		default:
 			return TRACE_ID_UNSUPPORTED_LENGTH_ERROR;
 		}

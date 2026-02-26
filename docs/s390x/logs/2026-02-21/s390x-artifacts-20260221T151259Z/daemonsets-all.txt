@@ -1,0 +1,4 @@
+NAMESPACE     NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE   CONTAINERS     IMAGES                                                                SELECTOR
+kube-system   cilium         1         1         1       1            1           kubernetes.io/os=linux   22m   cilium-agent   docker.io/cilium/cilium-dev:1233512912-nogit-wip                      k8s-app=cilium
+kube-system   cilium-envoy   1         1         1       1            1           kubernetes.io/os=linux   22m   cilium-envoy   quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x   k8s-app=cilium-envoy
+kube-system   kube-proxy     1         1         1       1            1           kubernetes.io/os=linux   24m   kube-proxy     registry.k8s.io/kube-proxy:v1.35.1                                    k8s-app=kube-proxy

@@ -60,15 +60,20 @@ static __always_inline int ipv4_dec_ttl(struct __ctx_buff *ctx, int off,
 					struct iphdr *ip4)
 {
 	__u8 new_ttl, ttl = ip4->ttl;
+	__be16 old_ttl_proto, new_ttl_proto;
 
 	if (ttl <= 1)
 		return DROP_TTL_EXCEEDED;
 
+	/* Keep checksum updates endian-safe by using the full 16-bit TTL+Proto
+	 * header field that changed, not just the 8-bit TTL value.
+	 */
+	old_ttl_proto = *(__be16 *)&ip4->ttl;
 	new_ttl = ttl - 1;
 	ip4->ttl = new_ttl;
+	new_ttl_proto = *(__be16 *)&ip4->ttl;
 
-	/* l3_csum_replace() takes at min 2 bytes, zero extended. */
-	if (ipv4_csum_update_by_value(ctx, off, ttl, new_ttl, 2) < 0)
+	if (ipv4_csum_update_by_value(ctx, off, old_ttl_proto, new_ttl_proto, 2) < 0)
 		return DROP_CSUM_L3;
 
 	return 0;

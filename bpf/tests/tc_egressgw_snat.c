@@ -96,8 +96,9 @@ int egressgw_snat1_pktgen(struct __ctx_buff *ctx)
 SETUP("tc", "tc_egressgw_snat1")
 int egressgw_snat1_setup(struct __ctx_buff *ctx)
 {
-	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24,
+	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24,
 				  GATEWAY_NODE_IP, EGRESS_IP);
+	ipcache_v4_add_entry(CLIENT_IP, 0, CLIENT_IDENTITY, CLIENT_NODE_IP, 0);
 	ipcache_v4_add_entry(EGRESS_IP, 0, HOST_ID, 0, 0);
 
 	set_identity_mark(ctx, CLIENT_IDENTITY, MARK_MAGIC_EGW_DONE);
@@ -172,7 +173,7 @@ int egressgw_snat2_check(struct __ctx_buff *ctx)
 			.status_code = CTX_ACT_OK
 		});
 
-	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0Xffffff, 24);
+	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24);
 
 	return ret;
 }
@@ -192,7 +193,7 @@ int egressgw_tuple_collision1_pktgen(struct __ctx_buff *ctx)
 SETUP("tc", "tc_egressgw_tuple_collision1")
 int egressgw_tuple_collision1_setup(struct __ctx_buff *ctx)
 {
-	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24,
+	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24,
 				  GATEWAY_NODE_IP, EGRESS_IP);
 	ipcache_v4_add_entry(EGRESS_IP, 0, HOST_ID, 0, 0);
 
@@ -210,7 +211,7 @@ int egressgw_tuple_collision1_check(const struct __ctx_buff *ctx)
 			.status_code = CTX_ACT_OK
 		});
 
-	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0Xffffff, 24);
+	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24);
 
 	return ret;
 }
@@ -226,7 +227,7 @@ int egressgw_tuple_collision2_pktgen(struct __ctx_buff *ctx)
 SETUP("tc", "tc_egressgw_tuple_collision2")
 int egressgw_tuple_collision2_setup(struct __ctx_buff *ctx)
 {
-	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24,
+	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24,
 				  GATEWAY_NODE_IP, EGRESS_IP3);
 	ipcache_v4_add_entry(EGRESS_IP3, 0, HOST_ID, 0, 0);
 
@@ -279,7 +280,7 @@ int egressgw_tuple_collision2_reply_check(const struct __ctx_buff *ctx)
 			.status_code = CTX_ACT_REDIRECT,
 		});
 
-	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0Xffffff, 24);
+	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24);
 
 	return ret;
 }
@@ -299,7 +300,7 @@ SETUP("tc", "tc_egressgw_skip_excluded_cidr_snat")
 int egressgw_skip_excluded_cidr_snat_setup(struct __ctx_buff *ctx)
 {
 
-	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24, GATEWAY_NODE_IP, 0);
+	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24, GATEWAY_NODE_IP, 0);
 	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP, 32, EGRESS_GATEWAY_EXCLUDED_CIDR, 0);
 
 	set_identity_mark(ctx, CLIENT_IDENTITY, MARK_MAGIC_EGW_DONE);
@@ -377,8 +378,9 @@ int egressgw_fib_redirect_pktgen(struct __ctx_buff *ctx)
 SETUP("tc", "tc_egressgw_fib_redirect")
 int egressgw_fib_redirect_setup(struct __ctx_buff *ctx)
 {
-	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24,
+	add_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24,
 				  GATEWAY_NODE_IP, EGRESS_IP2);
+	ipcache_v4_add_entry(CLIENT_IP, 0, CLIENT_IDENTITY, CLIENT_NODE_IP, 0);
 	ipcache_v4_add_entry(EGRESS_IP2, 0, HOST_ID, 0, 0);
 
 	set_identity_mark(ctx, CLIENT_IDENTITY, MARK_MAGIC_EGW_DONE);
@@ -396,7 +398,7 @@ int egressgw_fib_redirect_check(const struct __ctx_buff *ctx __maybe_unused)
 			.status_code = CTX_ACT_REDIRECT,
 		});
 
-	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & 0xffffff, 24);
+	del_egressgw_policy_entry(CLIENT_IP, EXTERNAL_SVC_IP & bpf_htonl(0xffffff00), 24);
 
 	return ret;
 }

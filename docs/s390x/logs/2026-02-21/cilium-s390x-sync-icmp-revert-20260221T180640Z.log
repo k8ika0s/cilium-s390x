@@ -1,0 +1,29 @@
+# 2026-02-21T18:06:40Z targeted sync
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+Number of files: 7
+Number of files transferred: 7
+Total file size: 50367 B
+Total transferred file size: 50367 B
+Unmatched data: 50367 B
+Matched data: 0 B
+File list size: 343 B
+Total sent: 16765 B
+Total received: 174 B
+
+sent 16765 bytes  received 174 bytes  43533 bytes/sec
+total size is 50367  speedup is 2.97

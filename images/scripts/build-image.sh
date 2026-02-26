@@ -33,6 +33,16 @@ shift 5
 
 registries=("${@}")
 
+buildx_version="$(docker buildx version 2>/dev/null || true)"
+buildx_is_podman=false
+if grep -qi "buildah" <<<"${buildx_version}"; then
+  buildx_is_podman=true
+fi
+
+if [ "${buildx_is_podman}" = "true" ] && [ "${output}" = "type=image" ]; then
+  output=""
+fi
+
 if [ "${with_root_context}" = "false" ] ; then
   image_tag="$("${script_dir}/make-image-tag.sh" "${image_dir}")"
 else
@@ -94,23 +104,77 @@ fi
 do_test="${TEST:-false}"
 
 run_buildx() {
+  local build_args
+  local release_target_args=()
+  local test_target_args=()
+  local dockerfile
+  local has_release_stage=false
+  local has_test_stage=false
+  local build_output_args=()
+  local build_arg_name
+  local build_arg_value
+  dockerfile="${image_dir}/Dockerfile"
+
+  # Not all image Dockerfiles define explicit "release"/"test" stages.
+  if grep -Eiq '^[[:space:]]*FROM[[:space:]].*[[:space:]]AS[[:space:]]+release([[:space:]]|$)' "${dockerfile}"; then
+    has_release_stage=true
+  fi
+  if grep -Eiq '^[[:space:]]*FROM[[:space:]].*[[:space:]]AS[[:space:]]+test([[:space:]]|$)' "${dockerfile}"; then
+    has_test_stage=true
+  fi
+
   build_args=(
     "--platform=${platform}"
-    "--builder=${builder}"
-    "--target=release"
-    "--file=${image_dir}/Dockerfile"
+    "--file=${dockerfile}"
   )
+  if [ "${has_release_stage}" = "true" ] ; then
+    release_target_args+=("--target=release")
+  fi
+  if [ "${has_test_stage}" = "true" ] ; then
+    test_target_args+=("--target=test")
+  fi
+  if [ -n "${builder}" ] ; then
+    build_args+=("--builder=${builder}")
+  fi
+  if [ -n "${output}" ] ; then
+    build_output_args+=("--output=${output}")
+  fi
+  for build_arg_name in \
+    GOLANG_IMAGE \
+    UBUNTU_IMAGE \
+    ALPINE_IMAGE \
+    BASE_IMAGE \
+    COMPILERS_IMAGE \
+    TESTER_IMAGE \
+    OPERATOR_VARIANT \
+    MODIFIERS \
+    CILIUM_BUILDER_IMAGE \
+    CILIUM_RUNTIME_IMAGE \
+    CILIUM_ENVOY_IMAGE \
+    CILIUM_LLVM_IMAGE \
+    CILIUM_BPFTOOL_IMAGE \
+    CILIUM_IPTABLES_IMAGE
+  do
+    build_arg_value="${!build_arg_name:-}"
+    if [ -n "${build_arg_value}" ] ; then
+      build_args+=("--build-arg=${build_arg_name}=${build_arg_value}")
+    fi
+  done
   if [ "${with_root_context}" = "false" ] ; then
     build_args+=("${image_dir}")
   else
     build_args+=("${root_dir}")
   fi
   if [ "${do_test}" = "true" ] ; then
-    if ! docker buildx build --target=test "${build_args[@]}" ; then
-      exit 1
+    if [ "${has_test_stage}" = "true" ] ; then
+      if ! docker buildx build "${test_target_args[@]}" "${build_args[@]}" ; then
+        exit 1
+      fi
+    else
+      echo "skipping test target for ${dockerfile}: stage 'test' not found"
     fi
   fi
-  docker buildx build --output="${output}" "${tag_args[@]}" "${build_args[@]}"
+  docker buildx build "${build_output_args[@]}" "${tag_args[@]}" "${release_target_args[@]}" "${build_args[@]}"
 }
 
 if [ "${do_build}" = "true" ] ; then

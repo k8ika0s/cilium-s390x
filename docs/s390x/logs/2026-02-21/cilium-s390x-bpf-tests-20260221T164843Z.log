@@ -1,0 +1,8 @@
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+Traceback (most recent call last):
+  File "/root/work/cilium-s390x/bpf/tests/scapy/./parser.py", line 9, in <module>
+    import jinja2
+ModuleNotFoundError: No module named 'jinja2'
+make: *** [Makefile:44: /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.stamp] Error 1
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'

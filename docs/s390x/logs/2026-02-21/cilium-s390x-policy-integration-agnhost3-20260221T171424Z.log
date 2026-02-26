@@ -1,0 +1,18 @@
+TS=20260221T171424Z
+NS=s390x-validate
+namespace/s390x-validate created
+pod/server created
+pod/client created
+pod/server condition met
+pod/client condition met
+SERVER_IP=10.244.0.186
+Baseline connectivity (should succeed)
+ciliumnetworkpolicy.cilium.io/allow-server-from-granted created
+Connectivity without access label (should fail)
+TIMEOUT
+command terminated with exit code 1
+Expected deny observed without access label
+pod/client labeled
+Connectivity with access label (should succeed)
+TIMEOUT
+command terminated with exit code 1

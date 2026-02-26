@@ -1,0 +1,216 @@
+[START] 2026-02-21T15:48:43Z /root/work/logs/cilium-s390x-cilium-be-ttlfix-r2-validate-20260221T154843Z.log
+--- smoke ---
+Cluster nodes
+NAME                 STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                              KERNEL-VERSION                CONTAINER-RUNTIME
+zkd01.fyre.ibm.com   Ready    control-plane   53m   v1.35.1   10.11.59.172   <none>        Red Hat Enterprise Linux 9.6 (Plow)   5.14.0-570.62.1.el9_6.s390x   containerd://1.7.27
+Waiting for node readiness
+node/zkd01.fyre.ibm.com condition met
+Waiting for Cilium DaemonSets/Deployments
+daemon set "cilium" successfully rolled out
+daemon set "cilium-envoy" successfully rolled out
+deployment "cilium-operator" successfully rolled out
+Cilium pod status
+NAME           READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-cgkc4   1/1     Running   0          31s   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                 READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-envoy-rz5ch   1/1     Running   0          51m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+NAME                               READY   STATUS    RESTARTS   AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-operator-7d796b74f8-bmc6k   1/1     Running   0          51m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+Smoke checks failed: cluster-health kube-dns-endpoints coredns-rollout host-to-pod-health
+----- cluster-health -----
+cluster health has zero reachable endpoints
+----- kube-dns-endpoints -----
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+kube-dns service has no ready endpoints
+----- coredns-rollout -----
+error: deployment "coredns" exceeded its progress deadline
+----- host-to-pod-health -----
+curl: (28) Connection timed out after 3001 milliseconds
+--- cilium status ---
+KVStore:                Disabled   
+Kubernetes:             Ok         1.35 (v1.35.1) [linux/s390x]
+Kubernetes APIs:        ["cilium/v2::CiliumCIDRGroup", "cilium/v2::CiliumClusterwideNetworkPolicy", "cilium/v2::CiliumEndpoint", "cilium/v2::CiliumNetworkPolicy", "cilium/v2::CiliumNode", "core/v1::Pods", "networking.k8s.io/v1::NetworkPolicy"]
+KubeProxyReplacement:   False   
+Host firewall:          Disabled
+SRv6:                   Disabled
+CNI Chaining:           none
+CNI Config file:        successfully wrote CNI configuration file to /host/etc/cni/net.d/05-cilium.conflist
+Cilium:                 Ok    (v-)
+NodeMonitor:            Disabled
+Cilium health daemon:   Ok   
+IPAM:                   IPv4: 4/254 allocated from 10.244.0.0/24, 
+Allocated addresses:
+  10.244.0.108 (kube-system/coredns-7d764666f9-hsmgg [restored])
+  10.244.0.249 (kube-system/coredns-7d764666f9-gj2fg [restored])
+  10.244.0.29 (health)
+  10.244.0.88 (router)
+IPv4 BIG TCP:           Disabled
+IPv6 BIG TCP:           Disabled
+BandwidthManager:       Disabled
+Routing:                Network: Tunnel [vxlan]   Host: Legacy
+Attach Mode:            TCX
+Device Mode:            veth
+Masquerading:           IPTables [IPv4: Enabled, IPv6: Disabled]
+Clock Source for BPF:   ktime
+Controller Status:      26/26 healthy
+  Name                                                  Last success   Last error   Count   Message
+  cilium-health-ep                                      25s ago        never        0       no error   
+  ct-map-pressure                                       22s ago        never        0       no error   
+  endpoint-1648-regeneration-recovery                   never          never        0       no error   
+  endpoint-717-regeneration-recovery                    never          never        0       no error   
+  endpoint-766-regeneration-recovery                    never          never        0       no error   
+  endpoint-928-regeneration-recovery                    never          never        0       no error   
+  endpoint-gc                                           22s ago        never        0       no error   
+  endpoint-periodic-regeneration                        22s ago        never        0       no error   
+  ipcache-inject-labels                                 25s ago        never        0       no error   
+  k8s-heartbeat                                         26s ago        never        0       no error   
+  resolve-identity-928                                  25s ago        never        0       no error   
+  resolve-labels-/                                      25s ago        never        0       no error   
+  resolve-labels-kube-system/coredns-7d764666f9-gj2fg   22s ago        never        0       no error   
+  resolve-labels-kube-system/coredns-7d764666f9-hsmgg   22s ago        never        0       no error   
+  restoring-ep-identity (1648)                          26s ago        never        0       no error   
+  restoring-ep-identity (717)                           26s ago        never        0       no error   
+  restoring-ep-identity (766)                           26s ago        never        0       no error   
+  sync-policymap-1648                                   22s ago        never        0       no error   
+  sync-policymap-717                                    22s ago        never        0       no error   
+  sync-policymap-766                                    24s ago        never        0       no error   
+  sync-policymap-928                                    22s ago        never        0       no error   
+  sync-to-k8s-ciliumendpoint (1648)                     6s ago         never        0       no error   
+  sync-to-k8s-ciliumendpoint (717)                      6s ago         never        0       no error   
+  waiting-initial-global-identities-ep (1648)           26s ago        never        0       no error   
+  waiting-initial-global-identities-ep (717)            26s ago        never        0       no error   
+  write-cni-file                                        26s ago        never        0       no error   
+Proxy Status:            OK, ip 10.244.0.88, 0 redirects active on ports 10000-20000, Envoy: external
+Global Identity Range:   min 256, max 65535
+Hubble:                  Disabled   Metrics: Disabled
+KubeProxyReplacement Details:
+  Status:               False
+  Socket LB:            Disabled
+  Socket LB Tracing:    Disabled
+  Socket LB Coverage:   Full
+  Session Affinity:     Enabled
+  NAT46/64 Support:     Disabled
+  Services:
+  - ClusterIP:      Enabled
+  - NodePort:       Disabled 
+  - LoadBalancer:   Disabled 
+  - externalIPs:    Disabled 
+  - HostPort:       Disabled
+  Annotations:      (n/a)
+BPF Maps:   dynamic sizing: on (ratio: 0.002500)
+  Name                          Size
+  Auth                          524288
+  Non-TCP connection tracking   72764
+  TCP connection tracking       145529
+  Endpoints                     65535
+  IP cache                      512000
+  IPv4 masquerading agent       16384
+  IPv6 masquerading agent       16384
+  IPv4 fragmentation            8192
+  IPv4 service                  65536
+  IPv6 service                  65536
+  IPv4 service backend          65536
+  IPv6 service backend          65536
+  IPv4 service reverse NAT      65536
+  IPv6 service reverse NAT      65536
+  Metrics                       1024
+  Ratelimit metrics             64
+  NAT                           145529
+  Neighbor table                145529
+  Endpoint policy               16384
+  Policy stats                  65536
+  Session affinity              65536
+  Sock reverse NAT              72764
+Encryption:       Disabled        
+Cluster health:   0/0 reachable   (2026-02-21T15:48:24Z)   (Probe interval: 0s)
+Name              IP              Node                     Endpoints
+Modules Health:                   agent
+                                  ├── controlplane
+                                  │   ├── agent-infra-endpoints
+                                  │   │   └── job-init-host-endpoint                              [STOPPED] Start initialization (26s, x1)
+                                  │   ├── bgp-control-plane
+                                  │   │   ├── observer-job-default-gateway-route-change-tracker      [OK] Primed (26s, x1)
+                                  │   │   └── observer-job-device-change-device-change-tracker      [OK] Primed (26s, x1)
+                                  │   ├── cilium-agent-dynamic-config
+                                  │   │   └── job-k8s-reflector-cilium-configs-cm-cilium-config-kube-system      [OK] 143 upserted, 0 deleted, 143 total objects (26s, x1)
+                                  │   ├── cilium-health
+                                  │   │   └── job-init                                            [STOPPED] Start initialization (26s, x1)
+                                  │   ├── ciliumenvoyconfig
+                                  │   │   ├── job-node-labels                                     [OK] Running (26s, x1)
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (26s, x2)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (26s, x1)
+                                  │   ├── clustermesh
+                                  │   │   └── job-clustermesh-nodemanager-notifier                [STOPPED] Running (26s, x1)
+                                  │   ├── config-drift-checker
+                                  │   │   └── job-drift-checker                                   [OK] Running (26s, x1)
+                                  │   ├── daemonconfig
+                                  │   │   └── timer-job-validate-unchanged-daemon-config          [OK] Primed (26s, x1)
+                                  │   ├── dynamic-lifecycle-manager
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (26s, x2)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (26s, x1)
+                                  │   ├── enabled-features
+                                  │   │   └── job-update-config-metric                            [STOPPED] Waiting for agent config (26s, x1)
+                                  │   ├── endpoint-api
+                                  │   │   ├── job-cni-deletion-queue                              [STOPPED] Running (26s, x1)
+                                  │   │   └── job-unlock-lockfile                                 [STOPPED] Running (26s, x1)
+                                  │   ├── endpoint-manager
+                                  │   │   ├── cilium-endpoint-1648 (kube-system/coredns-7d764666f9-hsmgg)
+                                  │   │   │   ├── cep-k8s-sync                                    [OK] sync-to-k8s-ciliumendpoint (1648) (6s, x3)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (22s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-1648 (22s, x1)
+                                  │   │   ├── cilium-endpoint-717 (kube-system/coredns-7d764666f9-gj2fg)
+                                  │   │   │   ├── cep-k8s-sync                                    [OK] sync-to-k8s-ciliumendpoint (717) (6s, x3)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (22s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-717 (22s, x1)
+                                  │   │   ├── cilium-endpoint-766 (/)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (22s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-766 (24s, x1)
+                                  │   │   ├── cilium-endpoint-928 (/)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (22s, x2)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-928 (22s, x1)
+                                  │   │   ├── endpoint-gc                                         [OK] endpoint-gc (22s, x1)
+                                  │   │   ├── job-init-periodic-endpoint-controllers              [STOPPED] Running (26s, x1)
+                                  │   │   └── job-namespace-updater                               [OK] Running (26s, x1)
+                                  │   ├── endpoint-restore
+                                  │   │   └── job-finish-endpoint-restore                         [STOPPED] Regenerating restored endpoints (26s, x1)
+                                  │   ├── envoy-proxy
+                                  │   │   ├── job-accesslog-server                                [OK] Running (26s, x1)
+                                  │   │   ├── job-xds-server                                      [OK] Running (26s, x1)
+                                  │   │   ├── observer-job-k8s-secrets-resource-events-cilium-secrets      [OK] Primed (26s, x1)
+--- endpoint map ---
+ENDPOINT   POLICY (ingress)   POLICY (egress)   IDENTITY   LABELS (source:key[=value])                                                  IPv6   IPv4           STATUS   
+           ENFORCEMENT        ENFORCEMENT                                                                                                                     
+717        Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system          10.244.0.249   ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                       
+766        Disabled           Disabled          1          k8s:node-role.kubernetes.io/control-plane                                                          ready   
+                                                           k8s:node.kubernetes.io/exclude-from-external-load-balancers                                                
+                                                           reserved:host                                                                                              
+928        Disabled           Disabled          4          reserved:health                                                                     10.244.0.29    ready   
+1648       Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system          10.244.0.108   ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                       
+--- probe curls ---
+== 10.244.0.29
+*   Trying 10.244.0.29:8080...
+== 10.244.0.108
+*   Trying 10.244.0.108:8080...
+== 10.244.0.249
+*   Trying 10.244.0.249:8080...
+--- tcpdump ---
+if=lxcb3659d9ea62e
+dropped privs to tcpdump
+tcpdump: listening on lxcb3659d9ea62e, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+07:48:59.765680 00:00:67:7a:6b:85 > 00:00:be:ae:00:4a, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 63, id 6324, offset 0, flags [DF], proto TCP (6), length 60)
+    10.244.0.88.37084 > 10.244.0.108.8080: Flags [S], cksum 0x9ea6 (correct), seq 3755918148, win 64240, options [mss 1460,sackOK,TS val 3962525693 ecr 0,nop,wscale 7], length 0
+07:49:00.779879 00:00:67:7a:6b:85 > 00:00:be:ae:00:4a, ethertype IPv4 (0x0800), length 74: (tos 0x0, ttl 63, id 6325, offset 0, flags [DF], proto TCP (6), length 60)
+    10.244.0.88.37084 > 10.244.0.108.8080: Flags [S], cksum 0x9aaf (correct), seq 3755918148, win 64240, options [mss 1460,sackOK,TS val 3962526708 ecr 0,nop,wscale 7], length 0
+
+2 packets captured
+2 packets received by filter
+0 packets dropped by kernel
+[END] 2026-02-21T15:49:07Z

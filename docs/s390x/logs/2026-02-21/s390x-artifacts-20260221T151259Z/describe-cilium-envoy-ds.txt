@@ -1,0 +1,71 @@
+Name:           cilium-envoy
+Namespace:      kube-system
+Selector:       k8s-app=cilium-envoy
+Node-Selector:  kubernetes.io/os=linux
+Labels:         app.kubernetes.io/managed-by=Helm
+                app.kubernetes.io/name=cilium-envoy
+                app.kubernetes.io/part-of=cilium
+                k8s-app=cilium-envoy
+                name=cilium-envoy
+Annotations:    deprecated.daemonset.template.generation: 1
+                meta.helm.sh/release-name: cilium
+                meta.helm.sh/release-namespace: kube-system
+Desired Number of Nodes Scheduled: 1
+Current Number of Nodes Scheduled: 1
+Number of Nodes Scheduled with Up-to-date Pods: 1
+Number of Nodes Scheduled with Available Pods: 1
+Number of Nodes Misscheduled: 0
+Pods Status:  1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:           app.kubernetes.io/name=cilium-envoy
+                    app.kubernetes.io/part-of=cilium
+                    k8s-app=cilium-envoy
+                    name=cilium-envoy
+  Service Account:  cilium-envoy
+  Containers:
+   cilium-envoy:
+    Image:      quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x
+    Port:       9964/TCP (envoy-metrics)
+    Host Port:  9964/TCP (envoy-metrics)
+    Command:
+      /usr/bin/cilium-envoy-starter
+    Args:
+      --
+      -c /var/run/cilium/envoy/bootstrap-config.json
+      --base-id 0
+      --log-level info
+    Liveness:   http-get http://127.0.0.1:9878/healthz delay=0s timeout=5s period=30s #success=1 #failure=10
+    Readiness:  http-get http://127.0.0.1:9878/healthz delay=0s timeout=5s period=30s #success=1 #failure=3
+    Startup:    http-get http://127.0.0.1:9878/healthz delay=5s timeout=1s period=2s #success=1 #failure=105
+    Environment:
+      K8S_NODE_NAME:          (v1:spec.nodeName)
+      CILIUM_K8S_NAMESPACE:   (v1:metadata.namespace)
+    Mounts:
+      /sys/fs/bpf from bpf-maps (rw)
+      /var/run/cilium/envoy/ from envoy-config (ro)
+      /var/run/cilium/envoy/artifacts from envoy-artifacts (ro)
+      /var/run/cilium/envoy/sockets from envoy-sockets (rw)
+  Volumes:
+   envoy-sockets:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/cilium/envoy/sockets
+    HostPathType:  DirectoryOrCreate
+   envoy-artifacts:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run/cilium/envoy/artifacts
+    HostPathType:  DirectoryOrCreate
+   envoy-config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      cilium-envoy-config
+    Optional:  false
+   bpf-maps:
+    Type:               HostPath (bare host directory volume)
+    Path:               /sys/fs/bpf
+    HostPathType:       DirectoryOrCreate
+  Priority Class Name:  system-node-critical
+  Node-Selectors:       kubernetes.io/os=linux
+  Tolerations:          op=Exists
+Events:
+  Type    Reason            Age   From                  Message
+  ----    ------            ----  ----                  -------
+  Normal  SuccessfulCreate  22m   daemonset-controller  Created pod: cilium-envoy-rz5ch

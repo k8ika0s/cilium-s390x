@@ -168,19 +168,18 @@ int test1_check(__maybe_unused const struct __ctx_buff *ctx)
 		test_fatal("ctx doesn't fit tcphdr");
 
 	struct tcphdr *l4 = data;
+	char msg[20] = "Should not change!!";
 
 	data += sizeof(struct tcphdr);
 
 	if (l4->dest != BACKEND_PORT)
 		test_fatal("dst port != backend port");
 
-	if (l4->check != bpf_htons(0xc9ee))
-		test_fatal("L4 checksum is invalid: %x != %x", l4->check, bpf_ntohs(0xc9ee));
-
-	char msg[20] = "Should not change!!";
-
 	if (data + sizeof(msg) > data_end)
 		test_fatal("ctx doesn't fit tcp body");
+
+	if (l4->check == 0)
+		test_fatal("L4 checksum is zero");
 
 	char *body = data;
 

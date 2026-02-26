@@ -1,0 +1,65 @@
+Name:                   cilium-operator
+Namespace:              kube-system
+CreationTimestamp:      Sat, 21 Feb 2026 06:57:15 -0800
+Labels:                 app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=cilium-operator
+                        app.kubernetes.io/part-of=cilium
+                        io.cilium/app=operator
+                        name=cilium-operator
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: cilium
+                        meta.helm.sh/release-namespace: kube-system
+Selector:               io.cilium/app=operator,name=cilium-operator
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  100% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app.kubernetes.io/name=cilium-operator
+                    app.kubernetes.io/part-of=cilium
+                    io.cilium/app=operator
+                    name=cilium-operator
+  Annotations:      prometheus.io/port: 9963
+                    prometheus.io/scrape: true
+  Service Account:  cilium-operator
+  Containers:
+   cilium-operator:
+    Image:       docker.io/cilium/operator-dev:1233512912-nogit-wip
+    Ports:       9234/TCP (health), 9963/TCP (prometheus)
+    Host Ports:  9234/TCP (health), 9963/TCP (prometheus)
+    Command:
+      cilium-operator-generic
+    Args:
+      --config-dir=/tmp/cilium/config-map
+      --debug=$(CILIUM_DEBUG)
+    Liveness:   http-get http://127.0.0.1:health/healthz delay=60s timeout=3s period=10s #success=1 #failure=3
+    Readiness:  http-get http://127.0.0.1:health/healthz delay=0s timeout=3s period=5s #success=1 #failure=5
+    Environment:
+      K8S_NODE_NAME:          (v1:spec.nodeName)
+      CILIUM_K8S_NAMESPACE:   (v1:metadata.namespace)
+      CILIUM_DEBUG:          <set to the key 'debug' of config map 'cilium-config'>  Optional: true
+    Mounts:
+      /tmp/cilium/config-map from cilium-config-path (ro)
+  Volumes:
+   cilium-config-path:
+    Type:               ConfigMap (a volume populated by a ConfigMap)
+    Name:               cilium-config
+    Optional:           false
+  Priority Class Name:  system-cluster-critical
+  Node-Selectors:       kubernetes.io/os=linux
+  Tolerations:          node-role.kubernetes.io/control-plane op=Exists
+                        node-role.kubernetes.io/master op=Exists
+                        node.cilium.io/agent-not-ready op=Exists
+                        node.cloudprovider.kubernetes.io/uninitialized op=Exists
+                        node.kubernetes.io/not-ready op=Exists
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   cilium-operator-7d796b74f8 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  22m   deployment-controller  Scaled up replica set cilium-operator-7d796b74f8 from 0 to 1

@@ -1,0 +1,33 @@
+make: Entering directory '/root/work/cilium-s390x/bpf/tests'
+/root/work/cilium-s390x/bpf/tests/scapy/./parser.py . > /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp
+if ! cmp -s /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp; then	\
+	mv /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h;			\
+else								\
+	rm /root/work/cilium-s390x/bpf/tests/output/gen_pkts.h.tmp;					\
+fi
+clang -I/root/work/cilium-s390x/bpf -I/root/work/cilium-s390x/bpf/include -g -O2 --target=bpf -std=gnu99 -nostdinc -ftrap-function=__undefined_trap -Wall -Wextra -Werror -Wshadow -Wno-address-of-packed-member -Wno-unknown-warning-option -Wno-gnu-variable-sized-type-not-at-end -Wimplicit-int-conversion -Wenum-conversion -Wimplicit-fallthrough -MD -mcpu=v3 -mllvm -bpf-stack-size=1024 -c xdp_nodeport_lb4_test.c -o xdp_nodeport_lb4_test.o
+go test ./bpftest \
+	-bpf-test-path /root/work/cilium-s390x/bpf/tests \
+	-mod=vendor -vet=all -tags=osusergo -test xdp_nodeport_lb4_test \
+| cat;
+time=2026-02-21T11:28:23.162193756-08:00 level=info msg="Initializing dissection cache..."
+--- FAIL: TestBPF (0.39s)
+    --- FAIL: TestBPF/xdp_nodeport_lb4_test.o (0.38s)
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=15.0.0.10:23445 dst=15.0.1.10:80
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        --- FAIL: TestBPF/xdp_nodeport_lb4_test.o/xdp_lb4_forward_to_other_node (0.00s)
+            bpf_test.go:584: xdp_nodeport_lb4_test.c:211: L4 checksum mismatch raw=0000 expected=0000 host=0000 expected_host=0000
+        bpf_test.go:64: xx drop (Service backend not found) flow 0x0 to endpoint 0, ifindex 1, file unknown(0):0, , identity unknown->unknown: [error]
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=15.0.0.10:23445 dst=15.0.1.10:80
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=4 dir=2 scope=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=0 lb=0.0.0.0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 1/2: src=15.0.2.10:8080 dst=15.0.0.10:23445
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack lookup 2/2: nexthdr=6 flags=0 dir=0 scope=0
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: CT verdict: New, revnat=1
+        bpf_test.go:64: CPU 04: MARK 0x0 FROM 0 DEBUG: Conntrack create: proxy-port=0 revnat=1 src-identity=2 lb=0.0.0.0
+FAIL
+FAIL	github.com/cilium/cilium/bpf/tests/bpftest	0.445s
+FAIL
+make: Leaving directory '/root/work/cilium-s390x/bpf/tests'

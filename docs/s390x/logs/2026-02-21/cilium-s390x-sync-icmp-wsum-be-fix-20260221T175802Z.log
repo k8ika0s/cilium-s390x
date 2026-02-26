@@ -1,0 +1,7 @@
+Transfer starting: 30 files
+bpf/lib/icmp6.h
+bpf/lib/icmp_wsum.h
+bpf/tests/
+
+sent 2789 bytes  received 280 bytes  12470 bytes/sec
+total size is 39453  speedup is 12.86

@@ -1,0 +1,136 @@
+[INFO] 2026-02-26T13:18:10Z start proxy-docker-tests-wide
+[INFO] host=kdz.dev.fyre.ibm.com
+[INFO] cmd=cd /root/work/proxy-s390x && make docker-tests ARCH=s390x CARGO_BAZEL_REPIN=true TEST_TARGETS='//tests/... @envoy//test/integration:tcp_proxy_integration_test' EXTRA_BAZEL_BUILD_OPTS='--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --@envoy//bazel:http3=False' BAZEL_TEST_OPTS='--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=1 --test_output=errors'
+BUILDING on s390x for s390x using //bazel:linux_s390x
+Skip registering C++ toolchains via BAZEL_BUILD_OPTS. Local C++ toolchain needs to be available!
+Using Docker Buildx builder "" with build flags "--platform=linux/s390x".
+DOCKER_BUILDKIT=1 docker buildx build --progress=plain --platform=linux/s390x --network=host  --build-arg BUILDER_BASE="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg PROXYLIB_BUILDER="quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609" --build-arg BAZEL_BUILD_OPTS="--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --@envoy//bazel:http3=False" --build-arg BAZEL_TEST_OPTS="--jobs=4 --local_ram_resources=16384 --local_cpu_resources=4 --test_timeout=300 --local_test_jobs=2 --flaky_test_attempts=1 --test_output=errors" --build-arg CARGO_BAZEL_REPIN="true" --build-arg TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test" -f Dockerfile.tests -t quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs .
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"V\" build argument. Try adding \"--build-arg V=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"DEBUG\" build argument. Try adding \"--build-arg DEBUG=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"BUILDARCH\" build argument. Try adding \"--build-arg BUILDARCH=<VALUE>\" to the command line"
+time="2026-02-26T05:18:10-08:00" level=warning msg="missing \"NO_CACHE\" build argument. Try adding \"--build-arg NO_CACHE=<VALUE>\" to the command line"
+[1/8] STEP 1/5: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS proxylib
+[1/8] STEP 2/5: WORKDIR /go/src/github.com/cilium/proxy
+--> Using cache 793ac1cc28e1e985e039489f211589da891528cc7a75ff714611a43388465469
+--> 793ac1cc28e1
+[1/8] STEP 3/5: COPY --chown=1337:1337 . ./
+--> Using cache 043f5fcb55eee8f2e6a3e07abbcdfcfa28d76c98d122f229ec78c0e1e09bb2ba
+--> 043f5fcb55ee
+[1/8] STEP 4/5: ARG TARGETARCH
+--> Using cache 305934d27ef5c4e5e102dded7e4528e30f1969f755aff9d9fa2d0128a7bbb93e
+--> 305934d27ef5
+[1/8] STEP 5/5: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/go/pkg,type=cache,id=$TARGETARCH     PATH=$PATH:/usr/local/go/bin GOFLAGS=-buildvcs=false GOARCH=${TARGETARCH} make -C proxylib all && mv proxylib/libcilium.so /tmp/libcilium.so
+--> Using cache d981f4c70bb001515bf6d143eab1f3bcedd7471b74f79d58f6f8d33160d0813b
+--> d981f4c70bb0
+[2/8] STEP 1/16: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS builder-fresh
+[2/8] STEP 2/16: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 0b8cf4bf6122a089473429c1db9159b10bb93b087c0f1bd9375df1478941a24c
+--> 0b8cf4bf6122
+[2/8] STEP 3/16: WORKDIR /cilium/proxy
+--> Using cache 1e58feb3532aaf7beb49a11b0c0b9d88611a77b8c3fecb3ca7bc6bd1b732946d
+--> 1e58feb3532a
+[2/8] STEP 4/16: COPY . ./
+--> Using cache fe7533dda73837a58320e91e96243252b29f1f6fdc6de1ed635f293c0dc4bcbf
+--> fe7533dda738
+[2/8] STEP 5/16: ARG V
+--> Using cache 6c730a33bd6b0b26bb77557225e108b569de54468e5d3cd210f09ef356187849
+--> 6c730a33bd6b
+[2/8] STEP 6/16: ARG BAZEL_BUILD_OPTS
+--> Using cache 813fb67f93f945ec45b328f11561469c68c8a4b5aa8224f95d5ed234c0628bc4
+--> 813fb67f93f9
+[2/8] STEP 7/16: ARG CARGO_BAZEL_REPIN=true
+--> Using cache 951b6ca5369e825bdd5694b0eca8c18e049f2f14b8017cbfa035fadf254e9b27
+--> 951b6ca5369e
+[2/8] STEP 8/16: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> Using cache 13bfe7e63c1aa1635de1d3c6a1c9292a1bc0200f53172151d2d35d848fb76b09
+--> 13bfe7e63c1a
+[2/8] STEP 9/16: ARG DEBUG
+--> Using cache 800c4da303a3126a7f1ff69a85b2ecedf1c7f4005765f4c393fab147aa78ff4e
+--> 800c4da303a3
+[2/8] STEP 10/16: ARG BUILDARCH
+--> Using cache 3b9547162af621c95156795d57d0b5cc9886eee5e20f7f86dd744eecb245d9d7
+--> 3b9547162af6
+[2/8] STEP 11/16: ARG TARGETARCH
+--> Using cache 964740bd16564aa95d5e28351f671d57934a5902b69ff763ca4a9572d8c959ea
+--> 964740bd1656
+[2/8] STEP 12/16: ARG NO_CACHE
+--> Using cache 079eeca19da0389fb2ee599b21a00979d8aeb0a8b1d4655061ea1935f1bace5f
+--> 079eeca19da0
+[2/8] STEP 13/16: ENV TARGETARCH=$TARGETARCH
+--> Using cache e1ee19a468532688c5cb325e86650f175f2ea349783e2234ddab7bf130e0b41d
+--> e1ee19a46853
+[2/8] STEP 14/16: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> Using cache 8c94100c4ff48ef001368c76ed89be92dc971a1b35f759a98713d83e7ea657dd
+--> 8c94100c4ff4
+[2/8] STEP 15/16: RUN mkdir -p /tmp/bazel-cache
+--> Using cache 3c021e3fd68ccd5a7ad6515ba9bf6ca1fdd7616b11081f9aaf1498eb71395590
+--> 3c021e3fd68c
+[2/8] STEP 16/16: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=mode=0777,uid=1337,gid=1337,target=/tmp/bazel-cache,type=cache,id=$TARGETARCH-bazel-cache     if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi;     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-test-deps
+--> Using cache 0996160034a639a4670d8a0ae254a3935dd9bdac128c325a1e742bd46b00e344
+--> 0996160034a6
+[3/8] STEP 1/1: FROM 0996160034a639a4670d8a0ae254a3935dd9bdac128c325a1e742bd46b00e344 AS archive-cache
+--> 0996160034a6
+[5/8] STEP 1/17: FROM --platform=linux/s390x quay.io/cilium/cilium-envoy-builder:f896ec9cc6f0fc9524b041a1f0f3af93ec735609 AS runner
+[5/8] STEP 2/17: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 0b8cf4bf6122a089473429c1db9159b10bb93b087c0f1bd9375df1478941a24c
+--> 0b8cf4bf6122
+[5/8] STEP 3/17: WORKDIR /cilium/proxy
+--> Using cache 1e58feb3532aaf7beb49a11b0c0b9d88611a77b8c3fecb3ca7bc6bd1b732946d
+--> 1e58feb3532a
+[5/8] STEP 4/17: COPY . ./
+--> Using cache fe7533dda73837a58320e91e96243252b29f1f6fdc6de1ed635f293c0dc4bcbf
+--> fe7533dda738
+[5/8] STEP 5/17: ARG V
+--> Using cache 6c730a33bd6b0b26bb77557225e108b569de54468e5d3cd210f09ef356187849
+--> 6c730a33bd6b
+[5/8] STEP 6/17: ARG BAZEL_BUILD_OPTS
+--> Using cache 813fb67f93f945ec45b328f11561469c68c8a4b5aa8224f95d5ed234c0628bc4
+--> 813fb67f93f9
+[5/8] STEP 7/17: ARG BAZEL_TEST_OPTS
+--> Using cache 18f4912feb2a30ce020ee904e98e73a755f771dad6a99cfcbf609213b0ea5048
+--> 18f4912feb2a
+[5/8] STEP 8/17: ARG CARGO_BAZEL_REPIN=true
+--> Using cache 564e0183178c3082b887eaaf727ea0a610315fa38db62978c8a4342c56b7ae06
+--> 564e0183178c
+[5/8] STEP 9/17: ARG TEST_TARGETS="//tests/... @envoy//test/integration:tcp_proxy_integration_test"
+--> Using cache a83d2692ffda75ebcb50003df39d85119b0f38bbeb83ccfbc718e14cb479a76e
+--> a83d2692ffda
+[5/8] STEP 10/17: ARG DEBUG
+--> Using cache 34352f115aefbeb900cf0a5a38912c162105b22f7e681592ecd30d3196130caf
+--> 34352f115aef
+[5/8] STEP 11/17: ARG BUILDARCH
+--> Using cache 03a59b7d339e5e183c65713b716fb0c784211c37d203183c4fe0d912cd2e360a
+--> 03a59b7d339e
+[5/8] STEP 12/17: ARG TARGETARCH
+--> Using cache e9674745a35d9f4aa05e0584f045f1da0a8f1144a23d6e2f86fab264cc03731b
+--> e9674745a35d
+[5/8] STEP 13/17: ARG NO_CACHE
+--> Using cache b6d5594e1d6c6e8320b7b53701af3e708be92e756f6f6b0a64aefcba8eeb05ae
+--> b6d5594e1d6c
+[5/8] STEP 14/17: ENV TARGETARCH=$TARGETARCH
+--> Using cache 79e3331199a61a1f0c388b9114e459cc66e56079e7cd8d73c506bb7fc0036a56
+--> 79e3331199a6
+[5/8] STEP 15/17: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH if [ -n "$NO_CACHE" ]; then rm -rf /cilium/proxy/.cache/*; fi
+--> Using cache 011a033e9d1febad33b4739f883ded90c36de5ee6270322ce3bd1f3bbe8309fd
+--> 011a033e9d1f
+[5/8] STEP 16/17: COPY --from=proxylib /tmp/libcilium.so proxylib/libcilium.so
+--> Using cache de35adfb7564ea79dcd888682468531fdba7f4bfd4e1fa5fe7ddf9367b8f8ec8
+--> de35adfb7564
+[5/8] STEP 17/17: RUN --mount=mode=0777,uid=1337,gid=1337,target=/cilium/proxy/.cache,type=cache,id=$TARGETARCH     --mount=target=/tmp/bazel-cache,source=/tmp/bazel-cache,from=archive-cache,rw     if [ "$TARGETARCH" != "$BUILDARCH" ]; then       if [ "$TARGETARCH" = "amd64" ]; then         ln -s /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.* /lib;         ln -s /lib /lib64;         ln -s /usr/x86_64-linux-gnu/lib /usr/cilium-cross-compat/lib;       elif [ "$TARGETARCH" = "arm64" ]; then         ln -s /usr/aarch64-linux-gnu/lib/ld-linux-aarch64.so.* /lib;         ln -s /usr/aarch64-linux-gnu/lib /usr/cilium-cross-compat/lib;       elif [ "$TARGETARCH" = "s390x" ]; then         ln -s /usr/s390x-linux-gnu/lib/ld64.so.1 /lib;         ln -s /usr/s390x-linux-gnu/lib /usr/cilium-cross-compat/lib;       fi;     fi &&     if [ "${TARGETARCH}" = "s390x" ]; then export CARGO_BAZEL_GENERATOR_URL="file:///usr/local/bin/cargo-bazel"; fi &&     BAZEL_BUILD_OPTS="${BAZEL_BUILD_OPTS} --disk_cache=/tmp/bazel-cache" BAZEL_TEST_OPTS="${BAZEL_TEST_OPTS}" CARGO_BAZEL_REPIN="${CARGO_BAZEL_REPIN}" TEST_TARGETS="${TEST_TARGETS}" PKG_BUILD=1 V=$V DEBUG=$DEBUG make envoy-tests &&     cp -Lr /cilium/proxy/bazel-testlogs testlogs
+--> Using cache c6e4e936c93ea2045e0356393b9b55558ac70f1cc89c127b4f186d7fae6f5225
+--> c6e4e936c93e
+[8/8] STEP 1/3: FROM scratch AS testlogs
+[8/8] STEP 2/3: LABEL maintainer="maintainer@cilium.io"
+--> Using cache 096d24800dee17480b97738b702eca757343f48756686a65b7b50023aafecffd
+--> 096d24800dee
+[8/8] STEP 3/3: COPY --from=runner /cilium/proxy/testlogs testlogs
+--> Using cache d1b1956bfe9de6eedfb41c61a097554acbb3e6b51e82b5240a9671fcc1b1b5e9
+[8/8] COMMIT quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs
+--> d1b1956bfe9d
+Successfully tagged quay.io/cilium/cilium-envoy-dev:k8ika0s-s390x-proxy-remediate-s390x-testlogs
+d1b1956bfe9de6eedfb41c61a097554acbb3e6b51e82b5240a9671fcc1b1b5e9
+[INFO] 2026-02-26T13:18:15Z end rc=0

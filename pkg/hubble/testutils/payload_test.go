@@ -4,6 +4,8 @@
 package testutils
 
 import (
+	"bytes"
+	"encoding/binary"
 	"encoding/hex"
 	"net"
 	"testing"
@@ -24,15 +26,24 @@ func decodeHex(s string) []byte {
 	return b
 }
 
+func traceNotifyPrefixWithNativeHeader(msg monitor.TraceNotify, legacyPrefix string) string {
+	buf := &bytes.Buffer{}
+	if err := binary.Write(buf, binary.NativeEndian, msg); err != nil {
+		panic(err)
+	}
+	headerHex := hex.EncodeToString(buf.Bytes()[:msg.DataOffset()])
+	return headerHex + legacyPrefix[len(headerHex):]
+}
+
 func TestCreateL3L4Payload(t *testing.T) {
 	// These contain TraceNotify headers plus the ethernet header of the packet
 	// - IPv4: test with TraceNotifyVersion0
 	// - IPv6: test with TraceNotifyVersion1 (additional [16]bytes for empty OrigIP)
-	packetv4Prefix := "0403a80b8d4598d462000000620000006800000001000000000002000000000006e9183bb275129106e2221a080045000054bfe900003f019ae2"
-	packetv4PrefixV2 := "0403a80b8d4598d462000000620002006800000001000000000002000000000000000000000000000000000000000000f0debc9a7856341206e9183bb275129106e2221a080045000054bfe900003f019ae2"
-	packetv4802Prefix := "0403a80b8d4598d462000000620000006800000001000000000002000000000006e9183bb275129106e2221a81000202080045000054bfe900003f019ae2"
-	packetv6Prefix := "0405a80b5f16f2b8560000005600010068000000000000000000000000000000000000000000000000000000000000003333ff00b3e5129106e2221a86dd6000000000203aff"
-	packetv6802Prefix := "0405a80b5f16f2b8560000005600010068000000000000000000000000000000000000000000000000000000000000003333ff00b3e5129106e2221a8100020286dd6000000000203aff"
+	packetv4PrefixLegacy := "0403a80b8d4598d462000000620000006800000001000000000002000000000006e9183bb275129106e2221a080045000054bfe900003f019ae2"
+	packetv4PrefixV2Legacy := "0403a80b8d4598d462000000620002006800000001000000000002000000000000000000000000000000000000000000f0debc9a7856341206e9183bb275129106e2221a080045000054bfe900003f019ae2"
+	packetv4802PrefixLegacy := "0403a80b8d4598d462000000620000006800000001000000000002000000000006e9183bb275129106e2221a81000202080045000054bfe900003f019ae2"
+	packetv6PrefixLegacy := "0405a80b5f16f2b8560000005600010068000000000000000000000000000000000000000000000000000000000000003333ff00b3e5129106e2221a86dd6000000000203aff"
+	packetv6802PrefixLegacy := "0405a80b5f16f2b8560000005600010068000000000000000000000000000000000000000000000000000000000000003333ff00b3e5129106e2221a8100020286dd6000000000203aff"
 	// ICMPv4/v6 packets (with reversed src/dst IPs)
 	packetICMPv4 := "010101010a107e4000003639225700051b7b415d0000000086bf050000000000101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f3031323334353637"
 	packetICMPv6Req := "f00d0000000000000a10000000009195ff0200000000000000000001ff00b3e58700507500000000f00d0000000000000a1000000000b3e50101129106e2221a"
@@ -77,6 +88,11 @@ func TestCreateL3L4Payload(t *testing.T) {
 		Version:   monitor.TraceNotifyVersion2,
 		IPTraceID: 0x123456789abcdef0,
 	}
+	packetv4Prefix := traceNotifyPrefixWithNativeHeader(traceNotifyIPv4, packetv4PrefixLegacy)
+	packetv4PrefixV2 := traceNotifyPrefixWithNativeHeader(traceNotifyIPv4V2, packetv4PrefixV2Legacy)
+	packetv4802Prefix := traceNotifyPrefixWithNativeHeader(traceNotifyIPv4, packetv4802PrefixLegacy)
+	packetv6Prefix := traceNotifyPrefixWithNativeHeader(traceNotifyIPv6, packetv6PrefixLegacy)
+	packetv6802Prefix := traceNotifyPrefixWithNativeHeader(traceNotifyIPv6, packetv6802PrefixLegacy)
 
 	etherIPv4 := &layers.Ethernet{
 		EthernetType: layers.EthernetTypeIPv4,

@@ -1,0 +1,13 @@
++ docker save docker.io/cilium/cilium-dev:s390x-be-policyfix-20260221T162748Z -o /root/work/cilium-dev-s390x-be-policyfix-20260221T162748Z.tar
+Copying blob sha256:bcca76fbad7a7ac532837969a9d606ff63e58434f7c8be166a944f61482c37a3
+Copying blob sha256:a302b986fc2a9b65d59d0dfc759fbc0279bb44dde6ace95e0ed171afbc39f70f
+Copying blob sha256:29f7bc23700e0d3683eff2c54ca5d1fd1ee57f20b6c0263440539a5b999b9419
+Copying blob sha256:fb8aa589a67dec67cf44241123fc9601c5c4e3a4c2ff0aa8d47feb50d17cc712
+Copying blob sha256:2b1c6b02a3b2dcceed6d21cc0f0aec8e6433fb2e9da502972ce3413863a1af05
+Copying config sha256:22a44b3880529c8975ff9f68ed68521767e12596c154222f3554416129be105d
+Writing manifest to image destination
++ ctr -n k8s.io images import /root/work/cilium-dev-s390x-be-policyfix-20260221T162748Z.tar
+unpacking docker.io/cilium/cilium-dev:s390x-be-policyfix-20260221T162748Z (sha256:80d6b9e3faa4f7d1f88d3a0dfa7d308e9102074db07c4c734aecf16e7b49676a)...done
++ ctr -n k8s.io images ls
++ grep cilium/cilium-dev:s390x-be-policyfix-20260221T162748Z
+docker.io/cilium/cilium-dev:s390x-be-policyfix-20260221T162748Z                                                 application/vnd.docker.distribution.manifest.v2+json      sha256:80d6b9e3faa4f7d1f88d3a0dfa7d308e9102074db07c4c734aecf16e7b49676a 831.6 MiB linux/s390x                                                                  io.cri-containerd.image=managed                                 

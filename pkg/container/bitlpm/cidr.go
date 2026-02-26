@@ -4,9 +4,9 @@
 package bitlpm
 
 import (
+	"encoding/binary"
 	"math/bits"
 	"net/netip"
-	"unsafe"
 )
 
 // CIDRTrie can hold both IPv4 and IPv6 prefixes
@@ -138,14 +138,16 @@ type cidrKey netip.Prefix
 func (k cidrKey) BitValueAt(idx uint) uint8 {
 	addr := netip.Prefix(k).Addr()
 	if addr.Is4() {
-		word := (*(*[2]uint64)(unsafe.Pointer(&addr)))[1]
+		v4 := addr.As4()
+		word := binary.BigEndian.Uint32(v4[:])
 		return uint8((word >> (31 - idx)) & 1)
 	}
+	v6 := addr.As16()
 	if idx < 64 {
-		word := (*(*[2]uint64)(unsafe.Pointer(&addr)))[0]
+		word := binary.BigEndian.Uint64(v6[:8])
 		return uint8((word >> (63 - idx)) & 1)
 	} else {
-		word := (*(*[2]uint64)(unsafe.Pointer(&addr)))[1]
+		word := binary.BigEndian.Uint64(v6[8:])
 		return uint8((word >> (127 - idx)) & 1)
 	}
 }
@@ -153,16 +155,18 @@ func (k cidrKey) BitValueAt(idx uint) uint8 {
 func (k cidrKey) CommonPrefix(k2 cidrKey) uint {
 	addr1 := netip.Prefix(k).Addr()
 	addr2 := netip.Prefix(k2).Addr()
-	words1 := (*[2]uint64)(unsafe.Pointer(&addr1))
-	words2 := (*[2]uint64)(unsafe.Pointer(&addr2))
 	if addr1.Is4() {
-		word1 := uint32((*words1)[1])
-		word2 := uint32((*words2)[1])
+		v41 := addr1.As4()
+		v42 := addr2.As4()
+		word1 := binary.BigEndian.Uint32(v41[:])
+		word2 := binary.BigEndian.Uint32(v42[:])
 		return uint(bits.LeadingZeros32(word1 ^ word2))
 	}
-	v := bits.LeadingZeros64((*words1)[0] ^ (*words2)[0])
+	v61 := addr1.As16()
+	v62 := addr2.As16()
+	v := bits.LeadingZeros64(binary.BigEndian.Uint64(v61[:8]) ^ binary.BigEndian.Uint64(v62[:8]))
 	if v == 64 {
-		v += bits.LeadingZeros64((*words1)[1] ^ (*words2)[1])
+		v += bits.LeadingZeros64(binary.BigEndian.Uint64(v61[8:]) ^ binary.BigEndian.Uint64(v62[8:]))
 	}
 	return uint(v)
 }

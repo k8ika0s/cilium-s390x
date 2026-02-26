@@ -1,0 +1,4 @@
+timestamp=20260221T162748Z
+tag=s390x-be-policyfix-20260221T162748Z
+log=/root/work/logs/cilium-s390x-cilium-be-policyfix-build-hostnet-20260221T162748Z.log
+network=host

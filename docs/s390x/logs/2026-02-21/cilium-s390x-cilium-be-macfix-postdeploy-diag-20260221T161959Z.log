@@ -1,0 +1,624 @@
++ export KUBECONFIG=/etc/kubernetes/admin.conf
++ KUBECONFIG=/etc/kubernetes/admin.conf
+++ kubectl -n kube-system get pod -l k8s-app=cilium -o 'jsonpath={.items[0].metadata.name}'
++ CILIUM_POD=cilium-87qxf
++ kubectl -n kube-system get pods -o wide
+NAME                                         READY   STATUS    RESTARTS       AGE   IP             NODE                 NOMINATED NODE   READINESS GATES
+cilium-87qxf                                 1/1     Running   0              43s   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+cilium-envoy-rz5ch                           1/1     Running   0              82m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+cilium-operator-7d796b74f8-bmc6k             1/1     Running   0              82m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+coredns-7d764666f9-gj2fg                     0/1     Running   19 (91s ago)   70m   10.244.0.249   zkd01.fyre.ibm.com   <none>           <none>
+coredns-7d764666f9-hsmgg                     0/1     Running   19 (66s ago)   70m   10.244.0.108   zkd01.fyre.ibm.com   <none>           <none>
+etcd-zkd01.fyre.ibm.com                      1/1     Running   0              84m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-apiserver-zkd01.fyre.ibm.com            1/1     Running   0              84m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-controller-manager-zkd01.fyre.ibm.com   1/1     Running   0              84m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-proxy-vhb8x                             1/1     Running   0              84m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
+kube-scheduler-zkd01.fyre.ibm.com            1/1     Running   0              84m   10.11.59.172   zkd01.fyre.ibm.com   <none>           <none>
++ kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium status --verbose
+KVStore:                Disabled   
+Kubernetes:             Ok         1.35 (v1.35.1) [linux/s390x]
+Kubernetes APIs:        ["cilium/v2::CiliumCIDRGroup", "cilium/v2::CiliumClusterwideNetworkPolicy", "cilium/v2::CiliumEndpoint", "cilium/v2::CiliumNetworkPolicy", "cilium/v2::CiliumNode", "core/v1::Pods", "networking.k8s.io/v1::NetworkPolicy"]
+KubeProxyReplacement:   False   
+Host firewall:          Disabled
+SRv6:                   Disabled
+CNI Chaining:           none
+CNI Config file:        successfully wrote CNI configuration file to /host/etc/cni/net.d/05-cilium.conflist
+Cilium:                 Ok    (v-)
+NodeMonitor:            Disabled
+Cilium health daemon:   Ok   
+IPAM:                   IPv4: 4/254 allocated from 10.244.0.0/24, 
+Allocated addresses:
+  10.244.0.108 (kube-system/coredns-7d764666f9-hsmgg [restored])
+  10.244.0.249 (kube-system/coredns-7d764666f9-gj2fg [restored])
+  10.244.0.29 (health)
+  10.244.0.88 (router)
+IPv4 BIG TCP:           Disabled
+IPv6 BIG TCP:           Disabled
+BandwidthManager:       Disabled
+Routing:                Network: Tunnel [vxlan]   Host: Legacy
+Attach Mode:            TCX
+Device Mode:            veth
+Masquerading:           IPTables [IPv4: Enabled, IPv6: Disabled]
+Clock Source for BPF:   ktime
+Controller Status:      26/26 healthy
+  Name                                                  Last success   Last error   Count   Message
+  cilium-health-ep                                      33s ago        never        0       no error   
+  ct-map-pressure                                       29s ago        never        0       no error   
+  endpoint-1517-regeneration-recovery                   never          never        0       no error   
+  endpoint-1648-regeneration-recovery                   never          never        0       no error   
+  endpoint-717-regeneration-recovery                    never          never        0       no error   
+  endpoint-766-regeneration-recovery                    never          never        0       no error   
+  endpoint-gc                                           30s ago        never        0       no error   
+  endpoint-periodic-regeneration                        29s ago        never        0       no error   
+  ipcache-inject-labels                                 34s ago        never        0       no error   
+  k8s-heartbeat                                         4s ago         never        0       no error   
+  resolve-identity-1517                                 33s ago        never        0       no error   
+  resolve-labels-/                                      34s ago        never        0       no error   
+  resolve-labels-kube-system/coredns-7d764666f9-gj2fg   29s ago        never        0       no error   
+  resolve-labels-kube-system/coredns-7d764666f9-hsmgg   29s ago        never        0       no error   
+  restoring-ep-identity (1648)                          34s ago        never        0       no error   
+  restoring-ep-identity (717)                           34s ago        never        0       no error   
+  restoring-ep-identity (766)                           34s ago        never        0       no error   
+  sync-policymap-1517                                   30s ago        never        0       no error   
+  sync-policymap-1648                                   30s ago        never        0       no error   
+  sync-policymap-717                                    30s ago        never        0       no error   
+  sync-policymap-766                                    32s ago        never        0       no error   
+  sync-to-k8s-ciliumendpoint (1648)                     14s ago        never        0       no error   
+  sync-to-k8s-ciliumendpoint (717)                      14s ago        never        0       no error   
+  waiting-initial-global-identities-ep (1648)           34s ago        never        0       no error   
+  waiting-initial-global-identities-ep (717)            34s ago        never        0       no error   
+  write-cni-file                                        34s ago        never        0       no error   
+Proxy Status:            OK, ip 10.244.0.88, 0 redirects active on ports 10000-20000, Envoy: external
+Global Identity Range:   min 256, max 65535
+Hubble:                  Disabled   Metrics: Disabled
+KubeProxyReplacement Details:
+  Status:               False
+  Socket LB:            Disabled
+  Socket LB Tracing:    Disabled
+  Socket LB Coverage:   Full
+  Session Affinity:     Enabled
+  NAT46/64 Support:     Disabled
+  Services:
+  - ClusterIP:      Enabled
+  - NodePort:       Disabled 
+  - LoadBalancer:   Disabled 
+  - externalIPs:    Disabled 
+  - HostPort:       Disabled
+  Annotations:      (n/a)
+BPF Maps:   dynamic sizing: on (ratio: 0.002500)
+  Name                          Size
+  Auth                          524288
+  Non-TCP connection tracking   72764
+  TCP connection tracking       145529
+  Endpoints                     65535
+  IP cache                      512000
+  IPv4 masquerading agent       16384
+  IPv6 masquerading agent       16384
+  IPv4 fragmentation            8192
+  IPv4 service                  65536
+  IPv6 service                  65536
+  IPv4 service backend          65536
+  IPv6 service backend          65536
+  IPv4 service reverse NAT      65536
+  IPv6 service reverse NAT      65536
+  Metrics                       1024
+  Ratelimit metrics             64
+  NAT                           145529
+  Neighbor table                145529
+  Endpoint policy               16384
+  Policy stats                  65536
+  Session affinity              65536
+  Sock reverse NAT              72764
+Encryption:       Disabled        
+Cluster health:   0/0 reachable   (2026-02-21T16:19:28Z)   (Probe interval: 0s)
+Name              IP              Node                     Endpoints
+Modules Health:                   agent
+                                  ├── controlplane
+                                  │   ├── agent-infra-endpoints
+                                  │   │   └── job-init-host-endpoint                              [STOPPED] Start initialization (34s, x1)
+                                  │   ├── bgp-control-plane
+                                  │   │   ├── observer-job-default-gateway-route-change-tracker      [OK] Primed (34s, x1)
+                                  │   │   └── observer-job-device-change-device-change-tracker      [OK] Primed (34s, x1)
+                                  │   ├── cilium-agent-dynamic-config
+                                  │   │   └── job-k8s-reflector-cilium-configs-cm-cilium-config-kube-system      [OK] 143 upserted, 0 deleted, 143 total objects (34s, x1)
+                                  │   ├── cilium-health
+                                  │   │   └── job-init                                            [STOPPED] Start initialization (34s, x1)
+                                  │   ├── ciliumenvoyconfig
+                                  │   │   ├── job-node-labels                                     [OK] Running (34s, x1)
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (34s, x2)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (34s, x1)
+                                  │   ├── clustermesh
+                                  │   │   └── job-clustermesh-nodemanager-notifier                [STOPPED] Running (34s, x1)
+                                  │   ├── config-drift-checker
+                                  │   │   └── job-drift-checker                                   [OK] Running (34s, x1)
+                                  │   ├── daemonconfig
+                                  │   │   └── timer-job-validate-unchanged-daemon-config          [OK] Primed (34s, x1)
+                                  │   ├── dynamic-lifecycle-manager
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (34s, x2)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (34s, x1)
+                                  │   ├── enabled-features
+                                  │   │   └── job-update-config-metric                            [STOPPED] Waiting for agent config (34s, x1)
+                                  │   ├── endpoint-api
+                                  │   │   ├── job-cni-deletion-queue                              [STOPPED] Running (34s, x1)
+                                  │   │   └── job-unlock-lockfile                                 [STOPPED] Running (34s, x1)
+                                  │   ├── endpoint-manager
+                                  │   │   ├── cilium-endpoint-1517 (/)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (30s, x2)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-1517 (30s, x1)
+                                  │   │   ├── cilium-endpoint-1648 (kube-system/coredns-7d764666f9-hsmgg)
+                                  │   │   │   ├── cep-k8s-sync                                    [OK] sync-to-k8s-ciliumendpoint (1648) (4s, x4)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (29s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-1648 (30s, x1)
+                                  │   │   ├── cilium-endpoint-717 (kube-system/coredns-7d764666f9-gj2fg)
+                                  │   │   │   ├── cep-k8s-sync                                    [OK] sync-to-k8s-ciliumendpoint (717) (4s, x4)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (29s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-717 (30s, x1)
+                                  │   │   ├── cilium-endpoint-766 (/)
+                                  │   │   │   ├── datapath-regenerate                             [OK] Endpoint regeneration successful (30s, x3)
+                                  │   │   │   └── policymap-sync                                  [OK] sync-policymap-766 (32s, x1)
+                                  │   │   ├── endpoint-gc                                         [OK] endpoint-gc (30s, x1)
+                                  │   │   ├── job-init-periodic-endpoint-controllers              [STOPPED] Running (34s, x1)
+                                  │   │   └── job-namespace-updater                               [OK] Running (34s, x1)
+                                  │   ├── endpoint-restore
+                                  │   │   └── job-finish-endpoint-restore                         [STOPPED] Regenerating restored endpoints (34s, x1)
+                                  │   ├── envoy-proxy
+                                  │   │   ├── job-accesslog-server                                [OK] Running (34s, x1)
+                                  │   │   ├── job-xds-server                                      [OK] Running (34s, x1)
+                                  │   │   ├── observer-job-k8s-secrets-resource-events-cilium-secrets      [OK] Primed (34s, x1)
+                                  │   │   └── timer-job-version-check                             [OK] Primed (34s, x1)
+                                  │   ├── ep-bpf-prog-watchdog
+                                  │   │   ├── job-wait-for-endpoint-restore                       [STOPPED] Running (34s, x1)
+                                  │   │   └── timer-job-ep-bpf-prog-watchdog                      [OK] OK (1.223264ms) (0s, x1)
+                                  │   ├── fqdn
+                                  │   │   ├── dns-proxy
+                                  │   │   │   └── job-proxy-bootstrapper                          [STOPPED] DNS proxy successfully initialized on port 40939 (31s, x1)
+                                  │   │   └── namemanager
+                                  │   │       ├── job-wait-for-endpoint-restore                   [STOPPED] OK (30s, x1)
+                                  │   │       ├── observer-job-preallocate                        [OK] Primed (34s, x1)
+                                  │   │       └── timer-job-dns-garbage-collector-job             [OK] Primed (30s, x1)
+                                  │   ├── hostip-sync
+                                  │   │   └── job-sync-hostips                                    [OK] Synchronized (34s, x1)
+                                  │   ├── hubble
+                                  │   │   ├── job-hubble                                          [STOPPED] Running (34s, x1)
+                                  │   │   └── timer-job-hubble-namespace-cleanup                  [OK] Primed (34s, x1)
+                                  │   ├── ipam
+                                  │   │   └── ipam-podippool-table
+                                  │   │       └── job-k8s-reflector-podippools-daemon-k8s         [OK] 0 upserted, 0 deleted, 0 total objects (34s, x1)
+                                  │   ├── ipcache
+                                  │   │   ├── job-api-server-backend-watcher                      [OK] Running (34s, x1)
+                                  │   │   └── job-release-local-identities                        [STOPPED] Running (34s, x1)
+                                  │   ├── k8s-tables
+                                  │   │   ├── job-k8s-reflector-k8s-namespaces-daemon-k8s         [OK] 5 upserted, 0 deleted, 5 total objects (34s, x1)
+                                  │   │   └── job-k8s-reflector-k8s-pods-daemon-k8s               [OK] 1 upserted, 0 deleted, 10 total objects (30s, x2)
+                                  │   ├── l2-announcer
+                                  │   │   └── job-l2-announcer-lease-gc                           [STOPPED] Running (34s, x1)
+                                  │   ├── l7-proxy
+                                  │   │   ├── job-proxy-ports-restore                             [STOPPED] Running (34s, x1)
+                                  │   │   └── timer-job-proxy-ports-checkpoint                    [OK] OK (803.547µs) (31s, x1)
+                                  │   ├── loadbalancer-healthserver
+                                  │   │   └── job-control-loop                                    [STOPPED] Running (34s, x1)
+                                  │   ├── loadbalancer-maps
+                                  │   │   └── timer-job-pressure-metrics-reporter                 [OK] Primed (34s, x1)
+                                  │   ├── loadbalancer-reconciler
+                                  │   │   ├── job-reconcile                                       [OK] OK, 4 object(s) (34s, x3)
+                                  │   │   ├── job-refresh                                         [OK] Next refresh in 29m59.999573361s (34s, x1)
+                                  │   │   └── job-start-reconciler                                [STOPPED] Waiting for load-balancing tables to initialize (34s, x1)
+                                  │   ├── loadbalancer-reflectors
+                                  │   │   └── k8s-reflector
+                                  │   │       ├── job-reflect-pods                                [OK] Running (34s, x1)
+                                  │   │       └── job-reflect-services-endpoints                  [OK] Running (34s, x1)
+                                  │   ├── loadbalancer-writer
+                                  │   │   └── job-node-addr-reconciler                            [OK] Running (34s, x1)
+                                  │   ├── local-node-store
+                                  │   │   └── job-sync-local-node                                 [OK] Running (34s, x1)
+                                  │   ├── node-manager
+                                  │   │   ├── job-backgroundSync                                  [OK] Running (34s, x1)
+                                  │   │   ├── node-checkpoint-writer                              [OK] node checkpoint written (34s, x1)
+                                  │   │   └── nodes-add                                           [OK] Node adds successful (34s, x1)
+                                  │   ├── policy
+                                  │   │   ├── observer-job-policy-importer                        [OK] Primed (34s, x1)
+                                  │   │   └── timer-job-id-alloc-update-policy-maps               [OK] OK (3.974145ms) (34s, x1)
+                                  │   ├── stale-endpoint-cleanup
+                                  │   │   └── job-endpoint-cleanup                                [STOPPED] Running (34s, x1)
+                                  │   ├── status
+                                  │   │   └── job-probes                                          [OK] Running (34s, x1)
+                                  │   └── ztunnel
+                                  │       └── enrollment-reconciler
+                                  │           └── job-derive-desired-mtls-namespace-enrollments    [OK] Running (34s, x1)
+                                  ├── datapath
+                                  │   ├── agent-liveness-updater
+                                  │   │   └── timer-job-agent-liveness-updater                    [OK] OK (83.593µs) (0s, x1)
+                                  │   ├── device-reconciler
+                                  │   │   ├── job-reconcile                                       [OK] OK, 0 object(s) (34s, x3)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (34s, x1)
+                                  │   ├── iptables
+                                  │   │   ├── ipset
+                                  │   │   │   ├── job-ipset-init-finalizer                        [STOPPED] Running (34s, x1)
+                                  │   │   │   ├── job-reconcile                                   [OK] OK, 0 object(s) (34s, x2)
+                                  │   │   │   └── job-refresh                                     [OK] Next refresh in 30m0s (34s, x1)
+                                  │   │   └── job-iptables-reconciliation-loop                    [OK] iptables rules update completed (31s, x1)
+                                  │   ├── l2-responder
+                                  │   │   └── job-l2-responder-reconciler                         [OK] Running (34s, x1)
+                                  │   ├── link-cache
+                                  │   │   └── timer-job-sync                                      [OK] OK (749.64µs) (4s, x1)
+                                  │   ├── loader
+                                  │   │   └── job-per-endpoint-route-initializer                  [STOPPED] Running (34s, x1)
+                                  │   ├── maps
+                                  │   │   ├── bwmap
+                                  │   │   │   └── timer-job-pressure-metric-throttle              [OK] OK (4.429µs) (4s, x1)
+                                  │   │   ├── ct-nat-map-gc
+                                  │   │   │   ├── job-enable-gc                                   [STOPPED] Running (34s, x1)
+                                  │   │   │   ├── observer-job-nat-map-next4                      [OK] Primed (34s, x1)
+                                  │   │   │   └── observer-job-nat-map-next6                      [OK] Primed (34s, x1)
+                                  │   │   ├── netdev-map
+                                  │   │   │   └── netdev-map-sync
+                                  │   │   │       └── job-netdev-map-sync                         [OK] Running (34s, x1)
+                                  │   │   └── subnet-map
+                                  │   │       └── timer-job-pressure-metric-subnet_map            [OK] OK (4.32µs) (4s, x1)
+                                  │   ├── maps-cleanup
+                                  │   │   └── job-cleanup                                         [STOPPED] Running (34s, x1)
+                                  │   ├── mtu
+                                  │   │   ├── job-endpoint-mtu-updater                            [OK] Endpoint MTU updated (34s, x1)
+                                  │   │   └── job-mtu-updater                                     [OK] MTU updated (1500) (34s, x1)
+                                  │   ├── node-address
+                                  │   │   ├──                                                     [OK] 9.30.183.125 (primary) (34s, x1)
+                                  │   │   └── job-node-address-update                             [OK] Running (34s, x1)
+                                  │   ├── orchestrator
+                                  │   │   └── job-reinitialize                                    [OK] OK (29s, x1)
+                                  │   ├── route-reconciler
+                                  │   │   ├── job-desired-route-refresher                         [OK] Running (34s, x1)
+                                  │   │   ├── job-reconcile                                       [OK] OK, 1 object(s) (30s, x4)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 30m0s (34s, x1)
+                                  │   ├── sysctl
+                                  │   │   ├── job-reconcile                                       [OK] OK, 20 object(s) (34s, x3)
+                                  │   │   └── job-refresh                                         [OK] Next refresh in 10m0s (34s, x1)
+                                  │   └── utime
+                                  │       └── timer-job-sync-userspace-and-datapath               [OK] OK (762.528µs) (34s, x1)
+                                  └── infra
+                                      ├── agent-healthz
+                                      │   └── job-agent-healthz-server-ipv4                       [OK] Running (34s, x1)
+                                      ├── k8s-synced-crdsync
+                                      │   └── job-sync-crds                                       [STOPPED] Running (35s, x1)
+                                      ├── metrics
+                                      │   ├── job-collect                                         [OK] Sampled 24 metrics in 7.273534ms, next collection at 2026-02-21 16:24:25.675946335 +0000 UTC m=+301.352356056 (34s, x1)
+                                      │   └── timer-job-cleanup                                   [OK] Primed (34s, x1)
+                                      └── shell
+                                          └── job-listener                                        [OK] Listening on /var/run/cilium/shell.sock (34s, x1)
+                                  
+
++ kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium endpoint list
+ENDPOINT   POLICY (ingress)   POLICY (egress)   IDENTITY   LABELS (source:key[=value])                                                  IPv6   IPv4           STATUS   
+           ENFORCEMENT        ENFORCEMENT                                                                                                                     
+717        Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system          10.244.0.249   ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                       
+766        Disabled           Disabled          1          k8s:node-role.kubernetes.io/control-plane                                                          ready   
+                                                           k8s:node.kubernetes.io/exclude-from-external-load-balancers                                                
+                                                           reserved:host                                                                                              
+1517       Disabled           Disabled          4          reserved:health                                                                     10.244.0.29    ready   
+1648       Disabled           Disabled          11329      k8s:io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name=kube-system          10.244.0.108   ready   
+                                                           k8s:io.cilium.k8s.policy.cluster=default                                                                   
+                                                           k8s:io.cilium.k8s.policy.serviceaccount=coredns                                                            
+                                                           k8s:io.kubernetes.pod.namespace=kube-system                                                                
+                                                           k8s:k8s-app=kube-dns                                                                                       
++ kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium-health status
+Cluster health:   0/0 reachable   (2026-02-21T16:19:28Z)   (Probe interval: 0s)
+Name              IP              Node                     Endpoints
+++ kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium endpoint list
+++ awk '/reserved:health/ {print $1; exit}'
++ HEP_ID=1517
+++ kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium endpoint list
+++ awk '/reserved:health/ {print $5; exit}'
++ HEP_IP=reserved:health
++ echo 'health_ep_id=1517 health_ep_ip=reserved:health'
+health_ep_id=1517 health_ep_ip=reserved:health
++ timeout 12 kubectl -n kube-system exec cilium-87qxf -c cilium-agent -- cilium monitor --type trace --hex -vv
++ true
++ sed -n 1,220p /tmp/cilium-monitor-20260221T161959Z.log
+Press Ctrl-C to quit
+------------------------------------------------------------------------------
+CPU 04: MARK 0xa538297 FROM 1648 to-endpoint: 74 bytes (74 captured), state new, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 3c d9 b2 40 00 3f 06  4b 5e 0a f4 00 58 0a f4  |.<..@.?.K^...X..|
+00000020  00 6c d0 38 1f 90 5e 5c  84 f7 00 00 00 00 a0 02  |.l.8..^\........|
+00000030  fa f0 16 da 00 00 02 04  05 b4 04 02 08 0a ec 4b  |...............K|
+00000040  cb 73 00 00 00 00 01 03  03 07 00 00              |.s..........|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x8f077bb7 FROM 1648 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  0e 9e 85 6b 7a 67 72 09  4a 00 ae be 08 00 45 00  |...kzgr.J.....E.|
+00000010  00 3c 00 00 40 00 40 06  24 11 0a f4 00 6c 0a f4  |.<..@.@.$....l..|
+00000020  00 58 1f 90 d0 38 9b 25  d3 3f 5e 5c 84 f8 a0 12  |.X...8.%.?^\....|
+00000030  fe 88 16 da 00 00 02 04  05 b4 04 02 08 0a ce f3  |................|
+00000040  9a dc ec 4b cb 73 01 03  03 07 00 00              |...K.s......|
+------------------------------------------------------------------------------
+CPU 04: MARK 0xa538297 FROM 1648 to-endpoint: 66 bytes (66 captured), state established, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 34 d9 b3 40 00 3f 06  4b 65 0a f4 00 58 0a f4  |.4..@.?.Ke...X..|
+00000020  00 6c d0 38 1f 90 5e 5c  84 f8 9b 25 d3 40 80 10  |.l.8..^\...%.@..|
+00000030  01 f6 16 d2 00 00 01 01  08 0a ec 4b cb 73 ce f3  |...........K.s..|
+00000040  9a dc 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 03: MARK 0xa538297 FROM 1648 to-endpoint: 176 bytes (128 captured), state established, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 a2 d9 b4 40 00 3f 06  4a f6 0a f4 00 58 0a f4  |....@.?.J....X..|
+00000020  00 6c d0 38 1f 90 5e 5c  84 f8 9b 25 d3 40 80 18  |.l.8..^\...%.@..|
+00000030  01 f6 17 40 00 00 01 01  08 0a ec 4b cb 73 ce f3  |...@.......K.s..|
+00000040  9a dc 47 45 54 20 2f 68  65 61 6c 74 68 20 48 54  |..GET /health HT|
+00000050  54 50 2f 31 2e 31 0d 0a  48 6f 73 74 3a 20 31 30  |TP/1.1..Host: 10|
+00000060  2e 32 34 34 2e 30 2e 31  30 38 3a 38 30 38 30 0d  |.244.0.108:8080.|
+00000070  0a 55 73 65 72 2d 41 67  65 6e 74 3a 20 6b 75 62  |.User-Agent: kub|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x8f077bb7 FROM 1648 to-stack: 203 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  0e 9e 85 6b 7a 67 72 09  4a 00 ae be 08 00 45 00  |...kzgr.J.....E.|
+00000010  00 bd 88 0c 40 00 40 06  9b 83 0a f4 00 6c 0a f4  |....@.@......l..|
+00000020  00 58 1f 90 d0 38 9b 25  d3 40 5e 5c 85 66 80 18  |.X...8.%.@^\.f..|
+00000030  01 fd 17 5b 00 00 01 01  08 0a ce f3 9a dd ec 4b  |...[...........K|
+00000040  cb 73 48 54 54 50 2f 31  2e 31 20 32 30 30 20 4f  |.sHTTP/1.1 200 O|
+00000050  4b 0d 0a 44 61 74 65 3a  20 53 61 74 2c 20 32 31  |K..Date: Sat, 21|
+00000060  20 46 65 62 20 32 30 32  36 20 31 36 3a 32 30 3a  | Feb 2026 16:20:|
+00000070  30 34 20 47 4d 54 0d 0a  43 6f 6e 74 65 6e 74 2d  |04 GMT..Content-|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x8f077bb7 FROM 1648 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  0e 9e 85 6b 7a 67 72 09  4a 00 ae be 08 00 45 00  |...kzgr.J.....E.|
+00000010  00 34 88 0d 40 00 40 06  9c 0b 0a f4 00 6c 0a f4  |.4..@.@......l..|
+00000020  00 58 1f 90 d0 38 9b 25  d3 c9 5e 5c 85 66 80 11  |.X...8.%..^\.f..|
+00000030  01 fd 16 d2 00 00 01 01  08 0a ce f3 9a dd ec 4b  |...............K|
+00000040  cb 74 00 00                                       |.t..|
+------------------------------------------------------------------------------
+CPU 04: MARK 0xa538297 FROM 1648 to-endpoint: 66 bytes (66 captured), state established, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 34 d9 b6 40 00 3f 06  4b 62 0a f4 00 58 0a f4  |.4..@.?.Kb...X..|
+00000020  00 6c d0 38 1f 90 5e 5c  85 66 9b 25 d3 ca 80 11  |.l.8..^\.f.%....|
+00000030  01 f5 16 d2 00 00 01 01  08 0a ec 4b cb 74 ce f3  |...........K.t..|
+00000040  9a dd 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x9f5846b6 FROM 717 to-endpoint: 74 bytes (74 captured), state new, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 3c 79 8e 40 00 3f 06  aa f5 0a f4 00 58 0a f4  |.<y.@.?......X..|
+00000020  00 f9 95 18 1f f5 83 23  2c cd 00 00 00 00 a0 02  |.......#,.......|
+00000030  fa f0 17 67 00 00 02 04  05 b4 04 02 08 0a 74 14  |...g..........t.|
+00000040  7c d2 00 00 00 00 01 03  03 07 00 00              ||...........|
+------------------------------------------------------------------------------
+CPU 04: MARK 0xf9fcb33c FROM 717 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 3c 00 00 40 00 40 06  23 84 0a f4 00 f9 0a f4  |.<..@.@.#.......|
+00000020  00 58 1f f5 95 18 2b 9c  d9 4c 83 23 2c ce a0 12  |.X....+..L.#,...|
+00000030  fe 88 17 67 00 00 02 04  05 b4 04 02 08 0a 4a cb  |...g..........J.|
+00000040  e8 9d 74 14 7c d2 01 03  03 07 00 00              |..t.|.......|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x9f5846b6 FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 79 8f 40 00 3f 06  aa fc 0a f4 00 58 0a f4  |.4y.@.?......X..|
+00000020  00 f9 95 18 1f f5 83 23  2c ce 2b 9c d9 4d 80 10  |.......#,.+..M..|
+00000030  01 f6 17 5f 00 00 01 01  08 0a 74 14 7c d3 4a cb  |..._......t.|.J.|
+00000040  e8 9d 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x9f5846b6 FROM 717 to-endpoint: 175 bytes (128 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 a1 79 90 40 00 3f 06  aa 8e 0a f4 00 58 0a f4  |..y.@.?......X..|
+00000020  00 f9 95 18 1f f5 83 23  2c ce 2b 9c d9 4d 80 18  |.......#,.+..M..|
+00000030  01 f6 17 cc 00 00 01 01  08 0a 74 14 7c d3 4a cb  |..........t.|.J.|
+00000040  e8 9d 47 45 54 20 2f 72  65 61 64 79 20 48 54 54  |..GET /ready HTT|
+00000050  50 2f 31 2e 31 0d 0a 48  6f 73 74 3a 20 31 30 2e  |P/1.1..Host: 10.|
+00000060  32 34 34 2e 30 2e 32 34  39 3a 38 31 38 31 0d 0a  |244.0.249:8181..|
+00000070  55 73 65 72 2d 41 67 65  6e 74 3a 20 6b 75 62 65  |User-Agent: kube|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 06: MARK 0xf9fcb33c FROM 717 to-stack: 229 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 d7 35 cb 40 00 40 06  ed 1d 0a f4 00 f9 0a f4  |..5.@.@.........|
+00000020  00 58 1f f5 95 18 2b 9c  d9 4d 83 23 2d 3b 80 18  |.X....+..M.#-;..|
+00000030  01 fd 18 02 00 00 01 01  08 0a 4a cb e8 9e 74 14  |..........J...t.|
+00000040  7c d3 48 54 54 50 2f 31  2e 31 20 35 30 33 20 53  ||.HTTP/1.1 503 S|
+00000050  65 72 76 69 63 65 20 55  6e 61 76 61 69 6c 61 62  |ervice Unavailab|
+00000060  6c 65 0d 0a 44 61 74 65  3a 20 53 61 74 2c 20 32  |le..Date: Sat, 2|
+00000070  31 20 46 65 62 20 32 30  32 36 20 31 36 3a 32 30  |1 Feb 2026 16:20|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 06: MARK 0xf9fcb33c FROM 717 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 34 35 cc 40 00 40 06  ed bf 0a f4 00 f9 0a f4  |.45.@.@.........|
+00000020  00 58 1f f5 95 18 2b 9c  d9 f0 83 23 2d 3b 80 11  |.X....+....#-;..|
+00000030  01 fd 17 5f 00 00 01 01  08 0a 4a cb e8 9e 74 14  |..._......J...t.|
+00000040  7c d3 00 00                                       ||...|
+------------------------------------------------------------------------------
+CPU 06: MARK 0x9f5846b6 FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 79 92 40 00 3f 06  aa f9 0a f4 00 58 0a f4  |.4y.@.?......X..|
+00000020  00 f9 95 18 1f f5 83 23  2d 3b 2b 9c d9 f1 80 11  |.......#-;+.....|
+00000030  01 f5 17 5f 00 00 01 01  08 0a 74 14 7c d3 4a cb  |..._......t.|.J.|
+00000040  e8 9e 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x116e7c36 FROM 717 to-endpoint: 74 bytes (74 captured), state new, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 3c ca 43 40 00 3f 06  5a 40 0a f4 00 58 0a f4  |.<.C@.?.Z@...X..|
+00000020  00 f9 e8 c6 1f 90 83 e5  0b 07 00 00 00 00 a0 02  |................|
+00000030  fa f0 17 67 00 00 02 04  05 b4 04 02 08 0a 74 14  |...g..........t.|
+00000040  8c 0a 00 00 00 00 01 03  03 07 00 00              |............|
+------------------------------------------------------------------------------
+CPU 03: MARK 0xa686dcb3 FROM 717 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 3c 00 00 40 00 40 06  23 84 0a f4 00 f9 0a f4  |.<..@.@.#.......|
+00000020  00 58 1f 90 e8 c6 7c cf  79 21 83 e5 0b 08 a0 12  |.X....|.y!......|
+00000030  fe 88 17 67 00 00 02 04  05 b4 04 02 08 0a 4a cb  |...g..........J.|
+00000040  f7 d5 74 14 8c 0a 01 03  03 07 00 00              |..t.........|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x116e7c36 FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 ca 44 40 00 3f 06  5a 47 0a f4 00 58 0a f4  |.4.D@.?.ZG...X..|
+00000020  00 f9 e8 c6 1f 90 83 e5  0b 08 7c cf 79 22 80 10  |..........|.y"..|
+00000030  01 f6 17 5f 00 00 01 01  08 0a 74 14 8c 0a 4a cb  |..._......t...J.|
+00000040  f7 d5 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x116e7c36 FROM 717 to-endpoint: 176 bytes (128 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 a2 ca 45 40 00 3f 06  59 d8 0a f4 00 58 0a f4  |...E@.?.Y....X..|
+00000020  00 f9 e8 c6 1f 90 83 e5  0b 08 7c cf 79 22 80 18  |..........|.y"..|
+00000030  01 f6 17 cd 00 00 01 01  08 0a 74 14 8c 0b 4a cb  |..........t...J.|
+00000040  f7 d5 47 45 54 20 2f 68  65 61 6c 74 68 20 48 54  |..GET /health HT|
+00000050  54 50 2f 31 2e 31 0d 0a  48 6f 73 74 3a 20 31 30  |TP/1.1..Host: 10|
+00000060  2e 32 34 34 2e 30 2e 32  34 39 3a 38 30 38 30 0d  |.244.0.249:8080.|
+00000070  0a 55 73 65 72 2d 41 67  65 6e 74 3a 20 6b 75 62  |.User-Agent: kub|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 05: MARK 0xa686dcb3 FROM 717 to-stack: 203 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 bd 54 9c 40 00 40 06  ce 66 0a f4 00 f9 0a f4  |..T.@.@..f......|
+00000020  00 58 1f 90 e8 c6 7c cf  79 22 83 e5 0b 76 80 18  |.X....|.y"...v..|
+00000030  01 fd 17 e8 00 00 01 01  08 0a 4a cb f7 d6 74 14  |..........J...t.|
+00000040  8c 0b 48 54 54 50 2f 31  2e 31 20 32 30 30 20 4f  |..HTTP/1.1 200 O|
+00000050  4b 0d 0a 44 61 74 65 3a  20 53 61 74 2c 20 32 31  |K..Date: Sat, 21|
+00000060  20 46 65 62 20 32 30 32  36 20 31 36 3a 32 30 3a  | Feb 2026 16:20:|
+00000070  30 39 20 47 4d 54 0d 0a  43 6f 6e 74 65 6e 74 2d  |09 GMT..Content-|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 02: MARK 0xa686dcb3 FROM 717 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  42 8c 33 0c b8 03 56 87  a5 1f de 7f 08 00 45 00  |B.3...V.......E.|
+00000010  00 34 54 9d 40 00 40 06  ce ee 0a f4 00 f9 0a f4  |.4T.@.@.........|
+00000020  00 58 1f 90 e8 c6 7c cf  79 ab 83 e5 0b 76 80 11  |.X....|.y....v..|
+00000030  01 fd 17 5f 00 00 01 01  08 0a 4a cb f7 d6 74 14  |..._......J...t.|
+00000040  8c 0b 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 02: MARK 0x116e7c36 FROM 717 to-endpoint: 66 bytes (66 captured), state established, interface lxce67f7778995a, , identity host->11329, orig-ip 10.244.0.88, to endpoint 717
+00000000  56 87 a5 1f de 7f 42 8c  33 0c b8 03 08 00 45 00  |V.....B.3.....E.|
+00000010  00 34 ca 47 40 00 3f 06  5a 44 0a f4 00 58 0a f4  |.4.G@.?.ZD...X..|
+00000020  00 f9 e8 c6 1f 90 83 e5  0b 76 7c cf 79 ac 80 11  |.........v|.y...|
+00000030  01 f5 17 5f 00 00 01 01  08 0a 74 14 8c 0b 4a cb  |..._......t...J.|
+00000040  f7 d6 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x8ebbf58d FROM 1648 to-endpoint: 175 bytes (128 captured), state established, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 a1 5d 48 40 00 3f 06  c7 63 0a f4 00 58 0a f4  |..]H@.?..c...X..|
+00000020  00 6c 8c 32 1f f5 a7 85  83 c8 6a 24 3d 6a 80 18  |.l.2......j$=j..|
+00000030  01 f6 17 3f 00 00 01 01  08 0a ec 4b e3 39 ce f3  |...?.......K.9..|
+00000040  b2 a2 47 45 54 20 2f 72  65 61 64 79 20 48 54 54  |..GET /ready HTT|
+00000050  50 2f 31 2e 31 0d 0a 48  6f 73 74 3a 20 31 30 2e  |P/1.1..Host: 10.|
+00000060  32 34 34 2e 30 2e 31 30  38 3a 38 31 38 31 0d 0a  |244.0.108:8181..|
+00000070  55 73 65 72 2d 41 67 65  6e 74 3a 20 6b 75 62 65  |User-Agent: kube|
+00000080  00 00 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 04: MARK 0x8ebbf58d FROM 1648 to-endpoint: 66 bytes (66 captured), state established, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 34 5d 4a 40 00 3f 06  c7 ce 0a f4 00 58 0a f4  |.4]J@.?......X..|
+00000020  00 6c 8c 32 1f f5 a7 85  84 35 6a 24 3e 0e 80 11  |.l.2.....5j$>...|
+00000030  01 f5 16 d2 00 00 01 01  08 0a ec 4b e3 3a ce f3  |...........K.:..|
+00000040  b2 a3 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x8ebbf58d FROM 1648 to-endpoint: 74 bytes (74 captured), state new, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 3c 5d 46 40 00 3f 06  c7 ca 0a f4 00 58 0a f4  |.<]F@.?......X..|
+00000020  00 6c 8c 32 1f f5 a7 85  83 c7 00 00 00 00 a0 02  |.l.2............|
+00000030  fa f0 16 da 00 00 02 04  05 b4 04 02 08 0a ec 4b  |...............K|
+00000040  e3 39 00 00 00 00 01 03  03 07 00 00              |.9..........|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x2c6a1ba8 FROM 1648 to-stack: 74 bytes (74 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  0e 9e 85 6b 7a 67 72 09  4a 00 ae be 08 00 45 00  |...kzgr.J.....E.|
+00000010  00 3c 00 00 40 00 40 06  24 11 0a f4 00 6c 0a f4  |.<..@.@.$....l..|
+00000020  00 58 1f f5 8c 32 6a 24  3d 69 a7 85 83 c8 a0 12  |.X...2j$=i......|
+00000030  fe 88 16 da 00 00 02 04  05 b4 04 02 08 0a ce f3  |................|
+00000040  b2 a2 ec 4b e3 39 01 03  03 07 00 00              |...K.9......|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x8ebbf58d FROM 1648 to-endpoint: 66 bytes (66 captured), state established, interface lxcb3659d9ea62e, , identity host->11329, orig-ip 10.244.0.88, to endpoint 1648
+00000000  72 09 4a 00 ae be 0e 9e  85 6b 7a 67 08 00 45 00  |r.J......kzg..E.|
+00000010  00 34 5d 47 40 00 3f 06  c7 d1 0a f4 00 58 0a f4  |.4]G@.?......X..|
+00000020  00 6c 8c 32 1f f5 a7 85  83 c8 6a 24 3d 6a 80 10  |.l.2......j$=j..|
+00000030  01 f6 16 d2 00 00 01 01  08 0a ec 4b e3 39 ce f3  |...........K.9..|
+00000040  b2 a2 00 00                                       |....|
+------------------------------------------------------------------------------
+CPU 03: MARK 0x2c6a1ba8 FROM 1648 to-stack: 66 bytes (66 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
+00000000  0e 9e 85 6b 7a 67 72 09  4a 00 ae be 08 00 45 00  |...kzgr.J.....E.|
+00000010  00 34 e3 fb 40 00 40 06  40 1d 0a f4 00 6c 0a f4  |.4..@.@.@....l..|
+00000020  00 58 1f f5 8c 32 6a 24  3e 0d a7 85 84 35 80 11  |.X...2j$>....5..|
+00000030  01 fd 16 d2 00 00 01 01  08 0a ce f3 b2 a3 ec 4b  |...............K|
+00000040  e3 39 00 00                                       |.9..|
+------------------------------------------------------------------------------
+CPU 01: MARK 0x2c6a1ba8 FROM 1648 to-stack: 229 bytes (128 captured), state reply, , identity 11329->host, orig-ip 0.0.0.0
++ '[' -n reserved:health ']'
++ timeout 5 curl -sv --max-time 4 http://reserved:health:4240/hello
+* Closing connection -1
++ true
++ kubectl -n kube-system logs deploy/coredns --tail=120
+Found 2 pods, using pod/coredns-7d764666f9-hsmgg
+maxprocs: Leaving GOMAXPROCS=8: CPU quota undefined
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[INFO] plugin/kubernetes: waiting for Kubernetes API before starting server
+[WARNING] plugin/kubernetes: starting server with unsynced Kubernetes API
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 1b226df79860026c6a52e67daa10d7f0d57ec5b023288ec00c5e05f93523c894564e15b91770d3a07ae1cfbe861d15b37d4a0027e69c546ab112970993a3b03b
+CoreDNS-1.13.1
+linux/s390x, go1.25.2, 1db4568
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:60850->10.11.48.21:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:41678->10.11.48.21:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:38452->10.11.48.21:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:42920->9.30.6.100:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:52312->10.11.48.21:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:51780->10.11.48.21:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:32830->10.11.48.21:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:45736->10.11.48.21:53: i/o timeout
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:41662->9.30.99.253:53: i/o timeout
+[ERROR] plugin/errors: 2 2643576214302590473.4711236923661896557. HINFO: read udp 10.244.0.108:41571->9.30.6.100:53: i/o timeout
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[ERROR] plugin/kubernetes: Failed to watch
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
+[INFO] plugin/ready: Plugins not ready: "kubernetes"
++ kubectl -n kube-system get endpoints kube-dns -o yaml
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2026-02-21T15:09:29Z"
+  creationTimestamp: "2026-02-21T14:55:16Z"
+  labels:
+    endpoints.kubernetes.io/managed-by: endpoint-controller
+    k8s-app: kube-dns
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: CoreDNS
+  name: kube-dns
+  namespace: kube-system
+  resourceVersion: "2454"
+  uid: 6782a799-a28f-40d8-b60c-bcb51b70d46f
+subsets:
+- notReadyAddresses:
+  - ip: 10.244.0.108
+    nodeName: zkd01.fyre.ibm.com
+    targetRef:
+      kind: Pod
+      name: coredns-7d764666f9-hsmgg
+      namespace: kube-system
+      uid: 8b9e6409-25ed-44a9-8121-234400f38d65
+  - ip: 10.244.0.249
+    nodeName: zkd01.fyre.ibm.com
+    targetRef:
+      kind: Pod
+      name: coredns-7d764666f9-gj2fg
+      namespace: kube-system
+      uid: 59f32582-71b6-4b77-bab9-e1c883baa3da
+  ports:
+  - name: metrics
+    port: 9153
+    protocol: TCP
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+  - name: dns
+    port: 53
+    protocol: UDP

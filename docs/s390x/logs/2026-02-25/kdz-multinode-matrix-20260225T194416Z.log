@@ -1,0 +1,31 @@
+[meta] started_at_utc=20260225T194416Z
+[meta] host=kdz
+[matrix] namespace=s390x-crossnode
+NAME          READY   STATUS    RESTARTS   AGE    IP             NODE                   NOMINATED NODE   READINESS GATES
+client-kdz    1/1     Running   0          2m3s   10.244.0.208   kdz.dev.fyre.ibm.com   <none>           <none>
+client-zkd0   1/1     Running   0          2m3s   10.244.1.136   zkd01.fyre.ibm.com     <none>           <none>
+server-kdz    1/1     Running   0          2m3s   10.244.0.126   kdz.dev.fyre.ibm.com   <none>           <none>
+server-zkd0   1/1     Running   0          2m3s   10.244.1.79    zkd01.fyre.ibm.com     <none>           <none>
+[matrix] server-kdz=10.244.0.126 server-zkd0=10.244.1.79 svc-kdz=10.96.21.179 svc-zkd0=10.101.51.13
+[matrix] same-node-kdz          client-kdz -> 10.244.0.126:8080
+[result] same-node-kdz=PASS
+[matrix] same-node-zkd0         client-zkd0 -> 10.244.1.79:8080
+[result] same-node-zkd0=PASS
+[matrix] cross-kdz-to-zkd0      client-kdz -> 10.244.1.79:8080
+[result] cross-kdz-to-zkd0=PASS
+[matrix] cross-zkd0-to-kdz      client-zkd0 -> 10.244.0.126:8080
+[result] cross-zkd0-to-kdz=PASS
+[matrix] svc-kdz-to-zkd0        client-kdz -> 10.101.51.13:8080
+[result] svc-kdz-to-zkd0=PASS
+[matrix] svc-zkd0-to-kdz        client-zkd0 -> 10.96.21.179:8080
+[result] svc-zkd0-to-kdz=PASS
+[health] pod/cilium-b9gch
+Cluster health:                      2/2 reachable   (2026-02-25T19:44:09Z)   (Probe interval: 1m36.566274746s)
+Name                                 IP              Node                     Endpoints
+  kdz.dev.fyre.ibm.com (localhost)   10.14.125.157   1/1                      1/1
+  zkd01.fyre.ibm.com                 10.11.59.172    1/1                      1/1
+[health] pod/cilium-dzkxx
+Cluster health:                    2/2 reachable   (2026-02-25T19:42:41Z)   (Probe interval: 1m36.566274746s)
+Name                               IP              Node                     Endpoints
+  zkd01.fyre.ibm.com (localhost)   10.11.59.172    1/1                      1/1
+  kdz.dev.fyre.ibm.com             10.14.125.157   1/1                      1/1

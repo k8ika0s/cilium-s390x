@@ -543,11 +543,19 @@ func subTest(progSet programSet, resultMap *ebpf.Map, scapyAssertMap *ebpf.Map, 
 			valueC = valueC[len:]
 		}
 
-		result := &SuiteResult{}
-		err = proto.Unmarshal(value[:valueLen], result)
-		if err != nil {
-			t.Fatal("error while unmarshalling suite result:", err)
-		}
+			result := &SuiteResult{}
+			err = proto.Unmarshal(value[:valueLen], result)
+			if err != nil {
+				dumpLen := valueLen
+				if dumpLen == 0 || dumpLen > len(value) {
+					dumpLen = len(value)
+				}
+				if dumpLen > 256 {
+					dumpLen = 256
+				}
+				t.Logf("suite result raw prefix (%d bytes of %d): %x", dumpLen, valueLen, value[:dumpLen])
+				t.Fatal("error while unmarshalling suite result:", err)
+			}
 
 		for _, testResult := range result.Results {
 			// Remove the C-string, null-terminator.

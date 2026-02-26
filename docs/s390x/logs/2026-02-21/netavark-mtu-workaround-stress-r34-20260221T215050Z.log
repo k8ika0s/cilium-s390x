@@ -1,0 +1,137 @@
+[2026-02-21T21:50:50Z] sync integration_wide + readme
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+[2026-02-21T21:50:52Z] stress run integration_wide quick mode (6 iterations)
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+*****************************************************************************
+* Systems must only be used for conducting IBMs business. IBM may exercise  *
+* rights to manage and enforce security, monitor use, remove access or      *
+* block traffic to and from this system, as well as any other rights listed *
+* in ITSS.                                                                  *
+*                                                                           *
+* Users must comply with DevIT service terms of use, IBM policies,          *
+* directives and corporate instructions including, import/export of data,   *
+* BCGs, Corporate Instructions, Standards, Addenda as well as all other     *
+* responsibilities listed in ITSS.                                          *
+*****************************************************************************
+
+
+--- iteration 1 ---
+[2026-02-21T21:50:54Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T21:50:55Z] Starting kvstore on cilium-etcd-net (attempt 1/1)
+a21d234f48516bb5e4cf6223f43f698ea4c7181ea694f695367b4df1b8829bea
+[2026-02-21T21:50:56Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T21:50:57Z] Integration sweep completed
+--- iteration 2 ---
+[2026-02-21T21:51:00Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T21:51:00Z] Starting kvstore on cilium-etcd-net (attempt 1/1)
+d95518e72d920970ee31f59f26d7f92425c19d94ba8d6c3ad6c16c9f0c253598
+[2026-02-21T21:51:03Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T21:51:04Z] Integration sweep completed
+--- iteration 3 ---
+[2026-02-21T21:51:06Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T21:51:06Z] Starting kvstore on cilium-etcd-net (attempt 1/1)
+5ce0f8c3f8db47a02c99cbaf6b9f0fc9556c4e0a4998489061589fb3de9bc844
+[2026-02-21T21:51:08Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T21:51:09Z] Integration sweep completed
+--- iteration 4 ---
+[2026-02-21T21:51:11Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T21:51:11Z] Starting kvstore on cilium-etcd-net (attempt 1/1)
+a65f084e9cdcd1704487c0aa817f348e073d8d9d89b0efb01ffdf3df309c8500
+[2026-02-21T21:51:13Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T21:51:14Z] Integration sweep completed
+--- iteration 5 ---
+[2026-02-21T21:51:16Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T21:51:16Z] Starting kvstore on cilium-etcd-net (attempt 1/1)
+7caef7052e0e984c7cf306e7fa3ba6ad4213309165c7278467f2a162d8f9cf39
+[2026-02-21T21:51:18Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T21:51:19Z] Integration sweep completed
+--- iteration 6 ---
+[2026-02-21T21:51:21Z] Using podman MTU workaround network cilium-etcd-net (mtu=1500)
+[2026-02-21T21:51:21Z] Starting kvstore on cilium-etcd-net (attempt 1/1)
+e31c7b17ee3d29c56dd0280c8761974b56f797c99a17428b62eade0e513f2a49
+[2026-02-21T21:51:24Z] Running stop-kvstores with SKIP_KVSTORES=true
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+make: Nothing to be done for 'stop-kvstores'.
+[2026-02-21T21:51:25Z] Integration sweep completed
+fatal: your current branch 'k8ika0s/s390x-local-pr-stack' does not have any commits yet
+quick-mode failures=0
